@@ -1,142 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/tabhost"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
+	android:id="@android:id/tabhost" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="fill_parent">
+		<TabWidget android:id="@android:id/tabs"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" />
+		<FrameLayout android:id="@android:id/tabcontent"
+			android:layout_width="fill_parent" android:layout_height="fill_parent">
+			<LinearLayout android:id="@+id/tabviewThrottle"
+				android:orientation="vertical" android:layout_width="fill_parent"
+				android:layout_height="fill_parent">
+				<Spinner android:id="@+id/spinnerLoco" android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
+				<LinearLayout android:id="@+id/fun1"
+					android:orientation="horizontal" android:layout_width="fill_parent"
+          android:layout_height="0px" android:layout_weight="25">
+					<Button android:id="@+id/android_buttonf1"
+						android:layout_width="0px" android:layout_weight="25"
+						android:layout_height="fill_parent" android:text="F1" />
+					<Button android:id="@+id/android_buttonf2"
+						android:layout_width="0px" android:layout_weight="25"
+						android:layout_height="fill_parent" android:text="F2" />
+					<Button android:id="@+id/android_buttonf3"
+						android:layout_width="0px" android:layout_weight="25"
+						android:layout_height="fill_parent" android:text="F3" />
+					<Button android:id="@+id/android_buttonf4"
+						android:layout_width="0px" android:layout_weight="25"
+						android:layout_height="fill_parent" android:text="F4" />
+				</LinearLayout>
+				<LinearLayout android:id="@+id/fun2"
+					android:orientation="horizontal" android:layout_width="fill_parent"
+					android:layout_height="0px" android:layout_weight="25">
+					<Button android:id="@+id/android_buttonf5"
+						android:layout_width="0px" android:layout_weight="25"
+						android:layout_height="fill_parent" android:text="F5" />
+					<Button android:id="@+id/android_buttonf6"
+						android:layout_width="0px" android:layout_weight="25"
+						android:layout_height="fill_parent" android:text="F6" />
+					<Button android:id="@+id/android_buttonf7"
+						android:layout_width="0px" android:layout_weight="25"
+						android:layout_height="fill_parent" android:text="F7" />
+					<Button android:id="@+id/android_buttonf8"
+						android:layout_width="0px" android:layout_weight="25"
+						android:layout_height="fill_parent" android:text="F8" />
+				</LinearLayout>
+				<LinearLayout android:id="@+id/fun3"
+					android:orientation="horizontal" android:layout_width="fill_parent"
+          android:layout_height="0px" android:layout_weight="25">
+					<Button android:id="@+id/android_buttondir"
+						android:layout_width="0px" android:layout_weight="50"
+						android:layout_height="fill_parent" android:text=">" />
+					<Button android:id="@+id/android_buttonf0"
+						android:layout_width="0px" android:layout_weight="25"
+						android:layout_height="fill_parent" android:text="Lights" />
+					<Button android:id="@+id/android_buttonfn"
+						android:layout_width="0px" android:layout_weight="25"
+						android:layout_height="fill_parent" android:text="Fn" />
+				</LinearLayout>
+				<SeekBar android:id="@+id/SeekBarSpeed" android:max="100"
+					android:progress="0" android:layout_width="fill_parent"
+          android:layout_height="0px" android:layout_weight="25"/>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/tabviewSystem"
+				android:orientation="vertical" android:layout_width="fill_parent"
+				android:layout_height="fill_parent">
+				<TextView android:id="@+id/textview2" android:layout_width="fill_parent"
+					android:layout_height="fill_parent" android:text="System view..." />
+			</LinearLayout>
+      <LinearLayout android:id="@+id/tabviewLayout"
+        android:orientation="vertical" android:layout_width="fill_parent"
         android:layout_height="fill_parent">
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <LinearLayout
-            android:id="@+id/tabview1"
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-    <Spinner 
-        android:id="@+id/spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:drawSelectorOnTop="true"
-    />
-        <LinearLayout
-            android:id="@+id/tabview111"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            <Button 
-                android:id="@+id/android_buttonf1"
-                android:layout_width="0px"
-                android:layout_weight="25"
-                android:layout_height="wrap_content"
-                android:text="F1"/> 
-            <Button 
-                android:id="@+id/android_buttonf2"
-                android:layout_width="0px"
-                android:layout_weight="25"
-                android:layout_height="wrap_content"
-                android:text="F2"/> 
-            <Button 
-                android:id="@+id/android_buttonf3"
-                android:layout_width="0px"
-                android:layout_weight="25"
-                android:layout_height="wrap_content"
-                android:text="F3"/> 
-            <Button 
-                android:id="@+id/android_buttonf4"
-                android:layout_width="0px"
-                android:layout_weight="25"
-                android:layout_height="wrap_content"
-                android:text="F4"/> 
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/tabview11"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            <Button 
-                android:id="@+id/android_buttonf5"
-                android:layout_width="0px"
-                android:layout_weight="25"
-                android:layout_height="wrap_content"
-                android:text="F5"/> 
-            <Button 
-                android:id="@+id/android_buttonf6"
-                android:layout_width="0px"
-                android:layout_weight="25"
-                android:layout_height="wrap_content"
-                android:text="F6"/> 
-            <Button 
-                android:id="@+id/android_buttonf7"
-                android:layout_width="0px"
-                android:layout_weight="25"
-                android:layout_height="wrap_content"
-                android:text="F7"/> 
-            <Button 
-                android:id="@+id/android_buttonf8"
-                android:layout_width="0px"
-                android:layout_weight="25"
-                android:layout_height="wrap_content"
-                android:text="F8"/> 
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/fun3"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            <Button 
-                android:id="@+id/android_buttondir"
-                android:layout_width="0px"
-                android:layout_weight="50"
-                android:layout_height="wrap_content"
-                android:text=">"/> 
-            <Button 
-                android:id="@+id/android_buttonf0"
-                android:layout_width="0px"
-                android:layout_weight="25"
-                android:layout_height="wrap_content"
-                android:text="Light"/> 
-            <Button 
-                android:id="@+id/android_buttonfn"
-                android:layout_width="0px"
-                android:layout_weight="25"
-                android:layout_height="wrap_content"
-                android:text="Fn"/> 
-        </LinearLayout>
-            <SeekBar android:id="@+id/progressSeekBar"
-                android:max="100"
-                android:progress="0"
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/tabview2"
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-            <TextView 
-                android:id="@+id/textview2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" 
-                android:text="this is the second tab" />
-        </LinearLayout>
-            <TextView 
-                android:id="@+id/textview3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" 
-                android:text="this is a third tab" />
-            <TextView 
-                android:id="@+id/textview4"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" 
-                android:text="this is a fourth tab" />
-</FrameLayout>
-    </LinearLayout>
+        <TextView android:id="@+id/textview3" android:layout_width="fill_parent"
+          android:layout_height="fill_parent" android:text="Layout view..." />
+      </LinearLayout>
+      <LinearLayout android:id="@+id/tabviewMenu"
+        android:orientation="vertical" android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <TextView android:id="@+id/textview4" android:layout_width="fill_parent"
+          android:layout_height="fill_parent" android:text="Menu view..." />
+      </LinearLayout>
+		</FrameLayout>
+	</LinearLayout>
 </TabHost>
