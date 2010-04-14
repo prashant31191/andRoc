@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  Rocrail - Model Railroad Software
 
  Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
@@ -17,8 +16,9 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
--->
-<resources>
-    <string name="hello">Hello World, aApp!</string>
-    <string name="app_name">andRoc</string>
-</resources>
+*/
+package net.rocrail.androc;
+
+public class Model {
+
+}

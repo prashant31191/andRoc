@@ -1,7 +1,27 @@
+/*
+ Rocrail - Model Railroad Software
+
+ Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
 package net.rocrail.androc;
 
 import net.rocrail.androc.R;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,22 +31,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 
 public class andRoc extends Activity {
-  public static final String PREFS_NAME = "andRoc.ini";
-  String m_Host = "?";
-  int m_iPort = 0;
+  System m_System = null;
 
   /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    // Restore preferences
-    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-    m_Host = settings.getString("host", "rocrail.dyndns.org");
-    m_iPort = settings.getInt("port", 8080);
+    m_System = new System(this);
     connectView();
   }
 
@@ -51,11 +67,7 @@ public class andRoc extends Activity {
       setContentView(R.layout.system);
       return true;
     case 2: {
-      SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-      SharedPreferences.Editor editor = settings.edit();
-      editor.putString("host", m_Host);
-      editor.putInt("port", m_iPort);
-      editor.commit();
+      m_System.exit();
       finish();
       return true;
     }
@@ -74,18 +86,36 @@ public class andRoc extends Activity {
         public void onClick(View v) {
             // Perform action on click
           EditText s = (EditText) findViewById(R.id.connectHost);
-          m_Host = s.getText().toString();
+          m_System.m_Host = s.getText().toString();
           s = (EditText) findViewById(R.id.connectPort);
-          m_iPort = Integer.parseInt(s.getText().toString());
-          mainView();
+          m_System.m_iPort = Integer.parseInt(s.getText().toString());
+          // TODO: progress dialog
+          try {
+            m_System.connect();
+            mainView();
+          }
+          catch( Exception e ) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(andRoc.this); 
+            builder.setMessage("Could not connect to " + m_System.m_Host+":"+m_System.m_iPort)
+            .setCancelable(false)
+            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+              //andRoc.this.finish();
+              dialog.cancel();
+            }});
+            
+            AlertDialog alert = builder.create();
+            alert.show();
+          
+          }
         }
     });
 
     
     EditText s = (EditText) findViewById(R.id.connectHost);
-    s.setText(m_Host);
+    s.setText(m_System.m_Host);
     s = (EditText) findViewById(R.id.connectPort);
-    s.setText(""+m_iPort);
+    s.setText(""+m_System.m_iPort);
   }
 
   void mainView() {
