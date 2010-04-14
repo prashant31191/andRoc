@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:orientation="vertical"
+  android:layout_width="fill_parent" android:layout_height="fill_parent">
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="fill_parent" android:layout_height="wrap_content">
+  <TextView android:text="Host" android:id="@+id/TextView01" android:layout_weight="20" android:layout_width="0px" android:layout_height="wrap_content" android:padding="4px"></TextView>
+  <EditText android:text="Host" android:id="@+id/connectHost"
+    android:layout_width="0px" android:layout_weight="80" android:layout_height="wrap_content" android:padding="4px"></EditText>
+</LinearLayout>
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="fill_parent" android:layout_height="wrap_content">
+  <TextView android:text="Port:" android:id="@+id/TextView01" android:layout_weight="20" android:layout_width="0px" android:layout_height="wrap_content" android:padding="4px"></TextView>
+  <EditText android:text="Port" android:id="@+id/connectPort"
+    android:layout_width="0px" android:layout_weight="80" android:layout_height="wrap_content" android:padding="4px"></EditText>
+</LinearLayout>
+  <Button android:text="Connect" android:id="@+id/ButtonConnect"
+    android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+
+      <ImageView android:id="@+id/logoImage" android:layout_width="fill_parent" 
+      android:layout_height="fill_parent" android:src="@drawable/logo" android:padding="4px"></ImageView>
+
+</LinearLayout>

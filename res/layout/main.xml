@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@android:id/tabhost" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<LinearLayout android:orientation="vertical"
-		android:layout_width="fill_parent" android:layout_height="fill_parent">
-		<TabWidget android:id="@android:id/tabs"
-			android:layout_width="fill_parent" android:layout_height="wrap_content" />
-		<FrameLayout android:id="@android:id/tabcontent"
-			android:layout_width="fill_parent" android:layout_height="fill_parent">
-			<LinearLayout android:id="@+id/tabviewThrottle"
-				android:orientation="vertical" android:layout_width="fill_parent"
-				android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+   android:orientation="vertical">
+      <ImageView android:id="@+id/locoImage" android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" android:src="@drawable/ns2418" android:padding="4px"></ImageView>
 				<Spinner android:id="@+id/spinnerLoco" android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
 				<LinearLayout android:id="@+id/fun1"
@@ -61,25 +55,4 @@
 				<SeekBar android:id="@+id/SeekBarSpeed" android:max="100"
 					android:progress="0" android:layout_width="fill_parent"
           android:layout_height="0px" android:layout_weight="25"/>
-			</LinearLayout>
-			<LinearLayout android:id="@+id/tabviewSystem"
-				android:orientation="vertical" android:layout_width="fill_parent"
-				android:layout_height="fill_parent">
-				<TextView android:id="@+id/textview2" android:layout_width="fill_parent"
-					android:layout_height="fill_parent" android:text="System view..." />
-			</LinearLayout>
-      <LinearLayout android:id="@+id/tabviewLayout"
-        android:orientation="vertical" android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <TextView android:id="@+id/textview3" android:layout_width="fill_parent"
-          android:layout_height="fill_parent" android:text="Layout view..." />
-      </LinearLayout>
-      <LinearLayout android:id="@+id/tabviewMenu"
-        android:orientation="vertical" android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <TextView android:id="@+id/textview4" android:layout_width="fill_parent"
-          android:layout_height="fill_parent" android:text="Menu view..." />
-      </LinearLayout>
-		</FrameLayout>
-	</LinearLayout>
-</TabHost>
+</LinearLayout>
