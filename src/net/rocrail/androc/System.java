@@ -22,6 +22,7 @@ package net.rocrail.androc;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -83,7 +84,7 @@ public class System extends Thread implements Runnable {
     xmlHandler xmlhandler = new xmlHandler();
     while(saxparser != null && m_bRun) {
       try {
-        if( m_Socket != null && m_Socket.isConnected() ) {
+        if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
           InputStream is = m_Socket.getInputStream();
           if( is.available() > 0 ) {
             saxparser.parse(is, xmlhandler);
@@ -91,6 +92,10 @@ public class System extends Thread implements Runnable {
         }
         
         Thread.sleep(10);
+      } catch (SocketException soce) {
+        // TODO Auto-generated catch block
+        soce.printStackTrace();
+        m_bRun = false;
       } catch (SAXException saxe) {
         // TODO Auto-generated catch block
         saxe.printStackTrace();
@@ -118,7 +123,12 @@ class xmlHandler extends DefaultHandler {
   }
 
   public void startElement (String uri, String localName, String qName, Attributes atts) {
-    
+    if( localName.equals("xmlh") ) {
+      // TODO: xmlh handling
+    }
+    else if( localName.equals("xml") ) {
+      // TODO: xml handling
+    }
   }
 
   public void endElement (String uri, String localName, String qName) {
