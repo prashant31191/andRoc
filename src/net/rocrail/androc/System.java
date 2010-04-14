@@ -19,17 +19,31 @@
 */
 package net.rocrail.androc;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.Socket;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 
-public class System {
+public class System extends Thread implements Runnable {
   public String m_Host   = "rocrail.dyndns.org";
   public int    m_iPort  = 8080;
 
   Activity      m_andRoc = null;
   Socket        m_Socket = null;
+  boolean       m_bRun   = true;
+  
+  SAXParser m_Parser = null;
 
   public static final String PREFS_NAME = "andRoc.ini";
 
@@ -39,6 +53,10 @@ public class System {
     SharedPreferences settings = androc.getSharedPreferences(PREFS_NAME, 0);
     m_Host  = settings.getString("host", "rocrail.dyndns.org");
     m_iPort = settings.getInt("port", 8080);
+
+    //m_Parser = SAXParser;
+    m_bRun = true;
+    start();
   }
   
   public void connect() throws Exception {
@@ -53,4 +71,57 @@ public class System {
     editor.commit();
   }
 
+  public void run() {
+    SAXParser saxparser = null;
+    try {
+      saxparser = SAXParserFactory.newInstance().newSAXParser();
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+    
+    xmlHandler xmlhandler = new xmlHandler();
+    while(saxparser != null && m_bRun) {
+      try {
+        if( m_Socket != null && m_Socket.isConnected() ) {
+          InputStream is = m_Socket.getInputStream();
+          if( is.available() > 0 ) {
+            saxparser.parse(is, xmlhandler);
+          }
+        }
+        
+        Thread.sleep(10);
+      } catch (SAXException saxe) {
+        // TODO Auto-generated catch block
+        saxe.printStackTrace();
+      } catch (IOException ioe) {
+        // TODO Auto-generated catch block
+        ioe.printStackTrace();
+      } catch (InterruptedException inte) {
+        // TODO Auto-generated catch block
+        inte.printStackTrace();
+      }
+    }
+  }
+
+
+}
+
+
+class xmlHandler extends DefaultHandler {
+  public void startDocument () {
+  
+  }
+  
+  public void endDocument () {
+    
+  }
+
+  public void startElement (String uri, String localName, String qName, Attributes atts) {
+    
+  }
+
+  public void endElement (String uri, String localName, String qName) {
+    
+  }
 }
