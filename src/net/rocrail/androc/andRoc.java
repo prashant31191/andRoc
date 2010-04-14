@@ -95,8 +95,9 @@ public class andRoc extends Activity {
             mainView();
           }
           catch( Exception e ) {
+            e.printStackTrace();
             AlertDialog.Builder builder = new AlertDialog.Builder(andRoc.this); 
-            builder.setMessage("Could not connect to " + m_System.m_Host+":"+m_System.m_iPort)
+            builder.setMessage(e.getClass().getName()+"\nCould not connect to " + m_System.m_Host+":"+m_System.m_iPort)
             .setCancelable(false)
             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
