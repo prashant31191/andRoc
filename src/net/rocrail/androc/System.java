@@ -21,17 +21,15 @@ package net.rocrail.androc;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringBufferInputStream;
+import java.io.StringReader;
 import java.net.Socket;
 import java.net.SocketException;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -65,6 +63,7 @@ public class System extends Thread implements Runnable {
   }
   
   public void exit() {
+    m_bRun = false;
     SharedPreferences settings = m_andRoc.getSharedPreferences(PREFS_NAME, 0);
     SharedPreferences.Editor editor = settings.edit();
     editor.putString("host", m_Host);
@@ -81,13 +80,82 @@ public class System extends Thread implements Runnable {
       e.printStackTrace();
     }
     
-    xmlHandler xmlhandler = new xmlHandler();
+    XmlHandler xmlhandler = new XmlHandler();
+    String hdr = "";
+    boolean readHdr = true;
+    int xmlSize = 0;
+    byte[] buffer = null;
+    int read = 0;
+
+    
     while(saxparser != null && m_bRun) {
       try {
         if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
           InputStream is = m_Socket.getInputStream();
+          
           if( is.available() > 0 ) {
-            saxparser.parse(is, xmlhandler);
+            
+            // read header byte by byte
+            if( readHdr ) {
+              if( !hdr.endsWith("</xmlh>") ) {
+                // read next byte
+                hdr = hdr + String.valueOf((char) is.read());
+              }
+
+              // check if the header end is read
+              if( hdr.endsWith("</xmlh>") ) {
+                // find the start of the header
+                if( hdr.indexOf("<?xml") != -1 ) {
+                  // disregard al leading bytes
+                  hdr = hdr.substring(hdr.indexOf("<?xml"));
+                  // parse the header
+                  saxparser.parse(new StringBufferInputStream(hdr), xmlhandler);
+                  xmlSize = xmlhandler.getXmlSize();
+                  // reset header string and signal reading data
+                  hdr = "";
+                  readHdr = false;
+                  // initialize for reading data
+                  buffer = new byte[xmlSize+1];
+                  read = 0;
+                }
+                else {
+                  hdr = "";
+                  xmlSize = 0;
+                  readHdr = true;
+                }
+              }
+            }
+            
+            // read the xml data string at the given length
+            else if( xmlSize > 0 ) {
+              int avail = is.available();
+              if( read + avail > xmlSize ) {
+                // do not read more than wanted
+                avail = xmlSize - read;
+              }
+              // read the available bytes
+              is.read(buffer, read, avail);
+              read = read + avail;
+              
+              // all bytes are read
+              if( read == xmlSize ) {
+                // create the xml string from the byte with utf-8 encoding
+                String xml = new String(buffer, "UTF-8");
+                // parse the xml
+                saxparser.parse(new StringBufferInputStream(xml), xmlhandler);
+                // reset for next header
+                read = 0;
+                xmlSize = 0;
+                readHdr = true;
+              }
+            }
+            
+            // no valid header or zero xmlsize
+            else {
+              hdr = "";
+              xmlSize = 0;
+              readHdr = true;
+            }
           }
         }
         
@@ -105,6 +173,7 @@ public class System extends Thread implements Runnable {
       } catch (InterruptedException inte) {
         // TODO Auto-generated catch block
         inte.printStackTrace();
+        m_bRun = false;
       }
     }
   }
@@ -112,26 +181,3 @@ public class System extends Thread implements Runnable {
 
 }
 
-
-class xmlHandler extends DefaultHandler {
-  public void startDocument () {
-  
-  }
-  
-  public void endDocument () {
-    
-  }
-
-  public void startElement (String uri, String localName, String qName, Attributes atts) {
-    if( localName.equals("xmlh") ) {
-      // TODO: xmlh handling
-    }
-    else if( localName.equals("xml") ) {
-      // TODO: xml handling
-    }
-  }
-
-  public void endElement (String uri, String localName, String qName) {
-    
-  }
-}
