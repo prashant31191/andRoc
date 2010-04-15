@@ -43,7 +43,6 @@ public class System extends Thread implements Runnable {
   Activity      m_andRoc    = null;
   Socket        m_Socket    = null;
   boolean       m_bRun      = true;
-  boolean       m_bViewInit = false;
   
   SAXParser m_Parser = null;
 
@@ -210,9 +209,6 @@ public class System extends Thread implements Runnable {
 
   
   public void initView() {
-    if( m_bViewInit )
-      return;
-    
     final Button powerON = (Button) m_andRoc.findViewById(R.id.systemPowerON);
     powerON.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
@@ -226,7 +222,6 @@ public class System extends Thread implements Runnable {
         }
     });
     
-    m_bViewInit = true;
   }
 
 }
