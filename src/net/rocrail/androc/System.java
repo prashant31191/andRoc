@@ -69,6 +69,15 @@ public class System extends Thread implements Runnable {
     editor.putString("host", m_Host);
     editor.putInt("port", m_iPort);
     editor.commit();
+    try {
+      Thread.sleep(500);
+      if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
+        m_Socket.close();
+      }
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   public void run() {
@@ -140,7 +149,7 @@ public class System extends Thread implements Runnable {
               // all bytes are read
               if( read == xmlSize ) {
                 // create the xml string from the byte with utf-8 encoding
-                String xml = new String(buffer, "UTF-8");
+                String xml = new String(buffer, "UTF-8").trim();
                 // parse the xml
                 saxparser.parse(new StringBufferInputStream(xml), xmlhandler);
                 // reset for next header
@@ -167,6 +176,9 @@ public class System extends Thread implements Runnable {
       } catch (SAXException saxe) {
         // TODO Auto-generated catch block
         saxe.printStackTrace();
+        read = 0;
+        xmlSize = 0;
+        readHdr = true;
       } catch (IOException ioe) {
         // TODO Auto-generated catch block
         ioe.printStackTrace();

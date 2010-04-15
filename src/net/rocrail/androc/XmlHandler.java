@@ -26,7 +26,10 @@ class XmlHandler extends DefaultHandler {
   int m_iXmlSize = 0;
   
   public int getXmlSize() {
-    return m_iXmlSize;
+    int size = m_iXmlSize;
+    // reset size: read once
+    m_iXmlSize = 0;
+    return size;
   }
   
   
@@ -46,6 +49,10 @@ class XmlHandler extends DefaultHandler {
       // xml handling
       String val = atts.getValue("size");
       m_iXmlSize = Integer.parseInt(val);
+    }
+    else {
+      // xml handling
+      //localName;
     }
   }
 
