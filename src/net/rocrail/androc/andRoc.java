@@ -65,6 +65,7 @@ public class andRoc extends Activity {
       return true;
     case 3:
       setContentView(R.layout.system);
+      m_System.initView();
       return true;
     case 2: {
       m_System.exit();

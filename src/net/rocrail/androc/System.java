@@ -33,14 +33,17 @@ import org.xml.sax.SAXException;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.Button;
 
 public class System extends Thread implements Runnable {
   public String m_Host   = "rocrail.dyndns.org";
   public int    m_iPort  = 8080;
 
-  Activity      m_andRoc = null;
-  Socket        m_Socket = null;
-  boolean       m_bRun   = true;
+  Activity      m_andRoc    = null;
+  Socket        m_Socket    = null;
+  boolean       m_bRun      = true;
+  boolean       m_bViewInit = false;
   
   SAXParser m_Parser = null;
 
@@ -77,6 +80,21 @@ public class System extends Thread implements Runnable {
     } catch (Exception e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
+    }
+  }
+  
+  public void sendMessage(String name, String msg) {
+    if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
+      try {
+        int msgLen = msg.getBytes("UTF-8").length;
+        String stringToSend = String.format("<xmlh><xml size=\"%d\" name=\"%s\"/></xmlh>%s", msgLen, name, msg);
+        byte[] msgToSend = stringToSend.getBytes("UTF-8");
+        msgLen = msgToSend.length;
+        m_Socket.getOutputStream().write(msgToSend);
+      }
+      catch( Exception e) {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -190,6 +208,26 @@ public class System extends Thread implements Runnable {
     }
   }
 
+  
+  public void initView() {
+    if( m_bViewInit )
+      return;
+    
+    final Button powerON = (Button) m_andRoc.findViewById(R.id.systemPowerON);
+    powerON.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          System.this.sendMessage("sys", "<sys cmd=\"go\"/>");
+        }
+    });
+    final Button powerOFF = (Button) m_andRoc.findViewById(R.id.systemPowerOFF);
+    powerOFF.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          System.this.sendMessage("sys", "<sys cmd=\"stop\"/>");
+        }
+    });
+    
+    m_bViewInit = true;
+  }
 
 }
 
