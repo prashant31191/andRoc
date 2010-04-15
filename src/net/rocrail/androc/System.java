@@ -215,10 +215,18 @@ public class System extends Thread implements Runnable {
           System.this.sendMessage("sys", "<sys cmd=\"go\"/>");
         }
     });
+
     final Button powerOFF = (Button) m_andRoc.findViewById(R.id.systemPowerOFF);
     powerOFF.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           System.this.sendMessage("sys", "<sys cmd=\"stop\"/>");
+        }
+    });
+    
+    final Button initField = (Button) m_andRoc.findViewById(R.id.systemInitField);
+    initField.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          System.this.sendMessage("model", "<model cmd=\"initfield\"/>");
         }
     });
     

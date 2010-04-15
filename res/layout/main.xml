@@ -24,52 +24,52 @@
    android:orientation="vertical">
       <ImageView android:id="@+id/locoImage" android:layout_width="fill_parent" 
       android:layout_height="wrap_content" android:src="@drawable/ns2418" android:padding="4px"></ImageView>
-				<Spinner android:id="@+id/spinnerLoco" android:layout_width="fill_parent"
+				<Spinner android:id="@+id/spinnerLoco" android:textStyle="bold" android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
 				<LinearLayout android:id="@+id/fun1"
 					android:orientation="horizontal" android:layout_width="fill_parent"
           android:layout_height="0px" android:layout_weight="25">
 					<Button android:id="@+id/android_buttonf1"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F1" />
+						android:layout_height="fill_parent" android:text="F1" android:textStyle="bold" />
 					<Button android:id="@+id/android_buttonf2"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F2" />
+						android:layout_height="fill_parent" android:text="F2" android:textStyle="bold" />
 					<Button android:id="@+id/android_buttonf3"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F3" />
+						android:layout_height="fill_parent" android:text="F3" android:textStyle="bold" />
 					<Button android:id="@+id/android_buttonf4"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F4" />
+						android:layout_height="fill_parent" android:text="F4" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun2"
 					android:orientation="horizontal" android:layout_width="fill_parent"
 					android:layout_height="0px" android:layout_weight="25">
 					<Button android:id="@+id/android_buttonf5"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F5" />
+						android:layout_height="fill_parent" android:text="F5" android:textStyle="bold" />
 					<Button android:id="@+id/android_buttonf6"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F6" />
+						android:layout_height="fill_parent" android:text="F6" android:textStyle="bold" />
 					<Button android:id="@+id/android_buttonf7"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F7" />
+						android:layout_height="fill_parent" android:text="F7" android:textStyle="bold" />
 					<Button android:id="@+id/android_buttonf8"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F8" />
+						android:layout_height="fill_parent" android:text="F8" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun3"
 					android:orientation="horizontal" android:layout_width="fill_parent"
           android:layout_height="0px" android:layout_weight="25">
 					<Button android:id="@+id/android_buttondir"
 						android:layout_width="0px" android:layout_weight="50"
-						android:layout_height="fill_parent" android:text=">" />
+						android:layout_height="fill_parent" android:text=">" android:textStyle="bold" />
 					<Button android:id="@+id/android_buttonf0"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="Lights" />
+						android:layout_height="fill_parent" android:text="Lights" android:textStyle="bold" />
 					<Button android:id="@+id/android_buttonfn"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="Fn" />
+						android:layout_height="fill_parent" android:text="Fn" android:textStyle="bold" />
 				</LinearLayout>
 				<SeekBar android:id="@+id/SeekBarSpeed" android:max="100"
 					android:progress="0" android:layout_width="fill_parent"

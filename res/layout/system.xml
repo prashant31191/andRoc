@@ -22,16 +22,16 @@
   android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
   <LinearLayout android:id="@+id/systemLayout1"
     android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <Button android:text="Power ON" android:id="@+id/systemPowerON"
+    <Button android:text="Power ON" android:textStyle="bold" android:id="@+id/systemPowerON"
       android:layout_width="0px" android:layout_weight="50"
       android:layout_height="wrap_content"></Button>
-    <Button android:text="Power OFF" android:id="@+id/systemPowerOFF"
+    <Button android:text="Power OFF" android:textStyle="bold" android:id="@+id/systemPowerOFF"
       android:layout_width="0px" android:layout_weight="50"
       android:layout_height="wrap_content"></Button>
   </LinearLayout>
   <LinearLayout android:id="@+id/systemLayout2"
     android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <Button android:text="Init Field" android:id="@+id/systemInitField"
+    <Button android:text="Init Field" android:textStyle="bold" android:id="@+id/systemInitField"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"></Button>
   </LinearLayout>
