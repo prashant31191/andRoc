@@ -36,6 +36,13 @@ import android.content.SharedPreferences;
 
 public class andRoc extends Activity {
   System m_System = null;
+  final static int MENU_CONNECT  = 1;
+  final static int MENU_THROTTLE = 2;
+  final static int MENU_SYSTEM   = 3;
+  final static int MENU_LAYOUT   = 4;
+  final static int MENU_MENU     = 5;
+  final static int MENU_QUIT     = 6;
+  
 
   /** Called when the activity is first created. */
   @Override
@@ -48,32 +55,31 @@ public class andRoc extends Activity {
 
   /* Creates the menu items */
   public boolean onCreateOptionsMenu(Menu menu) {
-    menu.add(0, 6, 0, "Connect").setIcon(R.drawable.connect);
-    menu.add(0, 1, 0, "Throttle").setIcon(R.drawable.loco);
-    menu.add(0, 3, 0, "System").setIcon(R.drawable.system);
-    menu.add(0, 4, 0, "Layout").setIcon(R.drawable.layout);
-    menu.add(0, 5, 0, "Menu").setIcon(R.drawable.menu);
-    menu.add(0, 2, 0, "Quit").setIcon(R.drawable.quit);
+    menu.add(0, MENU_CONNECT , 0, "Connect").setIcon(R.drawable.connect);
+    menu.add(0, MENU_THROTTLE, 0, "Throttle").setIcon(R.drawable.loco);
+    menu.add(0, MENU_SYSTEM  , 0, "System").setIcon(R.drawable.system);
+    menu.add(0, MENU_LAYOUT  , 0, "Layout").setIcon(R.drawable.layout);
+    menu.add(0, MENU_MENU    , 0, "Menu").setIcon(R.drawable.menu);
+    menu.add(0, MENU_QUIT    , 0, "Quit").setIcon(R.drawable.quit);
     return true;
   }
 
   /* Handles item selections */
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-    case 1:
+    case MENU_CONNECT:
+      connectView();
+      return true;
+    case MENU_THROTTLE:
       mainView();
       return true;
-    case 3:
+    case MENU_SYSTEM:
       setContentView(R.layout.system);
       m_System.initView();
       return true;
-    case 2: {
+    case MENU_QUIT:
       m_System.exit();
       finish();
-      return true;
-    }
-    case 6:
-      connectView();
       return true;
     }
     return false;
