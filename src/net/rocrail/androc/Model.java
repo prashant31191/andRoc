@@ -42,7 +42,7 @@ public class Model {
   }
   
   public void addLoco(Loco loco) {
-    m_LocoMap.put(loco.m_ID, loco);
+    m_LocoMap.put(loco.ID, loco);
   }
   
   public void addListener( ModelListener listener ) {

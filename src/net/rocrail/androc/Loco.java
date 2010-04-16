@@ -19,21 +19,50 @@
 */
 package net.rocrail.androc;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 public class Loco {
+  public String  ID      = "?";
+  public String  PicName = null;
+  public Bitmap  LocoBmp = null;
+  
   andRoc  m_andRoc  = null;
   boolean m_bLights = false;
   boolean m_bDir    = true;
   int     m_iSpeed  = 0;
-  String  m_ID      = "?";
   boolean[] m_Function = new boolean[32];
+  String  mPicData  = null;
 
   public Loco( andRoc androc, String id) {
     m_andRoc = androc;
-    m_ID = id;
+    ID = id;
   }
 
-  public String getID() {
-    return m_ID;
+  public void requestLocoImg() {
+    if( PicName != null ) {
+      // type 1 is for small images
+      m_andRoc.getSystem().sendMessage("datareq", 
+          String.format("<datareq id=\"%s\" type=\"1\" filename=\"%s\"/>", ID, PicName) );
+    }
+  }
+
+  
+  static byte[] strToByte( String s ) {
+    int i = 0;
+    int len = s.length();
+    byte[] b = new byte[len/2 + 1];
+    for( i = 0; i < len; i+=2 ) {
+      b[i/2] = (byte)(Integer.getInteger(s.substring(i, i+2)) & 0xFF);
+    }
+    return b;
+  }
+
+  public void setPicData(String data) {
+    mPicData = data;
+    // TODO: convert from HEXA to Bitmap
+    byte[] rawdata = strToByte(mPicData);
+    LocoBmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
   }
   
   public void dir() {
@@ -44,19 +73,19 @@ public class Loco {
   public void lights() {
     m_bLights = !m_bLights;
     m_andRoc.getSystem().sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" fn=\"%s\"/>", 
-        m_andRoc.getSystem().getDeviceName(), m_ID, (m_bLights?"true":"false")) );
+        m_andRoc.getSystem().getDeviceName(), ID, (m_bLights?"true":"false")) );
   }
   
   public void function(int fn) {
     m_Function[fn] = !m_Function[fn];
     m_andRoc.getSystem().sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>", 
-        m_ID, fn, (fn-1)/4+1, fn, (m_Function[fn]?"true":"false")) );
+        ID, fn, (fn-1)/4+1, fn, (m_Function[fn]?"true":"false")) );
   }
   
   public void speed(int V) {
     m_iSpeed = V;
     m_andRoc.getSystem().sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
-        m_andRoc.getSystem().getDeviceName(), m_ID, m_iSpeed, (m_bDir?"true":"false"), (m_bLights?"true":"false") ) );
+        m_andRoc.getSystem().getDeviceName(), ID, m_iSpeed, (m_bDir?"true":"false"), (m_bLights?"true":"false") ) );
     
   }
 }

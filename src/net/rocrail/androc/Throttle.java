@@ -88,7 +88,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
     Iterator it = m_andRoc.getSystem().m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = (Loco)it.next();
-      m_adapterForSpinner.add(loco.getID());
+      m_adapterForSpinner.add(loco.ID);
       
     }
     
@@ -228,7 +228,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
             while (it.hasNext()) {
               Loco loco = (Loco) it.next();
               // TODO: invoke later?
-              m_adapterForSpinner.add(loco.getID());
+              m_adapterForSpinner.add(loco.ID);
 
             }
           }

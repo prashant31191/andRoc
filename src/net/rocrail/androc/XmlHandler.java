@@ -61,7 +61,19 @@ class XmlHandler extends DefaultHandler {
       // loco handling
       String id = atts.getValue("id");
       Loco loco = new Loco(m_andRoc, id);
+      loco.PicName = atts.getValue("image");
       m_Model.addLoco(loco);
+      // TODO: request image here?
+      //loco.requestLocoImg();
+    }
+    else if( localName.equals("datareq") ) {
+      // loco handling
+      String id = atts.getValue("id");
+      Loco loco = m_Model.getLoco(id);
+      if( loco != null ) {
+        String data = atts.getValue("data");
+        loco.setPicData(data);
+      }
     }
     else {
       // xml handling
