@@ -58,25 +58,25 @@ public class Throttle implements ViewController, ModelListener {
 
   @Override
   public void modelListLoaded(int MODELLIST) {
-    if( MODELLIST == ModelListener.MODELLIST_LC ) {
+    if (MODELLIST == ModelListener.MODELLIST_LC) {
       Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
-      if( s != null ) {
-        ArrayAdapter m_adapterForSpinner = (ArrayAdapter)s.getAdapter();
-/*        
-        if( m_adapterForSpinner == null ) {
-          m_adapterForSpinner = new ArrayAdapter(m_andRoc, android.R.layout.simple_spinner_item);
-          m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-          s.setAdapter(m_adapterForSpinner);
-        }
-*/        
-        // TODO: get the loco ids from the model
-        Iterator it = m_andRoc.getSystem().m_Model.m_LocoMap.values().iterator();
-        while( it.hasNext() ) {
-          Loco loco = (Loco)it.next();
-          // TODO: invoke later?
-          //m_adapterForSpinner.add(loco.m_ID);
-          
-        }
+
+      if (s != null) {
+        s.post(new Runnable() {
+          public void run() {
+            Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
+            ArrayAdapter m_adapterForSpinner = (ArrayAdapter) s.getAdapter();
+            // TODO: get the loco ids from the model
+            Iterator it = m_andRoc.getSystem().m_Model.m_LocoMap.values()
+                .iterator();
+            while (it.hasNext()) {
+              Loco loco = (Loco) it.next();
+              // TODO: invoke later?
+              m_adapterForSpinner.add(loco.m_ID);
+
+            }
+          }
+        });
       }
     }
   }
