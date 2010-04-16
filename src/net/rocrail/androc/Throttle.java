@@ -30,7 +30,8 @@ import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.ViewController;
 
 public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBarChangeListener {
-  andRoc      m_andRoc    = null;
+  andRoc      m_andRoc         = null;
+  int         m_iFunctionGroup = 0;
   
   public Throttle(andRoc androc) {
     m_andRoc = androc;
@@ -48,6 +49,26 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
       }
     }
     return null;
+  }
+  
+  void updateFunctions() {
+    Button f1 = (Button) m_andRoc.findViewById(R.id.android_buttonf1);
+    f1.setText("F"+(1+m_iFunctionGroup*8));
+    Button f2 = (Button) m_andRoc.findViewById(R.id.android_buttonf2);
+    f2.setText("F"+(2+m_iFunctionGroup*8));
+    Button f3 = (Button) m_andRoc.findViewById(R.id.android_buttonf3);
+    f3.setText("F"+(3+m_iFunctionGroup*8));
+    Button f4 = (Button) m_andRoc.findViewById(R.id.android_buttonf4);
+    f4.setText("F"+(4+m_iFunctionGroup*8));
+    Button f5 = (Button) m_andRoc.findViewById(R.id.android_buttonf5);
+    f5.setText("F"+(5+m_iFunctionGroup*8));
+    Button f6 = (Button) m_andRoc.findViewById(R.id.android_buttonf6);
+    f6.setText("F"+(6+m_iFunctionGroup*8));
+    Button f7 = (Button) m_andRoc.findViewById(R.id.android_buttonf7);
+    f7.setText("F"+(7+m_iFunctionGroup*8));
+    Button f8 = (Button) m_andRoc.findViewById(R.id.android_buttonf8);
+    f8.setText("F"+(8+m_iFunctionGroup*8));
+
   }
   
 
@@ -84,12 +105,22 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
         }
     });
 
+    Button fn = (Button) m_andRoc.findViewById(R.id.android_buttonfn);
+    fn.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          m_iFunctionGroup++;
+          if( m_iFunctionGroup > 2 )
+            m_iFunctionGroup = 0;
+          updateFunctions();
+        }
+    });
+
     Button f1 = (Button) m_andRoc.findViewById(R.id.android_buttonf1);
     f1.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
           if( loco != null ) {
-            loco.function(1);
+            loco.function(1+m_iFunctionGroup*8);
           }
         }
     });
@@ -99,7 +130,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
         public void onClick(View v) {
           Loco loco = findLoco();
           if( loco != null ) {
-            loco.function(2);
+            loco.function(2+m_iFunctionGroup*8);
           }
         }
     });
@@ -109,7 +140,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
         public void onClick(View v) {
           Loco loco = findLoco();
           if( loco != null ) {
-            loco.function(3);
+            loco.function(3+m_iFunctionGroup*8);
           }
         }
     });
@@ -119,7 +150,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
         public void onClick(View v) {
           Loco loco = findLoco();
           if( loco != null ) {
-            loco.function(4);
+            loco.function(4+m_iFunctionGroup*8);
           }
         }
     });
@@ -129,7 +160,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
         public void onClick(View v) {
           Loco loco = findLoco();
           if( loco != null ) {
-            loco.function(5);
+            loco.function(5+m_iFunctionGroup*8);
           }
         }
     });
@@ -139,7 +170,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
         public void onClick(View v) {
           Loco loco = findLoco();
           if( loco != null ) {
-            loco.function(6);
+            loco.function(6+m_iFunctionGroup*8);
           }
         }
     });
@@ -149,7 +180,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
         public void onClick(View v) {
           Loco loco = findLoco();
           if( loco != null ) {
-            loco.function(7);
+            loco.function(7+m_iFunctionGroup*8);
           }
         }
     });
@@ -159,7 +190,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
         public void onClick(View v) {
           Loco loco = findLoco();
           if( loco != null ) {
-            loco.function(8);
+            loco.function(8+m_iFunctionGroup*8);
           }
         }
     });
