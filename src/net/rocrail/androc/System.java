@@ -19,6 +19,7 @@
 */
 package net.rocrail.androc;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
@@ -33,7 +34,6 @@ import net.rocrail.androc.interfaces.ViewController;
 
 import org.xml.sax.SAXException;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
@@ -165,15 +165,16 @@ public class System extends Thread implements Runnable, ViewController {
                 avail = xmlSize - read;
               }
               // read the available bytes
-              is.read(buffer, read, avail);
-              read = read + avail;
+              int actualRead = is.read(buffer, read, avail);
+              if( actualRead != -1 )
+                read = read + actualRead;
               
               // all bytes are read
               if( read == xmlSize ) {
                 // create the xml string from the byte with utf-8 encoding
-                String xml = new String(buffer, "UTF-8").trim();
+                //String xml = new String(buffer, "UTF-8").trim();
                 // parse the xml
-                saxparser.parse(new StringBufferInputStream(xml), xmlhandler);
+                saxparser.parse(new ByteArrayInputStream(buffer), xmlhandler);
                 // reset for next header
                 read = 0;
                 xmlSize = 0;

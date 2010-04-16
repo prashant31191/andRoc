@@ -68,9 +68,9 @@ class XmlHandler extends DefaultHandler {
   }
 
   public void endElement (String uri, String localName, String qName) {
-    if( localName.equals("plan") ) {
+    if( localName.equals("lclist") ) {
       // signal end of loco list
-      m_Model.modelLoaded();
+      m_Model.lclistLoaded();
     }
   }
 }

@@ -49,7 +49,7 @@ public class Model {
     m_Listeners.add(listener);
   }
   
-  public void modelLoaded() {
+  public void lclistLoaded() {
     Iterator it = m_Listeners.iterator();
     while( it.hasNext() ) {
       ModelListener listener = (ModelListener)it.next();
