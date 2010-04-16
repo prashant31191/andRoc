@@ -20,35 +20,43 @@
 package net.rocrail.androc;
 
 public class Loco {
-  andRoc m_andRoc = null;
+  andRoc  m_andRoc  = null;
   boolean m_bLights = false;
-  boolean m_bDir = true;
-  int m_iSpeed = 0;
-  public String m_ID = "?";
-  
+  boolean m_bDir    = true;
+  int     m_iSpeed  = 0;
+  String  m_ID      = "?";
+  boolean[] m_Function = new boolean[32];
+
   public Loco( andRoc androc, String id) {
     m_andRoc = androc;
     m_ID = id;
   }
 
+  public String getID() {
+    return m_ID;
+  }
+  
   public void dir() {
-    m_bDir = m_bDir?false:true;
+    m_bDir = !m_bDir;
     speed(m_iSpeed);
   }
   
   public void lights() {
-    if( m_bLights ) 
-      m_bLights = false;
-    else
-      m_bLights = true;
+    m_bLights = !m_bLights;
     m_andRoc.getSystem().sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" fn=\"%s\"/>", 
-        m_andRoc.getSystem().getDeviceName(), m_ID, m_bLights?"true":"false") );
+        m_andRoc.getSystem().getDeviceName(), m_ID, (m_bLights?"true":"false")) );
+  }
+  
+  public void function(int fn) {
+    m_Function[fn] = !m_Function[fn];
+    m_andRoc.getSystem().sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>", 
+        m_ID, fn, (fn-1)/4+1, fn, (m_Function[fn]?"true":"false")) );
   }
   
   public void speed(int V) {
     m_iSpeed = V;
     m_andRoc.getSystem().sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
-        m_andRoc.getSystem().getDeviceName(), m_ID, m_iSpeed, m_bDir ? "true":"false", m_bLights ? "true":"false" ) );
+        m_andRoc.getSystem().getDeviceName(), m_ID, m_iSpeed, (m_bDir?"true":"false"), (m_bLights?"true":"false") ) );
     
   }
 }

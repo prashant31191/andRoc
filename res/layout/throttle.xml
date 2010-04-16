@@ -63,7 +63,7 @@
           android:layout_height="0px" android:layout_weight="25">
 					<Button android:id="@+id/android_buttondir"
 						android:layout_width="0px" android:layout_weight="50"
-						android:layout_height="fill_parent" android:text=">" android:textStyle="bold" />
+						android:layout_height="fill_parent" android:text="Direction" android:textStyle="bold" />
 					<Button android:id="@+id/android_buttonf0"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="Lights" android:textStyle="bold" />
@@ -73,5 +73,5 @@
 				</LinearLayout>
 				<SeekBar android:id="@+id/SeekBarSpeed" android:max="100"
 					android:progress="0" android:layout_width="fill_parent"
-          android:layout_height="0px" android:layout_weight="25" android:paddingLeft="10px" android:paddingRight="10px"/>
+          android:layout_height="0px" android:layout_weight="25" android:paddingLeft="20px" android:paddingRight="20px"/>
 </LinearLayout>
