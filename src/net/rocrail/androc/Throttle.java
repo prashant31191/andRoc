@@ -25,23 +25,38 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.SeekBar;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.ViewController;
 
-public class Throttle implements ViewController, ModelListener {
+public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBarChangeListener {
   andRoc      m_andRoc    = null;
   
   public Throttle(andRoc androc) {
     m_andRoc = androc;
     m_andRoc.getSystem().m_Model.addListener(this);
   }
+
   
+  Loco getLoco() {
+    Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
+    if( s != null ) {
+      String id = (String)s.getSelectedItem();
+      if( id != null ) {
+        Loco loco = m_andRoc.getSystem().m_Model.getLoco(id);
+        return loco;
+      }
+    }
+    return null;
+  }
+  
+
   @Override
   public void initView() {
     
     m_andRoc.setContentView(R.layout.throttle);
     Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
-    s.setPrompt(new String("Loco"));
+    s.setPrompt(new String("Select Loco"));
 
     ArrayAdapter m_adapterForSpinner = new ArrayAdapter(m_andRoc,
         android.R.layout.simple_spinner_item);
@@ -56,15 +71,24 @@ public class Throttle implements ViewController, ModelListener {
       
     }
     
-    final Button Lights = (Button) m_andRoc.findViewById(R.id.android_buttonf0);
+    SeekBar mSeekBar = (SeekBar)m_andRoc.findViewById(R.id.SeekBarSpeed);
+    mSeekBar.setOnSeekBarChangeListener(this);
+    
+    Button Lights = (Button) m_andRoc.findViewById(R.id.android_buttonf0);
     Lights.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
-          String id = (String)s.getSelectedItem();
-          if( id != null ) {
-            Loco loco = m_andRoc.getSystem().m_Model.getLoco(id);
+          Loco loco = getLoco();
+          if( loco != null )
             loco.lights();
-          }
+        }
+    });
+
+    Button Dir = (Button) m_andRoc.findViewById(R.id.android_buttondir);
+    Dir.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          Loco loco = getLoco();
+          if( loco != null )
+            loco.dir();
         }
     });
 
@@ -98,6 +122,25 @@ public class Throttle implements ViewController, ModelListener {
         });
       }
     }
+  }
+
+  @Override
+  public void onProgressChanged(SeekBar seekbar, int progress, boolean fromTouch) {
+    Loco loco = getLoco();
+    if( loco != null )
+      loco.speed(progress);
+  }
+
+  @Override
+  public void onStartTrackingTouch(SeekBar arg0) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void onStopTrackingTouch(SeekBar arseekbarg0) {
+    // TODO Auto-generated method stub
+
   }
 
 }

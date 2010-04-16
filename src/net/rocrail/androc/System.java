@@ -87,6 +87,10 @@ public class System extends Thread implements Runnable, ViewController {
     }
   }
   
+  public String getDeviceName() {
+    return "andRoc";
+  }
+  
   public void sendMessage(String name, String msg) {
     if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
       try {

@@ -73,5 +73,5 @@
 				</LinearLayout>
 				<SeekBar android:id="@+id/SeekBarSpeed" android:max="100"
 					android:progress="0" android:layout_width="fill_parent"
-          android:layout_height="0px" android:layout_weight="25"/>
+          android:layout_height="0px" android:layout_weight="25" android:paddingLeft="10px" android:paddingRight="10px"/>
 </LinearLayout>
