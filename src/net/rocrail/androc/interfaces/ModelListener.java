@@ -17,12 +17,9 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-package net.rocrail.androc;
+package net.rocrail.androc.interfaces;
 
-public class Loco {
-  public String m_ID = "?";
-  
-  public Loco( String id) {
-    m_ID = id;
-  }
+public interface ModelListener {
+  public static int MODELLIST_LC = 1;
+  public void modelListLoaded(int MODELLIST);
 }

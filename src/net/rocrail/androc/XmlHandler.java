@@ -24,6 +24,11 @@ import org.xml.sax.helpers.DefaultHandler;
 
 class XmlHandler extends DefaultHandler {
   int m_iXmlSize = 0;
+  Model m_Model = null;
+  
+  public XmlHandler(Model model) {
+    m_Model = model;
+  }
   
   public int getXmlSize() {
     int size = m_iXmlSize;
@@ -50,6 +55,12 @@ class XmlHandler extends DefaultHandler {
       String val = atts.getValue("size");
       m_iXmlSize = Integer.parseInt(val);
     }
+    else if( localName.equals("lc") ) {
+      // loco handling
+      String id = atts.getValue("id");
+      Loco loco = new Loco(id);
+      m_Model.addLoco(loco);
+    }
     else {
       // xml handling
       //localName;
@@ -57,6 +68,9 @@ class XmlHandler extends DefaultHandler {
   }
 
   public void endElement (String uri, String localName, String qName) {
-    
+    if( localName.equals("plan") ) {
+      // signal end of loco list
+      m_Model.modelLoaded();
+    }
   }
 }

@@ -41,8 +41,9 @@ import android.widget.Button;
 public class System extends Thread implements Runnable, ViewController {
   public String m_Host   = "rocrail.dyndns.org";
   public int    m_iPort  = 8080;
-
-  Activity      m_andRoc    = null;
+  public Model  m_Model  = null;
+  
+  andRoc        m_andRoc    = null;
   Socket        m_Socket    = null;
   boolean       m_bRun      = true;
   
@@ -50,12 +51,14 @@ public class System extends Thread implements Runnable, ViewController {
 
   public static final String PREFS_NAME = "andRoc.ini";
 
-  public System(Activity androc) {
+  public System(andRoc androc) {
     m_andRoc = androc;
     // Restore preferences
     SharedPreferences settings = androc.getSharedPreferences(PREFS_NAME, 0);
     m_Host  = settings.getString("host", "rocrail.dyndns.org");
     m_iPort = settings.getInt("port", 8080);
+    
+    m_Model = new Model(androc);
 
     //m_Parser = SAXParser;
     m_bRun = true;
@@ -108,7 +111,7 @@ public class System extends Thread implements Runnable, ViewController {
       e.printStackTrace();
     }
     
-    XmlHandler xmlhandler = new XmlHandler();
+    XmlHandler xmlhandler = new XmlHandler(m_Model);
     String hdr = "";
     boolean readHdr = true;
     int xmlSize = 0;

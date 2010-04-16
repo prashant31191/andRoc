@@ -19,13 +19,11 @@
 */
 package net.rocrail.androc;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import net.rocrail.androc.interfaces.Item;
 import net.rocrail.androc.interfaces.ViewController;
 
 public class Connection implements ViewController {

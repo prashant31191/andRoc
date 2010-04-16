@@ -64,6 +64,7 @@ public class andRoc extends Activity {
   }
   
   public void Connected() {
+    m_System.sendMessage("model","<model cmd=\"plan\" disablemonitor=\"true\"/>");
     m_Throttle.initView();
   }
 

@@ -22,13 +22,15 @@ package net.rocrail.androc;
 import android.app.Activity;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.ViewController;
 
-public class Throttle implements ViewController {
-  Activity      m_andRoc    = null;
+public class Throttle implements ViewController, ModelListener {
+  andRoc      m_andRoc    = null;
   
-  public Throttle(Activity androc) {
+  public Throttle(andRoc androc) {
     m_andRoc = androc;
+    m_andRoc.getSystem().m_Model.addListener(this);
   }
   
   @Override
@@ -46,6 +48,21 @@ public class Throttle implements ViewController {
     m_adapterForSpinner.add("NS 2418");
     m_adapterForSpinner.add("E19");
     m_adapterForSpinner.add("V160");
+  }
+
+  @Override
+  public void modelListLoaded(int MODELLIST) {
+    if( MODELLIST == ModelListener.MODELLIST_LC ) {
+      Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
+      if( s != null ) {
+        ArrayAdapter m_adapterForSpinner = new ArrayAdapter(m_andRoc, android.R.layout.simple_spinner_item);
+        m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(m_adapterForSpinner);
+
+        // TODO: get the loco ids from the model
+        m_adapterForSpinner.add("NS 2418");
+      }
+    }
   }
 
 }
