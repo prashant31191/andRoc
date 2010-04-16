@@ -22,8 +22,6 @@ package net.rocrail.androc;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringBufferInputStream;
-import java.io.StringReader;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -144,7 +142,7 @@ public class System extends Thread implements Runnable, ViewController {
                   // disregard al leading bytes
                   hdr = hdr.substring(hdr.indexOf("<?xml"));
                   // parse the header
-                  saxparser.parse(new StringBufferInputStream(hdr), xmlhandler);
+                  saxparser.parse(new ByteArrayInputStream(hdr.getBytes("UTF-8")), xmlhandler);
                   xmlSize = xmlhandler.getXmlSize();
                   // reset header string and signal reading data
                   hdr = "";

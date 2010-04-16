@@ -19,6 +19,8 @@
 */
 package net.rocrail.androc;
 
+import org.xml.sax.Attributes;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -28,15 +30,18 @@ public class Loco {
   public Bitmap  LocoBmp = null;
   
   andRoc  m_andRoc  = null;
-  boolean m_bLights = false;
+  private boolean m_bLights = false;
   boolean m_bDir    = true;
   int     m_iSpeed  = 0;
   boolean[] m_Function = new boolean[32];
   String  mPicData  = null;
+  
+  public Attributes properties = null;
 
-  public Loco( andRoc androc, String id) {
+  public Loco( andRoc androc, String id, Attributes atts) {
     m_andRoc = androc;
     ID = id;
+    properties = atts;
   }
 
   public void requestLocoImg() {

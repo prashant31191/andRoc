@@ -24,24 +24,24 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import net.rocrail.androc.interfaces.ModelListener;
+import org.xml.sax.Attributes;
 
-import android.app.Activity;
+import net.rocrail.androc.interfaces.ModelListener;
 
 public class Model {
   andRoc  m_andRoc  = null;
-  List m_Listeners = new ArrayList();
-  HashMap   m_LocoMap = new HashMap();
+  private List<ModelListener>  m_Listeners = new ArrayList<ModelListener>();
+  public  HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
   
   public Model(andRoc androc) {
     m_andRoc = androc;
   }
  
   public Loco getLoco(String ID) {
-    return (Loco)m_LocoMap.get(ID);
+    return m_LocoMap.get(ID);
   }
   
-  public void addLoco(Loco loco) {
+  public void addLoco(Loco loco, Attributes atts) {
     m_LocoMap.put(loco.ID, loco);
   }
   

@@ -79,7 +79,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
     Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
     s.setPrompt(new String("Select Loco"));
 
-    ArrayAdapter m_adapterForSpinner = new ArrayAdapter(m_andRoc,
+    ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(m_andRoc,
         android.R.layout.simple_spinner_item);
     m_adapterForSpinner
         .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -21,18 +21,9 @@ package net.rocrail.androc;
 
 import net.rocrail.androc.R;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 
 public class andRoc extends Activity {
   System     m_System     = null;
