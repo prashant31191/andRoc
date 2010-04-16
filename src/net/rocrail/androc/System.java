@@ -111,7 +111,7 @@ public class System extends Thread implements Runnable, ViewController {
       e.printStackTrace();
     }
     
-    XmlHandler xmlhandler = new XmlHandler(m_Model);
+    XmlHandler xmlhandler = new XmlHandler(m_andRoc, m_Model);
     String hdr = "";
     boolean readHdr = true;
     int xmlSize = 0;

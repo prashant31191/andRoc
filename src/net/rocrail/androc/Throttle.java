@@ -21,10 +21,10 @@ package net.rocrail.androc;
 
 import java.util.Iterator;
 
-import android.app.Activity;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.ViewController;
 
@@ -53,9 +53,28 @@ public class Throttle implements ViewController, ModelListener {
     while( it.hasNext() ) {
       Loco loco = (Loco)it.next();
       m_adapterForSpinner.add(loco.m_ID);
+      
     }
+    
+    final Button Lights = (Button) m_andRoc.findViewById(R.id.android_buttonf0);
+    Lights.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
+          String id = (String)s.getSelectedItem();
+          if( id != null ) {
+            Loco loco = m_andRoc.getSystem().m_Model.getLoco(id);
+            loco.lights();
+          }
+        }
+    });
+
+
+    
   }
 
+  
+  
+  
   @Override
   public void modelListLoaded(int MODELLIST) {
     if (MODELLIST == ModelListener.MODELLIST_LC) {
@@ -66,7 +85,7 @@ public class Throttle implements ViewController, ModelListener {
           public void run() {
             Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
             ArrayAdapter m_adapterForSpinner = (ArrayAdapter) s.getAdapter();
-            // TODO: get the loco ids from the model
+            // get the loco ids from the model
             Iterator it = m_andRoc.getSystem().m_Model.m_LocoMap.values()
                 .iterator();
             while (it.hasNext()) {

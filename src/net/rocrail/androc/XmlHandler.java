@@ -23,10 +23,12 @@ import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
 class XmlHandler extends DefaultHandler {
+  andRoc m_andRoc = null;
   int m_iXmlSize = 0;
   Model m_Model = null;
   
-  public XmlHandler(Model model) {
+  public XmlHandler(andRoc androc, Model model) {
+    m_andRoc = androc;
     m_Model = model;
   }
   
@@ -58,7 +60,7 @@ class XmlHandler extends DefaultHandler {
     else if( localName.equals("lc") ) {
       // loco handling
       String id = atts.getValue("id");
-      Loco loco = new Loco(id);
+      Loco loco = new Loco(m_andRoc, id);
       m_Model.addLoco(loco);
     }
     else {

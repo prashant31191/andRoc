@@ -20,9 +20,18 @@
 package net.rocrail.androc;
 
 public class Loco {
+  andRoc m_andRoc = null;
+  boolean m_bLights = false;
   public String m_ID = "?";
   
-  public Loco( String id) {
+  public Loco( andRoc androc, String id) {
+    m_andRoc = androc;
     m_ID = id;
+  }
+
+  public void lights() {
+    m_andRoc.getSystem().sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" fn=\"%s\"/>", 
+        "andRoc", m_ID, m_bLights?"true":"false") );
+    m_bLights = !m_bLights;
   }
 }
