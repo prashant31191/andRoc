@@ -19,6 +19,33 @@
 */
 package net.rocrail.androc;
 
-public class Throttle {
+import android.app.Activity;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import net.rocrail.androc.interfaces.ViewController;
+
+public class Throttle implements ViewController {
+  Activity      m_andRoc    = null;
+  
+  public Throttle(Activity androc) {
+    m_andRoc = androc;
+  }
+  
+  @Override
+  public void initView() {
+    
+    m_andRoc.setContentView(R.layout.throttle);
+    Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
+    s.setPrompt(new String("Loco"));
+
+    ArrayAdapter m_adapterForSpinner = new ArrayAdapter(m_andRoc,
+        android.R.layout.simple_spinner_item);
+    m_adapterForSpinner
+        .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    s.setAdapter(m_adapterForSpinner);
+    m_adapterForSpinner.add("NS 2418");
+    m_adapterForSpinner.add("E19");
+    m_adapterForSpinner.add("V160");
+  }
 
 }

@@ -17,8 +17,34 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-package net.rocrail.androc;
+package net.rocrail.androc.items;
 
-public class Loco {
-  public String m_ID = "?";
+import net.rocrail.androc.interfaces.Item;
+
+public class Switch implements Item {
+
+  @Override
+  public int getX() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public int getY() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public int getZ() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public String getID() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

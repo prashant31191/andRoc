@@ -29,6 +29,8 @@ import java.net.SocketException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import net.rocrail.androc.interfaces.ViewController;
+
 import org.xml.sax.SAXException;
 
 import android.app.Activity;
@@ -36,7 +38,7 @@ import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
 
-public class System extends Thread implements Runnable {
+public class System extends Thread implements Runnable, ViewController {
   public String m_Host   = "rocrail.dyndns.org";
   public int    m_iPort  = 8080;
 
@@ -209,6 +211,8 @@ public class System extends Thread implements Runnable {
 
   
   public void initView() {
+    m_andRoc.setContentView(R.layout.system);
+
     final Button powerON = (Button) m_andRoc.findViewById(R.id.systemPowerON);
     powerON.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {

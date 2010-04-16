@@ -35,7 +35,10 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 
 public class andRoc extends Activity {
-  System m_System = null;
+  System     m_System     = null;
+  Throttle   m_Throttle   = null;
+  Connection m_Connection = null;
+  
   final static int MENU_CONNECT  = 1;
   final static int MENU_THROTTLE = 2;
   final static int MENU_SYSTEM   = 3;
@@ -49,8 +52,19 @@ public class andRoc extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    m_System = new System(this);
-    connectView();
+    m_System     = new System(this);
+    m_Throttle   = new Throttle(this);
+    m_Connection = new Connection(this);
+    
+    m_Connection.initView();
+  }
+  
+  public System getSystem() {
+    return m_System;
+  }
+  
+  public void Connected() {
+    m_Throttle.initView();
   }
 
   /* Creates the menu items */
@@ -68,13 +82,12 @@ public class andRoc extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
     case MENU_CONNECT:
-      connectView();
+      m_Connection.initView();
       return true;
     case MENU_THROTTLE:
-      mainView();
+      m_Throttle.initView();
       return true;
     case MENU_SYSTEM:
-      setContentView(R.layout.system);
       m_System.initView();
       return true;
     case MENU_QUIT:
@@ -85,59 +98,4 @@ public class andRoc extends Activity {
     return false;
   }
 
-  void connectView() {
-    setContentView(R.layout.connect);
-    
-    final Button button = (Button) findViewById(R.id.ButtonConnect);
-    button.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-            // Perform action on click
-          EditText s = (EditText) findViewById(R.id.connectHost);
-          m_System.m_Host = s.getText().toString();
-          s = (EditText) findViewById(R.id.connectPort);
-          m_System.m_iPort = Integer.parseInt(s.getText().toString());
-          // TODO: progress dialog
-          try {
-            m_System.connect();
-            mainView();
-          }
-          catch( Exception e ) {
-            e.printStackTrace();
-            AlertDialog.Builder builder = new AlertDialog.Builder(andRoc.this); 
-            builder.setMessage(e.getClass().getName()+"\nCould not connect to " + m_System.m_Host+":"+m_System.m_iPort)
-            .setCancelable(false)
-            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-              //andRoc.this.finish();
-              dialog.cancel();
-            }});
-            
-            AlertDialog alert = builder.create();
-            alert.show();
-          
-          }
-        }
-    });
-
-    
-    EditText s = (EditText) findViewById(R.id.connectHost);
-    s.setText(m_System.m_Host);
-    s = (EditText) findViewById(R.id.connectPort);
-    s.setText(""+m_System.m_iPort);
-  }
-
-  void mainView() {
-    setContentView(R.layout.main);
-    Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
-    s.setPrompt(new String("Loco"));
-
-    ArrayAdapter m_adapterForSpinner = new ArrayAdapter(this,
-        android.R.layout.simple_spinner_item);
-    m_adapterForSpinner
-        .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    s.setAdapter(m_adapterForSpinner);
-    m_adapterForSpinner.add("NS 2418");
-    m_adapterForSpinner.add("E19");
-    m_adapterForSpinner.add("V160");
-  }
 }
