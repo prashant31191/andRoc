@@ -31,6 +31,7 @@ import net.rocrail.androc.interfaces.ModelListener;
 public class Model {
   andRoc  m_andRoc  = null;
   private List<ModelListener>  m_Listeners = new ArrayList<ModelListener>();
+  private List<Loco>  m_LocoList = new ArrayList<Loco>();
   public  HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
   
   public Model(andRoc androc) {
@@ -38,10 +39,24 @@ public class Model {
   }
  
   public Loco getLoco(String ID) {
-    return m_LocoMap.get(ID);
+    /* Rob:
+     * A new instance of the Loco class is returned if the hasmap is used to look up the ID...
+     * Is this a hasmap bug or do I overlook something here?
+     * 
+     * Original code:
+     * return m_LocoMap(ID);
+     */
+    Iterator it = m_LocoList.iterator();
+    while( it.hasNext()) {
+      Loco loco = (Loco)it.next();
+      if( ID.equals(loco.ID ))
+        return loco;
+    }
+    return null;
   }
   
   public void addLoco(Loco loco, Attributes atts) {
+    m_LocoList.add(loco);
     m_LocoMap.put(loco.ID, loco);
   }
   
