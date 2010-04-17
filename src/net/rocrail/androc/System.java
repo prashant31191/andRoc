@@ -141,6 +141,7 @@ public class System extends Thread implements Runnable, ViewController {
                 if( hdr.indexOf("<?xml") != -1 ) {
                   // disregard al leading bytes
                   hdr = hdr.substring(hdr.indexOf("<?xml"));
+                  hdr = hdr.trim();
                   // parse the header
                   saxparser.parse(new ByteArrayInputStream(hdr.getBytes("UTF-8")), xmlhandler);
                   xmlSize = xmlhandler.getXmlSize();
@@ -174,9 +175,9 @@ public class System extends Thread implements Runnable, ViewController {
               // all bytes are read
               if( read == xmlSize ) {
                 // create the xml string from the byte with utf-8 encoding
-                //String xml = new String(buffer, "UTF-8").trim();
+                String xml = new String(buffer, "UTF-8").trim();
                 // parse the xml
-                saxparser.parse(new ByteArrayInputStream(buffer), xmlhandler);
+                saxparser.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")), xmlhandler);
                 // reset for next header
                 read = 0;
                 xmlSize = 0;

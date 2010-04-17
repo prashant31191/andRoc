@@ -41,6 +41,7 @@ public class Loco {
   public Loco( andRoc androc, String id, Attributes atts) {
     m_andRoc = androc;
     ID = id;
+    PicName = atts.getValue("image");
     properties = atts;
   }
 
@@ -58,7 +59,8 @@ public class Loco {
     int len = s.length();
     byte[] b = new byte[len/2 + 1];
     for( i = 0; i < len; i+=2 ) {
-      b[i/2] = (byte)(Integer.getInteger(s.substring(i, i+2)) & 0xFF);
+      int val = Integer.parseInt(s.substring(i, i+2), 16);
+      b[i/2] = (byte)(val & 0xFF);
     }
     return b;
   }
