@@ -24,16 +24,16 @@
     android:layout_width="fill_parent" android:layout_height="wrap_content">
     <Button android:text="Power ON" android:textStyle="bold" android:id="@+id/systemPowerON"
       android:layout_width="0px" android:layout_weight="50"
-      android:layout_height="wrap_content"></Button>
+      android:layout_height="wrap_content" android:textSize="20px"></Button>
     <Button android:text="Power OFF" android:textStyle="bold" android:id="@+id/systemPowerOFF"
       android:layout_width="0px" android:layout_weight="50"
-      android:layout_height="wrap_content"></Button>
+      android:layout_height="wrap_content" android:textSize="20px"></Button>
   </LinearLayout>
   <LinearLayout android:id="@+id/systemLayout2"
     android:layout_width="fill_parent" android:layout_height="wrap_content">
     <Button android:text="Init Field" android:textStyle="bold" android:id="@+id/systemInitField"
       android:layout_width="fill_parent"
-      android:layout_height="wrap_content"></Button>
+      android:layout_height="wrap_content" android:textSize="20px"></Button>
   </LinearLayout>
 
 </LinearLayout>
