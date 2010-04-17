@@ -24,12 +24,14 @@ import java.util.Iterator;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SeekBar;
+import android.widget.AdapterView;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.ViewController;
 
-public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBarChangeListener {
+public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
   andRoc      m_andRoc         = null;
   int         m_iFunctionGroup = 0;
   
@@ -91,6 +93,8 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
       m_adapterForSpinner.add(loco.ID);
       
     }
+    
+    s.setOnItemSelectedListener(this);
     
     SeekBar mSeekBar = (SeekBar)m_andRoc.findViewById(R.id.SeekBarSpeed);
     mSeekBar.setOnSeekBarChangeListener(this);
@@ -254,6 +258,26 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
   public void onStopTrackingTouch(SeekBar arseekbarg0) {
     // TODO Auto-generated method stub
 
+  }
+
+
+  @Override
+  public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+    // TODO Auto-generated method stub
+    Loco loco = findLoco();
+    if( loco != null && loco.LocoBmp != null ) {
+      ImageView image = (ImageView)m_andRoc.findViewById(R.id.locoImage);
+      if( image != null ) {
+        image.setImageBitmap(loco.LocoBmp);
+      }
+    }
+  }
+
+
+  @Override
+  public void onNothingSelected(AdapterView<?> arg0) {
+    // TODO Auto-generated method stub
+    
   }
 
 }
