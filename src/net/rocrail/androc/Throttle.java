@@ -34,6 +34,8 @@ import net.rocrail.androc.interfaces.ViewController;
 public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
   andRoc      m_andRoc         = null;
   int         m_iFunctionGroup = 0;
+  int         m_iSelectedLoco  = 0;
+  int         m_iLocoCount     = 0;
   
   public Throttle(andRoc androc) {
     m_andRoc = androc;
@@ -76,6 +78,7 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
 
   @Override
   public void initView() {
+    m_iLocoCount = 0;
     
     m_andRoc.setContentView(R.layout.throttle);
     Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
@@ -91,10 +94,12 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
     while( it.hasNext() ) {
       Loco loco = (Loco)it.next();
       m_adapterForSpinner.add(loco.ID);
-      
+      m_iLocoCount++;
     }
     
     s.setOnItemSelectedListener(this);
+    if( m_iLocoCount > 0 && m_iSelectedLoco < m_iLocoCount)
+      s.setSelection(m_iSelectedLoco);    
     
     SeekBar mSeekBar = (SeekBar)m_andRoc.findViewById(R.id.SeekBarSpeed);
     mSeekBar.setOnSeekBarChangeListener(this);
@@ -262,8 +267,9 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
 
 
   @Override
-  public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+  public void onItemSelected(AdapterView<?> arg0, View view, int position, long longID) {
     // TODO Auto-generated method stub
+    m_iSelectedLoco = position;
     Loco loco = findLoco();
     if( loco != null && loco.LocoBmp != null ) {
       ImageView image = (ImageView)m_andRoc.findViewById(R.id.locoImage);
