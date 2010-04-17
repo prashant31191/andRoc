@@ -20,13 +20,15 @@
 package net.rocrail.androc;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.activities.Connection;
+import net.rocrail.androc.activities.Throttle;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class andRoc extends Activity {
-  System     m_System     = null;
+  RocrailService     m_System     = null;
   Throttle   m_Throttle   = null;
   Connection m_Connection = null;
   
@@ -43,14 +45,14 @@ public class andRoc extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    m_System     = new System(this);
+    m_System     = new RocrailService(this);
     m_Throttle   = new Throttle(this);
     m_Connection = new Connection(this);
     
     m_Connection.initView();
   }
   
-  public System getSystem() {
+  public RocrailService getSystem() {
     return m_System;
   }
   
@@ -88,6 +90,18 @@ public class andRoc extends Activity {
       return true;
     }
     return false;
+  }
+  
+  public void onPause() {
+    super.onPause();
+    // 1 also received at orientation change
+    return;
+  }
+
+  public void onStop() {
+    super.onStop();
+    // 2 also received at orientation change
+    return;
   }
 
 }

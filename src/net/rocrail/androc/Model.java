@@ -27,6 +27,7 @@ import java.util.List;
 import org.xml.sax.Attributes;
 
 import net.rocrail.androc.interfaces.ModelListener;
+import net.rocrail.androc.objects.Loco;
 
 public class Model {
   andRoc  m_andRoc  = null;

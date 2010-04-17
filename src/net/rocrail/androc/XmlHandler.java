@@ -19,6 +19,8 @@
 */
 package net.rocrail.androc;
 
+import net.rocrail.androc.objects.Loco;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 

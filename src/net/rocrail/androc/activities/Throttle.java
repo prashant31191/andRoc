@@ -17,10 +17,11 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-package net.rocrail.androc;
+package net.rocrail.androc.activities;
 
 import java.util.Iterator;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,10 +29,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SeekBar;
 import android.widget.AdapterView;
+import net.rocrail.androc.R;
+import net.rocrail.androc.andRoc;
+import net.rocrail.androc.R.id;
+import net.rocrail.androc.R.layout;
 import net.rocrail.androc.interfaces.ModelListener;
-import net.rocrail.androc.interfaces.ViewController;
+import net.rocrail.androc.objects.Loco;
 
-public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
+public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
   andRoc      m_andRoc         = null;
   int         m_iFunctionGroup = 0;
   int         m_iSelectedLoco  = 0;
@@ -76,7 +81,6 @@ public class Throttle implements ViewController, ModelListener, SeekBar.OnSeekBa
   }
   
 
-  @Override
   public void initView() {
     m_iLocoCount = 0;
     

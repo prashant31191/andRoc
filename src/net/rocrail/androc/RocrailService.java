@@ -28,15 +28,13 @@ import java.net.SocketException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import net.rocrail.androc.interfaces.ViewController;
-
 import org.xml.sax.SAXException;
 
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
 
-public class System extends Thread implements Runnable, ViewController {
+public class RocrailService extends Thread implements Runnable {
   public String m_Host   = "rocrail.dyndns.org";
   public int    m_iPort  = 8080;
   public Model  m_Model  = null;
@@ -49,7 +47,7 @@ public class System extends Thread implements Runnable, ViewController {
 
   public static final String PREFS_NAME = "andRoc.ini";
 
-  public System(andRoc androc) {
+  public RocrailService(andRoc androc) {
     m_andRoc = androc;
     // Restore preferences
     SharedPreferences settings = androc.getSharedPreferences(PREFS_NAME, 0);
@@ -223,21 +221,21 @@ public class System extends Thread implements Runnable, ViewController {
     final Button powerON = (Button) m_andRoc.findViewById(R.id.systemPowerON);
     powerON.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          System.this.sendMessage("sys", "<sys cmd=\"go\"/>");
+          RocrailService.this.sendMessage("sys", "<sys cmd=\"go\"/>");
         }
     });
 
     final Button powerOFF = (Button) m_andRoc.findViewById(R.id.systemPowerOFF);
     powerOFF.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          System.this.sendMessage("sys", "<sys cmd=\"stop\"/>");
+          RocrailService.this.sendMessage("sys", "<sys cmd=\"stop\"/>");
         }
     });
     
     final Button initField = (Button) m_andRoc.findViewById(R.id.systemInitField);
     initField.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          System.this.sendMessage("model", "<model cmd=\"initfield\"/>");
+          RocrailService.this.sendMessage("model", "<model cmd=\"initfield\"/>");
         }
     });
     

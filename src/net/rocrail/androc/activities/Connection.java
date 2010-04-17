@@ -17,16 +17,19 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-package net.rocrail.androc;
+package net.rocrail.androc.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import net.rocrail.androc.interfaces.ViewController;
+import net.rocrail.androc.R;
+import net.rocrail.androc.andRoc;
+import net.rocrail.androc.R.id;
+import net.rocrail.androc.R.layout;
 
-public class Connection implements ViewController {
+public class Connection {
   andRoc      m_andRoc    = null;
   
   public Connection(andRoc androc) {
@@ -34,7 +37,6 @@ public class Connection implements ViewController {
   }
   
 
-  @Override
   public void initView() {
     m_andRoc.setContentView(R.layout.connect);
     
