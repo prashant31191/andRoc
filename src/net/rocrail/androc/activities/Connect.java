@@ -21,6 +21,7 @@ package net.rocrail.androc.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -61,6 +62,13 @@ public class Connect extends Base {
           // TODO: progress dialog
           try {
             m_RocrailService.connect();
+            
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("host", m_RocrailService.m_Host);
+            editor.putInt("port", m_RocrailService.m_iPort);
+            editor.commit();
+            
             Connect.this.throttleView();
           }
           catch( Exception e ) {

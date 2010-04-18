@@ -49,6 +49,7 @@ public class andRoc extends Base {
   }
   
   public void connectedWithService() {
+    restorePreferences();
     connectView();
   }
 

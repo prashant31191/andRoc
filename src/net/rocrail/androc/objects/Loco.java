@@ -31,11 +31,11 @@ public class Loco {
   public String  ID      = "?";
   public String  PicName = null;
   public Bitmap  LocoBmp = null;
+  public int     Speed   = 0;
   
   RocrailService  m_andRoc  = null;
   private boolean m_bLights = false;
   boolean m_bDir    = true;
-  int     m_iSpeed  = 0;
   boolean[] m_Function = new boolean[32];
   String  mPicData  = null;
   
@@ -72,12 +72,13 @@ public class Loco {
     mPicData = data;
     // TODO: convert from HEXA to Bitmap
     byte[] rawdata = strToByte(mPicData);
-    LocoBmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
+    Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
+    LocoBmp = bmp;
   }
   
   public void dir() {
     m_bDir = !m_bDir;
-    speed(m_iSpeed);
+    speed(Speed);
   }
   
   public void lights() {
@@ -93,9 +94,9 @@ public class Loco {
   }
   
   public void speed(int V) {
-    m_iSpeed = V;
+    Speed = V;
     m_andRoc.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
-        m_andRoc.getDeviceName(), ID, m_iSpeed, (m_bDir?"true":"false"), (m_bLights?"true":"false") ) );
+        m_andRoc.getDeviceName(), ID, Speed, (m_bDir?"true":"false"), (m_bLights?"true":"false") ) );
     
   }
 }

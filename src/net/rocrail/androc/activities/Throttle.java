@@ -39,7 +39,6 @@ import net.rocrail.androc.objects.Loco;
 
 public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
   int         m_iFunctionGroup = 0;
-  int         m_iSelectedLoco  = 0;
   int         m_iLocoCount     = 0;
   
   @Override
@@ -109,8 +108,8 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     }
     
     s.setOnItemSelectedListener(this);
-    if( m_iLocoCount > 0 && m_iSelectedLoco < m_iLocoCount)
-      s.setSelection(m_iSelectedLoco);    
+    if( m_iLocoCount > 0 && m_RocrailService.m_iSelectedLoco < m_iLocoCount)
+      s.setSelection(m_RocrailService.m_iSelectedLoco);    
     
     SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
     mSeekBar.setOnSeekBarChangeListener(this);
@@ -279,14 +278,19 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
 
   @Override
   public void onItemSelected(AdapterView<?> arg0, View view, int position, long longID) {
-    // TODO Auto-generated method stub
-    m_iSelectedLoco = position;
+    m_RocrailService.m_iSelectedLoco = position;
     Loco loco = findLoco();
-    if( loco != null && loco.LocoBmp != null ) {
-      ImageView image = (ImageView)findViewById(R.id.locoImage);
-      if( image != null ) {
-        image.setImageBitmap(loco.LocoBmp);
+    if( loco != null ) {
+      if( loco.LocoBmp != null ) {
+        ImageView image = (ImageView)findViewById(R.id.locoImage);
+        if( image != null ) {
+          image.setImageBitmap(loco.LocoBmp);
+        }
       }
+      
+      SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
+      mSeekBar.setProgress(loco.Speed);
+
     }
   }
 

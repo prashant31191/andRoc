@@ -27,12 +27,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class Base extends Activity {
-  
+  public static final String PREFS_NAME = "andRoc.ini";
+
   final static int MENU_CONNECT  = 1;
   final static int MENU_THROTTLE = 2;
   final static int MENU_SYSTEM   = 3;
@@ -66,6 +68,15 @@ public class Base extends Activity {
 
   public void connectedWithService() {
     
+  }
+  
+  public void restorePreferences() {
+  // Restore preferences
+    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+    if( m_RocrailService != null ) {
+      m_RocrailService.m_Host  = settings.getString("host", "rocrail.dyndns.org");
+      m_RocrailService.m_iPort = settings.getInt("port", 8080);
+    }
   }
 
   

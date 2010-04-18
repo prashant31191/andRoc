@@ -34,6 +34,8 @@ public class RocrailService extends Service {
   public int    m_iPort  = 8080;
   public Model  m_Model  = null;
   
+  public int    m_iSelectedLoco = 0;
+  
   
   andRoc        m_andRoc     = null;
   Socket        m_Socket     = null;
@@ -42,17 +44,8 @@ public class RocrailService extends Service {
   
   SAXParser m_Parser = null;
 
-  public static final String PREFS_NAME = "andRoc.ini";
-
-  
   @Override
   public void onCreate() {
-    // Restore preferences
-    /*
-    SharedPreferences settings = m_andRoc.getSharedPreferences(PREFS_NAME, 0);
-    m_Host  = settings.getString("host", "rocrail.dyndns.org");
-    m_iPort = settings.getInt("port", 8080);
-    */
     m_Model = new Model(this);
   }
 
@@ -85,11 +78,6 @@ public class RocrailService extends Service {
   
   public void exit() {
     m_bRun = false;
-    SharedPreferences settings = m_andRoc.getSharedPreferences(PREFS_NAME, 0);
-    SharedPreferences.Editor editor = settings.edit();
-    editor.putString("host", m_Host);
-    editor.putInt("port", m_iPort);
-    editor.commit();
     try {
       Thread.sleep(500);
       if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
