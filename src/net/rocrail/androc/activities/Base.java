@@ -102,16 +102,19 @@ public class Base extends Activity {
   public void connectView() {
     Intent intent = new Intent(this,Connect.class);
     startActivity(intent);
+    finish();
   }
   
   public void throttleView() {
     Intent intent = new Intent(this,Throttle.class);
     startActivity(intent);
+    finish();
   }
   
   public void systemView() {
     Intent intent = new Intent(this,System.class);
     startActivity(intent);
+    finish();
   }
   
 }
