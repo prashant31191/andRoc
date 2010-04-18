@@ -19,16 +19,10 @@
 */
 package net.rocrail.androc;
 
+import android.os.Bundle;
 import net.rocrail.androc.R;
 import net.rocrail.androc.activities.Base;
-import net.rocrail.androc.activities.Connect;
-import net.rocrail.androc.activities.Throttle;
-import net.rocrail.androc.activities.System;
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+
 
 /**
  * Application entry activity representing a splash screen.

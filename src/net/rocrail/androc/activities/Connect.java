@@ -78,11 +78,12 @@ public class Connect extends Base {
         }
     });
 
-    
-    EditText s = (EditText) findViewById(R.id.connectHost);
-    s.setText(m_RocrailService.m_Host);
-    s = (EditText) findViewById(R.id.connectPort);
-    s.setText(""+m_RocrailService.m_iPort);
+    if( m_RocrailService != null ) {
+      EditText s = (EditText) findViewById(R.id.connectHost);
+      s.setText(m_RocrailService.m_Host);
+      s = (EditText) findViewById(R.id.connectPort);
+      s.setText(""+m_RocrailService.m_iPort);
+    }
 
   }
 

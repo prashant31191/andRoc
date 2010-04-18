@@ -23,6 +23,7 @@ import java.net.Socket;
 import javax.xml.parsers.SAXParser;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Binder;
@@ -44,14 +45,24 @@ public class RocrailService extends Service {
   public static final String PREFS_NAME = "andRoc.ini";
 
   
-  
+  @Override
+  public void onCreate() {
+    // Restore preferences
+    /*
+    SharedPreferences settings = m_andRoc.getSharedPreferences(PREFS_NAME, 0);
+    m_Host  = settings.getString("host", "rocrail.dyndns.org");
+    m_iPort = settings.getInt("port", 8080);
+    */
+    m_Model = new Model(this);
+  }
+
   
   private final IBinder rocrailBinder = new RocrailLocalBinder();
   public class RocrailLocalBinder extends Binder {
     public RocrailService getService() {
         return RocrailService.this;
     }
-    Model getModel() {
+    public Model getModel() {
       return m_Model;
     }
   }
@@ -62,15 +73,7 @@ public class RocrailService extends Service {
   }
   
   
-  public RocrailService(andRoc androc) {
-    m_andRoc = androc;
-    // Restore preferences
-    SharedPreferences settings = androc.getSharedPreferences(PREFS_NAME, 0);
-    m_Host  = settings.getString("host", "rocrail.dyndns.org");
-    m_iPort = settings.getInt("port", 8080);
-    
-    m_Model = new Model(androc);
-    m_bRun = true;
+  public RocrailService() {
   }
   
   public void connect() throws Exception {

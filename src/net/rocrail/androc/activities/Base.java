@@ -40,8 +40,8 @@ public class Base extends Activity {
   final static int MENU_MENU     = 5;
   final static int MENU_QUIT     = 6;
   
-  RocrailService m_RocrailService;
-  RocrailService.RocrailLocalBinder m_RocrailServiceBinder;
+  RocrailService                    m_RocrailService       = null;
+  RocrailService.RocrailLocalBinder m_RocrailServiceBinder = null;
 
   
   private ServiceConnection RocrailServiceConnection = new ServiceConnection() {

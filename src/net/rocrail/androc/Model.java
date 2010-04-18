@@ -30,13 +30,13 @@ import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.objects.Loco;
 
 public class Model {
-  andRoc  m_andRoc  = null;
+  RocrailService  m_andRoc  = null;
   private List<ModelListener>  m_Listeners = new ArrayList<ModelListener>();
   private List<Loco>  m_LocoList = new ArrayList<Loco>();
   public  HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
   
-  public Model(andRoc androc) {
-    m_andRoc = androc;
+  public Model(RocrailService rocrailService) {
+    m_andRoc = rocrailService;
   }
  
   public Loco getLoco(String ID) {
