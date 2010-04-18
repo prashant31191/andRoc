@@ -20,7 +20,6 @@
 package net.rocrail.androc.activities;
 
 import net.rocrail.androc.R;
-import android.app.Activity;
 import android.os.Bundle;
 
 public class Layout extends Base {

@@ -117,31 +117,31 @@ public class Base extends Activity {
   }
   
   public void connectView() {
-    Intent intent = new Intent(this,Connect.class);
+    Intent intent = new Intent(this,net.rocrail.androc.activities.Connect.class);
     startActivity(intent);
     finish();
   }
   
   public void throttleView() {
-    Intent intent = new Intent(this,Throttle.class);
+    Intent intent = new Intent(this,net.rocrail.androc.activities.Throttle.class);
     startActivity(intent);
     finish();
   }
   
   public void systemView() {
-    Intent intent = new Intent(this,System.class);
+    Intent intent = new Intent(this,net.rocrail.androc.activities.System.class);
     startActivity(intent);
     finish();
   }
   
   public void menuView() {
-    Intent intent = new Intent(this,Menu.class);
+    Intent intent = new Intent(this,net.rocrail.androc.activities.Menu.class);
     startActivity(intent);
     finish();
   }
   
   public void layoutView() {
-    Intent intent = new Intent(this,Layout.class);
+    Intent intent = new Intent(this,net.rocrail.androc.activities.Layout.class);
     startActivity(intent);
     finish();
   }

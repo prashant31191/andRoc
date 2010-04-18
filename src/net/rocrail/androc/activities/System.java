@@ -22,7 +22,6 @@ package net.rocrail.androc.activities;
 import net.rocrail.androc.R;
 import net.rocrail.androc.RocrailService;
 import net.rocrail.androc.andRoc;
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
