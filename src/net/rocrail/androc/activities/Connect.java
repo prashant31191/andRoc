@@ -40,9 +40,12 @@ public class Connect extends Base {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     connectWithService();
-    initView();
   }
   
+  public void connectedWithService() {
+    initView();
+  }
+
 
   public void initView() {
     setContentView(R.layout.connect);
@@ -58,6 +61,7 @@ public class Connect extends Base {
           // TODO: progress dialog
           try {
             m_RocrailService.connect();
+            Connect.this.throttleView();
           }
           catch( Exception e ) {
             e.printStackTrace();

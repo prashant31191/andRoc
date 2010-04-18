@@ -46,11 +46,13 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     connectWithService();
-    m_RocrailService.m_Model.addListener(this);
-    initView();
   }
   
 
+  public void connectedWithService() {
+    m_RocrailService.m_Model.addListener(this);
+    initView();
+  }
 
   
   Loco findLoco() {

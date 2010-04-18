@@ -80,7 +80,7 @@ public class RocrailService extends Service {
     m_Socket = new Socket(m_Host, m_iPort);
     sendMessage("model","<model cmd=\"plan\" disablemonitor=\"true\"/>");
     m_Connection = new Connection(this, m_Model, m_Socket);
-    m_Connection.run();
+    m_Connection.start();
   }
   
   public void exit() {

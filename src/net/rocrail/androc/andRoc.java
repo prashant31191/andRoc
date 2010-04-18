@@ -43,10 +43,15 @@ public class andRoc extends Base {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
     setContentView(R.layout.androc);
 
+    connectWithService();
   }
+  
+  public void connectedWithService() {
+    connectView();
+  }
+
   
   public void Connected() {
   }

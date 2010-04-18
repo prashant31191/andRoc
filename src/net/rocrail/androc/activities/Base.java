@@ -49,6 +49,7 @@ public class Base extends Activity {
     public void onServiceConnected(ComponentName className, IBinder binder) {
       m_RocrailServiceBinder = (RocrailService.RocrailLocalBinder)binder;
       m_RocrailService = m_RocrailServiceBinder.getService();
+      Base.this.connectedWithService();
     }
 
     @Override
@@ -58,11 +59,14 @@ public class Base extends Activity {
     }
   };
   
-  void connectWithService() {
+  public void connectWithService() {
     Intent intent = new Intent(getApplicationContext(), RocrailService.class);
     bindService(intent, RocrailServiceConnection, Context.BIND_AUTO_CREATE);
   }
 
+  public void connectedWithService() {
+    
+  }
 
   
   /* Creates the menu items */
@@ -80,21 +84,34 @@ public class Base extends Activity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
     case MENU_CONNECT:
-    {
-      //m_Connection.initView();
-      Intent intent = new Intent(this,Connect.class);
-      startActivity(intent);
+      connectView();
       return true;
-    }
     case MENU_THROTTLE:
+      throttleView();
       return true;
     case MENU_SYSTEM:
+      systemView();
       return true;
     case MENU_QUIT:
       finish();
       return true;
     }
     return false;
+  }
+  
+  public void connectView() {
+    Intent intent = new Intent(this,Connect.class);
+    startActivity(intent);
+  }
+  
+  public void throttleView() {
+    Intent intent = new Intent(this,Throttle.class);
+    startActivity(intent);
+  }
+  
+  public void systemView() {
+    Intent intent = new Intent(this,System.class);
+    startActivity(intent);
   }
   
 }
