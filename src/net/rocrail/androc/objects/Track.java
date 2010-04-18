@@ -17,11 +17,11 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-package net.rocrail.androc.items;
+package net.rocrail.androc.objects;
 
-import net.rocrail.androc.interfaces.Item;
+import net.rocrail.androc.interfaces.LayoutItem;
 
-public class Track implements Item {
+public class Track implements LayoutItem {
 
   @Override
   public int getX() {

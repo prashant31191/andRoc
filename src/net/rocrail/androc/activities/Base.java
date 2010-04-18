@@ -103,6 +103,12 @@ public class Base extends Activity {
     case MENU_SYSTEM:
       systemView();
       return true;
+    case MENU_LAYOUT:
+      layoutView();
+      return true;
+    case MENU_MENU:
+      menuView();
+      return true;
     case MENU_QUIT:
       finish();
       return true;
@@ -124,6 +130,18 @@ public class Base extends Activity {
   
   public void systemView() {
     Intent intent = new Intent(this,System.class);
+    startActivity(intent);
+    finish();
+  }
+  
+  public void menuView() {
+    Intent intent = new Intent(this,Menu.class);
+    startActivity(intent);
+    finish();
+  }
+  
+  public void layoutView() {
+    Intent intent = new Intent(this,Layout.class);
     startActivity(intent);
     finish();
   }

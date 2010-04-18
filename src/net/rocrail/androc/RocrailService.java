@@ -39,7 +39,6 @@ public class RocrailService extends Service {
   
   andRoc        m_andRoc     = null;
   Socket        m_Socket     = null;
-  boolean       m_bRun       = true;
   Connection    m_Connection = null;
   
   SAXParser m_Parser = null;
@@ -69,16 +68,33 @@ public class RocrailService extends Service {
   public RocrailService() {
   }
   
+  
   public void connect() throws Exception {
+    try {
+      m_Connection.stopReading();
+      Thread.sleep(500);
+    } 
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+    
+    if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
+      m_Socket.close();
+    }
     m_Socket = new Socket(m_Host, m_iPort);
     sendMessage("model","<model cmd=\"plan\" disablemonitor=\"true\"/>");
-    m_Connection = new Connection(this, m_Model, m_Socket);
-    m_Connection.start();
+    if( m_Connection == null ) {
+      m_Connection = new Connection(this, m_Model, m_Socket);
+      m_Connection.start();
+    }
+    m_Connection.startReading();
   }
   
-  public void exit() {
-    m_bRun = false;
+  
+  public void onDestroy() {
     try {
+      m_Connection.stopReading();
+      m_Connection.stopRunning();
       Thread.sleep(500);
       if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
         m_Socket.close();

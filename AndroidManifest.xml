@@ -34,6 +34,8 @@
         <activity android:name=".activities.Connect" />
         <activity android:name=".activities.Throttle" />
         <activity android:name=".activities.System" />
+        <activity android:name=".activities.Menu" />
+        <activity android:name=".activities.Layout" />
         <service android:name=".RocrailService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

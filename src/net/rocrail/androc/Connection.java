@@ -36,6 +36,7 @@ public class Connection extends Thread {
   Model   m_Model  = null;
   Socket  m_Socket = null;
   boolean m_bRun   = true;
+  boolean m_bRead  = true;
   
   public Connection( RocrailService rocrailService, Model model, Socket socket ) {
     m_andRoc = rocrailService;
@@ -44,9 +45,17 @@ public class Connection extends Thread {
   }
   
   public void stopReading() {
-    m_bRun = false;
+    m_bRead = false;
   }
   
+  
+  public void startReading() {
+    m_bRead = true;
+  }
+  
+  public void stopRunning() {
+    m_bRun = false;
+  }
   
   public void run() {
     SAXParser saxparser = null;
@@ -67,7 +76,7 @@ public class Connection extends Thread {
     
     while(saxparser != null && m_bRun) {
       try {
-        if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
+        if( m_bRead && m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
           InputStream is = m_Socket.getInputStream();
           
           if( is.available() > 0 ) {
