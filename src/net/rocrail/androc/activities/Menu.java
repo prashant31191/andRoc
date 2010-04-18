@@ -22,6 +22,6 @@ package net.rocrail.androc.activities;
 
 import android.app.Activity;
 
-public class Menu extends Activity {
+public class Menu extends Base {
 
 }

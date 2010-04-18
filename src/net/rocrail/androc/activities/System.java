@@ -23,37 +23,41 @@ import net.rocrail.androc.R;
 import net.rocrail.androc.RocrailService;
 import net.rocrail.androc.andRoc;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class System extends Activity {
-  andRoc m_andRoc = null;
+public class System extends Base {
   
-  public System(andRoc androc) {
-    m_andRoc = androc;
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    connectWithService();
+    initView();
   }
   
-  public void initView() {
-    m_andRoc.setContentView(R.layout.system);
 
-    final Button powerON = (Button) m_andRoc.findViewById(R.id.systemPowerON);
+  public void initView() {
+    setContentView(R.layout.system);
+
+    final Button powerON = (Button) findViewById(R.id.systemPowerON);
     powerON.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_andRoc.getSystem().sendMessage("sys", "<sys cmd=\"go\"/>");
+          m_RocrailService.sendMessage("sys", "<sys cmd=\"go\"/>");
         }
     });
 
-    final Button powerOFF = (Button) m_andRoc.findViewById(R.id.systemPowerOFF);
+    final Button powerOFF = (Button) findViewById(R.id.systemPowerOFF);
     powerOFF.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_andRoc.getSystem().sendMessage("sys", "<sys cmd=\"stop\"/>");
+          m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
         }
     });
     
-    final Button initField = (Button) m_andRoc.findViewById(R.id.systemInitField);
+    final Button initField = (Button) findViewById(R.id.systemInitField);
     initField.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_andRoc.getSystem().sendMessage("model", "<model cmd=\"initfield\"/>");
+          m_RocrailService.sendMessage("model", "<model cmd=\"initfield\"/>");
         }
     });
     

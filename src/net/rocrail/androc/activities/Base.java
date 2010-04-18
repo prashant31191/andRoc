@@ -21,8 +21,13 @@
 package net.rocrail.androc.activities;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.RocrailService;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -34,6 +39,31 @@ public class Base extends Activity {
   final static int MENU_LAYOUT   = 4;
   final static int MENU_MENU     = 5;
   final static int MENU_QUIT     = 6;
+  
+  RocrailService m_RocrailService;
+  RocrailService.RocrailLocalBinder m_RocrailServiceBinder;
+
+  
+  private ServiceConnection RocrailServiceConnection = new ServiceConnection() {
+    @Override
+    public void onServiceConnected(ComponentName className, IBinder binder) {
+      m_RocrailServiceBinder = (RocrailService.RocrailLocalBinder)binder;
+      m_RocrailService = m_RocrailServiceBinder.getService();
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName arg0) {
+      // TODO Auto-generated method stub
+      
+    }
+  };
+  
+  void connectWithService() {
+    Intent intent = new Intent(getApplicationContext(), RocrailService.class);
+    bindService(intent, RocrailServiceConnection, Context.BIND_AUTO_CREATE);
+  }
+
+
   
   /* Creates the menu items */
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,5 +97,4 @@ public class Base extends Activity {
     return false;
   }
   
-
 }

@@ -19,6 +19,7 @@
 */
 package net.rocrail.androc.objects;
 
+import net.rocrail.androc.RocrailService;
 import net.rocrail.androc.andRoc;
 
 import org.xml.sax.Attributes;
@@ -31,7 +32,7 @@ public class Loco {
   public String  PicName = null;
   public Bitmap  LocoBmp = null;
   
-  andRoc  m_andRoc  = null;
+  RocrailService  m_andRoc  = null;
   private boolean m_bLights = false;
   boolean m_bDir    = true;
   int     m_iSpeed  = 0;
@@ -40,8 +41,8 @@ public class Loco {
   
   public Attributes properties = null;
 
-  public Loco( andRoc androc, String id, Attributes atts) {
-    m_andRoc = androc;
+  public Loco( RocrailService rocrailService, String id, Attributes atts) {
+    m_andRoc = rocrailService;
     ID = id;
     PicName = atts.getValue("image");
     properties = atts;
@@ -50,7 +51,7 @@ public class Loco {
   public void requestLocoImg() {
     if( PicName != null ) {
       // type 1 is for small images
-      m_andRoc.getSystem().sendMessage("datareq", 
+      m_andRoc.sendMessage("datareq", 
           String.format("<datareq id=\"%s\" type=\"1\" filename=\"%s\"/>", ID, PicName) );
     }
   }
@@ -81,20 +82,20 @@ public class Loco {
   
   public void lights() {
     m_bLights = !m_bLights;
-    m_andRoc.getSystem().sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" fn=\"%s\"/>", 
-        m_andRoc.getSystem().getDeviceName(), ID, (m_bLights?"true":"false")) );
+    m_andRoc.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" fn=\"%s\"/>", 
+        m_andRoc.getDeviceName(), ID, (m_bLights?"true":"false")) );
   }
   
   public void function(int fn) {
     m_Function[fn] = !m_Function[fn];
-    m_andRoc.getSystem().sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>", 
+    m_andRoc.sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>", 
         ID, fn, (fn-1)/4+1, fn, (m_Function[fn]?"true":"false")) );
   }
   
   public void speed(int V) {
     m_iSpeed = V;
-    m_andRoc.getSystem().sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
-        m_andRoc.getSystem().getDeviceName(), ID, m_iSpeed, (m_bDir?"true":"false"), (m_bLights?"true":"false") ) );
+    m_andRoc.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
+        m_andRoc.getDeviceName(), ID, m_iSpeed, (m_bDir?"true":"false"), (m_bLights?"true":"false") ) );
     
   }
 }

@@ -21,6 +21,6 @@ package net.rocrail.androc.activities;
 
 import android.app.Activity;
 
-public class Layout extends Activity {
+public class Layout extends Base {
 
 }

@@ -22,6 +22,7 @@ package net.rocrail.androc.activities;
 import java.util.Iterator;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,24 +37,28 @@ import net.rocrail.androc.R.layout;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.objects.Loco;
 
-public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
-  andRoc      m_andRoc         = null;
+public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
   int         m_iFunctionGroup = 0;
   int         m_iSelectedLoco  = 0;
   int         m_iLocoCount     = 0;
   
-  public Throttle(andRoc androc) {
-    m_andRoc = androc;
-    m_andRoc.getSystem().m_Model.addListener(this);
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    connectWithService();
+    m_RocrailService.m_Model.addListener(this);
+    initView();
   }
+  
+
 
   
   Loco findLoco() {
-    Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
+    Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
     if( s != null ) {
       String id = (String)s.getSelectedItem();
       if( id != null ) {
-        Loco loco = m_andRoc.getSystem().m_Model.getLoco(id);
+        Loco loco = m_RocrailService.m_Model.getLoco(id);
         return loco;
       }
     }
@@ -61,21 +66,21 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
   }
   
   void updateFunctions() {
-    Button f1 = (Button) m_andRoc.findViewById(R.id.android_buttonf1);
+    Button f1 = (Button) findViewById(R.id.android_buttonf1);
     f1.setText("F"+(1+m_iFunctionGroup*8));
-    Button f2 = (Button) m_andRoc.findViewById(R.id.android_buttonf2);
+    Button f2 = (Button) findViewById(R.id.android_buttonf2);
     f2.setText("F"+(2+m_iFunctionGroup*8));
-    Button f3 = (Button) m_andRoc.findViewById(R.id.android_buttonf3);
+    Button f3 = (Button) findViewById(R.id.android_buttonf3);
     f3.setText("F"+(3+m_iFunctionGroup*8));
-    Button f4 = (Button) m_andRoc.findViewById(R.id.android_buttonf4);
+    Button f4 = (Button) findViewById(R.id.android_buttonf4);
     f4.setText("F"+(4+m_iFunctionGroup*8));
-    Button f5 = (Button) m_andRoc.findViewById(R.id.android_buttonf5);
+    Button f5 = (Button) findViewById(R.id.android_buttonf5);
     f5.setText("F"+(5+m_iFunctionGroup*8));
-    Button f6 = (Button) m_andRoc.findViewById(R.id.android_buttonf6);
+    Button f6 = (Button) findViewById(R.id.android_buttonf6);
     f6.setText("F"+(6+m_iFunctionGroup*8));
-    Button f7 = (Button) m_andRoc.findViewById(R.id.android_buttonf7);
+    Button f7 = (Button) findViewById(R.id.android_buttonf7);
     f7.setText("F"+(7+m_iFunctionGroup*8));
-    Button f8 = (Button) m_andRoc.findViewById(R.id.android_buttonf8);
+    Button f8 = (Button) findViewById(R.id.android_buttonf8);
     f8.setText("F"+(8+m_iFunctionGroup*8));
 
   }
@@ -84,17 +89,17 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
   public void initView() {
     m_iLocoCount = 0;
     
-    m_andRoc.setContentView(R.layout.throttle);
-    Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
+    setContentView(R.layout.throttle);
+    Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
     s.setPrompt(new String("Select Loco"));
 
-    ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(m_andRoc,
+    ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(this,
         android.R.layout.simple_spinner_item);
     m_adapterForSpinner
         .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
 
-    Iterator it = m_andRoc.getSystem().m_Model.m_LocoMap.values().iterator();
+    Iterator it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = (Loco)it.next();
       m_adapterForSpinner.add(loco.ID);
@@ -105,10 +110,10 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
     if( m_iLocoCount > 0 && m_iSelectedLoco < m_iLocoCount)
       s.setSelection(m_iSelectedLoco);    
     
-    SeekBar mSeekBar = (SeekBar)m_andRoc.findViewById(R.id.SeekBarSpeed);
+    SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
     mSeekBar.setOnSeekBarChangeListener(this);
     
-    Button Lights = (Button) m_andRoc.findViewById(R.id.android_buttonf0);
+    Button Lights = (Button) findViewById(R.id.android_buttonf0);
     Lights.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
@@ -118,7 +123,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
         }
     });
 
-    Button fn = (Button) m_andRoc.findViewById(R.id.android_buttonfn);
+    Button fn = (Button) findViewById(R.id.android_buttonfn);
     fn.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           m_iFunctionGroup++;
@@ -128,7 +133,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
         }
     });
 
-    Button f1 = (Button) m_andRoc.findViewById(R.id.android_buttonf1);
+    Button f1 = (Button) findViewById(R.id.android_buttonf1);
     f1.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
@@ -138,7 +143,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
         }
     });
 
-    Button f2 = (Button) m_andRoc.findViewById(R.id.android_buttonf2);
+    Button f2 = (Button) findViewById(R.id.android_buttonf2);
     f2.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
@@ -148,7 +153,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
         }
     });
 
-    Button f3 = (Button) m_andRoc.findViewById(R.id.android_buttonf3);
+    Button f3 = (Button) findViewById(R.id.android_buttonf3);
     f3.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
@@ -158,7 +163,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
         }
     });
 
-    Button f4 = (Button) m_andRoc.findViewById(R.id.android_buttonf4);
+    Button f4 = (Button) findViewById(R.id.android_buttonf4);
     f4.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
@@ -168,7 +173,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
         }
     });
 
-    Button f5 = (Button) m_andRoc.findViewById(R.id.android_buttonf5);
+    Button f5 = (Button) findViewById(R.id.android_buttonf5);
     f5.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
@@ -178,7 +183,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
         }
     });
 
-    Button f6 = (Button) m_andRoc.findViewById(R.id.android_buttonf6);
+    Button f6 = (Button) findViewById(R.id.android_buttonf6);
     f6.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
@@ -188,7 +193,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
         }
     });
 
-    Button f7 = (Button) m_andRoc.findViewById(R.id.android_buttonf7);
+    Button f7 = (Button) findViewById(R.id.android_buttonf7);
     f7.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
@@ -198,7 +203,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
         }
     });
 
-    Button f8 = (Button) m_andRoc.findViewById(R.id.android_buttonf8);
+    Button f8 = (Button) findViewById(R.id.android_buttonf8);
     f8.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
@@ -208,7 +213,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
         }
     });
 
-    Button Dir = (Button) m_andRoc.findViewById(R.id.android_buttondir);
+    Button Dir = (Button) findViewById(R.id.android_buttondir);
     Dir.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
@@ -228,15 +233,15 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
   @Override
   public void modelListLoaded(int MODELLIST) {
     if (MODELLIST == ModelListener.MODELLIST_LC) {
-      Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
+      Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
 
       if (s != null) {
         s.post(new Runnable() {
           public void run() {
-            Spinner s = (Spinner) m_andRoc.findViewById(R.id.spinnerLoco);
+            Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
             ArrayAdapter m_adapterForSpinner = (ArrayAdapter) s.getAdapter();
             // get the loco ids from the model
-            Iterator it = m_andRoc.getSystem().m_Model.m_LocoMap.values()
+            Iterator it = m_RocrailService.m_Model.m_LocoMap.values()
                 .iterator();
             while (it.hasNext()) {
               Loco loco = (Loco) it.next();
@@ -276,7 +281,7 @@ public class Throttle extends Activity implements ModelListener, SeekBar.OnSeekB
     m_iSelectedLoco = position;
     Loco loco = findLoco();
     if( loco != null && loco.LocoBmp != null ) {
-      ImageView image = (ImageView)m_andRoc.findViewById(R.id.locoImage);
+      ImageView image = (ImageView)findViewById(R.id.locoImage);
       if( image != null ) {
         image.setImageBitmap(loco.LocoBmp);
       }

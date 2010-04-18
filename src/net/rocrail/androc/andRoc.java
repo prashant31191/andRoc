@@ -20,6 +20,7 @@
 package net.rocrail.androc;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.activities.Base;
 import net.rocrail.androc.activities.Connect;
 import net.rocrail.androc.activities.Throttle;
 import net.rocrail.androc.activities.System;
@@ -34,11 +35,7 @@ import android.view.MenuItem;
  * @author rob
  *
  */
-public class andRoc extends Activity {
-  RocrailService     m_RocrailService     = null;
-  Throttle   m_Throttle   = null;
-  //Connect m_Connection = null;
-  System     m_System     = null;
+public class andRoc extends Base {
   
   final static int MENU_CONNECT  = 1;
   final static int MENU_THROTTLE = 2;
@@ -53,61 +50,13 @@ public class andRoc extends Activity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    m_RocrailService = new RocrailService(this);
-    
-    m_Throttle   = new Throttle(this);
-    //m_Connection = new Connect(this);
-    m_System     = new System(this);
-    
-    //m_Connection.initView();
     setContentView(R.layout.androc);
 
   }
   
-  public RocrailService getSystem() {
-    return m_RocrailService;
-  }
-  
   public void Connected() {
-    m_RocrailService.sendMessage("model","<model cmd=\"plan\" disablemonitor=\"true\"/>");
-    m_Throttle.initView();
   }
 
-  /* Creates the menu items */
-  public boolean onCreateOptionsMenu(Menu menu) {
-    menu.add(0, MENU_CONNECT , 0, "Connect").setIcon(R.drawable.connect);
-    menu.add(0, MENU_THROTTLE, 0, "Throttle").setIcon(R.drawable.loco);
-    menu.add(0, MENU_SYSTEM  , 0, "System").setIcon(R.drawable.system);
-    menu.add(0, MENU_LAYOUT  , 0, "Layout").setIcon(R.drawable.layout);
-    menu.add(0, MENU_MENU    , 0, "Menu").setIcon(R.drawable.menu);
-    menu.add(0, MENU_QUIT    , 0, "Quit").setIcon(R.drawable.quit);
-    return true;
-  }
-
-  /* Handles item selections */
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-    case MENU_CONNECT:
-    {
-      //m_Connection.initView();
-      Intent intent = new Intent(this,Connect.class);
-      startActivity(intent);
-      return true;
-    }
-    case MENU_THROTTLE:
-      m_Throttle.initView();
-      return true;
-    case MENU_SYSTEM:
-      m_System.initView();
-      return true;
-    case MENU_QUIT:
-      m_RocrailService.exit();
-      finish();
-      return true;
-    }
-    return false;
-  }
-  
   public void onPause() {
     super.onPause();
     // 1 also received at orientation change

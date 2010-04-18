@@ -25,12 +25,12 @@ import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
 class XmlHandler extends DefaultHandler {
-  andRoc m_andRoc = null;
+  RocrailService m_andRoc = null;
   int m_iXmlSize = 0;
   Model m_Model = null;
   
-  public XmlHandler(andRoc androc, Model model) {
-    m_andRoc = androc;
+  public XmlHandler(RocrailService rocrailService, Model model) {
+    m_andRoc = rocrailService;
     m_Model = model;
   }
   

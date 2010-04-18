@@ -25,6 +25,7 @@ import javax.xml.parsers.SAXParser;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Binder;
 import android.os.IBinder;
 
 public class RocrailService extends Service {
@@ -42,6 +43,25 @@ public class RocrailService extends Service {
 
   public static final String PREFS_NAME = "andRoc.ini";
 
+  
+  
+  
+  private final IBinder rocrailBinder = new RocrailLocalBinder();
+  public class RocrailLocalBinder extends Binder {
+    public RocrailService getService() {
+        return RocrailService.this;
+    }
+    Model getModel() {
+      return m_Model;
+    }
+  }
+
+  @Override
+  public IBinder onBind(Intent intent) {
+    return rocrailBinder;
+  }
+  
+  
   public RocrailService(andRoc androc) {
     m_andRoc = androc;
     // Restore preferences
@@ -55,7 +75,8 @@ public class RocrailService extends Service {
   
   public void connect() throws Exception {
     m_Socket = new Socket(m_Host, m_iPort);
-    m_Connection = new Connection(m_andRoc, m_Model, m_Socket);
+    sendMessage("model","<model cmd=\"plan\" disablemonitor=\"true\"/>");
+    m_Connection = new Connection(this, m_Model, m_Socket);
     m_Connection.run();
   }
   
@@ -96,11 +117,6 @@ public class RocrailService extends Service {
     }
   }
 
-  @Override
-  public IBinder onBind(Intent intent) {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
 
 }

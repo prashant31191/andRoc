@@ -39,6 +39,7 @@ public class Connect extends Base {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    connectWithService();
     initView();
   }
   
@@ -51,18 +52,18 @@ public class Connect extends Base {
         public void onClick(View v) {
             // Perform action on click
           EditText s = (EditText) findViewById(R.id.connectHost);
-          m_andRoc.getSystem().m_Host = s.getText().toString();
+          m_RocrailService.m_Host = s.getText().toString();
           s = (EditText) findViewById(R.id.connectPort);
-          m_andRoc.getSystem().m_iPort = Integer.parseInt(s.getText().toString());
+          m_RocrailService.m_iPort = Integer.parseInt(s.getText().toString());
           // TODO: progress dialog
           try {
-            m_andRoc.getSystem().connect();
-            m_andRoc.Connected();
+            m_RocrailService.connect();
           }
           catch( Exception e ) {
             e.printStackTrace();
             AlertDialog.Builder builder = new AlertDialog.Builder(Connect.this); 
-            builder.setMessage(e.getClass().getName()+"\nCould not connect to " + m_andRoc.getSystem().m_Host+":"+m_andRoc.getSystem().m_iPort)
+            builder.setMessage(e.getClass().getName()+"\nCould not connect to " + 
+                m_RocrailService.m_Host+":"+m_RocrailService.m_iPort)
             .setCancelable(false)
             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -77,12 +78,12 @@ public class Connect extends Base {
         }
     });
 
-    /*
+    
     EditText s = (EditText) findViewById(R.id.connectHost);
-    s.setText(m_andRoc.getSystem().m_Host);
+    s.setText(m_RocrailService.m_Host);
     s = (EditText) findViewById(R.id.connectPort);
-    s.setText(""+m_andRoc.getSystem().m_iPort);
-*/
+    s.setText(""+m_RocrailService.m_iPort);
+
   }
 
 }

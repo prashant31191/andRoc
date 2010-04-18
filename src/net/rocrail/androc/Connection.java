@@ -32,13 +32,13 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 
 public class Connection extends Thread {
-  andRoc  m_andRoc = null;
+  RocrailService  m_andRoc = null;
   Model   m_Model  = null;
   Socket  m_Socket = null;
   boolean m_bRun   = true;
   
-  public Connection( andRoc androc, Model model, Socket socket ) {
-    m_andRoc = androc;
+  public Connection( RocrailService rocrailService, Model model, Socket socket ) {
+    m_andRoc = rocrailService;
     m_Model  = model;
     m_Socket = socket;
   }
