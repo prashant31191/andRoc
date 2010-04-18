@@ -19,29 +19,24 @@
 */
 package net.rocrail.androc;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
-import java.net.SocketException;
-
 import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.SAXException;
-
+import android.app.Service;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.view.View;
-import android.widget.Button;
+import android.os.IBinder;
 
-public class RocrailService extends Thread implements Runnable {
+public class RocrailService extends Service {
   public String m_Host   = "rocrail.dyndns.org";
   public int    m_iPort  = 8080;
   public Model  m_Model  = null;
   
-  andRoc        m_andRoc    = null;
-  Socket        m_Socket    = null;
-  boolean       m_bRun      = true;
+  
+  andRoc        m_andRoc     = null;
+  Socket        m_Socket     = null;
+  boolean       m_bRun       = true;
+  Connection    m_Connection = null;
   
   SAXParser m_Parser = null;
 
@@ -55,14 +50,13 @@ public class RocrailService extends Thread implements Runnable {
     m_iPort = settings.getInt("port", 8080);
     
     m_Model = new Model(androc);
-
-    //m_Parser = SAXParser;
     m_bRun = true;
-    start();
   }
   
   public void connect() throws Exception {
     m_Socket = new Socket(m_Host, m_iPort);
+    m_Connection = new Connection(m_andRoc, m_Model, m_Socket);
+    m_Connection.run();
   }
   
   public void exit() {
@@ -102,144 +96,12 @@ public class RocrailService extends Thread implements Runnable {
     }
   }
 
-  public void run() {
-    SAXParser saxparser = null;
-    try {
-      saxparser = SAXParserFactory.newInstance().newSAXParser();
-    }
-    catch(Exception e) {
-      e.printStackTrace();
-    }
-    
-    XmlHandler xmlhandler = new XmlHandler(m_andRoc, m_Model);
-    String hdr = "";
-    boolean readHdr = true;
-    int xmlSize = 0;
-    byte[] buffer = null;
-    int read = 0;
-
-    
-    while(saxparser != null && m_bRun) {
-      try {
-        if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
-          InputStream is = m_Socket.getInputStream();
-          
-          if( is.available() > 0 ) {
-            
-            // read header byte by byte
-            if( readHdr ) {
-              if( !hdr.endsWith("</xmlh>") ) {
-                // read next byte
-                hdr = hdr + String.valueOf((char) is.read());
-              }
-
-              // check if the header end is read
-              if( hdr.endsWith("</xmlh>") ) {
-                // find the start of the header
-                if( hdr.indexOf("<?xml") != -1 ) {
-                  // disregard al leading bytes
-                  hdr = hdr.substring(hdr.indexOf("<?xml"));
-                  hdr = hdr.trim();
-                  // parse the header
-                  saxparser.parse(new ByteArrayInputStream(hdr.getBytes("UTF-8")), xmlhandler);
-                  xmlSize = xmlhandler.getXmlSize();
-                  // reset header string and signal reading data
-                  hdr = "";
-                  readHdr = false;
-                  // initialize for reading data
-                  buffer = new byte[xmlSize+1];
-                  read = 0;
-                }
-                else {
-                  hdr = "";
-                  xmlSize = 0;
-                  readHdr = true;
-                }
-              }
-            }
-            
-            // read the xml data string at the given length
-            else if( xmlSize > 0 ) {
-              int avail = is.available();
-              if( read + avail > xmlSize ) {
-                // do not read more than wanted
-                avail = xmlSize - read;
-              }
-              // read the available bytes
-              int actualRead = is.read(buffer, read, avail);
-              if( actualRead != -1 )
-                read = read + actualRead;
-              
-              // all bytes are read
-              if( read == xmlSize ) {
-                // create the xml string from the byte with utf-8 encoding
-                String xml = new String(buffer, "UTF-8").trim();
-                // parse the xml
-                saxparser.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")), xmlhandler);
-                // reset for next header
-                read = 0;
-                xmlSize = 0;
-                readHdr = true;
-              }
-            }
-            
-            // no valid header or zero xmlsize
-            else {
-              hdr = "";
-              xmlSize = 0;
-              readHdr = true;
-            }
-          }
-        }
-        
-        Thread.sleep(10);
-      } catch (SocketException soce) {
-        // TODO Auto-generated catch block
-        soce.printStackTrace();
-        m_bRun = false;
-      } catch (SAXException saxe) {
-        // TODO Auto-generated catch block
-        saxe.printStackTrace();
-        read = 0;
-        xmlSize = 0;
-        readHdr = true;
-      } catch (IOException ioe) {
-        // TODO Auto-generated catch block
-        ioe.printStackTrace();
-      } catch (InterruptedException inte) {
-        // TODO Auto-generated catch block
-        inte.printStackTrace();
-        m_bRun = false;
-      }
-    }
+  @Override
+  public IBinder onBind(Intent intent) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
-  
-  public void initView() {
-    m_andRoc.setContentView(R.layout.system);
-
-    final Button powerON = (Button) m_andRoc.findViewById(R.id.systemPowerON);
-    powerON.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-          RocrailService.this.sendMessage("sys", "<sys cmd=\"go\"/>");
-        }
-    });
-
-    final Button powerOFF = (Button) m_andRoc.findViewById(R.id.systemPowerOFF);
-    powerOFF.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-          RocrailService.this.sendMessage("sys", "<sys cmd=\"stop\"/>");
-        }
-    });
-    
-    final Button initField = (Button) m_andRoc.findViewById(R.id.systemInitField);
-    initField.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-          RocrailService.this.sendMessage("model", "<model cmd=\"initfield\"/>");
-        }
-    });
-    
-  }
 
 }
 

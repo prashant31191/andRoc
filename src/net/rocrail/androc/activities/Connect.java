@@ -21,32 +21,38 @@ package net.rocrail.androc.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import net.rocrail.androc.R;
 import net.rocrail.androc.andRoc;
-import net.rocrail.androc.R.id;
-import net.rocrail.androc.R.layout;
 
-public class Connection {
+public class Connect extends Base {
   andRoc      m_andRoc    = null;
-  
-  public Connection(andRoc androc) {
+/* 
+  public Connect(andRoc androc) {
     m_andRoc = androc;
+  }
+*/
+  
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    initView();
   }
   
 
   public void initView() {
-    m_andRoc.setContentView(R.layout.connect);
+    setContentView(R.layout.connect);
     
-    final Button button = (Button) m_andRoc.findViewById(R.id.ButtonConnect);
+    final Button button = (Button) findViewById(R.id.ButtonConnect);
     button.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
             // Perform action on click
-          EditText s = (EditText) m_andRoc.findViewById(R.id.connectHost);
+          EditText s = (EditText) findViewById(R.id.connectHost);
           m_andRoc.getSystem().m_Host = s.getText().toString();
-          s = (EditText) m_andRoc.findViewById(R.id.connectPort);
+          s = (EditText) findViewById(R.id.connectPort);
           m_andRoc.getSystem().m_iPort = Integer.parseInt(s.getText().toString());
           // TODO: progress dialog
           try {
@@ -55,7 +61,7 @@ public class Connection {
           }
           catch( Exception e ) {
             e.printStackTrace();
-            AlertDialog.Builder builder = new AlertDialog.Builder(m_andRoc); 
+            AlertDialog.Builder builder = new AlertDialog.Builder(Connect.this); 
             builder.setMessage(e.getClass().getName()+"\nCould not connect to " + m_andRoc.getSystem().m_Host+":"+m_andRoc.getSystem().m_iPort)
             .setCancelable(false)
             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -71,12 +77,12 @@ public class Connection {
         }
     });
 
-    
-    EditText s = (EditText) m_andRoc.findViewById(R.id.connectHost);
+    /*
+    EditText s = (EditText) findViewById(R.id.connectHost);
     s.setText(m_andRoc.getSystem().m_Host);
-    s = (EditText) m_andRoc.findViewById(R.id.connectPort);
+    s = (EditText) findViewById(R.id.connectPort);
     s.setText(""+m_andRoc.getSystem().m_iPort);
-
+*/
   }
 
 }
