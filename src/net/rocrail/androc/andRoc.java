@@ -20,6 +20,7 @@
 package net.rocrail.androc;
 
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import net.rocrail.androc.R;
 import net.rocrail.androc.activities.Base;
 
@@ -50,6 +51,8 @@ public class andRoc extends Base {
   
   public void connectedWithService() {
     restorePreferences();
+    TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+    m_RocrailService.m_DevideId = tm.getDeviceId();
     connectView();
   }
 

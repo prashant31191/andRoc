@@ -30,9 +30,10 @@ import android.os.Binder;
 import android.os.IBinder;
 
 public class RocrailService extends Service {
-  public String m_Host   = "rocrail.dyndns.org";
-  public int    m_iPort  = 8080;
-  public Model  m_Model  = null;
+  public String m_Host     = "rocrail.dyndns.org";
+  public int    m_iPort    = 8080;
+  public Model  m_Model    = null;
+  public String m_DevideId = "andRoc";
   
   public int    m_iSelectedLoco = 0;
   
@@ -106,7 +107,7 @@ public class RocrailService extends Service {
   }
   
   public String getDeviceName() {
-    return "andRoc";
+    return m_DevideId;
   }
   
   public void sendMessage(String name, String msg) {

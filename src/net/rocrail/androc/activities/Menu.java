@@ -22,6 +22,8 @@ package net.rocrail.androc.activities;
 
 import net.rocrail.androc.R;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class Menu extends Base {
   @Override
@@ -37,6 +39,8 @@ public class Menu extends Base {
 
   public void initView() {
     setContentView(R.layout.menu);
+    final TextView t = (TextView) findViewById(R.id.infoDeviceId);
+    t.setText(m_RocrailService.getDeviceName());
   }
   
 }
