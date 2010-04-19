@@ -36,6 +36,7 @@
         <activity android:name=".activities.System" />
         <activity android:name=".activities.Menu" />
         <activity android:name=".activities.Layout" />
+        <activity android:name=".activities.LocoProps" />
         <service android:name=".RocrailService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

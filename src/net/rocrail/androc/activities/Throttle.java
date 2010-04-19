@@ -22,6 +22,7 @@ package net.rocrail.androc.activities;
 import java.util.Iterator;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -223,6 +224,19 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           }
         }
     });
+    
+    ImageView image = (ImageView)findViewById(R.id.locoImage);
+    image.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        Loco loco = findLoco();
+        if( loco != null ) {
+          Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.LocoProps.class);
+          intent.putExtra("id", loco.ID);
+          startActivity(intent);
+        }
+      }
+  });
+
 
 
     
@@ -287,7 +301,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           image.setImageBitmap(loco.LocoBmp);
         }
         else {
-          //image.setImageResource(R.drawable.noimg);
+          image.setImageResource(R.drawable.noimg);
         }
       }
       
