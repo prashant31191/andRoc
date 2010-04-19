@@ -19,14 +19,31 @@
 */
 package net.rocrail.androc.activities;
 
-import net.rocrail.androc.R;
-import android.os.Bundle;
+import java.util.Iterator;
 
-public class Layout extends Base {
+import net.rocrail.androc.R;
+import android.app.Activity;
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Layout extends ListActivity implements ServiceListener {
+  Base m_Base = null;
+  String[] m_Levels = null;
+  
+  
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    connectWithService();
+    m_Base = new Base(this, this);
+    m_Base.connectWithService();
   }
   
   public void connectedWithService() {
@@ -35,7 +52,34 @@ public class Layout extends Base {
 
 
   public void initView() {
-    setContentView(R.layout.layout);
+    m_Levels = new String[m_Base.m_RocrailService.m_Model.m_ZLevelList.size()];
+    Iterator<String> it = m_Base.m_RocrailService.m_Model.m_ZLevelList.iterator();
+    int idx = 0;
+    while( it.hasNext() ) {
+      m_Levels[idx] = it.next();
+      idx++;
+    }
+    setListAdapter(new ArrayAdapter<String>(this, R.layout.layoutitem, m_Levels));
+
+    ListView lv = getListView();
+    lv.setTextFilterEnabled(true);
+
+    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      public void onItemClick(AdapterView<?> parent, View view,
+          int position, long id) {
+        // When clicked, show a toast with the TextView text
+        Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
+            Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
+  public boolean onCreateOptionsMenu(Menu menu) {
+    return m_Base.onCreateOptionsMenu(menu);
+  }
+  
+  public boolean onOptionsItemSelected(MenuItem item) {
+    return m_Base.onOptionsItemSelected(item);
+  }
+  
 }

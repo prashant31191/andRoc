@@ -78,6 +78,13 @@ class XmlHandler extends DefaultHandler {
         loco.setPicData(data);
       }
     }
+    else if( localName.equals("zlevel") ) {
+      // zlevel handling
+      String id = atts.getValue("title");
+      if( id != null && id.length() > 0 ) {
+        m_Model.addLevel(id, atts);
+      }
+    }
     else {
       // xml handling
       //localName;

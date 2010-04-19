@@ -35,10 +35,10 @@
   <EditText android:text="Port" android:id="@+id/connectPort"
     android:layout_width="0px" android:layout_weight="80" android:layout_height="wrap_content" android:padding="4px"></EditText>
 </LinearLayout>
-  <Button android:text="Connect" android:textStyle="bold" android:id="@+id/ButtonConnect"
+  <Button android:text="Connect" android:textSize="20px" android:textStyle="bold" android:id="@+id/ButtonConnect"
     android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
 
-      <ImageView android:id="@+id/logoImage" android:layout_width="fill_parent" 
-      android:layout_height="fill_parent" android:src="@drawable/logo" android:padding="4px"></ImageView>
+      <ImageView android:id="@+id/logoImage" android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" android:src="@drawable/logo" android:padding="4px"></ImageView>
 
 </LinearLayout>

@@ -34,6 +34,7 @@ public class Model {
   private List<ModelListener>  m_Listeners = new ArrayList<ModelListener>();
   private List<Loco>  m_LocoList = new ArrayList<Loco>();
   public  HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
+  public List<String> m_ZLevelList = new ArrayList<String>();
   
   public Model(RocrailService rocrailService) {
     m_andRoc = rocrailService;
@@ -59,6 +60,10 @@ public class Model {
   public void addLoco(Loco loco, Attributes atts) {
     m_LocoList.add(loco);
     m_LocoMap.put(loco.ID, loco);
+  }
+  
+  public void addLevel(String level, Attributes atts) {
+    m_ZLevelList.add(level);
   }
   
   public void addListener( ModelListener listener ) {

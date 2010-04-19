@@ -32,7 +32,7 @@ import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Base extends Activity {
+public class Base extends Activity implements ServiceListener {
   public static final String PREFS_NAME = "andRoc.ini";
 
   final static int MENU_CONNECT  = 1;
@@ -41,6 +41,9 @@ public class Base extends Activity {
   final static int MENU_LAYOUT   = 4;
   final static int MENU_MENU     = 5;
   final static int MENU_QUIT     = 6;
+  
+  Activity        m_Activity = null;
+  ServiceListener m_Listener = null;
   
   public RocrailService             m_RocrailService       = null;
   RocrailService.RocrailLocalBinder m_RocrailServiceBinder = null;
@@ -51,7 +54,7 @@ public class Base extends Activity {
     public void onServiceConnected(ComponentName className, IBinder binder) {
       m_RocrailServiceBinder = (RocrailService.RocrailLocalBinder)binder;
       m_RocrailService = m_RocrailServiceBinder.getService();
-      Base.this.connectedWithService();
+      m_Listener.connectedWithService();
     }
 
     @Override
@@ -61,9 +64,19 @@ public class Base extends Activity {
     }
   };
   
+  public Base( Activity activity, ServiceListener listener ) {
+    m_Activity = activity;
+    m_Listener = listener;
+  }
+  
+  public Base() {
+    m_Activity = this;
+    m_Listener = this;
+  }
+  
   public void connectWithService() {
-    Intent intent = new Intent(getApplicationContext(), RocrailService.class);
-    bindService(intent, RocrailServiceConnection, Context.BIND_AUTO_CREATE);
+    Intent intent = new Intent(m_Activity.getApplicationContext(), RocrailService.class);
+    m_Activity.bindService(intent, RocrailServiceConnection, Context.BIND_AUTO_CREATE);
   }
 
   public void connectedWithService() {
@@ -72,7 +85,7 @@ public class Base extends Activity {
   
   public void restorePreferences() {
   // Restore preferences
-    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+    SharedPreferences settings = m_Activity.getSharedPreferences(PREFS_NAME, 0);
     if( m_RocrailService != null ) {
       m_RocrailService.m_Host  = settings.getString("host", "rocrail.dyndns.org");
       m_RocrailService.m_iPort = settings.getInt("port", 8080);
@@ -111,40 +124,40 @@ public class Base extends Activity {
       menuView();
       return true;
     case MENU_QUIT:
-      finish();
+      m_Activity.finish();
       return true;
     }
     return false;
   }
   
   public void connectView() {
-    Intent intent = new Intent(this,net.rocrail.androc.activities.Connect.class);
-    startActivity(intent);
-    finish();
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Connect.class);
+    m_Activity.startActivity(intent);
+    m_Activity.finish();
   }
   
   public void throttleView() {
-    Intent intent = new Intent(this,net.rocrail.androc.activities.Throttle.class);
-    startActivity(intent);
-    finish();
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Throttle.class);
+    m_Activity.startActivity(intent);
+    m_Activity.finish();
   }
   
   public void systemView() {
-    Intent intent = new Intent(this,net.rocrail.androc.activities.System.class);
-    startActivity(intent);
-    finish();
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.System.class);
+    m_Activity.startActivity(intent);
+    m_Activity.finish();
   }
   
   public void menuView() {
-    Intent intent = new Intent(this,net.rocrail.androc.activities.Menu.class);
-    startActivity(intent);
-    finish();
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Menu.class);
+    m_Activity.startActivity(intent);
+    m_Activity.finish();
   }
   
   public void layoutView() {
-    Intent intent = new Intent(this,net.rocrail.androc.activities.Layout.class);
-    startActivity(intent);
-    finish();
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Layout.class);
+    m_Activity.startActivity(intent);
+    m_Activity.finish();
   }
   
 }

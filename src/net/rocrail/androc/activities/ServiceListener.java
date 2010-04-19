@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  Rocrail - Model Railroad Software
 
  Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
@@ -17,12 +16,11 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
--->
+*/
 
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-      <ImageView android:id="@+id/logoImage" android:layout_width="fill_parent" 
-      android:layout_height="fill_parent" android:src="@drawable/logo" android:padding="4px"></ImageView>
-</LinearLayout>
+package net.rocrail.androc.activities;
+
+public interface ServiceListener {
+  public void connectedWithService();
+
+}
