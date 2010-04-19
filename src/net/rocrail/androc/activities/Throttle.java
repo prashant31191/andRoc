@@ -21,7 +21,6 @@ package net.rocrail.androc.activities;
 
 import java.util.Iterator;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,9 +31,6 @@ import android.widget.Spinner;
 import android.widget.SeekBar;
 import android.widget.AdapterView;
 import net.rocrail.androc.R;
-import net.rocrail.androc.andRoc;
-import net.rocrail.androc.R.id;
-import net.rocrail.androc.R.layout;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.objects.Loco;
 
@@ -101,9 +97,9 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
         .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
 
-    Iterator it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
+    Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
-      Loco loco = (Loco)it.next();
+      Loco loco = it.next();
       m_adapterForSpinner.add(loco.ID);
       m_iLocoCount++;
     }
@@ -295,16 +291,14 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     m_RocrailService.m_iSelectedLoco = position;
     Loco loco = findLoco();
     if( loco != null ) {
+      ImageView image = (ImageView)findViewById(R.id.locoImage);
       if( loco.LocoBmp != null ) {
-        ImageView image = (ImageView)findViewById(R.id.locoImage);
-        if( image != null ) {
-          image.setImageBitmap(loco.LocoBmp);
-        }
-        else {
-          image.setImageResource(R.drawable.noimg);
-        }
+        image.setImageBitmap(loco.LocoBmp);
       }
-      
+      else {
+        image.setImageResource(R.drawable.noimg);
+      }
+
       SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
       mSeekBar.setProgress(loco.Speed);
 

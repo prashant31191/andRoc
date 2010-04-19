@@ -20,7 +20,6 @@
 package net.rocrail.androc.objects;
 
 import net.rocrail.androc.RocrailService;
-import net.rocrail.androc.andRoc;
 
 import org.xml.sax.Attributes;
 

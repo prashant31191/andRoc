@@ -48,9 +48,9 @@ public class Model {
      * Original code:
      * return m_LocoMap(ID);
      */
-    Iterator it = m_LocoList.iterator();
+    Iterator<Loco> it = m_LocoList.iterator();
     while( it.hasNext()) {
-      Loco loco = (Loco)it.next();
+      Loco loco = it.next();
       if( ID.equals(loco.ID ))
         return loco;
     }
@@ -71,9 +71,9 @@ public class Model {
   }
   
   public void lclistLoaded() {
-    Iterator it = m_Listeners.iterator();
+    Iterator<ModelListener> it = m_Listeners.iterator();
     while( it.hasNext() ) {
-      ModelListener listener = (ModelListener)it.next();
+      ModelListener listener = it.next();
       listener.modelListLoaded(ModelListener.MODELLIST_LC);
     }
   }

@@ -22,8 +22,8 @@ package net.rocrail.androc.activities;
 import java.util.Iterator;
 
 import net.rocrail.androc.R;
-import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -70,6 +70,9 @@ public class Layout extends ListActivity implements ServiceListener {
         // When clicked, show a toast with the TextView text
         Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
             Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Layout.this,net.rocrail.androc.activities.Level.class);
+        intent.putExtra("level", position);
+        startActivity(intent);
       }
     });
   }

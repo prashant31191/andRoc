@@ -18,13 +18,15 @@
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+
 package net.rocrail.androc.activities;
 
 import net.rocrail.androc.R;
 import android.os.Bundle;
-import android.widget.TextView;
 
-public class Menu extends Base {
+public class Level extends Base {
+
+  
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -37,9 +39,7 @@ public class Menu extends Base {
 
 
   public void initView() {
-    setContentView(R.layout.menu);
-    final TextView t = (TextView) findViewById(R.id.infoDeviceId);
-    t.setText(m_RocrailService.getDeviceName());
+    setContentView(R.layout.level);
   }
-  
+
 }

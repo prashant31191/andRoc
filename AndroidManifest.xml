@@ -20,7 +20,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.rocrail.androc"
-      android:versionCode="43"
+      android:versionCode="45"
       android:versionName="0.1">
     <application android:icon="@drawable/rocrail" android:label="@string/app_name" >
     <!--application android:icon="@drawable/rocrail" android:theme="@android:style/Theme.NoTitleBar"-->
@@ -37,6 +37,7 @@
         <activity android:name=".activities.Menu" />
         <activity android:name=".activities.Layout" />
         <activity android:name=".activities.LocoProps" />
+        <activity android:name=".activities.Level" />
         <service android:name=".RocrailService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

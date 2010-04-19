@@ -25,7 +25,6 @@ import net.rocrail.androc.objects.Loco;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class LocoProps extends Base {
   Loco m_Loco = null;
@@ -56,9 +55,6 @@ public class LocoProps extends Base {
     if( m_Loco.LocoBmp != null ) {
       if( image != null ) {
         image.setImageBitmap(m_Loco.LocoBmp);
-      }
-      else {
-        image.setImageResource(R.drawable.noimg);
       }
     }
 

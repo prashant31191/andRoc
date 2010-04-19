@@ -21,4 +21,6 @@
 <resources>
     <string name="hello">Hello World, aApp!</string>
     <string name="app_name">andRoc</string>
+    <drawable name="solid_white">#ffffff</drawable>
+    
 </resources>
