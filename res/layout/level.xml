@@ -18,17 +18,12 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/ScrollView01" android:background="@drawable/solid_white"
-  android:layout_width="fill_parent" android:layout_height="fill_parent">
-  <AbsoluteLayout android:layout_width="fill_parent"
-    android:background="@drawable/solid_white" android:layout_height="fill_parent">
-    <ImageView android:id="@+id/levelItem1" android:layout_y="32px"
-      android:layout_width="wrap_content" android:layout_height="wrap_content"
-      android:layout_x="32px" android:src="@drawable/ccrossing_1"></ImageView>
-    <ImageView android:id="@+id/levelItem2" android:layout_y="32px"
-      android:layout_width="wrap_content" android:layout_height="wrap_content"
-      android:layout_x="64px" android:src="@drawable/signal_r_3"></ImageView>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:id="@+id/levelScrollView"
+  android:background="@drawable/solid_white"
+  android:layout_width="fill_parent" android:layout_height="fill_parent" android:scrollbarAlwaysDrawHorizontalTrack="true" android:scrollbarAlwaysDrawVerticalTrack="true">
+  <AbsoluteLayout android:layout_width="640px" android:id="@+id/levelView"
+    android:background="@drawable/solid_white" android:layout_height="480px">
   </AbsoluteLayout>
 </ScrollView>
 

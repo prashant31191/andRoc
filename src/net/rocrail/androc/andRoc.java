@@ -19,10 +19,12 @@
 */
 package net.rocrail.androc;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import net.rocrail.androc.R;
 import net.rocrail.androc.activities.Base;
+import net.rocrail.androc.activities.Connect;
 
 
 /**
@@ -44,8 +46,8 @@ public class andRoc extends Base {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.androc);
-
+    //setContentView(R.layout.androc);
+    
     connectWithService();
   }
   

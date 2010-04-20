@@ -21,8 +21,18 @@
 
 package net.rocrail.androc.activities;
 
+import java.util.Iterator;
+
 import net.rocrail.androc.R;
+import net.rocrail.androc.objects.Loco;
+import net.rocrail.androc.objects.Switch;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AbsoluteLayout;
+import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.AbsoluteLayout.LayoutParams;
 
 public class Level extends Base {
 
@@ -40,6 +50,25 @@ public class Level extends Base {
 
   public void initView() {
     setContentView(R.layout.level);
+    AbsoluteLayout levelView = (AbsoluteLayout)findViewById(R.id.levelView);
+    ScrollView scrollView = (ScrollView)findViewById(R.id.levelScrollView);
+    
+    Iterator<Switch> it = m_RocrailService.m_Model.m_SwitchList.iterator();
+    while( it.hasNext() ) {
+      Switch sw = it.next();
+      
+      ImageView image = new ImageView(this);
+      image.setImageResource(R.drawable.turnout_ls_1);
+      
+      image.setOnClickListener(sw);
+
+      LayoutParams lp = new LayoutParams(32, 32, sw.X*32, sw.Y*32);
+      levelView.addView(image, lp);
+      
+    }
+    
+    scrollView.requestLayout();
+
   }
 
 }

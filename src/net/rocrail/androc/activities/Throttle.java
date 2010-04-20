@@ -22,6 +22,7 @@ package net.rocrail.androc.activities;
 import java.util.Iterator;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -57,6 +58,12 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
       String id = (String)s.getSelectedItem();
       if( id != null ) {
         Loco loco = m_RocrailService.m_Model.getLoco(id);
+        
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("loco", id);
+        editor.commit();
+        
         return loco;
       }
     }

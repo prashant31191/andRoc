@@ -20,6 +20,7 @@
 package net.rocrail.androc;
 
 import net.rocrail.androc.objects.Loco;
+import net.rocrail.androc.objects.Switch;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
@@ -70,6 +71,14 @@ class XmlHandler extends DefaultHandler {
         m_Model.addLoco(loco, atts);
         // TODO: request image here?
         loco.requestLocoImg();
+      }
+    }
+    else if( localName.equals("sw") ) {
+      // switch handling
+      String id = atts.getValue("id");
+      if( id != null && id.length() > 0 ) {
+        Switch sw = new Switch(m_andRoc, id, atts);
+        m_Model.addSwitch(sw);
       }
     }
     else if( localName.equals("datareq") ) {

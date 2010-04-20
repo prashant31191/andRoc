@@ -95,7 +95,7 @@ public class Base extends Activity implements ServiceListener {
   
   /* Creates the menu items */
   public boolean onCreateOptionsMenu(Menu menu) {
-    menu.add(0, MENU_CONNECT , 0, "Connect").setIcon(R.drawable.connect);
+    //menu.add(0, MENU_CONNECT , 0, "Connect").setIcon(R.drawable.connect);
     menu.add(0, MENU_THROTTLE, 0, "Throttle").setIcon(R.drawable.loco);
     menu.add(0, MENU_SYSTEM  , 0, "System").setIcon(R.drawable.system);
     menu.add(0, MENU_LAYOUT  , 0, "Layout").setIcon(R.drawable.layout);

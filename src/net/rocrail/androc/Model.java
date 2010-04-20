@@ -28,13 +28,15 @@ import org.xml.sax.Attributes;
 
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.objects.Loco;
+import net.rocrail.androc.objects.Switch;
 
 public class Model {
   RocrailService  m_andRoc  = null;
   private List<ModelListener>  m_Listeners = new ArrayList<ModelListener>();
-  private List<Loco>  m_LocoList = new ArrayList<Loco>();
-  public  HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
+  public List<Loco>  m_LocoList = new ArrayList<Loco>();
+  public HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
   public List<String> m_ZLevelList = new ArrayList<String>();
+  public List<Switch> m_SwitchList = new ArrayList<Switch>();
   public String m_Title = "";  
   public String m_Name = "";  
   public String m_RocrailVersion = "";  
@@ -75,6 +77,10 @@ public class Model {
   public void addLoco(Loco loco, Attributes atts) {
     m_LocoList.add(loco);
     m_LocoMap.put(loco.ID, loco);
+  }
+  
+  public void addSwitch(Switch sw) {
+    m_SwitchList.add(sw);
   }
   
   public void addLevel(String level, Attributes atts) {

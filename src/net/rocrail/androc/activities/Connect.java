@@ -77,7 +77,7 @@ public class Connect extends Base implements ModelListener {
             editor.commit();
             
             ProgressDialog dialog = ProgressDialog.show(Connect.this, "", 
-                "Loading. Please wait...", true);
+                "Loading. Please wait...", true, true);
             
           }
           catch( Exception e ) {
