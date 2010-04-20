@@ -35,10 +35,25 @@ public class Model {
   private List<Loco>  m_LocoList = new ArrayList<Loco>();
   public  HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
   public List<String> m_ZLevelList = new ArrayList<String>();
+  public String m_Title = "";  
+  public String m_Name = "";  
+  public String m_RocrailVersion = "";  
+
   
   public Model(RocrailService rocrailService) {
     m_andRoc = rocrailService;
   }
+  
+  public void setup(Attributes atts) {
+    m_LocoList.clear();
+    m_LocoMap.clear();
+    m_ZLevelList.clear();
+    
+    m_Title = atts.getValue("title");  
+    m_Name = atts.getValue("name");  
+    m_RocrailVersion = atts.getValue("rocrailversion");  
+  }  
+
  
   public Loco getLoco(String ID) {
     /* Rob:

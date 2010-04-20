@@ -20,6 +20,7 @@
 package net.rocrail.androc.activities;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,8 +29,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import net.rocrail.androc.R;
 import net.rocrail.androc.andRoc;
+import net.rocrail.androc.interfaces.ModelListener;
 
-public class Connect extends Base {
+public class Connect extends Base implements ModelListener {
   andRoc      m_andRoc    = null;
 /* 
   public Connect(andRoc androc) {
@@ -44,10 +46,15 @@ public class Connect extends Base {
   }
   
   public void connectedWithService() {
+    m_RocrailService.m_Model.addListener(this);
     initView();
   }
 
-
+  @Override
+  public void modelListLoaded(int MODELLIST) {
+    Connect.this.throttleView();
+  }
+  
   public void initView() {
     setContentView(R.layout.connect);
     
@@ -69,7 +76,9 @@ public class Connect extends Base {
             editor.putInt("port", m_RocrailService.m_iPort);
             editor.commit();
             
-            Connect.this.throttleView();
+            ProgressDialog dialog = ProgressDialog.show(Connect.this, "", 
+                "Loading. Please wait...", true);
+            
           }
           catch( Exception e ) {
             e.printStackTrace();

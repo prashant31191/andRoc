@@ -59,6 +59,9 @@ class XmlHandler extends DefaultHandler {
       String val = atts.getValue("size");
       m_iXmlSize = Integer.parseInt(val);
     }
+    else if(localName.equals("plan")) {
+      m_Model.setup(atts);
+    }
     else if( localName.equals("lc") ) {
       // loco handling
       String id = atts.getValue("id");

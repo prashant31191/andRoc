@@ -38,6 +38,7 @@
         <activity android:name=".activities.Layout" />
         <activity android:name=".activities.LocoProps" />
         <activity android:name=".activities.Level" />
+        <activity android:name=".activities.Info" />
         <service android:name=".RocrailService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

@@ -22,16 +22,11 @@ package net.rocrail.androc.activities;
 
 import net.rocrail.androc.R;
 import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-public class Menu extends  ListActivity implements ServiceListener {
+public class Info extends ListActivity implements ServiceListener {
   Base m_Base = null;
   String[] m_Items = null;
   
@@ -48,33 +43,15 @@ public class Menu extends  ListActivity implements ServiceListener {
 
 
   public void initView() {
-    m_Items = new String[1];
-    m_Items[0] = "Info";
+    m_Items = new String[4];
+    m_Items[0] = "andRoc Version:\n0.1.46";
+    m_Items[1] = "Rocrail Version:\n" + m_Base.m_RocrailService.m_Model.m_RocrailVersion;
+    m_Items[2] = "Layout Title:\n" + m_Base.m_RocrailService.m_Model.m_Title;
+    m_Items[3] = "Device ID:\n"+m_Base.m_RocrailService.getDeviceName();
       
     setListAdapter(new ArrayAdapter<String>(this, R.layout.menuitem, m_Items));
 
     ListView lv = getListView();
     lv.setTextFilterEnabled(true);
-
-    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      public void onItemClick(AdapterView<?> parent, View view,
-          int position, long id) {
-        // When clicked, show a toast with the TextView text
-        Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-            Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Menu.this,net.rocrail.androc.activities.Info.class);
-        //intent.putExtra("level", position);
-        startActivity(intent);
-      }
-    });
   }
-
-  public boolean onCreateOptionsMenu(android.view.Menu menu) {
-    return m_Base.onCreateOptionsMenu(menu);
-  }
-  
-  public boolean onOptionsItemSelected(android.view.MenuItem item) {
-    return m_Base.onOptionsItemSelected(item);
-  }
-  
 }
