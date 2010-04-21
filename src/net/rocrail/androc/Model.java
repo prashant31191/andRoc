@@ -27,8 +27,11 @@ import java.util.List;
 import org.xml.sax.Attributes;
 
 import net.rocrail.androc.interfaces.ModelListener;
+import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
+import net.rocrail.androc.objects.Sensor;
+import net.rocrail.androc.objects.Signal;
 import net.rocrail.androc.objects.Switch;
 import net.rocrail.androc.objects.Track;
 import net.rocrail.androc.objects.ZLevel;
@@ -91,6 +94,25 @@ public class Model {
     if( itemtype.equals("tk") ) {
       Track track = new Track(atts);
       m_ItemList.add(track);
+      return;
+    }
+    
+    if( itemtype.equals("fb") ) {
+      Sensor sensor = new Sensor(atts);
+      m_ItemList.add(sensor);
+      return;
+    }
+    
+    if( itemtype.equals("sg") ) {
+      Signal signal = new Signal(atts);
+      m_ItemList.add(signal);
+      return;
+    }
+
+    if( itemtype.equals("bk") ) {
+      Block block = new Block(atts);
+      m_ItemList.add(block);
+      return;
     }
   }
   

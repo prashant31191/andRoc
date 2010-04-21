@@ -105,6 +105,18 @@ class XmlHandler extends DefaultHandler {
         // track handling
         m_Model.addItem(localName, atts);
       }
+      else if( localName.equals("fb") ) {
+        // track handling
+        m_Model.addItem(localName, atts);
+      }
+      else if( localName.equals("sg") ) {
+        // track handling
+        m_Model.addItem(localName, atts);
+      }
+      else if( localName.equals("bk") ) {
+        // track handling
+        m_Model.addItem(localName, atts);
+      }
       else if( localName.equals("zlevel") ) {
         // zlevel handling
         String id = atts.getValue("title");
