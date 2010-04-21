@@ -83,6 +83,12 @@ public class Base extends Activity implements ServiceListener {
     
   }
   
+  public void updateTitle() {
+    m_Activity.setTitle("andRoc " + m_RocrailService.m_Model.m_Title);
+  }
+  
+
+  
   public void restorePreferences() {
   // Restore preferences
     SharedPreferences settings = m_Activity.getSharedPreferences(PREFS_NAME, 0);
@@ -96,12 +102,11 @@ public class Base extends Activity implements ServiceListener {
   /* Creates the menu items */
   public boolean onCreateOptionsMenu(Menu menu) {
     //menu.add(0, MENU_CONNECT , 0, "Connect").setIcon(R.drawable.connect);
-    menu.add(0, MENU_THROTTLE, 0, "Throttle").setIcon(R.drawable.loco);
+    menu.add(0, MENU_THROTTLE, 0, R.string.Throttle ).setIcon(R.drawable.loco);
     menu.add(0, MENU_SYSTEM  , 0, "System").setIcon(R.drawable.system);
     menu.add(0, MENU_LAYOUT  , 0, "Layout").setIcon(R.drawable.layout);
     menu.add(0, MENU_MENU    , 0, "Menu").setIcon(R.drawable.menu);
     menu.add(0, MENU_QUIT    , 0, "Quit").setIcon(R.drawable.quit);
-    
     return true;
   }
 

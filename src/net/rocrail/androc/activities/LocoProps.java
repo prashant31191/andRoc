@@ -37,6 +37,7 @@ public class LocoProps extends Base {
   
   public void connectedWithService() {
     initView();
+    updateTitle();
   }
 
 

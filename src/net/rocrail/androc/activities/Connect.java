@@ -52,7 +52,9 @@ public class Connect extends Base implements ModelListener {
 
   @Override
   public void modelListLoaded(int MODELLIST) {
-    Connect.this.throttleView();
+    if( MODELLIST == ModelListener.MODELLIST_PLAN ) {
+      Connect.this.throttleView();
+    }
   }
   
   public void initView() {

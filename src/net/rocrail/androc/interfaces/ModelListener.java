@@ -20,6 +20,7 @@
 package net.rocrail.androc.interfaces;
 
 public interface ModelListener {
+  public static int MODELLIST_PLAN = 0;
   public static int MODELLIST_LC = 1;
   public void modelListLoaded(int MODELLIST);
 }

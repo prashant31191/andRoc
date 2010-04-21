@@ -24,16 +24,16 @@ package net.rocrail.androc.activities;
 import java.util.Iterator;
 
 import net.rocrail.androc.R;
-import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.objects.Switch;
+import net.rocrail.androc.objects.ZLevel;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.AbsoluteLayout.LayoutParams;
 
+@SuppressWarnings("deprecation")
 public class Level extends Base {
 
   
@@ -45,25 +45,38 @@ public class Level extends Base {
   
   public void connectedWithService() {
     initView();
+    updateTitle();
   }
 
 
   public void initView() {
     setContentView(R.layout.level);
+    
+    int Z = 0;
+
+    Bundle extras = getIntent().getExtras();
+    if (extras != null) {
+      int level = extras.getInt("level", 0);
+      ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(level);
+      setTitle(zlevel.Title);
+      Z = zlevel.Z;
+    }
+
     AbsoluteLayout levelView = (AbsoluteLayout)findViewById(R.id.levelView);
     ScrollView scrollView = (ScrollView)findViewById(R.id.levelScrollView);
     
     Iterator<Switch> it = m_RocrailService.m_Model.m_SwitchList.iterator();
     while( it.hasNext() ) {
       Switch sw = it.next();
-      
-      ImageView image = new ImageView(this);
-      image.setImageResource(R.drawable.turnout_ls_1);
-      
-      image.setOnClickListener(sw);
-
-      LayoutParams lp = new LayoutParams(32, 32, sw.X*32, sw.Y*32);
-      levelView.addView(image, lp);
+      if( sw.Z == Z ) {
+        ImageView image = new ImageView(this);
+        image.setImageResource(R.raw.turnout_ls_1);
+        
+        image.setOnClickListener(sw);
+  
+        LayoutParams lp = new LayoutParams(32, 32, sw.X*32, sw.Y*32);
+        levelView.addView(image, lp);
+      }
       
     }
     

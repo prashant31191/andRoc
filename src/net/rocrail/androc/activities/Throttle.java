@@ -49,6 +49,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
   public void connectedWithService() {
     m_RocrailService.m_Model.addListener(this);
     initView();
+    updateTitle();
   }
 
   
@@ -95,6 +96,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     m_iLocoCount = 0;
     
     setContentView(R.layout.throttle);
+    
     Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
     s.setPrompt(new String("Select Loco"));
 

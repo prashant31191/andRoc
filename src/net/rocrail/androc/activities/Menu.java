@@ -44,6 +44,7 @@ public class Menu extends  ListActivity implements ServiceListener {
   
   public void connectedWithService() {
     initView();
+    m_Base.updateTitle();
   }
 
 

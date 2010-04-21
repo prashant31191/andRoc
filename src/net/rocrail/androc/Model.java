@@ -29,13 +29,14 @@ import org.xml.sax.Attributes;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.objects.Switch;
+import net.rocrail.androc.objects.ZLevel;
 
 public class Model {
   RocrailService  m_andRoc  = null;
   private List<ModelListener>  m_Listeners = new ArrayList<ModelListener>();
   public List<Loco>  m_LocoList = new ArrayList<Loco>();
   public HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
-  public List<String> m_ZLevelList = new ArrayList<String>();
+  public List<ZLevel> m_ZLevelList = new ArrayList<ZLevel>();
   public List<Switch> m_SwitchList = new ArrayList<Switch>();
   public String m_Title = "";  
   public String m_Name = "";  
@@ -84,7 +85,11 @@ public class Model {
   }
   
   public void addLevel(String level, Attributes atts) {
-    m_ZLevelList.add(level);
+    String sZ = atts.getValue("z");
+    int z = 0;
+    if( sZ != null && sZ.length() > 0 )
+      z = Integer.parseInt(sZ);
+    m_ZLevelList.add(new ZLevel(level, z));
   }
   
   public void addListener( ModelListener listener ) {
@@ -96,6 +101,14 @@ public class Model {
     while( it.hasNext() ) {
       ModelListener listener = it.next();
       listener.modelListLoaded(ModelListener.MODELLIST_LC);
+    }
+  }
+  
+  public void planLoaded() {
+    Iterator<ModelListener> it = m_Listeners.iterator();
+    while( it.hasNext() ) {
+      ModelListener listener = it.next();
+      listener.modelListLoaded(ModelListener.MODELLIST_PLAN);
     }
   }
   

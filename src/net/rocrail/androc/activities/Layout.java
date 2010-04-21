@@ -22,6 +22,7 @@ package net.rocrail.androc.activities;
 import java.util.Iterator;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.objects.ZLevel;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,15 +49,16 @@ public class Layout extends ListActivity implements ServiceListener {
   
   public void connectedWithService() {
     initView();
+    m_Base.updateTitle();
   }
 
 
   public void initView() {
     m_Levels = new String[m_Base.m_RocrailService.m_Model.m_ZLevelList.size()];
-    Iterator<String> it = m_Base.m_RocrailService.m_Model.m_ZLevelList.iterator();
+    Iterator<ZLevel> it = m_Base.m_RocrailService.m_Model.m_ZLevelList.iterator();
     int idx = 0;
     while( it.hasNext() ) {
-      m_Levels[idx] = it.next();
+      m_Levels[idx] = it.next().Title;
       idx++;
     }
     setListAdapter(new ArrayAdapter<String>(this, R.layout.layoutitem, m_Levels));
@@ -65,8 +67,7 @@ public class Layout extends ListActivity implements ServiceListener {
     lv.setTextFilterEnabled(true);
 
     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      public void onItemClick(AdapterView<?> parent, View view,
-          int position, long id) {
+      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // When clicked, show a toast with the TextView text
         Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
             Toast.LENGTH_SHORT).show();

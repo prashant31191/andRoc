@@ -29,6 +29,7 @@ class XmlHandler extends DefaultHandler {
   RocrailService m_andRoc = null;
   int m_iXmlSize = 0;
   Model m_Model = null;
+  boolean m_bParsingPlan = false;
   
   public XmlHandler(RocrailService rocrailService, Model model) {
     m_andRoc = rocrailService;
@@ -54,34 +55,17 @@ class XmlHandler extends DefaultHandler {
   public void startElement (String uri, String localName, String qName, Attributes atts) {
     if( localName.equals("xmlh") ) {
       // xmlh handling
+      return;
     }
-    else if( localName.equals("xml") ) {
+    
+    if( localName.equals("xml") ) {
       // xml handling
       String val = atts.getValue("size");
       m_iXmlSize = Integer.parseInt(val);
+      return;
     }
-    else if(localName.equals("plan")) {
-      m_Model.setup(atts);
-    }
-    else if( localName.equals("lc") ) {
-      // loco handling
-      String id = atts.getValue("id");
-      if( id != null && id.length() > 0 ) {
-        Loco loco = new Loco(m_andRoc, id, atts);
-        m_Model.addLoco(loco, atts);
-        // TODO: request image here?
-        loco.requestLocoImg();
-      }
-    }
-    else if( localName.equals("sw") ) {
-      // switch handling
-      String id = atts.getValue("id");
-      if( id != null && id.length() > 0 ) {
-        Switch sw = new Switch(m_andRoc, id, atts);
-        m_Model.addSwitch(sw);
-      }
-    }
-    else if( localName.equals("datareq") ) {
+    
+    if( localName.equals("datareq") ) {
       // loco handling
       String id = atts.getValue("id");
       Loco loco = m_Model.getLoco(id);
@@ -89,24 +73,56 @@ class XmlHandler extends DefaultHandler {
         String data = atts.getValue("data");
         loco.setPicData(data);
       }
+      return;
     }
-    else if( localName.equals("zlevel") ) {
-      // zlevel handling
-      String id = atts.getValue("title");
-      if( id != null && id.length() > 0 ) {
-        m_Model.addLevel(id, atts);
+    
+    if(localName.equals("plan")) {
+      m_bParsingPlan = true;
+      m_Model.setup(atts);
+      return;
+    }
+    
+    if( m_bParsingPlan ) {
+      if( localName.equals("lc") ) {
+        // loco handling
+        String id = atts.getValue("id");
+        if( id != null && id.length() > 0 ) {
+          Loco loco = new Loco(m_andRoc, id, atts);
+          m_Model.addLoco(loco, atts);
+          // TODO: request image here?
+          loco.requestLocoImg();
+        }
       }
+      else if( localName.equals("sw") ) {
+        // switch handling
+        String id = atts.getValue("id");
+        if( id != null && id.length() > 0 ) {
+          Switch sw = new Switch(m_andRoc, id, atts);
+          m_Model.addSwitch(sw);
+        }
+      }
+      else if( localName.equals("zlevel") ) {
+        // zlevel handling
+        String id = atts.getValue("title");
+        if( id != null && id.length() > 0 ) {
+          m_Model.addLevel(id, atts);
+        }
+      }
+      return;
     }
-    else {
-      // xml handling
-      //localName;
-    }
+    
   }
 
   public void endElement (String uri, String localName, String qName) {
-    if( localName.equals("lclist") ) {
-      // signal end of loco list
-      m_Model.lclistLoaded();
+    if( localName.equals("plan") ) {
+      m_bParsingPlan = false;
+      m_Model.planLoaded();
+    }
+    else if( localName.equals("lclist") ) {
+      if( m_bParsingPlan ) {
+        // signal end of loco list
+        m_Model.lclistLoaded();
+      }
     }
   }
 }
