@@ -21,56 +21,80 @@ package net.rocrail.androc.objects;
 
 import org.xml.sax.Attributes;
 
-import android.content.Intent;
 import android.view.View;
 
 import net.rocrail.androc.RocrailService;
-import net.rocrail.androc.interfaces.LayoutItem;
 
-public class Switch implements LayoutItem, View.OnClickListener {
-  RocrailService m_RocrailService = null;
-  public String ID = "?";
-  public Attributes properties = null;
-  public int X = 0;
-  public int Y = 0;
-  public int Z = 0;
-  
+public class Switch extends Item implements View.OnClickListener {
+  boolean Dir = false;
 
   public Switch( RocrailService rocrailService, String id, Attributes atts) {
+    super(atts);
     m_RocrailService = rocrailService;
-    ID = id;
-    properties = atts;
-    String sX = atts.getValue("x");
-    if( sX != null ) X = Integer.parseInt(sX);
-    String sY = atts.getValue("y");
-    if( sY != null ) Y = Integer.parseInt(sY);
-    String sZ = atts.getValue("z");
-    if( sZ != null ) Z = Integer.parseInt(sZ);
+    Dir = Item.getAttrValue(atts, "dir", false );
   }
 
   public void onClick(View v) {
     m_RocrailService.sendMessage("sw", String.format( "<sw id=\"%s\" cmd=\"flip\"/>", ID ) );
   }
 
-
-  @Override
-  public int getX() {
-    return X;
-  }
-
-  @Override
-  public int getY() {
-    return Y;
-  }
-
-  @Override
-  public int getZ() {
-    return Z;
-  }
-
-  @Override
-  public String getID() {
-    return ID;
+  
+  public String getImageName() {
+    int orinr = getOriNr();
+    
+    if( orinr == 1 )
+      orinr = 3;
+    else if( orinr == 3 )
+      orinr = 1;
+    
+    if( Type.equals("right") ) {
+      if( State.equals("straight"))
+        ImageName = String.format("turnout_rs_%d", orinr);
+      else 
+        ImageName = String.format("turnout_rt_%d", orinr);
+      
+    } else if( Type.equals("left")) {
+        if( State.equals("straight"))
+          ImageName = String.format("turnout_ls_%d", orinr);
+        else 
+          ImageName = String.format("turnout_lt_%d", orinr);
+    
+    } else if( Type.equals("threeway")) {
+      if( State.equals("straight"))
+        ImageName = String.format("threeway_s_%d", orinr);
+      else if( State.equals("left"))
+        ImageName = String.format("threeway_l_%d", orinr);
+      else 
+        ImageName = String.format("threeway_r_%d", orinr);
+      
+    } else if( Type.equals("dcrossing") ){
+      char st = 's';
+      
+      if( State.equals("straight"))
+        st = 's';
+      else if( State.equals("turnout"))
+        st = 't';
+      else if( State.equals("left"))
+        st = 'l';
+      else if( State.equals("right"))
+        st = 'r';
+      
+      ImageName = String.format("dcrossing%s_%c_%d", (Dir?"left":"right"), st, orinr);
+      
+      cX = orinr % 2 == 0 ? 1:2; 
+      cY = orinr % 2 == 0 ? 2:1; 
+    } else if( Type.equals("crossing") ) {
+      ImageName = "cross";
+    } else if( Type.equals("ccrossing") ) {
+      ImageName = String.format("ccrossing_%d", (orinr % 2 == 0 ? 2:1));
+      cX = orinr % 2 == 0 ? 1:2; 
+      cY = orinr % 2 == 0 ? 2:1; 
+    } else if( Type.equals("decoupler") ) {
+      ImageName = String.format("decoupler_%d", (orinr % 2 == 0 ? 2:1));
+    }
+    
+    return ImageName;
+    
   }
 
 }

@@ -19,32 +19,14 @@
 */
 package net.rocrail.androc.objects;
 
-import net.rocrail.androc.interfaces.LayoutItem;
+import org.xml.sax.Attributes;
 
-public class Track implements LayoutItem {
 
-  @Override
-  public int getX() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+public class Track extends Item {
 
-  @Override
-  public int getY() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  @Override
-  public int getZ() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  @Override
-  public String getID() {
-    // TODO Auto-generated method stub
-    return null;
+  public Track(Attributes atts) {
+    super(atts);
+    // TODO Auto-generated constructor stub
   }
 
 }

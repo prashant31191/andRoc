@@ -45,9 +45,7 @@ public class Level extends Base {
   
   public void connectedWithService() {
     initView();
-    updateTitle();
   }
-
 
   public void initView() {
     setContentView(R.layout.level);
@@ -70,11 +68,16 @@ public class Level extends Base {
       Switch sw = it.next();
       if( sw.Z == Z ) {
         ImageView image = new ImageView(this);
-        image.setImageResource(R.raw.turnout_ls_1);
+        
+        int resId = getResources().getIdentifier(sw.getImageName(), "raw", "net.rocrail.androc");
+
+        //image.setImageResource(R.raw.turnout_ls_1);
+        
+        image.setImageResource(resId);
         
         image.setOnClickListener(sw);
   
-        LayoutParams lp = new LayoutParams(32, 32, sw.X*32, sw.Y*32);
+        LayoutParams lp = new LayoutParams(sw.cX*32, sw.cY*32, sw.X*32, sw.Y*32);
         levelView.addView(image, lp);
       }
       
