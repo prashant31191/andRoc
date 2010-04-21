@@ -98,13 +98,13 @@ public class Model {
     }
     
     if( itemtype.equals("fb") ) {
-      Sensor sensor = new Sensor(atts);
+      Sensor sensor = new Sensor(m_andRoc, atts);
       m_ItemList.add(sensor);
       return;
     }
     
     if( itemtype.equals("sg") ) {
-      Signal signal = new Signal(atts);
+      Signal signal = new Signal(m_andRoc, atts);
       m_ItemList.add(signal);
       return;
     }

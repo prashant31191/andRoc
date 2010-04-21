@@ -19,6 +19,8 @@
 */
 package net.rocrail.androc.objects;
 
+import net.rocrail.androc.RocrailService;
+
 import org.xml.sax.Attributes;
 
 import android.view.View;
@@ -26,8 +28,9 @@ import android.view.View;
 public class Sensor extends Item implements View.OnClickListener {
   Boolean Curve = false;
 
-  public Sensor(Attributes atts) {
+  public Sensor(RocrailService rocrailService, Attributes atts) {
     super(atts);
+    m_RocrailService = rocrailService;
     Curve = Item.getAttrValue(atts, "curve", false );
   }
   

@@ -19,14 +19,17 @@
 */
 package net.rocrail.androc.objects;
 
+import net.rocrail.androc.RocrailService;
+
 import org.xml.sax.Attributes;
 
 import android.view.View;
 
 public class Signal extends Item implements View.OnClickListener {
 
-  public Signal(Attributes atts) {
+  public Signal(RocrailService rocrailService, Attributes atts) {
     super(atts);
+    m_RocrailService = rocrailService;
   }
   
   public String getImageName() {
