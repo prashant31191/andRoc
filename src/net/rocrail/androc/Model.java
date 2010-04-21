@@ -27,8 +27,10 @@ import java.util.List;
 import org.xml.sax.Attributes;
 
 import net.rocrail.androc.interfaces.ModelListener;
+import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.objects.Switch;
+import net.rocrail.androc.objects.Track;
 import net.rocrail.androc.objects.ZLevel;
 
 public class Model {
@@ -38,6 +40,7 @@ public class Model {
   public HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
   public List<ZLevel> m_ZLevelList = new ArrayList<ZLevel>();
   public List<Switch> m_SwitchList = new ArrayList<Switch>();
+  public List<Item>   m_ItemList = new ArrayList<Item>();
   public String m_Title = "";  
   public String m_Name = "";  
   public String m_RocrailVersion = "";  
@@ -82,6 +85,13 @@ public class Model {
   
   public void addSwitch(Switch sw) {
     m_SwitchList.add(sw);
+  }
+  
+  public void addItem(String itemtype, Attributes atts) {
+    if( itemtype.equals("tk") ) {
+      Track track = new Track(atts);
+      m_ItemList.add(track);
+    }
   }
   
   public void addLevel(String level, Attributes atts) {

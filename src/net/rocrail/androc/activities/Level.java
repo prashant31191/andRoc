@@ -24,6 +24,7 @@ package net.rocrail.androc.activities;
 import java.util.Iterator;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Switch;
 import net.rocrail.androc.objects.ZLevel;
 import android.content.Intent;
@@ -63,22 +64,35 @@ public class Level extends Base {
     AbsoluteLayout levelView = (AbsoluteLayout)findViewById(R.id.levelView);
     ScrollView scrollView = (ScrollView)findViewById(R.id.levelScrollView);
     
-    Iterator<Switch> it = m_RocrailService.m_Model.m_SwitchList.iterator();
-    while( it.hasNext() ) {
-      Switch sw = it.next();
+    Iterator<Switch> switchIt = m_RocrailService.m_Model.m_SwitchList.iterator();
+    while( switchIt.hasNext() ) {
+      Switch sw = switchIt.next();
       if( sw.Z == Z ) {
         ImageView image = new ImageView(this);
-        
         int resId = getResources().getIdentifier(sw.getImageName(), "raw", "net.rocrail.androc");
-
-        //image.setImageResource(R.raw.turnout_ls_1);
-        
-        image.setImageResource(resId);
-        
-        image.setOnClickListener(sw);
-  
-        LayoutParams lp = new LayoutParams(sw.cX*32, sw.cY*32, sw.X*32, sw.Y*32);
-        levelView.addView(image, lp);
+        if( resId != 0 ) {
+          image.setImageResource(resId);
+          image.setOnClickListener(sw);
+          LayoutParams lp = new LayoutParams(sw.cX*32, sw.cY*32, sw.X*32, sw.Y*32);
+          levelView.addView(image, lp);
+        }
+      }
+      
+    }
+    
+    Iterator<Item> itemIt = m_RocrailService.m_Model.m_ItemList.iterator();
+    while( itemIt.hasNext() ) {
+      Item item = itemIt.next();
+      if( item.Z == Z ) {
+        ImageView image = new ImageView(this);
+        String imgname = item.getImageName();
+        int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
+        if( resId != 0 ) {
+          image.setImageResource(resId);
+          image.setOnClickListener(item);
+          LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, item.X*32, item.Y*32);
+          levelView.addView(image, lp);
+        }
       }
       
     }

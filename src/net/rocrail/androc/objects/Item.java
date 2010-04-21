@@ -23,7 +23,9 @@ import net.rocrail.androc.RocrailService;
 
 import org.xml.sax.Attributes;
 
-public class Item {
+import android.view.View;
+
+public class Item  implements View.OnClickListener {
   RocrailService m_RocrailService = null;
 
   public Attributes Properties = null;
@@ -58,7 +60,7 @@ public class Item {
       
   }
   
-  public String getImgName(){
+  public String getImageName(){
     return ImageName;
   }
   
@@ -96,6 +98,12 @@ public class Item {
     if(Ori.equals("south"))
       return 4;
     return 1;
+  }
+
+  @Override
+  public void onClick(View arg0) {
+    // TODO Auto-generated method stub
+    
   }
 
 }

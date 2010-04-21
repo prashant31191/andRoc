@@ -28,5 +28,25 @@ public class Track extends Item {
     super(atts);
     // TODO Auto-generated constructor stub
   }
+  
+  
+  public String getImageName() {
+    int orinr = getOriNr();
+
+    if (Type.equals("curve")) {
+      ImageName = String.format("curve_%d", orinr);
+    } else if (Type.equals("buffer")) {
+      // symbol naming fix (see rocrail/impl/pclient.c line 250)
+      if (orinr == 1)
+        orinr = 3;
+      else if (orinr == 3)
+        orinr = 1;
+      ImageName = String.format("buffer_%d", orinr);
+    } else {
+      ImageName = String.format("track_%d", (orinr % 2 == 0 ? 2 : 1));
+    }
+
+    return ImageName;
+  }
 
 }

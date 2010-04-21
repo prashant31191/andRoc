@@ -101,6 +101,10 @@ class XmlHandler extends DefaultHandler {
           m_Model.addSwitch(sw);
         }
       }
+      else if( localName.equals("tk") ) {
+        // track handling
+        m_Model.addItem(localName, atts);
+      }
       else if( localName.equals("zlevel") ) {
         // zlevel handling
         String id = atts.getValue("title");
