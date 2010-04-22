@@ -42,7 +42,10 @@ public class Model {
   public List<Loco>  m_LocoList = new ArrayList<Loco>();
   public HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
   public List<ZLevel> m_ZLevelList = new ArrayList<ZLevel>();
-  public List<Switch> m_SwitchList = new ArrayList<Switch>();
+  public HashMap<String,Switch> m_SwitchMap = new HashMap<String,Switch>();
+  public HashMap<String,Signal> m_SignalMap = new HashMap<String,Signal>();
+  public HashMap<String,Sensor> m_SensorMap = new HashMap<String,Sensor>();
+  public HashMap<String,Block> m_BlockMap = new HashMap<String,Block>();
   public List<Item>   m_ItemList = new ArrayList<Item>();
   public String m_Title = "";  
   public String m_Name = "";  
@@ -86,10 +89,41 @@ public class Model {
     m_LocoMap.put(loco.ID, loco);
   }
   
+  public void updateItem(String itemtype, Attributes atts) {
+    if( itemtype.equals("sw") ) {
+      Switch sw = m_SwitchMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( sw != null ) {
+        sw.updateWithAttributes(atts);
+      }
+      return;
+    }
+    if( itemtype.equals("sg") ) {
+      Signal sg = m_SignalMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( sg != null ) {
+        sg.updateWithAttributes(atts);
+      }
+      return;
+    }
+    if( itemtype.equals("fb") ) {
+      Sensor fb = m_SensorMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( fb != null ) {
+        fb.updateWithAttributes(atts);
+      }
+      return;
+    }
+    if( itemtype.equals("bk") ) {
+      Block bk = m_BlockMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( bk != null ) {
+        bk.updateWithAttributes(atts);
+      }
+      return;
+    }
+  }
+  
   public void addItem(String itemtype, Attributes atts) {
-    if( itemtype.equals("tk") ) {
+    if( itemtype.equals("sw") ) {
       Switch sw = new Switch(m_andRoc, atts);
-      m_SwitchList.add(sw);
+      m_SwitchMap.put(sw.ID, sw);
       m_ItemList.add(sw);
       return;
     }
@@ -102,18 +136,21 @@ public class Model {
     
     if( itemtype.equals("fb") ) {
       Sensor sensor = new Sensor(m_andRoc, atts);
+      m_SensorMap.put(sensor.ID, sensor);
       m_ItemList.add(sensor);
       return;
     }
     
     if( itemtype.equals("sg") ) {
       Signal signal = new Signal(m_andRoc, atts);
+      m_SignalMap.put(signal.ID, signal);
       m_ItemList.add(signal);
       return;
     }
 
     if( itemtype.equals("bk") ) {
       Block block = new Block(m_andRoc, atts);
+      m_BlockMap.put(block.ID, block);
       m_ItemList.add(block);
       return;
     }

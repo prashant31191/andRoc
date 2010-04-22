@@ -122,6 +122,14 @@ class XmlHandler extends DefaultHandler {
       }
       return;
     }
+    else {
+      if( localName.equals("sw") || localName.equals("sg") || localName.equals("fb") || 
+          localName.equals("bk") ) 
+      {
+        m_Model.updateItem(localName, atts);
+      }
+      
+    }
     
   }
 

@@ -61,24 +61,17 @@ public class Level extends Base {
       Z = zlevel.Z;
     }
 
+    /*
+      The AbsoluteLayout is needed for drawing the Layout levels.
+      The API is flagged as deprecated but, as it seems, with another meaning than 'obsolete':
+      
+      “I'll say again: we are not going to remove AbsoluteLayout from a future
+      release, but we strongly discourage people from using it.”
+      Dianne Hackborn
+      Android framework engineer 
+     */
     AbsoluteLayout levelView = (AbsoluteLayout)findViewById(R.id.levelView);
     ScrollView scrollView = (ScrollView)findViewById(R.id.levelScrollView);
-    
-    Iterator<Switch> switchIt = m_RocrailService.m_Model.m_SwitchList.iterator();
-    while( switchIt.hasNext() ) {
-      Switch sw = switchIt.next();
-      if( sw.Z == Z ) {
-        ImageView image = new ImageView(this);
-        int resId = getResources().getIdentifier(sw.getImageName(), "raw", "net.rocrail.androc");
-        if( resId != 0 ) {
-          image.setImageResource(resId);
-          image.setOnClickListener(sw);
-          LayoutParams lp = new LayoutParams(sw.cX*32, sw.cY*32, sw.X*32, sw.Y*32);
-          levelView.addView(image, lp);
-        }
-      }
-      
-    }
     
     Iterator<Item> itemIt = m_RocrailService.m_Model.m_ItemList.iterator();
     while( itemIt.hasNext() ) {
@@ -90,6 +83,7 @@ public class Level extends Base {
         if( resId != 0 ) {
           image.setImageResource(resId);
           image.setOnClickListener(item);
+          item.imageView = image;
           LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, item.X*32, item.Y*32);
           levelView.addView(image, lp);
         }

@@ -24,8 +24,9 @@ import net.rocrail.androc.RocrailService;
 import org.xml.sax.Attributes;
 
 import android.view.View;
+import android.widget.ImageView;
 
-public class Item  implements View.OnClickListener {
+public class Item implements View.OnClickListener {
   RocrailService m_RocrailService = null;
 
   public Attributes Properties = null;
@@ -43,6 +44,7 @@ public class Item  implements View.OnClickListener {
   public String Text = "";
   public boolean textVertical = false;
   public String ImageName = "";
+  public ImageView imageView = null;
   
   public Item(RocrailService rocrailService, Attributes atts) {
     m_RocrailService = rocrailService;
@@ -87,6 +89,15 @@ public class Item  implements View.OnClickListener {
     Ori   = getAttrValue(atts, "ori", Ori); 
     Type  = getAttrValue(atts, "type", Type); 
     State = getAttrValue(atts, "state", State); 
+    
+    try {
+      if( imageView != null && imageView.isShown() ) {
+        imageView.post(new UpdateImage(this));
+      }
+    }
+    catch( Exception e ) {
+      // Probably not a valid ImageView...
+    }
   }
 
 
@@ -101,10 +112,28 @@ public class Item  implements View.OnClickListener {
     return 1;
   }
 
+  
   @Override
-  public void onClick(View arg0) {
+  public void onClick(View view) {
     // TODO Auto-generated method stub
     
   }
 
+}
+
+class UpdateImage implements Runnable {
+  Item item = null;
+  
+  public UpdateImage( Item item ) {
+    this.item = item;
+  }
+
+  @Override
+  public void run() {
+    int resId = item.imageView.getContext().getResources().getIdentifier(item.getImageName(), "raw", "net.rocrail.androc");
+    if( resId != 0 ) {
+      item.imageView.setImageResource(resId);
+    }
+  }
+  
 }

@@ -44,14 +44,13 @@ public class Info extends ListActivity implements ServiceListener {
 
 
   public void initView() {
-    m_Items = new String[7];
+    m_Items = new String[6];
     m_Items[0] = "Copyrights Rob Versluis\nhttp://www.rocrail.net\nGNU GENERAL PUBLIC LICENSE";
-    m_Items[1] = "andRoc Version:\n0.1.54";
+    m_Items[1] = "andRoc Version:\n0.1.56";
     m_Items[2] = "Device ID:\n"+m_Base.m_RocrailService.getDeviceName();
     m_Items[3] = "Rocrail Version:\n" + m_Base.m_RocrailService.m_Model.m_RocrailVersion;
     m_Items[4] = "Layout Title:\n" + m_Base.m_RocrailService.m_Model.m_Title;
     m_Items[5] = m_Base.m_RocrailService.m_Model.m_LocoList.size() + " Locos";
-    m_Items[6] = m_Base.m_RocrailService.m_Model.m_SwitchList.size() + " Switches";
       
     setListAdapter(new ArrayAdapter<String>(this, R.layout.menuitem, m_Items));
 
