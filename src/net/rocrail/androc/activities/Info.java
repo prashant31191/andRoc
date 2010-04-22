@@ -34,6 +34,7 @@ public class Info extends ListActivity implements ServiceListener {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     m_Base = new Base(this, this);
+    m_Base.MenuSelection = 0;
     m_Base.connectWithService();
   }
   
@@ -46,7 +47,7 @@ public class Info extends ListActivity implements ServiceListener {
   public void initView() {
     m_Items = new String[6];
     m_Items[0] = "Copyrights Rob Versluis\nhttp://www.rocrail.net\nGNU GENERAL PUBLIC LICENSE";
-    m_Items[1] = "andRoc Version:\n0.1.56";
+    m_Items[1] = "andRoc Version:\n0.1.58";
     m_Items[2] = "Device ID:\n"+m_Base.m_RocrailService.getDeviceName();
     m_Items[3] = "Rocrail Version:\n" + m_Base.m_RocrailService.m_Model.m_RocrailVersion;
     m_Items[4] = "Layout Title:\n" + m_Base.m_RocrailService.m_Model.m_Title;

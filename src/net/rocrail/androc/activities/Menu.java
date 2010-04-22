@@ -39,6 +39,7 @@ public class Menu extends  ListActivity implements ServiceListener {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     m_Base = new Base(this, this);
+    m_Base.MenuSelection = Base.MENU_THROTTLE | Base.MENU_SYSTEM | Base.MENU_LAYOUT;
     m_Base.connectWithService();
   }
   

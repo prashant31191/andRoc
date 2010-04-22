@@ -44,6 +44,8 @@ public class Layout extends ListActivity implements ServiceListener {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     m_Base = new Base(this, this);
+    m_Base.MenuSelection = Base.MENU_THROTTLE | Base.MENU_SYSTEM | Base.MENU_MENU;
+
     m_Base.connectWithService();
   }
   

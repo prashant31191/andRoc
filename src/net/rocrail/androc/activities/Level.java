@@ -41,6 +41,7 @@ public class Level extends Base {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    MenuSelection = 0;
     connectWithService();
   }
   

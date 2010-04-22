@@ -42,6 +42,8 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    MenuSelection = Base.MENU_QUIT | Base.MENU_MENU | Base.MENU_LAYOUT | Base.MENU_SYSTEM;
+
     connectWithService();
   }
   

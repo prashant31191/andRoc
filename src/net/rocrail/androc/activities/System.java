@@ -29,6 +29,7 @@ public class System extends Base {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    MenuSelection = Base.MENU_THROTTLE | Base.MENU_MENU | Base.MENU_LAYOUT;
     connectWithService();
   }
   

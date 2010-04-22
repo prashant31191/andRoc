@@ -42,6 +42,7 @@ public class Connect extends Base implements ModelListener {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    MenuSelection = 0;
     connectWithService();
   }
   
@@ -54,6 +55,7 @@ public class Connect extends Base implements ModelListener {
   public void modelListLoaded(int MODELLIST) {
     if( MODELLIST == ModelListener.MODELLIST_PLAN ) {
       Connect.this.throttleView();
+      Connect.this.finish();
     }
   }
   

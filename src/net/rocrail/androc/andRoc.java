@@ -56,6 +56,7 @@ public class andRoc extends Base {
     TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
     m_RocrailService.m_DevideId = tm.getDeviceId();
     connectView();
+    finish();
   }
 
   

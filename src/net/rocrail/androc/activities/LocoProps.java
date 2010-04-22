@@ -32,6 +32,7 @@ public class LocoProps extends Base {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    MenuSelection = 0;
     connectWithService();
   }
   
