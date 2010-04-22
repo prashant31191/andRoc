@@ -29,32 +29,32 @@
 				<LinearLayout android:id="@+id/fun1"
 					android:orientation="horizontal" android:layout_width="fill_parent"
           android:layout_height="0px" android:layout_weight="25">
-					<Button android:id="@+id/android_buttonf1"
+					<net.rocrail.androc.activities.LEDButton android:id="@+id/android_buttonf1"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F1" android:textStyle="bold" />
-					<Button android:id="@+id/android_buttonf2"
+					<net.rocrail.androc.activities.LEDButton android:id="@+id/android_buttonf2"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F2" android:textStyle="bold" />
-					<Button android:id="@+id/android_buttonf3"
+					<net.rocrail.androc.activities.LEDButton android:id="@+id/android_buttonf3"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F3" android:textStyle="bold" />
-					<Button android:id="@+id/android_buttonf4"
+					<net.rocrail.androc.activities.LEDButton android:id="@+id/android_buttonf4"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F4" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun2"
 					android:orientation="horizontal" android:layout_width="fill_parent"
 					android:layout_height="0px" android:layout_weight="25">
-					<Button android:id="@+id/android_buttonf5"
+					<net.rocrail.androc.activities.LEDButton android:id="@+id/android_buttonf5"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F5" android:textStyle="bold" />
-					<Button android:id="@+id/android_buttonf6"
+					<net.rocrail.androc.activities.LEDButton android:id="@+id/android_buttonf6"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F6" android:textStyle="bold" />
-					<Button android:id="@+id/android_buttonf7"
+					<net.rocrail.androc.activities.LEDButton android:id="@+id/android_buttonf7"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F7" android:textStyle="bold" />
-					<Button android:id="@+id/android_buttonf8"
+					<net.rocrail.androc.activities.LEDButton android:id="@+id/android_buttonf8"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F8" android:textStyle="bold" />
 				</LinearLayout>
@@ -64,7 +64,7 @@
 					<Button android:id="@+id/android_buttondir"
 						android:layout_width="0px" android:layout_weight="50"
 						android:layout_height="fill_parent" android:text="Direction" android:textStyle="bold" />
-					<Button android:id="@+id/android_buttonf0"
+					<net.rocrail.androc.activities.LEDButton android:id="@+id/android_buttonf0"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="Lights" android:textStyle="bold" />
 					<Button android:id="@+id/android_buttonfn"

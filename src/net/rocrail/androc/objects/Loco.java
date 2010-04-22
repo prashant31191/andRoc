@@ -34,9 +34,9 @@ public class Loco {
   public int     Speed   = 0;
   
   RocrailService  m_andRoc  = null;
-  private boolean m_bLights = false;
+  public boolean m_bLights = false;
   boolean m_bDir    = true;
-  boolean[] m_Function = new boolean[32];
+  public boolean[] m_Function = new boolean[32];
   String  mPicData  = null;
   private boolean m_bImageRequested = false;
   ImageView imageView = null;

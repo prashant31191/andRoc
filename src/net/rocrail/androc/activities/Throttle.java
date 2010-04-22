@@ -74,22 +74,42 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
   }
   
   void updateFunctions() {
-    Button f1 = (Button) findViewById(R.id.android_buttonf1);
+    LEDButton f1 = (LEDButton) findViewById(R.id.android_buttonf1);
     f1.setText("F"+(1+m_iFunctionGroup*8));
-    Button f2 = (Button) findViewById(R.id.android_buttonf2);
+    LEDButton f2 = (LEDButton) findViewById(R.id.android_buttonf2);
     f2.setText("F"+(2+m_iFunctionGroup*8));
-    Button f3 = (Button) findViewById(R.id.android_buttonf3);
+    LEDButton f3 = (LEDButton) findViewById(R.id.android_buttonf3);
     f3.setText("F"+(3+m_iFunctionGroup*8));
-    Button f4 = (Button) findViewById(R.id.android_buttonf4);
+    LEDButton f4 = (LEDButton) findViewById(R.id.android_buttonf4);
     f4.setText("F"+(4+m_iFunctionGroup*8));
-    Button f5 = (Button) findViewById(R.id.android_buttonf5);
+    LEDButton f5 = (LEDButton) findViewById(R.id.android_buttonf5);
     f5.setText("F"+(5+m_iFunctionGroup*8));
-    Button f6 = (Button) findViewById(R.id.android_buttonf6);
+    LEDButton f6 = (LEDButton) findViewById(R.id.android_buttonf6);
     f6.setText("F"+(6+m_iFunctionGroup*8));
-    Button f7 = (Button) findViewById(R.id.android_buttonf7);
+    LEDButton f7 = (LEDButton) findViewById(R.id.android_buttonf7);
     f7.setText("F"+(7+m_iFunctionGroup*8));
-    Button f8 = (Button) findViewById(R.id.android_buttonf8);
+    LEDButton f8 = (LEDButton) findViewById(R.id.android_buttonf8);
     f8.setText("F"+(8+m_iFunctionGroup*8));
+
+    Loco loco = findLoco();
+    if( loco != null ) {
+      f1.ON = loco.m_Function[1+m_iFunctionGroup*8];
+      f2.ON = loco.m_Function[2+m_iFunctionGroup*8];
+      f3.ON = loco.m_Function[3+m_iFunctionGroup*8];
+      f4.ON = loco.m_Function[4+m_iFunctionGroup*8];
+      f5.ON = loco.m_Function[5+m_iFunctionGroup*8];
+      f6.ON = loco.m_Function[6+m_iFunctionGroup*8];
+      f7.ON = loco.m_Function[7+m_iFunctionGroup*8];
+      f8.ON = loco.m_Function[8+m_iFunctionGroup*8];
+      f1.invalidate();
+      f2.invalidate();
+      f3.invalidate();
+      f4.invalidate();
+      f5.invalidate();
+      f6.invalidate();
+      f7.invalidate();
+      f8.invalidate();
+    }
 
   }
   
@@ -128,6 +148,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.lights();
+            ((LEDButton)v).ON = loco.m_bLights;
           }
         }
     });
@@ -142,12 +163,14 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
         }
     });
 
-    Button f1 = (Button) findViewById(R.id.android_buttonf1);
+    LEDButton f1 = (LEDButton) findViewById(R.id.android_buttonf1);
     f1.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(1+m_iFunctionGroup*8);
+            ((LEDButton)v).ON = loco.m_Function[1+m_iFunctionGroup*8];
+
           }
         }
     });
@@ -158,6 +181,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(2+m_iFunctionGroup*8);
+            ((LEDButton)v).ON = loco.m_Function[2+m_iFunctionGroup*8];
           }
         }
     });
@@ -168,6 +192,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(3+m_iFunctionGroup*8);
+            ((LEDButton)v).ON = loco.m_Function[3+m_iFunctionGroup*8];
           }
         }
     });
@@ -178,6 +203,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(4+m_iFunctionGroup*8);
+            ((LEDButton)v).ON = loco.m_Function[4+m_iFunctionGroup*8];
           }
         }
     });
@@ -188,6 +214,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(5+m_iFunctionGroup*8);
+            ((LEDButton)v).ON = loco.m_Function[5+m_iFunctionGroup*8];
           }
         }
     });
@@ -198,6 +225,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(6+m_iFunctionGroup*8);
+            ((LEDButton)v).ON = loco.m_Function[6+m_iFunctionGroup*8];
           }
         }
     });
@@ -208,6 +236,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(7+m_iFunctionGroup*8);
+            ((LEDButton)v).ON = loco.m_Function[7+m_iFunctionGroup*8];
           }
         }
     });
@@ -218,6 +247,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(8+m_iFunctionGroup*8);
+            ((LEDButton)v).ON = loco.m_Function[8+m_iFunctionGroup*8];
           }
         }
     });
@@ -302,6 +332,10 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     m_RocrailService.m_iSelectedLoco = position;
     Loco loco = findLoco();
     if( loco != null ) {
+      LEDButton f0 = (LEDButton) findViewById(R.id.android_buttonf0);
+      f0.ON = loco.m_bLights;
+      updateFunctions();
+      
       ImageView image = (ImageView)findViewById(R.id.locoImage);
       if( loco.getLocoBmp(image) != null ) {
         image.setImageBitmap(loco.getLocoBmp(null));
