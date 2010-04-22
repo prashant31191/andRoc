@@ -22,6 +22,8 @@ package net.rocrail.androc.activities;
 
 import net.rocrail.androc.R;
 import android.app.ListActivity;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -45,9 +47,22 @@ public class Info extends ListActivity implements ServiceListener {
 
 
   public void initView() {
+    int versionCode = 0; 
+    String versionName = "?"; 
+    PackageInfo pinfo;
+    try {
+      pinfo = getPackageManager().getPackageInfo 
+      (this.getPackageName(), 0);
+      versionCode = pinfo.versionCode; 
+      versionName = pinfo.versionName; 
+    } catch (NameNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } 
+
     m_Items = new String[6];
     m_Items[0] = "Copyrights Rob Versluis\nhttp://www.rocrail.net\nGNU GENERAL PUBLIC LICENSE";
-    m_Items[1] = "andRoc Version:\n0.1.58";
+    m_Items[1] = "andRoc Version:\n"+versionName+"-"+versionCode;
     m_Items[2] = "Device ID:\n"+m_Base.m_RocrailService.getDeviceName();
     m_Items[3] = "Rocrail Version:\n" + m_Base.m_RocrailService.m_Model.m_RocrailVersion;
     m_Items[4] = "Layout Title:\n" + m_Base.m_RocrailService.m_Model.m_Title;
