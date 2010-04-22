@@ -44,7 +44,8 @@ public class Item  implements View.OnClickListener {
   public boolean textVertical = false;
   public String ImageName = "";
   
-  public Item(Attributes atts) {
+  public Item(RocrailService rocrailService, Attributes atts) {
+    m_RocrailService = rocrailService;
     Properties = atts;
     updateWithAttributes(atts);
     ID   = getAttrValue(atts, "id", "?"); 

@@ -48,7 +48,7 @@ public class Loco {
   }
 
   public void requestLocoImg() {
-    if( PicName != null ) {
+    if( PicName != null && PicName.length() > 0 ) {
       // type 1 is for small images
       m_andRoc.sendMessage("datareq", 
           String.format("<datareq id=\"%s\" type=\"1\" filename=\"%s\"/>", ID, PicName) );
@@ -68,11 +68,13 @@ public class Loco {
   }
 
   public void setPicData(String data) {
-    mPicData = data;
-    // TODO: convert from HEXA to Bitmap
-    byte[] rawdata = strToByte(mPicData);
-    Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
-    LocoBmp = bmp;
+    if( data != null && data.length() > 0 ) {
+      mPicData = data;
+      // TODO: convert from HEXA to Bitmap
+      byte[] rawdata = strToByte(mPicData);
+      Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
+      LocoBmp = bmp;
+    }
   }
   
   public void dir() {

@@ -28,9 +28,8 @@ import net.rocrail.androc.RocrailService;
 public class Switch extends Item implements View.OnClickListener {
   boolean Dir = false;
 
-  public Switch( RocrailService rocrailService, String id, Attributes atts) {
-    super(atts);
-    m_RocrailService = rocrailService;
+  public Switch( RocrailService rocrailService, Attributes atts) {
+    super(rocrailService, atts);
     Dir = Item.getAttrValue(atts, "dir", false );
   }
 

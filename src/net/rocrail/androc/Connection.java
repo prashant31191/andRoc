@@ -130,7 +130,10 @@ public class Connection extends Thread {
                 // create the xml string from the byte with utf-8 encoding
                 String xml = new String(buffer, "UTF-8").trim();
                 // parse the xml
-                saxparser.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")), xmlhandler);
+                if( xml != null && xml.length() > 0 ) {
+                  ByteArrayInputStream bai = new ByteArrayInputStream(xml.getBytes("UTF-8"));
+                  saxparser.parse(bai, xmlhandler);
+                }
                 // reset for next header
                 read = 0;
                 xmlSize = 0;

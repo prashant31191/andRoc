@@ -95,11 +95,7 @@ class XmlHandler extends DefaultHandler {
       }
       else if( localName.equals("sw") ) {
         // switch handling
-        String id = atts.getValue("id");
-        if( id != null && id.length() > 0 ) {
-          Switch sw = new Switch(m_andRoc, id, atts);
-          m_Model.addSwitch(sw);
-        }
+        m_Model.addItem(localName, atts);
       }
       else if( localName.equals("tk") ) {
         // track handling

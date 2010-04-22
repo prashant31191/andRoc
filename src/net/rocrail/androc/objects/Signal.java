@@ -28,8 +28,7 @@ import android.view.View;
 public class Signal extends Item implements View.OnClickListener {
 
   public Signal(RocrailService rocrailService, Attributes atts) {
-    super(atts);
-    m_RocrailService = rocrailService;
+    super(rocrailService, atts);
   }
   
   public String getImageName() {

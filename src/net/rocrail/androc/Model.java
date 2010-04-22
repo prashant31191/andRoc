@@ -86,13 +86,16 @@ public class Model {
     m_LocoMap.put(loco.ID, loco);
   }
   
-  public void addSwitch(Switch sw) {
-    m_SwitchList.add(sw);
-  }
-  
   public void addItem(String itemtype, Attributes atts) {
     if( itemtype.equals("tk") ) {
-      Track track = new Track(atts);
+      Switch sw = new Switch(m_andRoc, atts);
+      m_SwitchList.add(sw);
+      m_ItemList.add(sw);
+      return;
+    }
+    
+    if( itemtype.equals("tk") ) {
+      Track track = new Track(m_andRoc, atts);
       m_ItemList.add(track);
       return;
     }
@@ -110,7 +113,7 @@ public class Model {
     }
 
     if( itemtype.equals("bk") ) {
-      Block block = new Block(atts);
+      Block block = new Block(m_andRoc, atts);
       m_ItemList.add(block);
       return;
     }

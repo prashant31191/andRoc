@@ -19,13 +19,15 @@
 */
 package net.rocrail.androc.objects;
 
+import net.rocrail.androc.RocrailService;
+
 import org.xml.sax.Attributes;
 
 
 public class Track extends Item {
 
-  public Track(Attributes atts) {
-    super(atts);
+  public Track(RocrailService rocrailService, Attributes atts) {
+    super(rocrailService, atts);
     // TODO Auto-generated constructor stub
   }
   

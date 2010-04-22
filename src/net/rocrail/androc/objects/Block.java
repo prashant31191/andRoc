@@ -19,6 +19,8 @@
 */
 package net.rocrail.androc.objects;
 
+import net.rocrail.androc.RocrailService;
+
 import org.xml.sax.Attributes;
 
 import android.view.View;
@@ -26,8 +28,8 @@ import android.view.View;
 public class Block extends Item implements View.OnClickListener {
   boolean Small = false;
   
-  public Block(Attributes atts) {
-    super(atts);
+  public Block(RocrailService rocrailService, Attributes atts) {
+    super(rocrailService, atts);
     Small = Item.getAttrValue(atts, "smallsymbol", false );
   }
   

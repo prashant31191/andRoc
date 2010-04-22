@@ -29,8 +29,7 @@ public class Sensor extends Item implements View.OnClickListener {
   Boolean Curve = false;
 
   public Sensor(RocrailService rocrailService, Attributes atts) {
-    super(atts);
-    m_RocrailService = rocrailService;
+    super(rocrailService, atts);
     Curve = Item.getAttrValue(atts, "curve", false );
   }
   
