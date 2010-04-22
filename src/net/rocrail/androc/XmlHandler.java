@@ -89,8 +89,8 @@ class XmlHandler extends DefaultHandler {
         if( id != null && id.length() > 0 ) {
           Loco loco = new Loco(m_andRoc, id, atts);
           m_Model.addLoco(loco, atts);
-          // TODO: request image here?
-          loco.requestLocoImg();
+          // request image here?
+          //loco.requestLocoImg();
         }
       }
       else if( localName.equals("sw") ) {
@@ -124,7 +124,7 @@ class XmlHandler extends DefaultHandler {
     }
     else {
       if( localName.equals("sw") || localName.equals("sg") || localName.equals("fb") || 
-          localName.equals("bk") ) 
+          localName.equals("bk") || localName.equals("lc") ) 
       {
         m_Model.updateItem(localName, atts);
       }

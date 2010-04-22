@@ -301,8 +301,8 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     Loco loco = findLoco();
     if( loco != null ) {
       ImageView image = (ImageView)findViewById(R.id.locoImage);
-      if( loco.LocoBmp != null ) {
-        image.setImageBitmap(loco.LocoBmp);
+      if( loco.getLocoBmp(image) != null ) {
+        image.setImageBitmap(loco.getLocoBmp(null));
       }
       else {
         image.setImageResource(R.drawable.noimg);

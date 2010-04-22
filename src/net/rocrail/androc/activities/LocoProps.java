@@ -53,9 +53,9 @@ public class LocoProps extends Base {
     
     ImageView image = (ImageView)findViewById(R.id.locoImage);
     
-    if( m_Loco.LocoBmp != null ) {
+    if( m_Loco.getLocoBmp(null) != null ) {
       if( image != null ) {
-        image.setImageBitmap(m_Loco.LocoBmp);
+        image.setImageBitmap(m_Loco.getLocoBmp(null));
       }
     }
 

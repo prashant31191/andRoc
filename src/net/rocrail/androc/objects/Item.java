@@ -45,7 +45,12 @@ public class Item implements View.OnClickListener {
   public boolean textVertical = false;
   public String ImageName = "";
   public ImageView imageView = null;
+  public String colorName = "";
   
+  boolean Reserved = false;
+  boolean Entering = false;
+
+
   public Item(RocrailService rocrailService, Attributes atts) {
     m_RocrailService = rocrailService;
     Properties = atts;
@@ -133,6 +138,10 @@ class UpdateImage implements Runnable {
     int resId = item.imageView.getContext().getResources().getIdentifier(item.getImageName(), "raw", "net.rocrail.androc");
     if( resId != 0 ) {
       item.imageView.setImageResource(resId);
+      if( item.Text != null && item.Text.length() > 0 ) {
+        // update text
+       
+      }
     }
   }
   

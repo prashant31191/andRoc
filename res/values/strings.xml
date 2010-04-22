@@ -21,5 +21,10 @@
 <resources>
     <string name="app_name">andRoc</string>
     <drawable name="solid_white">#ffffff</drawable>
+    <drawable name="block_free">#ffffff</drawable>
+    <drawable name="block_occupied">#ffaaaa</drawable>
+    <drawable name="block_reserved">#aaffff</drawable>
+    <drawable name="block_enter">#aaaaff</drawable>
+    <drawable name="block_closed">#666666</drawable>
     
 </resources>

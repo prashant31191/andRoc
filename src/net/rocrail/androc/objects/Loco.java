@@ -25,11 +25,12 @@ import org.xml.sax.Attributes;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.ImageView;
 
 public class Loco {
   public String  ID      = "?";
   public String  PicName = null;
-  public Bitmap  LocoBmp = null;
+  private Bitmap LocoBmp = null;
   public int     Speed   = 0;
   
   RocrailService  m_andRoc  = null;
@@ -37,6 +38,8 @@ public class Loco {
   boolean m_bDir    = true;
   boolean[] m_Function = new boolean[32];
   String  mPicData  = null;
+  private boolean m_bImageRequested = false;
+  ImageView imageView = null;
   
   public Attributes properties = null;
 
@@ -45,13 +48,50 @@ public class Loco {
     ID = id;
     PicName = atts.getValue("image");
     properties = atts;
+    /*
+    Vmax     = [Globals getAttribute:@"V_max" fromDict:attributeDict withDefault:@""];
+    vmaxstr  = [Globals getAttribute:@"V_max" fromDict:attributeDict withDefault:@""];
+    Vmid     = [Globals getAttribute:@"V_mid" fromDict:attributeDict withDefault:@""];
+    Vmin     = [Globals getAttribute:@"V_min" fromDict:attributeDict withDefault:@""];
+    Vmode    = [Globals getAttribute:@"V_mode" fromDict:attributeDict withDefault:@""];
+    Fn       = [Globals getAttribute:@"fn" fromDict:attributeDict withDefault:@""];
+    Fx       = [Globals getAttribute:@"fx" fromDict:attributeDict withDefault:@""];
+    SpCnt    = [Globals getAttribute:@"spcnt" fromDict:attributeDict withDefault:@""];
+    Placing  = [Globals getAttribute:@"placing" fromDict:attributeDict withDefault:@""];
+    Mode     = [Globals getAttribute:@"mode" fromDict:attributeDict withDefault:@""];
+    imgname  = [Globals getAttribute:@"image" fromDict:attributeDict withDefault:@""];
+    desc     = [Globals getAttribute:@"desc" fromDict:attributeDict withDefault:@""];
+    roadname = [Globals getAttribute:@"roadname" fromDict:attributeDict withDefault:@""];
+    dir      = [Globals getAttribute:@"dir" fromDict:attributeDict withDefault:@""];
+    vstr     = [Globals getAttribute:@"V" fromDict:attributeDict withDefault:@"0"];
+    */
+    updateWithAttributes(atts);
   }
 
-  public void requestLocoImg() {
-    if( PicName != null && PicName.length() > 0 ) {
-      // type 1 is for small images
-      m_andRoc.sendMessage("datareq", 
-          String.format("<datareq id=\"%s\" type=\"1\" filename=\"%s\"/>", ID, PicName) );
+  public void updateWithAttributes(Attributes atts) {
+    m_bDir = Item.getAttrValue(atts, "dir", m_bDir);
+    Speed  = Item.getAttrValue(atts, "V", Speed);
+  }
+
+  public Bitmap getLocoBmp(ImageView image) {
+    if( LocoBmp == null ) {
+      requestLocoImg(image);
+    }
+    return LocoBmp;
+      
+  }
+  
+  public void requestLocoImg(ImageView image) {
+    if( image != null )
+      imageView = image;
+    
+    if(!m_bImageRequested) {
+      m_bImageRequested = true;
+      if( PicName != null && PicName.length() > 0 ) {
+        // type 1 is for small images
+        m_andRoc.sendMessage("datareq", 
+            String.format("<datareq id=\"%s\" type=\"1\" filename=\"%s\"/>", ID, PicName) );
+      }
     }
   }
 
@@ -70,10 +110,13 @@ public class Loco {
   public void setPicData(String data) {
     if( data != null && data.length() > 0 ) {
       mPicData = data;
-      // TODO: convert from HEXA to Bitmap
+      // convert from HEXA to Bitmap
       byte[] rawdata = strToByte(mPicData);
       Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
       LocoBmp = bmp;
+      if( imageView != null ) {
+        imageView.post(new UpdateLocoImage(this));
+      }
     }
   }
   
@@ -100,4 +143,24 @@ public class Loco {
         m_andRoc.getDeviceName(), ID, Speed, (m_bDir?"true":"false"), (m_bLights?"true":"false") ) );
     
   }
+}
+
+class UpdateLocoImage implements Runnable {
+  Loco loco = null;
+  
+  public UpdateLocoImage( Loco loco ) {
+    this.loco = loco;
+  }
+  @Override
+  public void run() {
+    if( loco.getLocoBmp(null) != null && loco.imageView != null ) {
+      try {
+        loco.imageView.setImageBitmap(loco.getLocoBmp(null));
+      }
+      catch( Exception e ) {
+        // invalid imageView 
+      }
+    }
+  }
+  
 }

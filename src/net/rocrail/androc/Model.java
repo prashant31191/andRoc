@@ -90,6 +90,13 @@ public class Model {
   }
   
   public void updateItem(String itemtype, Attributes atts) {
+    if( itemtype.equals("lc") ) {
+      Loco lc = m_LocoMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( lc != null ) {
+        lc.updateWithAttributes(atts);
+      }
+      return;
+    }
     if( itemtype.equals("sw") ) {
       Switch sw = m_SwitchMap.get(Item.getAttrValue(atts, "id", "?"));
       if( sw != null ) {

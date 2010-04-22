@@ -24,23 +24,52 @@ import net.rocrail.androc.RocrailService;
 import org.xml.sax.Attributes;
 
 import android.view.View;
+import android.widget.TextView;
 
 public class Block extends Item implements View.OnClickListener {
-  boolean Small = false;
+  boolean Small    = false;
+  String LocoID = " ";
   
   public Block(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
-    Small = Item.getAttrValue(atts, "smallsymbol", false );
+    Small    = Item.getAttrValue(atts, "smallsymbol", false );
+    LocoID   = Item.getAttrValue(atts, "locid", " "); 
+    Reserved = Item.getAttrValue(atts, "reserved", false); 
+    Entering = Item.getAttrValue(atts, "entering", false); 
+    Text = LocoID;
   }
+  
+  public void updateTextColor() {
+    if( LocoID.length() > 0 ) {
+      if( Reserved ) 
+        colorName = "block_reserved";
+      else if( Entering ) 
+        colorName = "block_enter";
+      else 
+        colorName = "block_free";
+    }
+    else {
+      Text = " ";
+      if( State.equals("closed") ) {
+        Text = "Closed";
+        colorName = "block_closed";
+      }
+      else
+        colorName = "block_free";
+    }
+  }
+
+
+
   
   public String getImageName() {
     int orinr = getOriNr();
 
     if (orinr % 2 == 0) {
       // vertical
+      textVertical = true;
       cX = 1;
       cY = 4;
-      // textVertical = TRUE;
       if (Small) {
         cY = 2;
         ImageName = "block_2_s";
@@ -51,7 +80,7 @@ public class Block extends Item implements View.OnClickListener {
       // horizontal
       cX = 4;
       cY = 1;
-      // textVertical = FALSE;
+      textVertical = false;
       if (Small) {
         cX = 2;
         ImageName = "block_1_s";
@@ -59,8 +88,19 @@ public class Block extends Item implements View.OnClickListener {
         ImageName = "block_1";
       }
     }
+    
+    updateTextColor();
 
     return ImageName;
+  }
+
+  
+  public void updateWithAttributes(Attributes atts ) {
+    LocoID   = Item.getAttrValue(atts, "locid", " "); 
+    Reserved = Item.getAttrValue(atts, "reserved", false); 
+    Entering = Item.getAttrValue(atts, "entering", false); 
+    Text = LocoID;
+    super.updateWithAttributes(atts);
   }
 
 
