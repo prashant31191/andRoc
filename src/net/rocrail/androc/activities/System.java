@@ -42,16 +42,28 @@ public class System extends Base {
   public void initView() {
     setContentView(R.layout.system);
 
-    final Button powerON = (Button) findViewById(R.id.systemPowerON);
+    final LEDButton powerON = (LEDButton) findViewById(R.id.systemPowerON);
+    powerON.ON = m_RocrailService.Power;
     powerON.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          m_RocrailService.Power = true;
+          LEDButton powerOFF = (LEDButton) findViewById(R.id.systemPowerOFF);
+          powerOFF.ON = !m_RocrailService.Power;
+          powerOFF.invalidate();
+          ((LEDButton)v).ON = m_RocrailService.Power;
           m_RocrailService.sendMessage("sys", "<sys cmd=\"go\"/>");
         }
     });
 
-    final Button powerOFF = (Button) findViewById(R.id.systemPowerOFF);
+    final LEDButton powerOFF = (LEDButton) findViewById(R.id.systemPowerOFF);
+    powerOFF.ON = !m_RocrailService.Power;
     powerOFF.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          m_RocrailService.Power = false;
+          LEDButton powerON = (LEDButton) findViewById(R.id.systemPowerON);
+          powerON.ON = m_RocrailService.Power;
+          powerON.invalidate();
+          ((LEDButton)v).ON = !m_RocrailService.Power;
           m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
         }
     });

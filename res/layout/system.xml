@@ -27,14 +27,14 @@
     android:layout_weight="60" android:orientation="vertical">
     <LinearLayout android:id="@+id/systemLayout1"
       android:layout_width="fill_parent" android:layout_height="0px" android:layout_weight="33">
-      <Button android:text="Power ON" android:textStyle="bold"
+      <net.rocrail.androc.widgets.LEDButton android:text="Power ON" android:textStyle="bold"
         android:id="@+id/systemPowerON" android:layout_width="0px"
         android:layout_weight="50" android:layout_height="fill_parent"
-        android:textSize="20px"></Button>
-      <Button android:text="Power OFF" android:textStyle="bold"
+        android:textSize="20px"/>
+      <net.rocrail.androc.widgets.LEDButton android:text="Power OFF" android:textStyle="bold"
         android:id="@+id/systemPowerOFF" android:layout_width="0px"
         android:layout_weight="50" android:layout_height="fill_parent"
-        android:textSize="20px"></Button>
+        android:textSize="20px"/>
     </LinearLayout>
     <LinearLayout android:id="@+id/systemLayout2"
       android:layout_width="fill_parent" android:layout_height="0px" android:layout_weight="34">

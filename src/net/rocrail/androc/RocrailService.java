@@ -117,7 +117,7 @@ public class RocrailService extends Service {
     return m_DevideId;
   }
   
-  public void sendMessage(String name, String msg) {
+  public synchronized void sendMessage(String name, String msg) {
     if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
       try {
         int msgLen = msg.getBytes("UTF-8").length;
@@ -128,6 +128,7 @@ public class RocrailService extends Service {
       }
       catch( Exception e) {
         e.printStackTrace();
+        m_Socket = null;
       }
     }
   }

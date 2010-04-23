@@ -29,8 +29,10 @@ import net.rocrail.androc.objects.Switch;
 import net.rocrail.androc.objects.ZLevel;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.AbsoluteLayout.LayoutParams;
 
@@ -73,7 +75,11 @@ public class Level extends Base {
      */
     AbsoluteLayout levelView = (AbsoluteLayout)findViewById(R.id.levelView);
     ScrollView scrollView = (ScrollView)findViewById(R.id.levelScrollView);
+    LinearLayout levelViewTop = (LinearLayout)findViewById(R.id.levelViewTop);
     
+    int cx = 0;
+    int cy = 0;
+
     Iterator<Item> itemIt = m_RocrailService.m_Model.m_ItemList.iterator();
     while( itemIt.hasNext() ) {
       Item item = itemIt.next();
@@ -87,13 +93,21 @@ public class Level extends Base {
           item.imageView = image;
           item.activity = this;
           LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, item.X*32, item.Y*32);
+          if( item.X + item.cX > cx ) cx = item.X + item.cX;
+          if( item.Y + item.cY > cy ) cy = item.Y + item.cY;
+
           levelView.addView(image, lp);
         }
       }
       
     }
-    
-    scrollView.requestLayout();
+/*    
+    CGSize plansize = CGSizeMake(ITEMSIZE*cx, ITEMSIZE*cy); 
+    scrollView.contentSize = plansize;
+*/
+    levelViewTop.requestLayout();
+    scrollView.setHorizontalScrollBarEnabled(true);
+    scrollView.setVerticalScrollBarEnabled(true);
 
   }
 
