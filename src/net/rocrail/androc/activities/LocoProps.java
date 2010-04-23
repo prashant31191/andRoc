@@ -20,15 +20,25 @@
 
 package net.rocrail.androc.activities;
 
+import java.util.Iterator;
+
 import net.rocrail.androc.R;
+import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.Loco;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.AdapterView.OnItemSelectedListener;
 
-public class LocoProps extends Base {
+public class LocoProps extends Base implements OnItemSelectedListener {
   Loco m_Loco = null;
-  
+  String ScheduleID = null;
+  String BlockID    = null;
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -78,8 +88,16 @@ public class LocoProps extends Base {
         public void onClick(View v) {
           m_Loco.AutoStart = !m_Loco.AutoStart;
           ((LEDButton)v).ON = m_Loco.AutoStart;
-          m_RocrailService.sendMessage("sys", String.format("<lc id=\"%s\" cmd=\"%s\"/>", 
-              m_Loco.ID, m_Loco.AutoStart?(m_Loco.HalfAuto?"gomanual":"go"):"stop") );
+          
+          if( m_Loco.AutoStart && ScheduleID != null) {
+            m_RocrailService.sendMessage("lc", 
+                String.format("<lc id=\"%s\" cmd=\"useschedule\" scheduleid=\"%s\"/>", 
+                    m_Loco.ID, ScheduleID ) );
+          }
+          else {
+            m_RocrailService.sendMessage("lc", String.format("<lc id=\"%s\" cmd=\"%s\"/>", 
+                m_Loco.ID, m_Loco.AutoStart?(m_Loco.HalfAuto?"gomanual":"go"):"stop") );
+          }
         }
     });
 
@@ -94,6 +112,80 @@ public class LocoProps extends Base {
     });
 
    
+    final Button setInBlock = (Button) findViewById(R.id.locoSetInBlock);
+    setInBlock.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          if( BlockID != null ) {
+            m_RocrailService.sendMessage("lc", 
+                String.format("<lc id=\"%s\" cmd=\"block\" blockid=\"%s\"/>", m_Loco.ID, BlockID ) );
+          }
+        }
+    });
+
+   
+    // Block spinner
+    Spinner s = (Spinner) findViewById(R.id.locoBlocks);
+    s.setPrompt(new String("Select Block"));
+
+    ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+    m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    s.setAdapter(m_adapterForSpinner);
+
+    m_adapterForSpinner.add("none");
+
+    Iterator<Block> it = m_RocrailService.m_Model.m_BlockMap.values().iterator();
+    while( it.hasNext() ) {
+      Block block = it.next();
+      m_adapterForSpinner.add(block.ID);
+    }
+    
+    s.setOnItemSelectedListener(this);
+    // s.setSelection(m_RocrailService.m_iSelectedLoco);    
+    
+
+    // Schedule spinner
+    s = (Spinner) findViewById(R.id.locoSchedules);
+    s.setPrompt(new String("Select Schedule"));
+
+    m_adapterForSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+    m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    s.setAdapter(m_adapterForSpinner);
+
+    m_adapterForSpinner.add("none");
+
+    Iterator<String> itSc = m_RocrailService.m_Model.m_ScheduleList.iterator();
+    while( itSc.hasNext() ) {
+      String sc = itSc.next();
+      m_adapterForSpinner.add(sc);
+    }
+    
+    s.setOnItemSelectedListener(this);
+    // s.setSelection(m_RocrailService.m_iSelectedLoco);    
+    
+
+    
+    
+    
+  }
+
+  @Override
+  public void onItemSelected(AdapterView<?> adview, View view, int position, long longID) {
+    Spinner bk = (Spinner) findViewById(R.id.locoBlocks);
+    Spinner sc = (Spinner) findViewById(R.id.locoSchedules);
+    String id = (String)adview.getSelectedItem();
+    if( bk == adview ) {
+      BlockID = id.equals("none")?null:id;
+      ScheduleID = null;
+    }
+    else if(sc == adview) {
+      ScheduleID = id.equals("none")?null:id;
+      BlockID = null;
+    }
+  }
+
+  @Override
+  public void onNothingSelected(AdapterView<?> arg0) {
+    // TODO Auto-generated method stub
     
   }
   

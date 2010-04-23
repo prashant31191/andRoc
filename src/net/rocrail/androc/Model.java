@@ -47,6 +47,7 @@ public class Model {
   public HashMap<String,Sensor> m_SensorMap = new HashMap<String,Sensor>();
   public HashMap<String,Block> m_BlockMap = new HashMap<String,Block>();
   public List<Item>   m_ItemList = new ArrayList<Item>();
+  public List<String> m_ScheduleList = new ArrayList<String>();
   public String m_Title = "";  
   public String m_Name = "";  
   public String m_RocrailVersion = "";  
@@ -89,36 +90,36 @@ public class Model {
     m_LocoMap.put(loco.ID, loco);
   }
   
-  public void updateItem(String itemtype, Attributes atts) {
-    if( itemtype.equals("lc") ) {
+  public void updateItem(String objName, Attributes atts) {
+    if( objName.equals("lc") ) {
       Loco lc = m_LocoMap.get(Item.getAttrValue(atts, "id", "?"));
       if( lc != null ) {
         lc.updateWithAttributes(atts);
       }
       return;
     }
-    if( itemtype.equals("sw") ) {
+    if( objName.equals("sw") ) {
       Switch sw = m_SwitchMap.get(Item.getAttrValue(atts, "id", "?"));
       if( sw != null ) {
         sw.updateWithAttributes(atts);
       }
       return;
     }
-    if( itemtype.equals("sg") ) {
+    if( objName.equals("sg") ) {
       Signal sg = m_SignalMap.get(Item.getAttrValue(atts, "id", "?"));
       if( sg != null ) {
         sg.updateWithAttributes(atts);
       }
       return;
     }
-    if( itemtype.equals("fb") ) {
+    if( objName.equals("fb") ) {
       Sensor fb = m_SensorMap.get(Item.getAttrValue(atts, "id", "?"));
       if( fb != null ) {
         fb.updateWithAttributes(atts);
       }
       return;
     }
-    if( itemtype.equals("bk") ) {
+    if( objName.equals("bk") ) {
       Block bk = m_BlockMap.get(Item.getAttrValue(atts, "id", "?"));
       if( bk != null ) {
         bk.updateWithAttributes(atts);
@@ -127,38 +128,43 @@ public class Model {
     }
   }
   
-  public void addItem(String itemtype, Attributes atts) {
-    if( itemtype.equals("sw") ) {
+  public void addObject(String objName, Attributes atts) {
+    if( objName.equals("sw") ) {
       Switch sw = new Switch(m_andRoc, atts);
       m_SwitchMap.put(sw.ID, sw);
       m_ItemList.add(sw);
       return;
     }
     
-    if( itemtype.equals("tk") ) {
+    if( objName.equals("tk") ) {
       Track track = new Track(m_andRoc, atts);
       m_ItemList.add(track);
       return;
     }
     
-    if( itemtype.equals("fb") ) {
+    if( objName.equals("fb") ) {
       Sensor sensor = new Sensor(m_andRoc, atts);
       m_SensorMap.put(sensor.ID, sensor);
       m_ItemList.add(sensor);
       return;
     }
     
-    if( itemtype.equals("sg") ) {
+    if( objName.equals("sg") ) {
       Signal signal = new Signal(m_andRoc, atts);
       m_SignalMap.put(signal.ID, signal);
       m_ItemList.add(signal);
       return;
     }
 
-    if( itemtype.equals("bk") ) {
+    if( objName.equals("bk") ) {
       Block block = new Block(m_andRoc, atts);
       m_BlockMap.put(block.ID, block);
       m_ItemList.add(block);
+      return;
+    }
+
+    if( objName.equals("sc") ) {
+      m_ScheduleList.add(Item.getAttrValue(atts, "id", "?"));
       return;
     }
   }

@@ -42,6 +42,14 @@
     <LinearLayout android:id="@+id/locoLayout3" android:orientation="vertical"
       android:layout_width="fill_parent" android:layout_height="0px"
       android:layout_weight="80">
+        <Spinner android:id="@+id/locoSchedules" android:textStyle="bold" android:layout_width="fill_parent"
+          android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
+        <Spinner android:id="@+id/locoBlocks" android:textStyle="bold" android:layout_width="fill_parent"
+          android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
+      <Button
+        android:text="Set in block" android:textStyle="bold" android:id="@+id/locoSetInBlock"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:textSize="20px" />
     </LinearLayout>
   </LinearLayout>
 

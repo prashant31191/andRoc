@@ -85,6 +85,7 @@ public class Level extends Base {
           image.setImageResource(resId);
           image.setOnClickListener(item);
           item.imageView = image;
+          item.activity = this;
           LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, item.X*32, item.Y*32);
           levelView.addView(image, lp);
         }

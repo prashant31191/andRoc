@@ -23,6 +23,7 @@ import net.rocrail.androc.RocrailService;
 
 import org.xml.sax.Attributes;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -49,6 +50,8 @@ public class Item implements View.OnClickListener {
   
   boolean Reserved = false;
   boolean Entering = false;
+  
+  public Activity activity = null;
 
 
   public Item(RocrailService rocrailService, Attributes atts) {

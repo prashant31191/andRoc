@@ -95,23 +95,31 @@ class XmlHandler extends DefaultHandler {
       }
       else if( localName.equals("sw") ) {
         // switch handling
-        m_Model.addItem(localName, atts);
+        m_Model.addObject(localName, atts);
       }
       else if( localName.equals("tk") ) {
         // track handling
-        m_Model.addItem(localName, atts);
+        m_Model.addObject(localName, atts);
       }
       else if( localName.equals("fb") ) {
         // track handling
-        m_Model.addItem(localName, atts);
+        m_Model.addObject(localName, atts);
       }
       else if( localName.equals("sg") ) {
         // track handling
-        m_Model.addItem(localName, atts);
+        m_Model.addObject(localName, atts);
       }
       else if( localName.equals("bk") ) {
         // track handling
-        m_Model.addItem(localName, atts);
+        m_Model.addObject(localName, atts);
+      }
+      else if( localName.equals("st") ) {
+        // track handling
+        m_Model.addObject(localName, atts);
+      }
+      else if( localName.equals("sc") ) {
+        // track handling
+        m_Model.addObject(localName, atts);
       }
       else if( localName.equals("zlevel") ) {
         // zlevel handling

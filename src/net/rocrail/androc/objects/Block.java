@@ -23,6 +23,8 @@ import net.rocrail.androc.RocrailService;
 
 import org.xml.sax.Attributes;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -105,5 +107,13 @@ public class Block extends Item implements View.OnClickListener {
 
 
   public void onClick(View v) {
+    try {
+      Intent intent = new Intent(activity,net.rocrail.androc.activities.BlockProps.class);
+      intent.putExtra("id", Block.this.ID);
+      activity.startActivity(intent);
+    }
+    catch(Exception e) {
+      // invalid activity
+    }
   }
 }
