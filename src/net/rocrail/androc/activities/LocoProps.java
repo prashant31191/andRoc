@@ -51,6 +51,12 @@ public class LocoProps extends Base {
       String id = extras.getString("id");
       m_Loco = m_RocrailService.m_Model.getLoco(id);
     }
+    else {
+      m_Loco = m_RocrailService.SelectedLoco;
+    }
+
+    if( m_Loco == null )
+      return;
     
     ImageView image = (ImageView)findViewById(R.id.locoImage);
     

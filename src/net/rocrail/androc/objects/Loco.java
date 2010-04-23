@@ -28,23 +28,25 @@ import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
 public class Loco {
+  RocrailService  rocrailService = null;
+
   public String  ID      = "?";
   public String  PicName = null;
   private Bitmap LocoBmp = null;
   public int     Speed   = 0;
   
-  RocrailService  m_andRoc  = null;
-  public boolean m_bLights = false;
-  boolean m_bDir    = true;
-  public boolean[] m_Function = new boolean[32];
-  String  mPicData  = null;
-  private boolean m_bImageRequested = false;
-  ImageView imageView = null;
+  public boolean   Lights   = false;
+  public boolean   Dir      = true;
+  public boolean[] Function = new boolean[32];
+  
+  private boolean   ImageRequested = false;
+  public  ImageView imageView      = null;
   
   public Attributes properties = null;
+  
 
   public Loco( RocrailService rocrailService, String id, Attributes atts) {
-    m_andRoc = rocrailService;
+    this.rocrailService = rocrailService;
     ID = id;
     PicName = atts.getValue("image");
     properties = atts;
@@ -65,12 +67,20 @@ public class Loco {
     dir      = [Globals getAttribute:@"dir" fromDict:attributeDict withDefault:@""];
     vstr     = [Globals getAttribute:@"V" fromDict:attributeDict withDefault:@"0"];
     */
+    int fx = Item.getAttrValue(atts, "fx", 0 );
+    
+    for(int i = 1; i < 32; i++) {
+      int mask = 1 << (i-1);
+      Function[i] = ( (fx & mask) == mask ) ? true:false; 
+    }
+
     updateWithAttributes(atts);
   }
 
   public void updateWithAttributes(Attributes atts) {
-    m_bDir = Item.getAttrValue(atts, "dir", m_bDir);
+    Dir    = Item.getAttrValue(atts, "dir", Dir);
     Speed  = Item.getAttrValue(atts, "V", Speed);
+    Lights = Item.getAttrValue(atts, "fn", Lights );
   }
 
   public Bitmap getLocoBmp(ImageView image) {
@@ -85,11 +95,11 @@ public class Loco {
     if( image != null )
       imageView = image;
     
-    if(!m_bImageRequested) {
-      m_bImageRequested = true;
+    if(!ImageRequested) {
+      ImageRequested = true;
       if( PicName != null && PicName.length() > 0 ) {
         // type 1 is for small images
-        m_andRoc.sendMessage("datareq", 
+        rocrailService.sendMessage("datareq", 
             String.format("<datareq id=\"%s\" type=\"1\" filename=\"%s\"/>", ID, PicName) );
       }
     }
@@ -109,9 +119,8 @@ public class Loco {
 
   public void setPicData(String data) {
     if( data != null && data.length() > 0 ) {
-      mPicData = data;
       // convert from HEXA to Bitmap
-      byte[] rawdata = strToByte(mPicData);
+      byte[] rawdata = strToByte(data);
       Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
       LocoBmp = bmp;
       if( imageView != null ) {
@@ -121,26 +130,26 @@ public class Loco {
   }
   
   public void dir() {
-    m_bDir = !m_bDir;
+    Dir = !Dir;
     speed(Speed);
   }
   
   public void lights() {
-    m_bLights = !m_bLights;
-    m_andRoc.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" fn=\"%s\"/>", 
-        m_andRoc.getDeviceName(), ID, (m_bLights?"true":"false")) );
+    Lights = !Lights;
+    rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" fn=\"%s\"/>", 
+        rocrailService.getDeviceName(), ID, (Lights?"true":"false")) );
   }
   
   public void function(int fn) {
-    m_Function[fn] = !m_Function[fn];
-    m_andRoc.sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>", 
-        ID, fn, (fn-1)/4+1, fn, (m_Function[fn]?"true":"false")) );
+    Function[fn] = !Function[fn];
+    rocrailService.sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>", 
+        ID, fn, (fn-1)/4+1, fn, (Function[fn]?"true":"false")) );
   }
   
   public void speed(int V) {
     Speed = V;
-    m_andRoc.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
-        m_andRoc.getDeviceName(), ID, Speed, (m_bDir?"true":"false"), (m_bLights?"true":"false") ) );
+    rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
+        rocrailService.getDeviceName(), ID, Speed, (Dir?"true":"false"), (Lights?"true":"false") ) );
     
   }
 }

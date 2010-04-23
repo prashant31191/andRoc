@@ -41,6 +41,8 @@ public class Base extends Activity implements ServiceListener {
   final static int MENU_LAYOUT   = 0x08;
   final static int MENU_MENU     = 0x10;
   final static int MENU_QUIT     = 0x20;
+  final static int MENU_LOCO     = 0x40;
+  final static int MENU_BLOCK    = 0x80;
   
   Activity        m_Activity = null;
   ServiceListener m_Listener = null;
@@ -115,6 +117,8 @@ public class Base extends Activity implements ServiceListener {
       menu.add(0, MENU_MENU    , 0, "Menu").setIcon(R.drawable.menu);
     if( (MenuSelection & MENU_QUIT)  == MENU_QUIT )
       menu.add(0, MENU_QUIT    , 0, "Quit").setIcon(R.drawable.quit);
+    if( (MenuSelection & MENU_LOCO)  == MENU_LOCO )
+      menu.add(0, MENU_LOCO    , 0, R.string.Loco).setIcon(R.drawable.loco);
     return true;
   }
 
@@ -135,6 +139,9 @@ public class Base extends Activity implements ServiceListener {
       return true;
     case MENU_MENU:
       menuView();
+      return true;
+    case MENU_LOCO:
+      locoView();
       return true;
     case MENU_QUIT:
       m_Activity.finish();
@@ -171,6 +178,11 @@ public class Base extends Activity implements ServiceListener {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Layout.class);
     m_Activity.startActivityIfNeeded(intent,0);
     //m_Activity.finish();
+  }
+  
+  public void locoView() {
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.LocoProps.class);
+    m_Activity.startActivityIfNeeded(intent,0);
   }
   
 }

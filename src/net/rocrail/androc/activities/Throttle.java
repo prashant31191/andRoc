@@ -42,7 +42,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = Base.MENU_QUIT | Base.MENU_MENU | Base.MENU_LAYOUT | Base.MENU_SYSTEM;
+    MenuSelection = Base.MENU_MENU | Base.MENU_LAYOUT | Base.MENU_SYSTEM | Base.MENU_LOCO;
 
     connectWithService();
   }
@@ -93,14 +93,14 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
 
     Loco loco = findLoco();
     if( loco != null ) {
-      f1.ON = loco.m_Function[1+m_iFunctionGroup*8];
-      f2.ON = loco.m_Function[2+m_iFunctionGroup*8];
-      f3.ON = loco.m_Function[3+m_iFunctionGroup*8];
-      f4.ON = loco.m_Function[4+m_iFunctionGroup*8];
-      f5.ON = loco.m_Function[5+m_iFunctionGroup*8];
-      f6.ON = loco.m_Function[6+m_iFunctionGroup*8];
-      f7.ON = loco.m_Function[7+m_iFunctionGroup*8];
-      f8.ON = loco.m_Function[8+m_iFunctionGroup*8];
+      f1.ON = loco.Function[1+m_iFunctionGroup*8];
+      f2.ON = loco.Function[2+m_iFunctionGroup*8];
+      f3.ON = loco.Function[3+m_iFunctionGroup*8];
+      f4.ON = loco.Function[4+m_iFunctionGroup*8];
+      f5.ON = loco.Function[5+m_iFunctionGroup*8];
+      f6.ON = loco.Function[6+m_iFunctionGroup*8];
+      f7.ON = loco.Function[7+m_iFunctionGroup*8];
+      f8.ON = loco.Function[8+m_iFunctionGroup*8];
       f1.invalidate();
       f2.invalidate();
       f3.invalidate();
@@ -116,6 +116,11 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
 
   public void initView() {
     m_iLocoCount = 0;
+    String LocoID = "";
+    
+    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+    LocoID = settings.getString("locoid", "");
+
     
     setContentView(R.layout.throttle);
     
@@ -132,6 +137,9 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     while( it.hasNext() ) {
       Loco loco = it.next();
       m_adapterForSpinner.add(loco.ID);
+      if( LocoID.length() > 0 && LocoID.equals(loco.ID) ) {
+        m_RocrailService.m_iSelectedLoco = m_iLocoCount;
+      }
       m_iLocoCount++;
     }
     
@@ -148,7 +156,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.lights();
-            ((LEDButton)v).ON = loco.m_bLights;
+            ((LEDButton)v).ON = loco.Lights;
           }
         }
     });
@@ -169,7 +177,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(1+m_iFunctionGroup*8);
-            ((LEDButton)v).ON = loco.m_Function[1+m_iFunctionGroup*8];
+            ((LEDButton)v).ON = loco.Function[1+m_iFunctionGroup*8];
 
           }
         }
@@ -181,7 +189,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(2+m_iFunctionGroup*8);
-            ((LEDButton)v).ON = loco.m_Function[2+m_iFunctionGroup*8];
+            ((LEDButton)v).ON = loco.Function[2+m_iFunctionGroup*8];
           }
         }
     });
@@ -192,7 +200,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(3+m_iFunctionGroup*8);
-            ((LEDButton)v).ON = loco.m_Function[3+m_iFunctionGroup*8];
+            ((LEDButton)v).ON = loco.Function[3+m_iFunctionGroup*8];
           }
         }
     });
@@ -203,7 +211,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(4+m_iFunctionGroup*8);
-            ((LEDButton)v).ON = loco.m_Function[4+m_iFunctionGroup*8];
+            ((LEDButton)v).ON = loco.Function[4+m_iFunctionGroup*8];
           }
         }
     });
@@ -214,7 +222,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(5+m_iFunctionGroup*8);
-            ((LEDButton)v).ON = loco.m_Function[5+m_iFunctionGroup*8];
+            ((LEDButton)v).ON = loco.Function[5+m_iFunctionGroup*8];
           }
         }
     });
@@ -225,7 +233,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(6+m_iFunctionGroup*8);
-            ((LEDButton)v).ON = loco.m_Function[6+m_iFunctionGroup*8];
+            ((LEDButton)v).ON = loco.Function[6+m_iFunctionGroup*8];
           }
         }
     });
@@ -236,7 +244,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(7+m_iFunctionGroup*8);
-            ((LEDButton)v).ON = loco.m_Function[7+m_iFunctionGroup*8];
+            ((LEDButton)v).ON = loco.Function[7+m_iFunctionGroup*8];
           }
         }
     });
@@ -247,7 +255,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.function(8+m_iFunctionGroup*8);
-            ((LEDButton)v).ON = loco.m_Function[8+m_iFunctionGroup*8];
+            ((LEDButton)v).ON = loco.Function[8+m_iFunctionGroup*8];
           }
         }
     });
@@ -332,8 +340,15 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     m_RocrailService.m_iSelectedLoco = position;
     Loco loco = findLoco();
     if( loco != null ) {
+      m_RocrailService.SelectedLoco = loco;
+      
+      SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+      SharedPreferences.Editor editor = settings.edit();
+      editor.putString("locoid", loco.ID);
+      editor.commit();
+
       LEDButton f0 = (LEDButton) findViewById(R.id.android_buttonf0);
-      f0.ON = loco.m_bLights;
+      f0.ON = loco.Lights;
       updateFunctions();
       
       ImageView image = (ImageView)findViewById(R.id.locoImage);

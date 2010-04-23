@@ -22,6 +22,8 @@ package net.rocrail.androc;
 import java.net.Socket;
 import javax.xml.parsers.SAXParser;
 
+import net.rocrail.androc.objects.Loco;
+
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
@@ -34,6 +36,7 @@ public class RocrailService extends Service {
   public String m_DevideId = "andRoc";
   
   public int    m_iSelectedLoco = 0;
+  public Loco   SelectedLoco = null;
   
   
   andRoc        m_andRoc     = null;
