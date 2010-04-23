@@ -26,6 +26,7 @@ import net.rocrail.androc.R;
 import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
+import net.rocrail.androc.widgets.LocoImage;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -69,7 +70,7 @@ public class LocoProps extends Base implements OnItemSelectedListener {
     if( m_Loco == null )
       return;
     
-    ImageView image = (ImageView)findViewById(R.id.locoImage);
+    LocoImage image = (LocoImage)findViewById(R.id.locoImage);
     
     if( m_Loco.getLocoBmp(null) != null ) {
       if( image != null ) {

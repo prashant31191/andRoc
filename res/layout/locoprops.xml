@@ -30,11 +30,11 @@
     <LinearLayout android:id="@+id/locoLayout2"
       android:layout_width="fill_parent" android:layout_height="0px"
       android:layout_weight="20">
-      <net.rocrail.androc.activities.LEDButton
+      <net.rocrail.androc.widgets.LEDButton
         android:text="Start" android:textStyle="bold" android:id="@+id/locoStart"
         android:layout_width="0px" android:layout_weight="50"
         android:layout_height="fill_parent" android:textSize="20px" />
-      <net.rocrail.androc.activities.LEDButton
+      <net.rocrail.androc.widgets.LEDButton
         android:text="Half Auto" android:textStyle="bold" android:id="@+id/locoHalfAuto"
         android:layout_width="0px" android:layout_weight="50"
         android:layout_height="fill_parent" android:textSize="20px" />
