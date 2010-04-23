@@ -21,6 +21,7 @@ public class LEDButton extends Button {
     super.onDraw(canvas);
     if( ON ) {
       Paint paint = new Paint();
+      paint.setAntiAlias(true);
       paint.setColor(Color.DKGRAY);
       canvas.drawCircle(15, 12, 7, paint);
       paint.setColor(Color.YELLOW);

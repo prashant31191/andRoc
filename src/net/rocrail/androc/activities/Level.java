@@ -77,7 +77,7 @@ public class Level extends Base {
     Iterator<Item> itemIt = m_RocrailService.m_Model.m_ItemList.iterator();
     while( itemIt.hasNext() ) {
       Item item = itemIt.next();
-      if( item.Z == Z ) {
+      if( item.Z == Z && item.Show ) {
         ImageView image = new ImageView(this);
         String imgname = item.getImageName();
         int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
