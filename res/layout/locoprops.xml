@@ -21,9 +21,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent" android:orientation="vertical"
   android:layout_height="fill_parent">
-  <ImageView android:id="@+id/locoImage" android:layout_width="fill_parent"
+  <net.rocrail.androc.widgets.LocoImage android:id="@+id/locoImage" android:layout_width="fill_parent"
     android:clickable="true" android:layout_height="wrap_content"
-    android:src="@drawable/noimg" android:padding="4px"></ImageView>
+    android:src="@drawable/noimg" android:padding="4px"/>
 
   <LinearLayout android:id="@+id/locoLayout1" android:orientation="vertical"
     android:layout_width="fill_parent" android:layout_height="fill_parent">

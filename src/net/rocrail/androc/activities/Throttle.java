@@ -34,6 +34,8 @@ import android.widget.AdapterView;
 import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.objects.Loco;
+import net.rocrail.androc.widgets.LEDButton;
+import net.rocrail.androc.widgets.LocoImage;
 
 public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
   int         m_iFunctionGroup = 0;
@@ -351,7 +353,8 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
       f0.ON = loco.Lights;
       updateFunctions();
       
-      ImageView image = (ImageView)findViewById(R.id.locoImage);
+      LocoImage image = (LocoImage)findViewById(R.id.locoImage);
+      image.ID = loco.ID;
       if( loco.getLocoBmp(image) != null ) {
         image.setImageBitmap(loco.getLocoBmp(null));
       }

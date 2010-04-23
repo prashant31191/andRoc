@@ -1,4 +1,4 @@
-package net.rocrail.androc.activities;
+package net.rocrail.androc.widgets;
 
 import android.content.Context;
 import android.graphics.Canvas;

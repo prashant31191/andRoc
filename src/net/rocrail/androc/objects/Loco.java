@@ -20,6 +20,7 @@
 package net.rocrail.androc.objects;
 
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.widgets.LocoImage;
 
 import org.xml.sax.Attributes;
 
@@ -42,7 +43,7 @@ public class Loco {
   public boolean[] Function  = new boolean[32];
   
   private boolean   ImageRequested = false;
-  public  ImageView imageView      = null;
+  public  LocoImage imageView      = null;
   
   public Attributes properties = null;
   
@@ -85,7 +86,7 @@ public class Loco {
     Lights = Item.getAttrValue(atts, "fn", Lights );
   }
 
-  public Bitmap getLocoBmp(ImageView image) {
+  public Bitmap getLocoBmp(LocoImage image) {
     if( LocoBmp == null ) {
       requestLocoImg(image);
     }
@@ -93,7 +94,7 @@ public class Loco {
       
   }
   
-  public void requestLocoImg(ImageView image) {
+  public void requestLocoImg(LocoImage image) {
     if( image != null )
       imageView = image;
     
@@ -166,7 +167,8 @@ class UpdateLocoImage implements Runnable {
   public void run() {
     if( loco.getLocoBmp(null) != null && loco.imageView != null ) {
       try {
-        loco.imageView.setImageBitmap(loco.getLocoBmp(null));
+        if( loco.ID.equals(loco.imageView.ID))
+          loco.imageView.setImageBitmap(loco.getLocoBmp(null));
       }
       catch( Exception e ) {
         // invalid imageView 

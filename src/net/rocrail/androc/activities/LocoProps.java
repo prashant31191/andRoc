@@ -25,6 +25,7 @@ import java.util.Iterator;
 import net.rocrail.androc.R;
 import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.Loco;
+import net.rocrail.androc.widgets.LEDButton;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
