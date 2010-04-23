@@ -35,9 +35,11 @@ public class Loco {
   private Bitmap LocoBmp = null;
   public int     Speed   = 0;
   
-  public boolean   Lights   = false;
-  public boolean   Dir      = true;
-  public boolean[] Function = new boolean[32];
+  public boolean   AutoStart = false;
+  public boolean   HalfAuto  = false;
+  public boolean   Lights    = false;
+  public boolean   Dir       = true;
+  public boolean[] Function  = new boolean[32];
   
   private boolean   ImageRequested = false;
   public  ImageView imageView      = null;

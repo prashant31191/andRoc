@@ -18,10 +18,32 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="wrap_content" android:orientation="vertical"
-  android:layout_height="wrap_content">
-      <ImageView android:id="@+id/locoImage" android:layout_width="fill_parent" android:clickable="true"
-      android:layout_height="wrap_content" android:src="@drawable/noimg" android:padding="4px"></ImageView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent" android:orientation="vertical"
+  android:layout_height="fill_parent">
+  <ImageView android:id="@+id/locoImage" android:layout_width="fill_parent"
+    android:clickable="true" android:layout_height="wrap_content"
+    android:src="@drawable/noimg" android:padding="4px"></ImageView>
+
+  <LinearLayout android:id="@+id/locoLayout1" android:orientation="vertical"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
+    <LinearLayout android:id="@+id/locoLayout2"
+      android:layout_width="fill_parent" android:layout_height="0px"
+      android:layout_weight="20">
+      <net.rocrail.androc.activities.LEDButton
+        android:text="Start" android:textStyle="bold" android:id="@+id/locoStart"
+        android:layout_width="0px" android:layout_weight="50"
+        android:layout_height="fill_parent" android:textSize="20px" />
+      <net.rocrail.androc.activities.LEDButton
+        android:text="Half Auto" android:textStyle="bold" android:id="@+id/locoHalfAuto"
+        android:layout_width="0px" android:layout_weight="50"
+        android:layout_height="fill_parent" android:textSize="20px" />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/locoLayout3" android:orientation="vertical"
+      android:layout_width="fill_parent" android:layout_height="0px"
+      android:layout_weight="80">
+    </LinearLayout>
+  </LinearLayout>
+
+
 </LinearLayout>

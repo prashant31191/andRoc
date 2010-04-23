@@ -71,7 +71,33 @@ public class LocoProps extends Base {
         finish();
       }
   });
+    
+    final LEDButton autoStart = (LEDButton) findViewById(R.id.locoStart);
+    autoStart.ON = m_Loco.AutoStart;
+    autoStart.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          m_Loco.AutoStart = !m_Loco.AutoStart;
+          ((LEDButton)v).ON = m_Loco.AutoStart;
+          m_RocrailService.sendMessage("sys", String.format("<lc id=\"%s\" cmd=\"%s\"/>", 
+              m_Loco.ID, m_Loco.AutoStart?(m_Loco.HalfAuto?"gomanual":"go"):"stop") );
+        }
+    });
+
+   
+    final LEDButton halfAuto = (LEDButton) findViewById(R.id.locoHalfAuto);
+    halfAuto.ON = m_Loco.HalfAuto;
+    halfAuto.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          m_Loco.HalfAuto = !m_Loco.HalfAuto;
+          ((LEDButton)v).ON = m_Loco.HalfAuto;
+        }
+    });
+
+   
+    
   }
+  
+  
   
 
 }
