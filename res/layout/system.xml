@@ -19,21 +19,45 @@
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
-  <LinearLayout android:id="@+id/systemLayout1"
-    android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <Button android:text="Power ON" android:textStyle="bold" android:id="@+id/systemPowerON"
-      android:layout_width="0px" android:layout_weight="50"
-      android:layout_height="wrap_content" android:textSize="20px"></Button>
-    <Button android:text="Power OFF" android:textStyle="bold" android:id="@+id/systemPowerOFF"
-      android:layout_width="0px" android:layout_weight="50"
-      android:layout_height="wrap_content" android:textSize="20px"></Button>
+  android:layout_width="fill_parent" android:layout_height="fill_parent"
+  android:orientation="vertical">
+
+  <LinearLayout android:id="@+id/systemLayout3"
+    android:layout_width="fill_parent" android:layout_height="0px"
+    android:layout_weight="60" android:orientation="vertical">
+    <LinearLayout android:id="@+id/systemLayout1"
+      android:layout_width="fill_parent" android:layout_height="0px" android:layout_weight="33">
+      <Button android:text="Power ON" android:textStyle="bold"
+        android:id="@+id/systemPowerON" android:layout_width="0px"
+        android:layout_weight="50" android:layout_height="fill_parent"
+        android:textSize="20px"></Button>
+      <Button android:text="Power OFF" android:textStyle="bold"
+        android:id="@+id/systemPowerOFF" android:layout_width="0px"
+        android:layout_weight="50" android:layout_height="fill_parent"
+        android:textSize="20px"></Button>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/systemLayout2"
+      android:layout_width="fill_parent" android:layout_height="0px" android:layout_weight="34">
+      <Button android:text="Init Field" android:textStyle="bold"
+        android:id="@+id/systemInitField" android:layout_width="fill_parent"
+        android:layout_height="fill_parent" android:textSize="20px"></Button>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/systemLayout1"
+      android:layout_width="fill_parent" android:layout_height="0px" android:layout_weight="33">
+      <net.rocrail.androc.activities.LEDButton android:text="Auto ON" android:textStyle="bold"
+        android:id="@+id/systemAutoON" android:layout_width="0px"
+        android:layout_weight="50" android:layout_height="fill_parent"
+        android:textSize="20px"/>
+      <net.rocrail.androc.activities.LEDButton android:text="Auto Start" android:textStyle="bold"
+        android:id="@+id/systemAutoStart" android:layout_width="0px"
+        android:layout_weight="50" android:layout_height="fill_parent"
+        android:textSize="20px"/>
+    </LinearLayout>
   </LinearLayout>
-  <LinearLayout android:id="@+id/systemLayout2"
-    android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <Button android:text="Init Field" android:textStyle="bold" android:id="@+id/systemInitField"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content" android:textSize="20px"></Button>
+
+  <LinearLayout android:id="@+id/systemLayout4"
+    android:layout_width="fill_parent" android:layout_height="0px"
+    android:layout_weight="40">
   </LinearLayout>
 
 </LinearLayout>

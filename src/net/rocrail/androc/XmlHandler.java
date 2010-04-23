@@ -128,6 +128,9 @@ class XmlHandler extends DefaultHandler {
       {
         m_Model.updateItem(localName, atts);
       }
+      else if( localName.equals("state") || localName.equals("auto") ) {
+        m_andRoc.event(localName, atts);
+      }
       
     }
     

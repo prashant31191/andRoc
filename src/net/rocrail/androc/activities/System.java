@@ -62,6 +62,29 @@ public class System extends Base {
         }
     });
     
+    final LEDButton autoON = (LEDButton) findViewById(R.id.systemAutoON);
+    autoON.ON = m_RocrailService.AutoMode;
+    autoON.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          m_RocrailService.AutoMode = !m_RocrailService.AutoMode;
+          ((LEDButton)v).ON = m_RocrailService.AutoMode;
+          m_RocrailService.sendMessage("sys", String.format("<auto cmd=\"%s\"/>", m_RocrailService.AutoMode?"on":"off") );
+        }
+    });
+
+    final LEDButton autoStart = (LEDButton) findViewById(R.id.systemAutoStart);
+    autoStart.ON = m_RocrailService.AutoStart;
+    autoStart.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          // TODO: show alert if going from stop to start
+          m_RocrailService.AutoMode = !m_RocrailService.AutoStart;
+          ((LEDButton)v).ON = m_RocrailService.AutoStart;
+          m_RocrailService.sendMessage("sys", String.format("<auto cmd=\"%s\"/>", m_RocrailService.AutoStart?"start":"stop") );
+        }
+    });
+
+
+    
   }
 
 }

@@ -22,6 +22,9 @@ package net.rocrail.androc;
 import java.net.Socket;
 import javax.xml.parsers.SAXParser;
 
+import org.xml.sax.Attributes;
+
+import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
 
 import android.app.Service;
@@ -38,6 +41,9 @@ public class RocrailService extends Service {
   public int    m_iSelectedLoco = 0;
   public Loco   SelectedLoco = null;
   
+  public boolean Power     = false;
+  public boolean AutoMode  = false;
+  public boolean AutoStart = false;
   
   andRoc        m_andRoc     = null;
   Socket        m_Socket     = null;
@@ -126,6 +132,18 @@ public class RocrailService extends Service {
     }
   }
 
+  public void event(String itemtype, Attributes atts) {
+    if( itemtype.equals("state") ) {
+      Power = Item.getAttrValue(atts, "power", false);
+      return;
+    }
+    if( itemtype.equals("auto") ) {
+      String cmd = Item.getAttrValue(atts, "cmd", "");
+      if( cmd.equals("on") || cmd.equals("off") )
+        AutoMode = cmd.equals("on");
+      return;
+    }
+  }
 
 
 }
