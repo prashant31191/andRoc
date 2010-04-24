@@ -19,26 +19,50 @@
 */
 package net.rocrail.androc.widgets;
 
+import net.rocrail.androc.objects.Item;
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
 public class LevelItem extends ImageView {
   LevelCanvas levelCanvas = null;
+  private Item item = null;
   private int currentX;
   private int currentY;
 
   
-  public LevelItem(Context context, LevelCanvas levelCanvas) {
+  public LevelItem(Context context, LevelCanvas levelCanvas, Item item) {
     super(context);
     this.levelCanvas = levelCanvas;
+    this.item = item;
   }
   public LevelItem(Context context) {
     super(context);
   }
   public LevelItem(Context context, AttributeSet attrs) {
     super(context, attrs);
+  }
+  
+  protected void  onDraw  (Canvas canvas) {
+    super.onDraw(canvas);
+    if( item.Text != null && item.Text.trim().length() > 0 ) {
+      // draw the text on top of the image
+      if( item.textVertical ) {
+        drawRotatedText(canvas);
+      }
+      else {
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLACK);
+        paint.setTextSize((float)20.0);
+        canvas.drawText(item.Text, (float)6.0, (float)22.0, paint);
+      }
+    }
   }
 
   @Override 
@@ -70,6 +94,32 @@ public class LevelItem extends ImageView {
       return true; 
   }
   
+  
+  void drawRotatedText(Canvas canvas) {
+    // draw some rotated text
+    // get text width and height
+    // set desired drawing location
+    int x = 0;
+    int y = 56;
+    Paint paint = new Paint();
+    paint.setColor(Color.BLACK);
+    paint.setAntiAlias(true);
+    paint.setTextSize(20);
+
+    // draw bounding rect before rotating text
+    Rect rect = new Rect();
+    paint.getTextBounds(item.Text, 0, item.Text.length(), rect);
+    canvas.translate(x, y);
+    // rotate the canvas on center of the text to draw
+    canvas.rotate(-90, x + rect.exactCenterX(), y + rect.exactCenterY());
+    // draw the rotated text
+    paint.setStyle(Paint.Style.FILL);
+    canvas.drawText(item.Text, x, y, paint);
+
+    //undo the rotate
+    canvas.restore();
+    
+  }
   
 
   

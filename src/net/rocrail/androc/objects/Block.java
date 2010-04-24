@@ -30,12 +30,12 @@ import android.widget.TextView;
 
 public class Block extends Item implements View.OnClickListener {
   boolean Small    = false;
-  String LocoID = " ";
+  String LocoID = "-";
   
   public Block(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
     Small    = Item.getAttrValue(atts, "smallsymbol", false );
-    LocoID   = Item.getAttrValue(atts, "locid", " "); 
+    LocoID   = Item.getAttrValue(atts, "locid", ID); 
     Reserved = Item.getAttrValue(atts, "reserved", false); 
     Entering = Item.getAttrValue(atts, "entering", false); 
     Text = LocoID;
@@ -43,6 +43,7 @@ public class Block extends Item implements View.OnClickListener {
   
   public void updateTextColor() {
     if( LocoID.length() > 0 ) {
+      Text = LocoID;
       if( Reserved ) 
         colorName = "block_reserved";
       else if( Entering ) 
@@ -51,7 +52,7 @@ public class Block extends Item implements View.OnClickListener {
         colorName = "block_free";
     }
     else {
-      Text = " ";
+      Text = ID;
       if( State.equals("closed") ) {
         Text = "Closed";
         colorName = "block_closed";
@@ -98,7 +99,7 @@ public class Block extends Item implements View.OnClickListener {
 
   
   public void updateWithAttributes(Attributes atts ) {
-    LocoID   = Item.getAttrValue(atts, "locid", " "); 
+    LocoID   = Item.getAttrValue(atts, "locid", ID); 
     Reserved = Item.getAttrValue(atts, "reserved", false); 
     Entering = Item.getAttrValue(atts, "entering", false); 
     Text = LocoID;

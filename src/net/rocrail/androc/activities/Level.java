@@ -75,7 +75,7 @@ public class Level extends Base {
     while( itemIt.hasNext() ) {
       Item item = itemIt.next();
       if( item.Z == Z && item.Show ) {
-        LevelItem image = new LevelItem(this, levelView );
+        LevelItem image = new LevelItem(this, levelView, item );
         String imgname = item.getImageName();
         int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
         if( resId != 0 ) {
