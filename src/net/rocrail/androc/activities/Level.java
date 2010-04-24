@@ -27,6 +27,7 @@ import net.rocrail.androc.R;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Switch;
 import net.rocrail.androc.objects.ZLevel;
+import net.rocrail.androc.widgets.LevelCanvas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -73,9 +74,7 @@ public class Level extends Base {
       Dianne Hackborn
       Android framework engineer 
      */
-    AbsoluteLayout levelView = (AbsoluteLayout)findViewById(R.id.levelView);
-    ScrollView scrollView = (ScrollView)findViewById(R.id.levelScrollView);
-    LinearLayout levelViewTop = (LinearLayout)findViewById(R.id.levelViewTop);
+    LevelCanvas levelView = (LevelCanvas)findViewById(R.id.levelView);
     
     int cx = 0;
     int cy = 0;
@@ -102,12 +101,9 @@ public class Level extends Base {
       
     }
 /*    
-    CGSize plansize = CGSizeMake(ITEMSIZE*cx, ITEMSIZE*cy); 
+    plansize = CGSizeMake(ITEMSIZE*cx, ITEMSIZE*cy); 
     scrollView.contentSize = plansize;
 */
-    levelViewTop.requestLayout();
-    scrollView.setHorizontalScrollBarEnabled(true);
-    scrollView.setVerticalScrollBarEnabled(true);
 
   }
 
