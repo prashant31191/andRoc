@@ -22,24 +22,22 @@ package net.rocrail.androc.widgets;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.AbsoluteLayout;
+import android.widget.ImageView;
 
-/*
-The AbsoluteLayout is needed for drawing the Layout levels.
-The API is flagged as deprecated but, as it seems, with another meaning than 'obsolete':
-
-“I'll say again: we are not going to remove AbsoluteLayout from a future
-release, but we strongly discourage people from using it.”
-Dianne Hackborn
-Android framework engineer 
-*/
-
-@SuppressWarnings("deprecation")
-public class LevelCanvas extends AbsoluteLayout {
+public class LevelItem extends ImageView {
+  LevelCanvas levelCanvas = null;
   private int currentX;
   private int currentY;
 
-  public LevelCanvas(Context context, AttributeSet attrs) {
+  
+  public LevelItem(Context context, LevelCanvas levelCanvas) {
+    super(context);
+    this.levelCanvas = levelCanvas;
+  }
+  public LevelItem(Context context) {
+    super(context);
+  }
+  public LevelItem(Context context, AttributeSet attrs) {
     super(context, attrs);
   }
 
@@ -56,11 +54,11 @@ public class LevelCanvas extends AbsoluteLayout {
             int x2 = (int) event.getRawX();
             int y2 = (int) event.getRawY();
            
-            scrollBy(currentX - x2 , currentY - y2);
-            int x = getScrollX();
-            int y = getScrollY();
+            levelCanvas.scrollBy(currentX - x2 , currentY - y2);
+            int x = levelCanvas.getScrollX();
+            int y = levelCanvas.getScrollY();
             if( x < 0 || y < 0 )
-              scrollTo( x < 0 ? 0:x, y < 0 ? 0:y);
+              levelCanvas.scrollTo( x < 0 ? 0:x, y < 0 ? 0:y);
             currentX = x2;
             currentY = y2;
             break;
@@ -72,5 +70,7 @@ public class LevelCanvas extends AbsoluteLayout {
       return true; 
   }
   
+  
+
   
 }

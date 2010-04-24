@@ -28,6 +28,7 @@ import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Switch;
 import net.rocrail.androc.objects.ZLevel;
 import net.rocrail.androc.widgets.LevelCanvas;
+import net.rocrail.androc.widgets.LevelItem;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -65,15 +66,6 @@ public class Level extends Base {
       Z = zlevel.Z;
     }
 
-    /*
-      The AbsoluteLayout is needed for drawing the Layout levels.
-      The API is flagged as deprecated but, as it seems, with another meaning than 'obsolete':
-      
-      “I'll say again: we are not going to remove AbsoluteLayout from a future
-      release, but we strongly discourage people from using it.”
-      Dianne Hackborn
-      Android framework engineer 
-     */
     LevelCanvas levelView = (LevelCanvas)findViewById(R.id.levelView);
     
     int cx = 0;
@@ -83,7 +75,7 @@ public class Level extends Base {
     while( itemIt.hasNext() ) {
       Item item = itemIt.next();
       if( item.Z == Z && item.Show ) {
-        ImageView image = new ImageView(this);
+        LevelItem image = new LevelItem(this, levelView );
         String imgname = item.getImageName();
         int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
         if( resId != 0 ) {
