@@ -21,25 +21,31 @@ package net.rocrail.androc.widgets;
 
 import net.rocrail.androc.objects.Item;
 import android.content.Context;
+import android.gesture.GestureOverlayView;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.GestureDetector.OnGestureListener;
 import android.widget.ImageView;
 
-public class LevelItem extends ImageView {
+public class LevelItem extends ImageView implements OnGestureListener {
   LevelCanvas levelCanvas = null;
   private Item item = null;
   private int currentX;
   private int currentY;
+  
+  private GestureDetector gestureDetector = null;
 
   
   public LevelItem(Context context, LevelCanvas levelCanvas, Item item) {
     super(context);
     this.levelCanvas = levelCanvas;
     this.item = item;
+    gestureDetector = new GestureDetector(this);
   }
   public LevelItem(Context context) {
     super(context);
@@ -67,6 +73,8 @@ public class LevelItem extends ImageView {
 
   @Override 
   public boolean onTouchEvent(MotionEvent event) {
+    return gestureDetector.onTouchEvent(event);
+    /*
     switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN: {
             currentX = (int) event.getRawX();
@@ -92,6 +100,7 @@ public class LevelItem extends ImageView {
         }
     }
       return true; 
+      */
   }
   
   
@@ -110,6 +119,30 @@ public class LevelItem extends ImageView {
     canvas.restore();
     
   }
+  @Override
+  public boolean onDown(MotionEvent event) {
+    return super.onTouchEvent(event);
+  }
+  @Override
+  public boolean onFling(MotionEvent arg0, MotionEvent arg1, float arg2, float arg3) {
+    return false;
+  }
+  @Override
+  public void onLongPress(MotionEvent arg0) {
+  }
+  @Override
+  public boolean onScroll(MotionEvent event1, MotionEvent event2, float distX, float distY) {
+    levelCanvas.scrollBy((int)distX , (int)distY);
+    return true;
+  }
+  @Override
+  public void onShowPress(MotionEvent arg0) {
+  }
+  @Override
+  public boolean onSingleTapUp(MotionEvent event) {
+    return super.onTouchEvent(event);
+  }
+
   
 
   
