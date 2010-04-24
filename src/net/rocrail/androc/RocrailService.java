@@ -44,6 +44,7 @@ public class RocrailService extends Service {
   public boolean Power     = false;
   public boolean AutoMode  = false;
   public boolean AutoStart = false;
+  public boolean Connected = false;
   
   andRoc        m_andRoc     = null;
   Socket        m_Socket     = null;
@@ -96,6 +97,7 @@ public class RocrailService extends Service {
       m_Connection.start();
     }
     m_Connection.startReading();
+    Connected = true;
   }
   
   
@@ -107,6 +109,8 @@ public class RocrailService extends Service {
       if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
         m_Socket.close();
       }
+      Connected = false;
+
     } catch (Exception e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
