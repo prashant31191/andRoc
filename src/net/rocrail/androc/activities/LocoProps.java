@@ -51,7 +51,7 @@ public class LocoProps extends Base implements OnItemSelectedListener {
   
   public void connectedWithService() {
     initView();
-    updateTitle();
+    updateTitle(m_Loco!=null?m_Loco.ID:"Loco properties");
   }
 
 

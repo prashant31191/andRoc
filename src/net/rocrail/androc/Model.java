@@ -48,6 +48,7 @@ public class Model {
   public HashMap<String,Block> m_BlockMap = new HashMap<String,Block>();
   public List<Item>   m_ItemList = new ArrayList<Item>();
   public List<String> m_ScheduleList = new ArrayList<String>();
+  public List<String> m_RouteList = new ArrayList<String>();
   public String m_Title = "";  
   public String m_Name = "";  
   public String m_RocrailVersion = "";  
@@ -165,6 +166,10 @@ public class Model {
 
     if( objName.equals("sc") ) {
       m_ScheduleList.add(Item.getAttrValue(atts, "id", "?"));
+      return;
+    }
+    if( objName.equals("st") ) {
+      m_RouteList.add(Item.getAttrValue(atts, "id", "?"));
       return;
     }
   }

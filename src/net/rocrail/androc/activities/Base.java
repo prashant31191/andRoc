@@ -88,6 +88,9 @@ public class Base extends Activity implements ServiceListener {
     
   }
   
+  public void updateTitle(String title) {
+    m_Activity.setTitle("andRoc " + title);
+  }
   public void updateTitle() {
     m_Activity.setTitle("andRoc " + m_RocrailService.m_Model.m_Title);
   }

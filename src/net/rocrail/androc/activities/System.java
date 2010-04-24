@@ -36,7 +36,7 @@ public class System extends Base {
   
   public void connectedWithService() {
     initView();
-    updateTitle();
+    updateTitle("System");
   }
 
   public void initView() {

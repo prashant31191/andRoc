@@ -17,10 +17,12 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-
 package net.rocrail.androc.activities;
 
+import java.util.Iterator;
+
 import net.rocrail.androc.R;
+import net.rocrail.androc.objects.ZLevel;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,30 +33,34 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Menu extends  ListActivity implements ServiceListener {
+public class Routes extends ListActivity implements ServiceListener {
   Base m_Base = null;
-  String[] m_Items = null;
-  
+  String[] m_Routes = null;
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     m_Base = new Base(this, this);
-    m_Base.MenuSelection = Base.MENU_THROTTLE | Base.MENU_SYSTEM | Base.MENU_LAYOUT;
+    m_Base.MenuSelection = 0; //Base.MENU_THROTTLE | Base.MENU_SYSTEM | Base.MENU_MENU;
+
     m_Base.connectWithService();
   }
   
   public void connectedWithService() {
     initView();
-    m_Base.updateTitle("Menu");
+    m_Base.updateTitle("Routes");
   }
 
 
   public void initView() {
-    m_Items = new String[2];
-    m_Items[0] = "Info";
-    m_Items[1] = "Routes";
-      
-    setListAdapter(new ArrayAdapter<String>(this, R.layout.menuitem, m_Items));
+    m_Routes = new String[m_Base.m_RocrailService.m_Model.m_RouteList.size()];
+    Iterator<String> it = m_Base.m_RocrailService.m_Model.m_RouteList.iterator();
+    int idx = 0;
+    while( it.hasNext() ) {
+      m_Routes[idx] = it.next();
+      idx++;
+    }
+    setListAdapter(new ArrayAdapter<String>(this, R.layout.menuitem, m_Routes));
 
     ListView lv = getListView();
     lv.setTextFilterEnabled(true);
@@ -62,30 +68,12 @@ public class Menu extends  ListActivity implements ServiceListener {
     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // When clicked, show a toast with the TextView text
-        Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-            Toast.LENGTH_SHORT).show();
-        switch( position ) {
-          case 0: {
-            Intent intent = new Intent(Menu.this,net.rocrail.androc.activities.Info.class);
-            startActivity(intent);
-          }
-          break;
-          case 1: {
-            Intent intent = new Intent(Menu.this,net.rocrail.androc.activities.Routes.class);
-            startActivity(intent);
-          }
-          break;
-        }
+        Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+        // send route command
+        m_Base.m_RocrailService.sendMessage("st", String.format("<st id=\"%s\" cmd=\"test\"/>",
+            ((TextView) view).getText() ) );
       }
     });
   }
 
-  public boolean onCreateOptionsMenu(android.view.Menu menu) {
-    return m_Base.onCreateOptionsMenu(menu);
-  }
-  
-  public boolean onOptionsItemSelected(android.view.MenuItem item) {
-    return m_Base.onOptionsItemSelected(item);
-  }
-  
 }

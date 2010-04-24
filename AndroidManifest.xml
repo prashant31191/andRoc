@@ -39,6 +39,7 @@
         <activity android:name=".activities.LocoProps" />
         <activity android:name=".activities.Level" />
         <activity android:name=".activities.Info" />
+        <activity android:name=".activities.Routes" />
         <service android:name=".RocrailService"/>
         <activity android:name=".activities.BlockProps" />
     </application>
