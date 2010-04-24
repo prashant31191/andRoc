@@ -96,25 +96,15 @@ public class LevelItem extends ImageView {
   
   
   void drawRotatedText(Canvas canvas) {
-    // draw some rotated text
-    // get text width and height
-    // set desired drawing location
-    int x = 0;
-    int y = 56;
     Paint paint = new Paint();
     paint.setColor(Color.BLACK);
     paint.setAntiAlias(true);
     paint.setTextSize(20);
 
-    // draw bounding rect before rotating text
-    Rect rect = new Rect();
-    paint.getTextBounds(item.Text, 0, item.Text.length(), rect);
-    canvas.translate(x, y);
-    // rotate the canvas on center of the text to draw
-    canvas.rotate(-90, x + rect.exactCenterX(), y + rect.exactCenterY());
+    canvas.rotate(90, 15, 15);
     // draw the rotated text
     paint.setStyle(Paint.Style.FILL);
-    canvas.drawText(item.Text, x, y, paint);
+    canvas.drawText(item.Text, 6, 22, paint);
 
     //undo the rotate
     canvas.restore();
