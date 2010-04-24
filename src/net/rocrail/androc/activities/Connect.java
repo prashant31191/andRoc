@@ -30,8 +30,9 @@ import android.widget.EditText;
 import net.rocrail.androc.R;
 import net.rocrail.androc.andRoc;
 import net.rocrail.androc.interfaces.ModelListener;
+import net.rocrail.androc.interfaces.SystemListener;
 
-public class Connect extends Base implements ModelListener {
+public class Connect extends Base implements ModelListener, SystemListener {
   andRoc      m_andRoc    = null;
 /* 
   public Connect(andRoc androc) {
@@ -48,6 +49,7 @@ public class Connect extends Base implements ModelListener {
   
   public void connectedWithService() {
     m_RocrailService.m_Model.addListener(this);
+    m_RocrailService.addListener(this);
     initView();
   }
 
@@ -110,6 +112,18 @@ public class Connect extends Base implements ModelListener {
       s.setText(""+m_RocrailService.m_iPort);
     }
 
+  }
+
+  @Override
+  public void SystemDisconnected() {
+    Connect.this.connectView();
+    Connect.this.setVisible(true);
+  }
+
+  @Override
+  public void SystemShutdown() {
+    Connect.this.connectView();
+    Connect.this.setVisible(true);
   }
 
 }

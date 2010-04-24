@@ -20,10 +20,16 @@
 package net.rocrail.androc;
 
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.xml.parsers.SAXParser;
 
 import org.xml.sax.Attributes;
 
+import net.rocrail.androc.interfaces.ModelListener;
+import net.rocrail.androc.interfaces.SystemListener;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
 
@@ -46,11 +52,11 @@ public class RocrailService extends Service {
   public boolean AutoStart = false;
   public boolean Connected = false;
   
-  andRoc        m_andRoc     = null;
   Socket        m_Socket     = null;
   Connection    m_Connection = null;
   
   SAXParser m_Parser = null;
+  private List<SystemListener>  m_Listeners = new ArrayList<SystemListener>();
 
   @Override
   public void onCreate() {
@@ -77,11 +83,17 @@ public class RocrailService extends Service {
   public RocrailService() {
   }
   
+  public void addListener( SystemListener listener ) {
+    m_Listeners.add(listener);
+  }
   
+
   public void connect() throws Exception {
     try {
-      m_Connection.stopReading();
-      Thread.sleep(500);
+      if(m_Connection!=null) {
+        m_Connection.stopReading();
+        Thread.sleep(500);
+      }
     } 
     catch (Exception e) {
       e.printStackTrace();
@@ -109,12 +121,13 @@ public class RocrailService extends Service {
       if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
         m_Socket.close();
       }
-      Connected = false;
 
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
+    Connected = false;
+    m_Socket = null;;
+
   }
   
   public String getDeviceName() {
@@ -133,11 +146,31 @@ public class RocrailService extends Service {
       catch( Exception e) {
         e.printStackTrace();
         m_Socket = null;
+        Connected = false;
+        // TODO: inform activity...
+        Iterator<SystemListener> it = m_Listeners.iterator();
+        while( it.hasNext() ) {
+          SystemListener listener = it.next();
+          listener.SystemDisconnected();
+        }
+
       }
     }
   }
 
   public void event(String itemtype, Attributes atts) {
+    if( itemtype.equals("sys") ) {
+      if( "shutdown".equals(Item.getAttrValue(atts, "cmd", "") ) ) {
+        onDestroy();
+        // TODO: set the connection view active again
+        Iterator<SystemListener> it = m_Listeners.iterator();
+        while( it.hasNext() ) {
+          SystemListener listener = it.next();
+          listener.SystemShutdown();
+        }
+      }
+      return;
+    }
     if( itemtype.equals("state") ) {
       Power = Item.getAttrValue(atts, "power", false);
       return;
