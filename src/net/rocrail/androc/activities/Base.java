@@ -48,6 +48,7 @@ public class Base extends Activity implements ServiceListener {
   ServiceListener m_Listener = null;
   
   public int MenuSelection = MENU_THROTTLE | MENU_SYSTEM | MENU_LAYOUT | MENU_MENU | MENU_QUIT;
+  public boolean Finish = false;
   
   public RocrailService             m_RocrailService       = null;
   RocrailService.RocrailLocalBinder m_RocrailServiceBinder = null;
@@ -153,36 +154,43 @@ public class Base extends Activity implements ServiceListener {
   public void connectView() {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Connect.class);
     m_Activity.startActivity(intent);
-    //m_Activity.finish();
+    if(Finish) 
+      m_Activity.finish();
   }
   
   public void throttleView() {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Throttle.class);
     m_Activity.startActivityIfNeeded(intent,0);
-    //m_Activity.finish();
+    if(Finish) 
+      m_Activity.finish();
   }
   
   public void systemView() {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.System.class);
     m_Activity.startActivityIfNeeded(intent,0);
-    //m_Activity.finish();
+    if(Finish) 
+      m_Activity.finish();
   }
   
   public void menuView() {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Menu.class);
     m_Activity.startActivityIfNeeded(intent,0);
-    //m_Activity.finish();
+    if(Finish) 
+      m_Activity.finish();
   }
   
   public void layoutView() {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Layout.class);
     m_Activity.startActivityIfNeeded(intent,0);
-    //m_Activity.finish();
+    if(Finish) 
+      m_Activity.finish();
   }
   
   public void locoView() {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.LocoProps.class);
     m_Activity.startActivityIfNeeded(intent,0);
+    if(Finish) 
+      m_Activity.finish();
   }
   
 }

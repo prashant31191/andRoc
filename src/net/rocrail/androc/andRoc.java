@@ -54,7 +54,10 @@ public class andRoc extends Base {
   public void connectedWithService() {
     restorePreferences();
     TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-    m_RocrailService.m_DevideId = tm.getDeviceId();
+    if(tm.getLine1Number()!=null)
+      m_RocrailService.m_DevideId = tm.getLine1Number();
+    else
+      m_RocrailService.m_DevideId = tm.getDeviceId();
     connectView();
     finish();
   }

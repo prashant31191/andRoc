@@ -45,7 +45,8 @@ public class Level extends Base {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = 0;
+    MenuSelection = 0; //Base.MENU_THROTTLE | Base.MENU_SYSTEM | Base.MENU_MENU | Base.MENU_LAYOUT;
+    Finish = true;
     connectWithService();
   }
   

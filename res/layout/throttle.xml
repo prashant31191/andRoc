@@ -38,25 +38,25 @@
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf3"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F3" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf4"
+					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleGo"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F4" android:textStyle="bold" />
+						android:layout_height="fill_parent" android:text="GO" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun2"
 					android:orientation="horizontal" android:layout_width="fill_parent"
 					android:layout_height="0px" android:layout_weight="25">
+          <net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf4"
+            android:layout_width="0px" android:layout_weight="25"
+            android:layout_height="fill_parent" android:text="F4" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf5"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F5" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf6"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F6" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf7"
+					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleRelease"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F7" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf8"
-						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F8" android:textStyle="bold" />
+						android:layout_height="fill_parent" android:text="REL" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun3"
 					android:orientation="horizontal" android:layout_width="fill_parent"

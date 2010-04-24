@@ -40,6 +40,7 @@ public class Loco {
   public boolean   HalfAuto  = false;
   public boolean   Lights    = false;
   public boolean   Dir       = true;
+  public boolean   Go        = false;
   public boolean[] Function  = new boolean[32];
   
   private boolean   ImageRequested = false;
@@ -141,6 +142,18 @@ public class Loco {
     Lights = !Lights;
     rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" fn=\"%s\"/>", 
         rocrailService.getDeviceName(), ID, (Lights?"true":"false")) );
+  }
+  
+  public void go() {
+    if( rocrailService.AutoMode ) {
+      Go = !Go; // TODO: use the reported mode of the loco
+      rocrailService.sendMessage("lc", String.format("<lc id=\"%s\" cmd=\"%s\"/>", 
+          ID, (Go?"go":"stop") ) );
+    }
+  }
+  public void release() {
+    rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" cmd=\"release\" id=\"%s\"/>",
+        rocrailService.getDeviceName(), ID ) );
   }
   
   public void function(int fn) {
