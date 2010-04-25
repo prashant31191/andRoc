@@ -19,6 +19,40 @@
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 <resources>
-    <string name="Loco">Loco</string>
-    <string name="Throttle">Throttle</string>
+  <string name="Throttle">Throttle</string>
+  <string name="Locomotives">Locomotives</string>
+  <string name="Outputs">Outputs</string>
+  <string name="Routes">Routes</string>
+  <string name="Switches">Switches</string>
+  <string name="Signals">Signals</string>
+  <string name="Blocks">Blocks</string>
+  <string name="Schedules">Schedules</string>
+  <string name="System">System</string>
+  <string name="Power_ON">Power ON</string>
+  <string name="Power_OFF">Power OFF</string>
+  <string name="Init_Field">Init Field</string>
+  <string name="Auto_ON">Auto ON</string>
+  <string name="Auto_Start">Auto Start</string>
+  <string name="Release">Release</string>
+  <string name="none">none</string>
+  <string name="START">START</string>
+  <string name="STOP">STOP</string>
+  <string name="HalfAuto">Half Auto</string>
+  <string name="Set_in_block">Set in block</string>
+  <string name="Normal">Normal</string>
+  <string name="Swapped">Swapped</string>
+  <string name="Placing">Placing</string>
+  <string name="Automatic">Automatic</string>
+  <string name="Settings">Settings</string>
+  <string name="Loco">Loco</string>
+  <string name="Close">Close</string>
+  <string name="Open">Open</string>
+  <string name="Connect">Connect</string>
+  <string name="Menu">Menu</string>
+  <string name="Layout">Layout</string>
+  <string name="Level">Level</string>
+  <string name="Quit">Quit</string>
+  <string name="Direction">Direction</string>
+  <string name="Host">Host</string>
+  <string name="Port">Port</string>
 </resources>

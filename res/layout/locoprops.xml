@@ -31,11 +31,11 @@
       android:layout_width="fill_parent" android:layout_height="0px"
       android:layout_weight="20">
       <net.rocrail.androc.widgets.LEDButton
-        android:text="Start" android:textStyle="bold" android:id="@+id/locoStart"
+        android:text="@string/START" android:textStyle="bold" android:id="@+id/locoStart"
         android:layout_width="0px" android:layout_weight="50"
         android:layout_height="fill_parent" android:textSize="20px" />
       <net.rocrail.androc.widgets.LEDButton
-        android:text="Half Auto" android:textStyle="bold" android:id="@+id/locoHalfAuto"
+        android:text="@string/HalfAuto" android:textStyle="bold" android:id="@+id/locoHalfAuto"
         android:layout_width="0px" android:layout_weight="50"
         android:layout_height="fill_parent" android:textSize="20px" />
     </LinearLayout>
@@ -47,7 +47,7 @@
         <Spinner android:id="@+id/locoBlocks" android:textStyle="bold" android:layout_width="fill_parent"
           android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
       <Button
-        android:text="Set in block" android:textStyle="bold" android:id="@+id/locoSetInBlock"
+        android:text="@string/Set_in_block" android:textStyle="bold" android:id="@+id/locoSetInBlock"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" android:textSize="20px" />
     </LinearLayout>

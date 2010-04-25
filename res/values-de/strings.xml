@@ -19,6 +19,36 @@
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 <resources>
-    <string name="Loco">Lok</string>
-    <string name="Throttle">Regler</string>
+	<string name="Throttle">Regler</string>
+	<string name="Locomotives">Triebfahrzeuge</string>
+	<string name="Outputs">Ausgänge</string>
+	<string name="Routes">Fahrstraßen</string>
+	<string name="Switches">Weichen</string>
+	<string name="Blocks">Blöcke</string>
+	<string name="Schedules">Fahrpläne</string>
+	<string name="Signals">Signale</string>
+	<string name="Power_ON">Strom ein</string>
+	<string name="Power_OFF">Strom aus</string>
+	<string name="Init_Field">Initialisieren</string>
+	<string name="Auto_ON">Autom. ein</string>
+	<string name="Auto_Start">Autom. start</string>
+	<string name="Release">Freigeben</string>
+	<string name="Automatic">Automatik</string>
+	<string name="Settings">Einstellungen</string>
+	<string name="Loco">Lok</string>
+	<string name="none">kein</string>
+	<string name="START">START</string>
+	<string name="STOP">STOP</string>
+	<string name="HalfAuto">HalbAutom.</string>
+	<string name="Set_in_block">Block zuweisen</string>
+	<string name="Normal">Normal</string>
+	<string name="Swapped">Umgekehrt</string>
+	<string name="Placing">Platzierung</string>
+	<string name="Connect">Verbinden</string>
+  <string name="Menu">Menü</string>
+  <string name="Layout">Gleisbild</string>
+  <string name="Level">Nivo</string>
+  <string name="Direction">Fahrrichtung</string>
+  <string name="Host">IP-Adresse</string>
+  <string name="Port">Port</string>
 </resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Rocrail - Model Railroad Software
+
+ Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
+
+ This program is free software</string> you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation</string> either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY</string> without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program</string> if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-->
+<resources>
+  <string name="Locomotives">Locomotive"</string>
+  <string name="Outputs">Uscite"</string>
+  <string name="Routes">Instradamenti"</string>
+  <string name="Switches">Deviatoi"</string>
+  <string name="Signals">Segnali"</string>
+  <string name="Blocks">Blocchi"</string>
+  <string name="Schedules">Schedulazioni"</string>
+  <string name="System">Sistema"</string>
+  <string name="Power_ON">Accendi"</string>
+  <string name="Power_OFF">Spegni"</string>
+  <string name="Init_Field">Inizializzazione"</string>
+  <string name="Auto_ON">Accendi autom."</string>
+  <string name="Auto_Start">Avvia autom."</string>
+  <string name="Release">Rilascia"</string>
+  <string name="none">nessuno"</string>
+  <string name="START">AVVIA"</string>
+  <string name="STOP">ARRESTA"</string>
+  <string name="HalfAuto">Semiautomatico"</string>
+  <string name="Set_in_block">Imposta nel blocco"</string>
+  <string name="Normal">Normale"</string>
+  <string name="Swapped">Invertito"</string>
+  <string name="Placing">Posizionamento"</string>
+  <string name="Automatic">Automatico"</string>
+  <string name="Settings">Impostazioni"</string>
+  <string name="Loco">Locomotiva"</string> 
+
+
+</resources>

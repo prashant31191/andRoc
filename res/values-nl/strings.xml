@@ -19,6 +19,39 @@
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 <resources>
-    <string name="Loco">Loc</string>
-    <string name="Throttle">Regelaar</string>
+  <string name="Throttle">Regelaar</string>
+	<string name="Locomotives">Locomotieven</string>
+	<string name="Outputs">Uitgangen</string>
+	<string name="Routes">Rijstraten</string>
+	<string name="Switches">Wissels</string>
+	<string name="Signals">Signalen</string>
+	<string name="Blocks">Blokken</string>
+	<string name="Schedules">Dienstroosters</string>
+	<string name="System">Systeem</string>
+	<string name="Power_ON">Booster AAN</string>
+	<string name="Power_OFF">Booster UIT</string>
+	<string name="Init_Field">Initialiseren</string>
+	<string name="Auto_ON">Autom. AAN</string>
+	<string name="Auto_Start">Autom. Start</string>
+	<string name="Release">Vrijgeven</string>
+	<string name="none">geen</string>
+	<string name="START">START</string>
+	<string name="STOP">STOP</string>
+	<string name="HalfAuto">HalfAuto</string>
+	<string name="Set_in_block">Zet in blok</string>
+	<string name="Normal">Normaal</string>
+	<string name="Swapped">Omgekeerd</string>
+	<string name="Placing">Plaatsing</string>
+	<string name="Automatic">Automaat</string>
+	<string name="Settings">Eigenschappen</string>
+	<string name="Loco">Loc</string>
+	<string name="Close">Sluiten</string>
+	<string name="Open">Openen</string>
+	<string name="Connect">Verbinden</string>
+  <string name="Menu">Menu</string>
+  <string name="Layout">Baan plan</string>
+  <string name="Level">Nivo</string>
+  <string name="Direction">Rijrichting</string>
+  <string name="Host">IP-Adres</string>
+  <string name="Port">Poort</string>
 </resources>

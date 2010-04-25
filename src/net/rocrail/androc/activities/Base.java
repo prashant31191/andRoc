@@ -110,17 +110,17 @@ public class Base extends Activity implements ServiceListener {
   /* Creates the menu items */
   public boolean onCreateOptionsMenu(Menu menu) {
     if( (MenuSelection & MENU_CONNECT)  == MENU_CONNECT )
-      menu.add(0, MENU_CONNECT , 0, "Connect").setIcon(R.drawable.connect);
+      menu.add(0, MENU_CONNECT , 0, R.string.Connect).setIcon(R.drawable.connect);
     if( (MenuSelection & MENU_THROTTLE)  == MENU_THROTTLE )
       menu.add(0, MENU_THROTTLE, 0, R.string.Throttle ).setIcon(R.drawable.loco);
     if( (MenuSelection & MENU_SYSTEM)  == MENU_SYSTEM )
-      menu.add(0, MENU_SYSTEM  , 0, "System").setIcon(R.drawable.system);
+      menu.add(0, MENU_SYSTEM  , 0, R.string.System).setIcon(R.drawable.system);
     if( (MenuSelection & MENU_LAYOUT)  == MENU_LAYOUT )
-      menu.add(0, MENU_LAYOUT  , 0, "Layout").setIcon(R.drawable.layout);
+      menu.add(0, MENU_LAYOUT  , 0, R.string.Layout).setIcon(R.drawable.layout);
     if( (MenuSelection & MENU_MENU)  == MENU_MENU )
-      menu.add(0, MENU_MENU    , 0, "Menu").setIcon(R.drawable.menu);
+      menu.add(0, MENU_MENU    , 0, R.string.Menu).setIcon(R.drawable.menu);
     if( (MenuSelection & MENU_QUIT)  == MENU_QUIT )
-      menu.add(0, MENU_QUIT    , 0, "Quit").setIcon(R.drawable.quit);
+      menu.add(0, MENU_QUIT    , 0, R.string.Quit).setIcon(R.drawable.quit);
     if( (MenuSelection & MENU_LOCO)  == MENU_LOCO )
       menu.add(0, MENU_LOCO    , 0, R.string.Loco).setIcon(R.drawable.loco);
     return true;
