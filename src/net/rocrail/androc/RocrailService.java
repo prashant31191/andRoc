@@ -56,6 +56,7 @@ public class RocrailService extends Service {
   
   SAXParser m_Parser = null;
   private List<SystemListener>  m_Listeners = new ArrayList<SystemListener>();
+  public List<String>  MessageList = new ArrayList<String>();
 
   @Override
   public void onCreate() {
@@ -101,7 +102,7 @@ public class RocrailService extends Service {
     }
     
     m_Socket = new Socket(m_Host, m_iPort);
-    sendMessage("model","<model cmd=\"plan\" disablemonitor=\"true\"/>");
+    sendMessage("model","<model cmd=\"plan\" disablemonitor=\"false\"/>");
     if( m_Connection == null ) {
       m_Connection = new Connection(this, m_Model, m_Socket);
       m_Connection.start();
@@ -195,6 +196,16 @@ public class RocrailService extends Service {
       String cmd = Item.getAttrValue(atts, "cmd", "");
       if( cmd.equals("on") || cmd.equals("off") )
         AutoMode = cmd.equals("on");
+      return;
+    }
+    if( itemtype.equals("exception") ) {
+      String text = Item.getAttrValue(atts, "text", null);
+      if( text != null && text.length() > 0 ) {
+        MessageList.add(0, text);
+        if( MessageList.size() > 100 ) {
+          MessageList.remove(MessageList.size()-1);
+        }
+      }
       return;
     }
   }

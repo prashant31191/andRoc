@@ -134,7 +134,8 @@ class XmlHandler extends DefaultHandler {
       {
         m_Model.updateItem(localName, atts);
       }
-      else if( localName.equals("state") || localName.equals("auto") || localName.equals("sys") ) {
+      else if( localName.equals("state") || localName.equals("auto") || 
+          localName.equals("sys") || localName.equals("exception") ) {
         rocrailService.event(localName, atts);
       }
       

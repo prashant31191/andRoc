@@ -19,11 +19,14 @@
 */
 package net.rocrail.androc.activities;
 
+import java.util.Iterator;
+
 import net.rocrail.androc.R;
 import net.rocrail.androc.widgets.LEDButton;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class System extends Base {
   
@@ -41,6 +44,14 @@ public class System extends Base {
 
   public void initView() {
     setContentView(R.layout.system);
+
+    
+    final TextView msgList = (TextView) findViewById(R.id.systemMessages);
+    msgList.setText("");
+    Iterator<String> it = m_RocrailService.MessageList.iterator();
+    while( it.hasNext()) {
+      msgList.append(it.next()+"\n");
+    }
 
     final LEDButton powerON = (LEDButton) findViewById(R.id.systemPowerON);
     powerON.ON = m_RocrailService.Power;
