@@ -78,6 +78,14 @@ public class Layout extends ListActivity implements ServiceListener {
         startActivity(intent);
       }
     });
+    
+    if( idx == 1 ) {
+      // show it
+      Intent intent = new Intent(Layout.this,net.rocrail.androc.activities.Level.class);
+      intent.putExtra("level", 0);
+      startActivity(intent);
+      finish();
+    }
   }
 
   public boolean onCreateOptionsMenu(Menu menu) {
