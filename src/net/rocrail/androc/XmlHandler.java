@@ -149,11 +149,9 @@ class XmlHandler extends DefaultHandler {
       m_bParsingPlan = false;
       m_Model.planLoaded();
     }
-    else if( localName.equals("lclist") ) {
-      if( m_bParsingPlan ) {
-        // signal end of loco list
-        m_Model.lclistLoaded();
-      }
+    else if( m_bParsingPlan ) {
+      // signal end of list
+      m_Model.listLoaded(localName);
     }
   }
 }

@@ -20,25 +20,26 @@
 package net.rocrail.androc.activities;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import net.rocrail.androc.R;
-import net.rocrail.androc.andRoc;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.SystemListener;
 
 public class Connect extends Base implements ModelListener, SystemListener {
-  andRoc      m_andRoc    = null;
-/* 
-  public Connect(andRoc androc) {
-    m_andRoc = androc;
-  }
-*/
+  static final int PROGRESS_DIALOG = 0;
+  boolean progressPlan = false;
+  int progressValue = 0;
+  ProgressDialog progressDialog = null;
   
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,13 @@ public class Connect extends Base implements ModelListener, SystemListener {
   }
   
   public void connectedWithService() {
+    restorePreferences();
+    TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+    if(tm.getLine1Number()!=null)
+      m_RocrailService.m_DevideId = tm.getLine1Number();
+    else
+      m_RocrailService.m_DevideId = tm.getDeviceId();
+    
     m_RocrailService.m_Model.addListener(this);
     m_RocrailService.addListener(this);
     initView();
@@ -55,11 +63,54 @@ public class Connect extends Base implements ModelListener, SystemListener {
 
   @Override
   public void modelListLoaded(int MODELLIST) {
+    if( !progressPlan )
+      return;
+    
     if( MODELLIST == ModelListener.MODELLIST_PLAN ) {
+      progressPlan  = false;
+      progressValue = 100;
+    }
+    else {
+      // progress
+      progressValue += 10;
+    }
+    
+    Message msg = handler.obtainMessage();
+    Bundle b = new Bundle();
+    b.putInt("total", progressValue);
+    msg.setData(b);
+    handler.sendMessage(msg);
+    
+    if( progressValue >= 100 ) {
       Connect.this.throttleView();
       Connect.this.finish();
     }
+
   }
+  
+  protected Dialog onCreateDialog(int id) {
+    switch(id) {
+    case PROGRESS_DIALOG:
+        progressDialog = new ProgressDialog(Connect.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setMessage("Loading plan...");
+        return progressDialog;
+    default:
+        return null;
+    }
+  }
+
+  // Define the Handler that receives messages from the thread and update the progress
+  final Handler handler = new Handler() {
+      public void handleMessage(Message msg) {
+          int total = msg.getData().getInt("total");
+          progressDialog.setProgress(total);
+          if (total >= 100){
+              dismissDialog(PROGRESS_DIALOG);
+          }
+      }
+  };
+
   
   public void initView() {
     setContentView(R.layout.connect);
@@ -75,6 +126,8 @@ public class Connect extends Base implements ModelListener, SystemListener {
           // TODO: progress dialog
           try {
             m_RocrailService.connect();
+            progressPlan = true;
+            progressValue = 0;
             
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor editor = settings.edit();
@@ -82,8 +135,11 @@ public class Connect extends Base implements ModelListener, SystemListener {
             editor.putInt("port", m_RocrailService.m_iPort);
             editor.commit();
             
-            ProgressDialog dialog = ProgressDialog.show(Connect.this, "", 
+            /*
+            progressDialog = ProgressDialog.show(Connect.this, "", 
                 "Loading. Please wait...", true, true);
+            */
+            showDialog(PROGRESS_DIALOG);
             
           }
           catch( Exception e ) {

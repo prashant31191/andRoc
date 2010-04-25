@@ -186,11 +186,35 @@ public class Model {
     m_Listeners.add(listener);
   }
   
-  public void lclistLoaded() {
-    Iterator<ModelListener> it = m_Listeners.iterator();
-    while( it.hasNext() ) {
-      ModelListener listener = it.next();
-      listener.modelListLoaded(ModelListener.MODELLIST_LC);
+  public void listLoaded(String listName ) {
+    int listCode = -1;
+    if( listName.equals("lclist") )
+      listCode = ModelListener.MODELLIST_LC;
+    else if( listName.equals("bklist") )
+      listCode = ModelListener.MODELLIST_BK;
+    else if( listName.equals("swlist") )
+      listCode = ModelListener.MODELLIST_SW;
+    else if( listName.equals("sglist") )
+      listCode = ModelListener.MODELLIST_SG;
+    else if( listName.equals("colist") )
+      listCode = ModelListener.MODELLIST_CO;
+    else if( listName.equals("fblist") )
+      listCode = ModelListener.MODELLIST_FB;
+    else if( listName.equals("sclist") )
+      listCode = ModelListener.MODELLIST_SC;
+    else if( listName.equals("stlist") )
+      listCode = ModelListener.MODELLIST_ST;
+    else if( listName.equals("tklist") )
+      listCode = ModelListener.MODELLIST_TK;
+    else if( listName.equals("plan") )
+      listCode = ModelListener.MODELLIST_PLAN;
+    
+    if( listCode != -1 ) {
+      Iterator<ModelListener> it = m_Listeners.iterator();
+      while( it.hasNext() ) {
+        ModelListener listener = it.next();
+        listener.modelListLoaded(listCode);
+      }
     }
   }
   

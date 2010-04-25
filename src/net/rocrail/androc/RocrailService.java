@@ -89,6 +89,8 @@ public class RocrailService extends Service {
   
 
   public void connect() throws Exception {
+    // TODO: clean up all activities and model
+    
     try {
       if(m_Connection!=null) {
         m_Connection.stopReading();
@@ -114,9 +116,14 @@ public class RocrailService extends Service {
   
   
   public void onDestroy() {
+    disConnect(true);
+  }
+  
+  public void disConnect(boolean stop) {
     try {
       m_Connection.stopReading();
-      m_Connection.stopRunning();
+      if( stop )
+        m_Connection.stopRunning();
       Thread.sleep(500);
       if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
         m_Socket.close();
@@ -126,7 +133,7 @@ public class RocrailService extends Service {
       e.printStackTrace();
     }
     Connected = false;
-    m_Socket = null;;
+    m_Socket = null;
 
   }
   
@@ -161,8 +168,8 @@ public class RocrailService extends Service {
   public void event(String itemtype, Attributes atts) {
     if( itemtype.equals("sys") ) {
       if( "shutdown".equals(Item.getAttrValue(atts, "cmd", "") ) ) {
-        onDestroy();
-        // TODO: set the connection view active again
+        disConnect(false);
+        // set the connection view active again
         Iterator<SystemListener> it = m_Listeners.iterator();
         while( it.hasNext() ) {
           SystemListener listener = it.next();
