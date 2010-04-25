@@ -143,7 +143,7 @@ class UpdateImage implements Runnable {
       item.imageView.setImageResource(resId);
       if( item.Text != null && item.Text.length() > 0 ) {
         // update text
-       
+        item.imageView.invalidate();
       }
     }
   }

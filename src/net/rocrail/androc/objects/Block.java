@@ -42,7 +42,11 @@ public class Block extends Item implements View.OnClickListener {
   }
   
   public void updateTextColor() {
-    if( LocoID.length() > 0 ) {
+    if( State.equals("closed") ) {
+      Text = "Closed";
+      colorName = "block_closed";
+    }
+    else if( LocoID.length() > 0 ) {
       Text = LocoID;
       if( Reserved ) 
         colorName = "block_reserved";
@@ -53,12 +57,7 @@ public class Block extends Item implements View.OnClickListener {
     }
     else {
       Text = ID;
-      if( State.equals("closed") ) {
-        Text = "Closed";
-        colorName = "block_closed";
-      }
-      else
-        colorName = "block_free";
+      colorName = "block_free";
     }
   }
 
@@ -102,7 +101,9 @@ public class Block extends Item implements View.OnClickListener {
     LocoID   = Item.getAttrValue(atts, "locid", ID); 
     Reserved = Item.getAttrValue(atts, "reserved", false); 
     Entering = Item.getAttrValue(atts, "entering", false); 
-    Text = LocoID;
+    State    = Item.getAttrValue(atts, "state", State); 
+
+    updateTextColor();
     super.updateWithAttributes(atts);
   }
 

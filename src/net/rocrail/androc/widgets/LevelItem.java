@@ -74,33 +74,6 @@ public class LevelItem extends ImageView implements OnGestureListener {
   @Override 
   public boolean onTouchEvent(MotionEvent event) {
     return gestureDetector.onTouchEvent(event);
-    /*
-    switch (event.getAction()) {
-        case MotionEvent.ACTION_DOWN: {
-            currentX = (int) event.getRawX();
-            currentY = (int) event.getRawY();
-            break;
-        }
-
-        case MotionEvent.ACTION_MOVE: {
-            int x2 = (int) event.getRawX();
-            int y2 = (int) event.getRawY();
-           
-            levelCanvas.scrollBy(currentX - x2 , currentY - y2);
-            int x = levelCanvas.getScrollX();
-            int y = levelCanvas.getScrollY();
-            if( x < 0 || y < 0 )
-              levelCanvas.scrollTo( x < 0 ? 0:x, y < 0 ? 0:y);
-            currentX = x2;
-            currentY = y2;
-            break;
-        }   
-        case MotionEvent.ACTION_UP: {
-            break;
-        }
-    }
-      return true; 
-      */
   }
   
   
