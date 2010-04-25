@@ -267,6 +267,8 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
           Loco loco = findLoco();
           if( loco != null ) {
             loco.dir();
+            SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
+            mSeekBar.setProgress(loco.Speed);
           }
         }
     });

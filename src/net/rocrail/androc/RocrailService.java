@@ -28,7 +28,6 @@ import javax.xml.parsers.SAXParser;
 
 import org.xml.sax.Attributes;
 
-import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.SystemListener;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
@@ -92,7 +91,7 @@ public class RocrailService extends Service {
     // TODO: clean up all activities and model
     
     try {
-      if(m_Connection!=null) {
+      if( m_Connection != null ) {
         m_Connection.stopReading();
         Thread.sleep(500);
       }
@@ -101,9 +100,6 @@ public class RocrailService extends Service {
       e.printStackTrace();
     }
     
-    if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
-      m_Socket.close();
-    }
     m_Socket = new Socket(m_Host, m_iPort);
     sendMessage("model","<model cmd=\"plan\" disablemonitor=\"true\"/>");
     if( m_Connection == null ) {
@@ -125,7 +121,11 @@ public class RocrailService extends Service {
       if( stop )
         m_Connection.stopRunning();
       Thread.sleep(500);
-      if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    try {
+      if( m_Socket != null ) {
         m_Socket.close();
       }
 
@@ -152,30 +152,39 @@ public class RocrailService extends Service {
       }
       catch( Exception e) {
         e.printStackTrace();
-        m_Socket = null;
-        Connected = false;
-        // TODO: inform activity...
-        Iterator<SystemListener> it = m_Listeners.iterator();
-        while( it.hasNext() ) {
-          SystemListener listener = it.next();
-          listener.SystemDisconnected();
-        }
-
+        informListeners(SystemListener.EVENT_DISCONNECTED);
       }
     }
   }
 
+  public void informListeners(String event) {
+    if( SystemListener.EVENT_SHUTDOWN.equals(event) ) {
+      disConnect(false);
+      // TODO: remove all views and clean up the model...
+      
+      // set the connection view active again
+      Iterator<SystemListener> it = m_Listeners.iterator();
+      while( it.hasNext() ) {
+        SystemListener listener = it.next();
+        listener.SystemShutdown();
+      }
+    }
+    else if( SystemListener.EVENT_DISCONNECTED.equals(event) ) {
+      m_Socket = null;
+      Connected = false;
+      
+      // set the connection view active again
+      Iterator<SystemListener> it = m_Listeners.iterator();
+      while( it.hasNext() ) {
+        SystemListener listener = it.next();
+        listener.SystemDisconnected();
+      }
+    }
+  }
+  
   public void event(String itemtype, Attributes atts) {
     if( itemtype.equals("sys") ) {
-      if( "shutdown".equals(Item.getAttrValue(atts, "cmd", "") ) ) {
-        disConnect(false);
-        // set the connection view active again
-        Iterator<SystemListener> it = m_Listeners.iterator();
-        while( it.hasNext() ) {
-          SystemListener listener = it.next();
-          listener.SystemShutdown();
-        }
-      }
+      informListeners(Item.getAttrValue(atts, "cmd", ""));
       return;
     }
     if( itemtype.equals("state") ) {

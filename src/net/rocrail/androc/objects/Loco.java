@@ -135,7 +135,7 @@ public class Loco {
   
   public void dir() {
     Dir = !Dir;
-    speed(Speed);
+    speed(0);
   }
   
   public void lights() {

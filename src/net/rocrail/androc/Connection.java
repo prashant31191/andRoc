@@ -29,19 +29,19 @@ import java.net.SocketException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import net.rocrail.androc.interfaces.SystemListener;
+
 import org.xml.sax.SAXException;
 
 public class Connection extends Thread {
-  RocrailService  m_andRoc = null;
+  RocrailService  rocrailService = null;
   Model   m_Model  = null;
-  Socket  m_Socket = null;
   boolean m_bRun   = true;
   boolean m_bRead  = true;
   
   public Connection( RocrailService rocrailService, Model model, Socket socket ) {
-    m_andRoc = rocrailService;
+    this.rocrailService = rocrailService;
     m_Model  = model;
-    m_Socket = socket;
   }
   
   public void stopReading() {
@@ -66,7 +66,7 @@ public class Connection extends Thread {
       e.printStackTrace();
     }
     
-    XmlHandler xmlhandler = new XmlHandler(m_andRoc, m_Model);
+    XmlHandler xmlhandler = new XmlHandler(rocrailService, m_Model);
     String hdr = "";
     boolean readHdr = true;
     int xmlSize = 0;
@@ -76,8 +76,8 @@ public class Connection extends Thread {
     
     while(saxparser != null && m_bRun) {
       try {
-        if( m_bRead && m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
-          InputStream is = m_Socket.getInputStream();
+        if( m_bRead && rocrailService.m_Socket != null && rocrailService.m_Socket.isConnected() && !rocrailService.m_Socket.isClosed() ) {
+          InputStream is = rocrailService.m_Socket.getInputStream();
           
           if( is.available() > 0 ) {
             
@@ -152,9 +152,9 @@ public class Connection extends Thread {
         
         Thread.sleep(10);
       } catch (SocketException soce) {
-        // TODO Auto-generated catch block
+        // TODO: Inform the system
         soce.printStackTrace();
-        m_bRun = false;
+        rocrailService.informListeners(SystemListener.EVENT_DISCONNECTED);
       } catch (SAXException saxe) {
         // TODO Auto-generated catch block
         saxe.printStackTrace();
@@ -167,7 +167,6 @@ public class Connection extends Thread {
       } catch (InterruptedException inte) {
         // TODO Auto-generated catch block
         inte.printStackTrace();
-        m_bRun = false;
       }
     }
   }

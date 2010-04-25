@@ -20,19 +20,17 @@
 package net.rocrail.androc;
 
 import net.rocrail.androc.objects.Loco;
-import net.rocrail.androc.objects.Switch;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
 class XmlHandler extends DefaultHandler {
-  RocrailService m_andRoc = null;
+  RocrailService rocrailService = null;
   int m_iXmlSize = 0;
   Model m_Model = null;
   boolean m_bParsingPlan = false;
   
   public XmlHandler(RocrailService rocrailService, Model model) {
-    m_andRoc = rocrailService;
+    this.rocrailService = rocrailService;
     m_Model = model;
   }
   
@@ -87,7 +85,7 @@ class XmlHandler extends DefaultHandler {
         // loco handling
         String id = atts.getValue("id");
         if( id != null && id.length() > 0 ) {
-          Loco loco = new Loco(m_andRoc, id, atts);
+          Loco loco = new Loco(rocrailService, id, atts);
           m_Model.addLoco(loco, atts);
           // request image here?
           //loco.requestLocoImg();
@@ -137,7 +135,7 @@ class XmlHandler extends DefaultHandler {
         m_Model.updateItem(localName, atts);
       }
       else if( localName.equals("state") || localName.equals("auto") || localName.equals("sys") ) {
-        m_andRoc.event(localName, atts);
+        rocrailService.event(localName, atts);
       }
       
     }
