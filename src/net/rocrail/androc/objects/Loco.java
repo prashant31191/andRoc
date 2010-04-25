@@ -140,7 +140,8 @@ public class Loco {
   
   public void dir() {
     Dir = !Dir;
-    speed(0, true);
+    Speed = 0;
+    speed();
   }
   
   public void lights() {
@@ -170,13 +171,13 @@ public class Loco {
     int vVal = (int)(V * (Vmax/100.00));
     
     if( force || StrictMath.abs( Vprev - vVal) >= VDelta ) {
-      Vprev = vVal;
       Speed = vVal;
       speed();
     }
   }
 
   public void speed() {
+    Vprev = Speed;
     rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
         rocrailService.getDeviceName(), ID, Speed, (Dir?"true":"false"), (Lights?"true":"false") ) );
     
