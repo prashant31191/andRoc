@@ -37,7 +37,6 @@ public class BlockProps extends Base {
   
   public void connectedWithService() {
     initView();
-    updateTitle();
   }
 
 
@@ -56,6 +55,7 @@ public class BlockProps extends Base {
     TextView text = (TextView)findViewById(R.id.blockID);
     text.setText(m_Block.ID);
 
+    updateTitle("Block \'"+m_Block.ID+"\'");
  
   }
   

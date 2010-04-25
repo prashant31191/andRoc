@@ -126,6 +126,10 @@ public class Item implements View.OnClickListener {
     // TODO Auto-generated method stub
     
   }
+  
+  public void propertiesView() {
+    
+  }
 
 }
 

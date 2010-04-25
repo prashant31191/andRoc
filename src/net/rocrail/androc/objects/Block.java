@@ -111,7 +111,9 @@ public class Block extends Item implements View.OnClickListener {
   public void onClick(View v) {
     m_RocrailService.sendMessage("bk", String.format( "<bk id=\"%s\" state=\"%s\"/>", 
         ID, State.equals("open")?"closed":"open" ) );
-/*
+  }
+  
+  public void propertiesView() {
     try {
       Intent intent = new Intent(activity,net.rocrail.androc.activities.BlockProps.class);
       intent.putExtra("id", Block.this.ID);
@@ -120,6 +122,6 @@ public class Block extends Item implements View.OnClickListener {
     catch(Exception e) {
       // invalid activity
     }
-    */
   }
+
 }

@@ -21,11 +21,9 @@ package net.rocrail.androc.widgets;
 
 import net.rocrail.androc.objects.Item;
 import android.content.Context;
-import android.gesture.GestureOverlayView;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -35,8 +33,6 @@ import android.widget.ImageView;
 public class LevelItem extends ImageView implements OnGestureListener {
   LevelCanvas levelCanvas = null;
   private Item item = null;
-  private int currentX;
-  private int currentY;
   
   private GestureDetector gestureDetector = null;
 
@@ -102,6 +98,7 @@ public class LevelItem extends ImageView implements OnGestureListener {
   }
   @Override
   public void onLongPress(MotionEvent arg0) {
+    item.propertiesView();
   }
   @Override
   public boolean onScroll(MotionEvent event1, MotionEvent event2, float distX, float distY) {
