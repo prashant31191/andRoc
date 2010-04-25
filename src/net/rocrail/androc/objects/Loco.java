@@ -35,6 +35,10 @@ public class Loco {
   public String  PicName = null;
   private Bitmap LocoBmp = null;
   public int     Speed   = 0;
+  public int     Vmax    = 0;
+  public int     Vprev   = 0;
+  
+  public static final int VDelta = 5;
   
   public boolean   AutoStart = false;
   public boolean   HalfAuto  = false;
@@ -71,6 +75,7 @@ public class Loco {
     dir      = [Globals getAttribute:@"dir" fromDict:attributeDict withDefault:@""];
     vstr     = [Globals getAttribute:@"V" fromDict:attributeDict withDefault:@"0"];
     */
+    Vmax  = Item.getAttrValue(atts, "V_max", 100);
     int fx = Item.getAttrValue(atts, "fx", 0 );
     
     for(int i = 1; i < 32; i++) {
@@ -135,13 +140,12 @@ public class Loco {
   
   public void dir() {
     Dir = !Dir;
-    speed(0);
+    speed(0, true);
   }
   
   public void lights() {
     Lights = !Lights;
-    rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" fn=\"%s\"/>", 
-        rocrailService.getDeviceName(), ID, (Lights?"true":"false")) );
+    speed();
   }
   
   public void go() {
@@ -162,12 +166,23 @@ public class Loco {
         ID, fn, (fn-1)/4+1, fn, (Function[fn]?"true":"false")) );
   }
   
-  public void speed(int V) {
-    Speed = V;
+  public void speed(int V, boolean force) {
+    int vVal = (int)(V * (Vmax/100.00));
+    
+    if( force || StrictMath.abs( Vprev - vVal) >= VDelta ) {
+      Vprev = vVal;
+      Speed = vVal;
+      speed();
+    }
+  }
+
+  public void speed() {
     rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
         rocrailService.getDeviceName(), ID, Speed, (Dir?"true":"false"), (Lights?"true":"false") ) );
     
   }
+
+
 }
 
 class UpdateLocoImage implements Runnable {

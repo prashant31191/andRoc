@@ -322,7 +322,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
   public void onProgressChanged(SeekBar seekbar, int progress, boolean fromTouch) {
     Loco loco = findLoco();
     if( loco != null )
-      loco.speed(progress);
+      loco.speed(progress, false);
   }
 
   @Override
@@ -332,9 +332,10 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
   }
 
   @Override
-  public void onStopTrackingTouch(SeekBar arseekbarg0) {
-    // TODO Auto-generated method stub
-
+  public void onStopTrackingTouch(SeekBar seekbar) {
+    Loco loco = findLoco();
+    if( loco != null )
+      loco.speed(seekbar.getProgress(), true);
   }
 
 
