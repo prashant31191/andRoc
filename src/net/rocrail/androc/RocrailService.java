@@ -28,6 +28,7 @@ import javax.xml.parsers.SAXParser;
 
 import org.xml.sax.Attributes;
 
+import net.rocrail.androc.interfaces.MessageListener;
 import net.rocrail.androc.interfaces.SystemListener;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
@@ -58,6 +59,8 @@ public class RocrailService extends Service {
   private List<SystemListener>  m_Listeners = new ArrayList<SystemListener>();
   public List<String>  MessageList = new ArrayList<String>();
 
+  MessageListener messageListener = null;
+  
   @Override
   public void onCreate() {
     m_Model = new Model(this);
@@ -205,11 +208,17 @@ public class RocrailService extends Service {
         if( MessageList.size() > 100 ) {
           MessageList.remove(MessageList.size()-1);
         }
+        if( messageListener != null )
+          messageListener.newMessages();
       }
       return;
     }
   }
 
+  public void setMessageListener(MessageListener listener) {
+    messageListener = listener;
+    
+  }
 
 }
 

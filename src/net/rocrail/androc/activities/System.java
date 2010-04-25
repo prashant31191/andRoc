@@ -22,13 +22,14 @@ package net.rocrail.androc.activities;
 import java.util.Iterator;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.interfaces.MessageListener;
 import net.rocrail.androc.widgets.LEDButton;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class System extends Base {
+public class System extends Base implements MessageListener {
   
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -39,12 +40,29 @@ public class System extends Base {
   
   public void connectedWithService() {
     initView();
+    m_RocrailService.setMessageListener(this);
     updateTitle("System");
   }
+  
+  protected void onDestroy() {
+    super.onDestroy();
+    m_RocrailService.setMessageListener(null);
+  }
 
+  
+  public void updateMessageList() {
+    final TextView msgList = (TextView) findViewById(R.id.systemMessages);
+    msgList.setText("");
+    Iterator<String> it = m_RocrailService.MessageList.iterator();
+    while( it.hasNext()) {
+      msgList.append(it.next()+"\n");
+    }
+  }
+  
   public void initView() {
     setContentView(R.layout.system);
 
+    updateMessageList();
     
     final TextView msgList = (TextView) findViewById(R.id.systemMessages);
     msgList.setText("");
@@ -111,4 +129,30 @@ public class System extends Base {
     
   }
 
+  @Override
+  public void newMessages() {
+    // use post method to refresh the message list
+    final TextView msgList = (TextView) findViewById(R.id.systemMessages);
+
+    msgList.post(new UpdateMessages(this));
+
+  }
+
 }
+
+
+class UpdateMessages implements Runnable {
+  System system = null;
+  
+  public UpdateMessages(System system) {
+    this.system = system;
+    
+  }
+  
+  @Override
+  public void run() {
+    system.updateMessageList();
+  }
+  
+}
+
