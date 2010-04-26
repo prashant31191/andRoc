@@ -33,7 +33,7 @@
 	<string name="Init_Field">Initialiseren</string>
 	<string name="Auto_ON">Autom. AAN</string>
 	<string name="Auto_Start">Autom. Start</string>
-	<string name="Release">Vrijgeven</string>
+	<string name="Release">VR</string>
 	<string name="none">geen</string>
 	<string name="START">START</string>
 	<string name="STOP">STOP</string>
@@ -54,4 +54,6 @@
   <string name="Direction">Rijrichting</string>
   <string name="Host">IP-Adres</string>
   <string name="Port">Poort</string>
+  <string name="Start">ST</string>
+  <string name="FunctionGroup">FG</string>
 </resources>

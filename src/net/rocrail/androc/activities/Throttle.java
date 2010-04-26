@@ -99,6 +99,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
       f5.ON = m_Loco.Function[5+m_iFunctionGroup*FNGROUPSIZE];
       f6.ON = m_Loco.Function[6+m_iFunctionGroup*FNGROUPSIZE];
       Direction.ON = m_Loco.Dir;
+      Go.setEnabled(m_RocrailService.AutoMode);
       Go.ON = m_Loco.Go;
       Release.ON = false;
       f1.invalidate();
@@ -241,6 +242,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     });
 
     Button Go = (Button) findViewById(R.id.throttleGo);
+    Go.setEnabled(m_RocrailService.AutoMode);
     Go.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           if( m_Loco != null ) {
@@ -336,6 +338,12 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
       m_Loco.setSpeed(seekbar.getProgress(), true);
   }
 
+  protected void  onResume() {
+    super.onResume();
+    if( m_Loco != null ) {
+      updateFunctions();
+    }
+  }
 
   @Override
   public void onItemSelected(AdapterView<?> arg0, View view, int position, long longID) {

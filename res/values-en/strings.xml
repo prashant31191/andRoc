@@ -33,7 +33,7 @@
   <string name="Init_Field">Init Field</string>
   <string name="Auto_ON">Auto ON</string>
   <string name="Auto_Start">Auto Start</string>
-  <string name="Release">Release</string>
+  <string name="Release">RE</string>
   <string name="none">none</string>
   <string name="START">START</string>
   <string name="STOP">STOP</string>
@@ -55,4 +55,6 @@
   <string name="Direction">Direction</string>
   <string name="Host">Host</string>
   <string name="Port">Port</string>
+  <string name="Start">ST</string>
+  <string name="FunctionGroup">FG</string>
 </resources>

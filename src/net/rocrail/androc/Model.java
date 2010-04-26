@@ -63,8 +63,8 @@ public class Model {
     m_LocoMap.clear();
     m_ZLevelList.clear();
     
-    m_Title = atts.getValue("title");  
-    m_Name = atts.getValue("name");  
+    m_Title = Item.getAttrValue(atts, "title", "New");  
+    m_Name = Item.getAttrValue(atts, "name", "plan.xml");  
     m_RocrailVersion = atts.getValue("rocrailversion");  
   }  
 

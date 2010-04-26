@@ -40,7 +40,7 @@
 						android:layout_height="fill_parent" android:text="F3" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleGo"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="GO" android:textStyle="bold" />
+						android:layout_height="fill_parent" android:text="@string/Start" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun2"
 					android:orientation="horizontal" android:layout_width="fill_parent"
@@ -56,7 +56,7 @@
 						android:layout_height="fill_parent" android:text="F6" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleRelease"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="REL" android:textStyle="bold" />
+						android:layout_height="fill_parent" android:text="@string/Release" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun3"
 					android:orientation="horizontal" android:layout_width="fill_parent"
@@ -69,7 +69,7 @@
 						android:layout_height="fill_parent" android:text="Lights" android:textStyle="bold" />
 					<Button android:id="@+id/throttleFn"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="Fn" android:textStyle="bold" />
+						android:layout_height="fill_parent" android:text="@string/FunctionGroup" android:textStyle="bold" />
 				</LinearLayout>
 				<SeekBar android:id="@+id/SeekBarSpeed" android:max="100"
 					android:progress="0" android:layout_width="fill_parent"

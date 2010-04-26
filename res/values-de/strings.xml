@@ -32,7 +32,7 @@
 	<string name="Init_Field">Initialisieren</string>
 	<string name="Auto_ON">Autom. ein</string>
 	<string name="Auto_Start">Autom. start</string>
-	<string name="Release">Freigeben</string>
+	<string name="Release">FG</string>
 	<string name="Automatic">Automatik</string>
 	<string name="Settings">Einstellungen</string>
 	<string name="Loco">Lok</string>
@@ -51,4 +51,6 @@
   <string name="Direction">Fahrrichtung</string>
   <string name="Host">IP-Adresse</string>
   <string name="Port">Port</string>
+  <string name="Start">ST</string>
+  <string name="FunctionGroup">FG</string>
 </resources>
