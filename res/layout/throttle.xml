@@ -29,13 +29,13 @@
 				<LinearLayout android:id="@+id/fun1"
 					android:orientation="horizontal" android:layout_width="fill_parent"
           android:layout_height="0px" android:layout_weight="25">
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf1"
+					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF1"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F1" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf2"
+					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF2"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F2" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf3"
+					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF3"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F3" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleGo"
@@ -45,13 +45,13 @@
 				<LinearLayout android:id="@+id/fun2"
 					android:orientation="horizontal" android:layout_width="fill_parent"
 					android:layout_height="0px" android:layout_weight="25">
-          <net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf4"
+          <net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF4"
             android:layout_width="0px" android:layout_weight="25"
             android:layout_height="fill_parent" android:text="F4" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf5"
+					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF5"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F5" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf6"
+					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF6"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F6" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleRelease"
@@ -61,13 +61,13 @@
 				<LinearLayout android:id="@+id/fun3"
 					android:orientation="horizontal" android:layout_width="fill_parent"
           android:layout_height="0px" android:layout_weight="25">
-					<Button android:id="@+id/android_buttondir"
+					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleDirection"
 						android:layout_width="0px" android:layout_weight="50"
 						android:layout_height="fill_parent" android:text="@string/Direction" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/android_buttonf0"
+					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleLights"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="Lights" android:textStyle="bold" />
-					<Button android:id="@+id/android_buttonfn"
+					<Button android:id="@+id/throttleFn"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="Fn" android:textStyle="bold" />
 				</LinearLayout>

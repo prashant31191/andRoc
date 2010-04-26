@@ -82,15 +82,19 @@ public class Item implements View.OnClickListener {
   }
   
   public static int getAttrValue(Attributes atts, String key, int defval) {
-    if( atts.getValue(key) == null )
+    if( atts.getValue(key) == null || atts.getValue(key).length() == 0 )
       return defval;
     return Integer.parseInt(atts.getValue(key));
   }
   
   public static boolean getAttrValue(Attributes atts, String key, boolean defval) {
-    if( atts.getValue(key) == null )
+    String val = atts.getValue(key);
+    if( val == null || val.length() == 0 )
       return defval;
-    return Boolean.parseBoolean(atts.getValue(key));
+    if( val.equals("false") || val.equals("true") )
+      return Boolean.parseBoolean(atts.getValue(key));
+    else
+      return defval;
   }
   
   public void updateWithAttributes(Attributes atts ) {

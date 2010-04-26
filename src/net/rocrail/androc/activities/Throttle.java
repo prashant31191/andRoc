@@ -41,6 +41,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
   int         m_iFunctionGroup = 0;
   int         m_iLocoCount     = 0;
   final static int FNGROUPSIZE = 6;
+  private Loco m_Loco = null;
   
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -58,49 +59,47 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
   }
 
   
-  Loco findLoco() {
+  void findLoco() {
     Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
     if( s != null ) {
       String id = (String)s.getSelectedItem();
       if( id != null ) {
-        Loco loco = m_RocrailService.m_Model.getLoco(id);
+        m_Loco = m_RocrailService.m_Model.getLoco(id);
         
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("loco", id);
         editor.commit();
-        
-        return loco;
       }
     }
-    return null;
   }
   
   void updateFunctions() {
-    LEDButton f1 = (LEDButton) findViewById(R.id.android_buttonf1);
+    LEDButton f1 = (LEDButton) findViewById(R.id.throttleF1);
     f1.setText("F"+(1+m_iFunctionGroup*FNGROUPSIZE));
-    LEDButton f2 = (LEDButton) findViewById(R.id.android_buttonf2);
+    LEDButton f2 = (LEDButton) findViewById(R.id.throttleF2);
     f2.setText("F"+(2+m_iFunctionGroup*FNGROUPSIZE));
-    LEDButton f3 = (LEDButton) findViewById(R.id.android_buttonf3);
+    LEDButton f3 = (LEDButton) findViewById(R.id.throttleF3);
     f3.setText("F"+(3+m_iFunctionGroup*FNGROUPSIZE));
-    LEDButton f4 = (LEDButton) findViewById(R.id.android_buttonf4);
+    LEDButton f4 = (LEDButton) findViewById(R.id.throttleF4);
     f4.setText("F"+(4+m_iFunctionGroup*FNGROUPSIZE));
-    LEDButton f5 = (LEDButton) findViewById(R.id.android_buttonf5);
+    LEDButton f5 = (LEDButton) findViewById(R.id.throttleF5);
     f5.setText("F"+(5+m_iFunctionGroup*FNGROUPSIZE));
-    LEDButton f6 = (LEDButton) findViewById(R.id.android_buttonf6);
+    LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
     f6.setText("F"+(6+m_iFunctionGroup*FNGROUPSIZE));
     LEDButton Go = (LEDButton) findViewById(R.id.throttleGo);
     LEDButton Release = (LEDButton) findViewById(R.id.throttleRelease);
+    LEDButton Direction = (LEDButton) findViewById(R.id.throttleDirection);
 
-    Loco loco = findLoco();
-    if( loco != null ) {
-      f1.ON = loco.Function[1+m_iFunctionGroup*FNGROUPSIZE];
-      f2.ON = loco.Function[2+m_iFunctionGroup*FNGROUPSIZE];
-      f3.ON = loco.Function[3+m_iFunctionGroup*FNGROUPSIZE];
-      f4.ON = loco.Function[4+m_iFunctionGroup*FNGROUPSIZE];
-      f5.ON = loco.Function[5+m_iFunctionGroup*FNGROUPSIZE];
-      f6.ON = loco.Function[6+m_iFunctionGroup*FNGROUPSIZE];
-      Go.ON = loco.Go;
+    if( m_Loco != null ) {
+      f1.ON = m_Loco.Function[1+m_iFunctionGroup*FNGROUPSIZE];
+      f2.ON = m_Loco.Function[2+m_iFunctionGroup*FNGROUPSIZE];
+      f3.ON = m_Loco.Function[3+m_iFunctionGroup*FNGROUPSIZE];
+      f4.ON = m_Loco.Function[4+m_iFunctionGroup*FNGROUPSIZE];
+      f5.ON = m_Loco.Function[5+m_iFunctionGroup*FNGROUPSIZE];
+      f6.ON = m_Loco.Function[6+m_iFunctionGroup*FNGROUPSIZE];
+      Direction.ON = m_Loco.Dir;
+      Go.ON = m_Loco.Go;
       Release.ON = false;
       f1.invalidate();
       f2.invalidate();
@@ -110,6 +109,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
       f6.invalidate();
       Go.invalidate();
       Release.invalidate();
+      Direction.invalidate();
     }
 
   }
@@ -148,21 +148,23 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     if( m_iLocoCount > 0 && m_RocrailService.m_iSelectedLoco < m_iLocoCount)
       s.setSelection(m_RocrailService.m_iSelectedLoco);    
     
+    findLoco();
+    
     SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
     mSeekBar.setOnSeekBarChangeListener(this);
     
-    Button Lights = (Button) findViewById(R.id.android_buttonf0);
+    Button Lights = (Button) findViewById(R.id.throttleLights);
     Lights.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Loco loco = findLoco();
-          if( loco != null ) {
-            loco.lights();
-            ((LEDButton)v).ON = loco.Lights;
+          if( m_Loco != null ) {
+            m_Loco.flipLights();
+            ((LEDButton)v).ON = m_Loco.Lights;
+            v.invalidate();
           }
         }
     });
 
-    Button fn = (Button) findViewById(R.id.android_buttonfn);
+    Button fn = (Button) findViewById(R.id.throttleFn);
     fn.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           m_iFunctionGroup++;
@@ -172,69 +174,68 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
         }
     });
 
-    LEDButton f1 = (LEDButton) findViewById(R.id.android_buttonf1);
+    LEDButton f1 = (LEDButton) findViewById(R.id.throttleF1);
     f1.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Loco loco = findLoco();
-          if( loco != null ) {
-            loco.function(1+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = loco.Function[1+m_iFunctionGroup*FNGROUPSIZE];
-
+          if( m_Loco != null ) {
+            m_Loco.flipFunction(1+m_iFunctionGroup*FNGROUPSIZE);
+            ((LEDButton)v).ON = m_Loco.Function[1+m_iFunctionGroup*FNGROUPSIZE];
+            v.invalidate();
           }
         }
     });
 
-    Button f2 = (Button) findViewById(R.id.android_buttonf2);
+    Button f2 = (Button) findViewById(R.id.throttleF2);
     f2.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Loco loco = findLoco();
-          if( loco != null ) {
-            loco.function(2+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = loco.Function[2+m_iFunctionGroup*FNGROUPSIZE];
+          if( m_Loco != null ) {
+            m_Loco.flipFunction(2+m_iFunctionGroup*FNGROUPSIZE);
+            ((LEDButton)v).ON = m_Loco.Function[2+m_iFunctionGroup*FNGROUPSIZE];
+            v.invalidate();
           }
         }
     });
 
-    Button f3 = (Button) findViewById(R.id.android_buttonf3);
+    Button f3 = (Button) findViewById(R.id.throttleF3);
     f3.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Loco loco = findLoco();
-          if( loco != null ) {
-            loco.function(3+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = loco.Function[3+m_iFunctionGroup*FNGROUPSIZE];
+          if( m_Loco != null ) {
+            m_Loco.flipFunction(3+m_iFunctionGroup*FNGROUPSIZE);
+            ((LEDButton)v).ON = m_Loco.Function[3+m_iFunctionGroup*FNGROUPSIZE];
+            v.invalidate();
           }
         }
     });
 
-    Button f4 = (Button) findViewById(R.id.android_buttonf4);
+    Button f4 = (Button) findViewById(R.id.throttleF4);
     f4.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Loco loco = findLoco();
-          if( loco != null ) {
-            loco.function(4+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = loco.Function[4+m_iFunctionGroup*FNGROUPSIZE];
+          if( m_Loco != null ) {
+            m_Loco.flipFunction(4+m_iFunctionGroup*FNGROUPSIZE);
+            ((LEDButton)v).ON = m_Loco.Function[4+m_iFunctionGroup*FNGROUPSIZE];
+            v.invalidate();
           }
         }
     });
 
-    Button f5 = (Button) findViewById(R.id.android_buttonf5);
+    Button f5 = (Button) findViewById(R.id.throttleF5);
     f5.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Loco loco = findLoco();
-          if( loco != null ) {
-            loco.function(5+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = loco.Function[5+m_iFunctionGroup*FNGROUPSIZE];
+          if( m_Loco != null ) {
+            m_Loco.flipFunction(5+m_iFunctionGroup*FNGROUPSIZE);
+            ((LEDButton)v).ON = m_Loco.Function[5+m_iFunctionGroup*FNGROUPSIZE];
+            v.invalidate();
           }
         }
     });
 
-    Button f6 = (Button) findViewById(R.id.android_buttonf6);
+    Button f6 = (Button) findViewById(R.id.throttleF6);
     f6.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Loco loco = findLoco();
-          if( loco != null ) {
-            loco.function(6+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = loco.Function[6+m_iFunctionGroup*FNGROUPSIZE];
+          if( m_Loco != null ) {
+            m_Loco.flipFunction(6+m_iFunctionGroup*FNGROUPSIZE);
+            ((LEDButton)v).ON = m_Loco.Function[6+m_iFunctionGroup*FNGROUPSIZE];
+            v.invalidate();
           }
         }
     });
@@ -242,10 +243,10 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     Button Go = (Button) findViewById(R.id.throttleGo);
     Go.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Loco loco = findLoco();
-          if( loco != null ) {
-            loco.go();
-            ((LEDButton)v).ON = loco.Go;
+          if( m_Loco != null ) {
+            m_Loco.flipGo();
+            ((LEDButton)v).ON = m_Loco.Go;
+            v.invalidate();
           }
         }
     });
@@ -253,22 +254,22 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     Button Release = (Button) findViewById(R.id.throttleRelease);
     Release.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Loco loco = findLoco();
-          if( loco != null ) {
-            loco.release();
+          if( m_Loco != null ) {
+            m_Loco.doRelease();
             ((LEDButton)v).ON = false;
           }
         }
     });
 
-    Button Dir = (Button) findViewById(R.id.android_buttondir);
+    Button Dir = (Button) findViewById(R.id.throttleDirection);
     Dir.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Loco loco = findLoco();
-          if( loco != null ) {
-            loco.dir();
+          if( m_Loco != null ) {
+            m_Loco.flipDir();
+            ((LEDButton)v).ON = m_Loco.Dir;
+            v.invalidate();
             SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
-            mSeekBar.setProgress(loco.Speed);
+            mSeekBar.setProgress(m_Loco.Speed);
           }
         }
     });
@@ -276,10 +277,9 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     ImageView image = (ImageView)findViewById(R.id.locoImage);
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        Loco loco = findLoco();
-        if( loco != null ) {
+        if( m_Loco != null ) {
           Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.LocoProps.class);
-          intent.putExtra("id", loco.ID);
+          intent.putExtra("id", m_Loco.ID);
           startActivity(intent);
         }
       }
@@ -320,9 +320,8 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
 
   @Override
   public void onProgressChanged(SeekBar seekbar, int progress, boolean fromTouch) {
-    Loco loco = findLoco();
-    if( loco != null )
-      loco.speed(progress, false);
+    if( m_Loco != null )
+      m_Loco.setSpeed(progress, false);
   }
 
   @Override
@@ -333,39 +332,38 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
 
   @Override
   public void onStopTrackingTouch(SeekBar seekbar) {
-    Loco loco = findLoco();
-    if( loco != null )
-      loco.speed(seekbar.getProgress(), true);
+    if( m_Loco != null )
+      m_Loco.setSpeed(seekbar.getProgress(), true);
   }
 
 
   @Override
   public void onItemSelected(AdapterView<?> arg0, View view, int position, long longID) {
     m_RocrailService.m_iSelectedLoco = position;
-    Loco loco = findLoco();
-    if( loco != null ) {
-      m_RocrailService.SelectedLoco = loco;
+    findLoco();
+    if( m_Loco != null ) {
+      m_RocrailService.SelectedLoco = m_Loco;
       
       SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
       SharedPreferences.Editor editor = settings.edit();
-      editor.putString("locoid", loco.ID);
+      editor.putString("locoid", m_Loco.ID);
       editor.commit();
 
-      LEDButton f0 = (LEDButton) findViewById(R.id.android_buttonf0);
-      f0.ON = loco.Lights;
+      LEDButton f0 = (LEDButton) findViewById(R.id.throttleLights);
+      f0.ON = m_Loco.Lights;
       updateFunctions();
       
       LocoImage image = (LocoImage)findViewById(R.id.locoImage);
-      image.ID = loco.ID;
-      if( loco.getLocoBmp(image) != null ) {
-        image.setImageBitmap(loco.getLocoBmp(null));
+      image.ID = m_Loco.ID;
+      if( m_Loco.getLocoBmp(image) != null ) {
+        image.setImageBitmap(m_Loco.getLocoBmp(null));
       }
       else {
         image.setImageResource(R.drawable.noimg);
       }
 
       SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
-      mSeekBar.setProgress(loco.Speed);
+      mSeekBar.setProgress(m_Loco.Speed);
 
     }
   }

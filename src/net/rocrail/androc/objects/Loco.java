@@ -26,7 +26,6 @@ import org.xml.sax.Attributes;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.ImageView;
 
 public class Loco {
   RocrailService  rocrailService = null;
@@ -87,9 +86,9 @@ public class Loco {
   }
 
   public void updateWithAttributes(Attributes atts) {
-    Dir    = Item.getAttrValue(atts, "dir", Dir);
-    Speed  = Item.getAttrValue(atts, "V", Speed);
-    Lights = Item.getAttrValue(atts, "fn", Lights );
+    //Dir    = Item.getAttrValue(atts, "dir", Dir);
+    //Speed  = Item.getAttrValue(atts, "V", Speed);
+    //Lights = Item.getAttrValue(atts, "fn", Lights );
   }
 
   public Bitmap getLocoBmp(LocoImage image) {
@@ -138,48 +137,49 @@ public class Loco {
     }
   }
   
-  public void dir() {
+  public void flipDir() {
     Dir = !Dir;
     Speed = 0;
-    speed();
+    setSpeed();
   }
   
-  public void lights() {
+  public void flipLights() {
     Lights = !Lights;
-    speed();
+    setSpeed();
   }
   
-  public void go() {
+  public void flipGo() {
     if( rocrailService.AutoMode ) {
       Go = !Go; // TODO: use the reported mode of the loco
       rocrailService.sendMessage("lc", String.format("<lc id=\"%s\" cmd=\"%s\"/>", 
           ID, (Go?"go":"stop") ) );
     }
   }
-  public void release() {
+  public void doRelease() {
     rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" cmd=\"release\" id=\"%s\"/>",
         rocrailService.getDeviceName(), ID ) );
   }
   
-  public void function(int fn) {
+  public void flipFunction(int fn) {
     Function[fn] = !Function[fn];
     rocrailService.sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>", 
         ID, fn, (fn-1)/4+1, fn, (Function[fn]?"true":"false")) );
   }
   
-  public void speed(int V, boolean force) {
+  public void setSpeed(int V, boolean force) {
     int vVal = (int)(V * (Vmax/100.00));
     
     if( force || StrictMath.abs( Vprev - vVal) >= VDelta ) {
       Speed = vVal;
-      speed();
+      setSpeed();
     }
   }
 
-  public void speed() {
+  public void setSpeed() {
     Vprev = Speed;
-    rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
-        rocrailService.getDeviceName(), ID, Speed, (Dir?"true":"false"), (Lights?"true":"false") ) );
+    rocrailService.sendMessage("lc", 
+        String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
+            rocrailService.getDeviceName(), ID, Speed, (Dir?"true":"false"), (Lights?"true":"false") ) );
     
   }
 
