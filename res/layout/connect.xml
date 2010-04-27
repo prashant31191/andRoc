@@ -26,7 +26,7 @@
     <LinearLayout android:orientation="horizontal"
       android:layout_width="fill_parent" android:layout_height="wrap_content">
       <TextView android:text="@string/Host" android:textStyle="bold"
-        android:id="@+id/TextView01" android:layout_weight="30"
+        android:id="@+id/labHost" android:layout_weight="30"
         android:layout_width="0px" android:layout_height="wrap_content"
         android:padding="4px"></TextView>
       <EditText android:text="Host" android:id="@+id/connectHost"
@@ -36,14 +36,25 @@
     <LinearLayout android:orientation="horizontal" 
       android:layout_width="fill_parent" android:layout_height="wrap_content">
       <TextView android:text="@string/Port" android:textStyle="bold"
-        android:id="@+id/TextView01" android:layout_weight="30"
+        android:id="@+id/labPort" android:layout_weight="30"
         android:layout_width="0px" android:layout_height="wrap_content"
         android:padding="4px"></TextView>
       <EditText android:text="Port" android:id="@+id/connectPort"
         android:layout_width="0px" android:layout_weight="70"
         android:layout_height="wrap_content" android:padding="4px"></EditText>
     </LinearLayout>
-  </LinearLayout>
+
+    <LinearLayout android:orientation="horizontal" 
+      android:layout_width="fill_parent" android:layout_height="wrap_content">
+      <TextView android:text="@string/Recent" android:textStyle="bold"
+        android:id="@+id/labRecent" android:layout_weight="30"
+        android:layout_width="0px" android:layout_height="wrap_content"
+        android:padding="4px"></TextView>
+      <Spinner android:id="@+id/connectRecent" android:layout_width="0px" android:padding="4px"
+      android:layout_height="wrap_content" android:layout_weight="70"></Spinner>
+    </LinearLayout>
+
+</LinearLayout>
   
   <Button android:text="@string/Connect" android:textSize="20px"
     android:textStyle="bold" android:id="@+id/ButtonConnect" android:layout_weight="20"
