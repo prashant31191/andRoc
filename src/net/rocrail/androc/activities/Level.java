@@ -25,18 +25,12 @@ import java.util.Iterator;
 
 import net.rocrail.androc.R;
 import net.rocrail.androc.objects.Item;
-import net.rocrail.androc.objects.Switch;
 import net.rocrail.androc.objects.ZLevel;
 import net.rocrail.androc.widgets.LevelCanvas;
 import net.rocrail.androc.widgets.LevelItem;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.ViewGroup;
-import android.widget.AbsoluteLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.AbsoluteLayout.LayoutParams;
+//import android.widget.AbsoluteLayout.LayoutParams;
+import net.rocrail.androc.widgets.AbsoluteLayout.LayoutParams;
 
 @SuppressWarnings("deprecation")
 public class Level extends Base {
@@ -68,7 +62,8 @@ public class Level extends Base {
     }
 
     LevelCanvas levelView = (LevelCanvas)findViewById(R.id.levelView);
-    
+    levelView.setPadding(0,0,0,0);
+
     int cx = 0;
     int cy = 0;
 

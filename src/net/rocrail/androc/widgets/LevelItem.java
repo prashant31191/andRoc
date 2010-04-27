@@ -41,6 +41,9 @@ public class LevelItem extends ImageView implements OnGestureListener {
     super(context);
     this.levelCanvas = levelCanvas;
     this.item = item;
+    //setScaleType(ImageView.ScaleType.CENTER);
+    setPadding(0,0,0,0);
+    
     gestureDetector = new GestureDetector(this);
   }
   public LevelItem(Context context) {
@@ -66,7 +69,15 @@ public class LevelItem extends ImageView implements OnGestureListener {
       }
     }
   }
-
+  
+  
+  @Override
+  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    setMeasuredDimension(item.cX*32, item.cY*32);
+  }
+  
+  
+  
   @Override 
   public boolean onTouchEvent(MotionEvent event) {
     return gestureDetector.onTouchEvent(event);

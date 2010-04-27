@@ -56,9 +56,9 @@
 
 </LinearLayout>
   
-  <Button android:text="@string/Connect" android:textSize="20px"
+  <Button android:text="@string/Connect"
     android:textStyle="bold" android:id="@+id/ButtonConnect" android:layout_weight="20"
-    android:layout_width="fill_parent" android:layout_height="0px"></Button>
+    android:layout_width="fill_parent" android:layout_height="0px" android:textSize="20sp"></Button>
 
   <ImageView android:id="@+id/logoImage" android:layout_width="wrap_content"
     android:layout_height="0px" android:src="@drawable/logo"  android:layout_weight="40"

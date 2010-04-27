@@ -22,7 +22,7 @@ package net.rocrail.androc.widgets;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.AbsoluteLayout;
+//import android.widget.AbsoluteLayout;
 
 /*
 The AbsoluteLayout is needed for drawing the Layout levels.

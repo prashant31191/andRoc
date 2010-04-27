@@ -41,10 +41,10 @@ public class LEDButton extends Button {
     if( ON ) {
       Paint paint = new Paint();
       paint.setAntiAlias(true);
-      paint.setColor(Color.DKGRAY);
-      canvas.drawCircle(15, 12, 7, paint);
+      paint.setColor(Color.GRAY);
+      canvas.drawCircle(15, 12, 6, paint);
       paint.setColor(Color.YELLOW);
-      canvas.drawCircle(15, 12, 5, paint);
+      canvas.drawCircle(15, 12, 4, paint);
     }
   }
 
