@@ -39,6 +39,7 @@ import android.os.Binder;
 import android.os.IBinder;
 
 public class RocrailService extends Service {
+  public String m_Recent   = "rocrail.dyndns.org:8080;";
   public String m_Host     = "rocrail.dyndns.org";
   public int    m_iPort    = 8080;
   public Model  m_Model    = null;

@@ -101,8 +101,9 @@ public class Base extends Activity implements ServiceListener {
   // Restore preferences
     SharedPreferences settings = m_Activity.getSharedPreferences(PREFS_NAME, 0);
     if( m_RocrailService != null ) {
-      m_RocrailService.m_Host  = settings.getString("host", "rocrail.dyndns.org");
-      m_RocrailService.m_iPort = settings.getInt("port", 8080);
+      m_RocrailService.m_Host   = settings.getString("host", "rocrail.dyndns.org");
+      m_RocrailService.m_iPort  = settings.getInt("port", 8080);
+      m_RocrailService.m_Recent = settings.getString("recent", "rocrail.dyndns.org:8080;");
     }
   }
 
