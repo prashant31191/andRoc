@@ -66,6 +66,8 @@ public class Model {
     m_Title = Item.getAttrValue(atts, "title", "New");  
     m_Name = Item.getAttrValue(atts, "name", "plan.xml");  
     m_RocrailVersion = atts.getValue("rocrailversion");  
+    
+    informListeners(ModelListener.MODELLIST_PLAN_START);
   }  
 
  
@@ -209,6 +211,10 @@ public class Model {
     else if( listName.equals("plan") )
       listCode = ModelListener.MODELLIST_PLAN;
     
+    informListeners(listCode);
+  }
+
+  void informListeners( int listCode ) {
     if( listCode != -1 ) {
       Iterator<ModelListener> it = m_Listeners.iterator();
       while( it.hasNext() ) {
@@ -216,6 +222,7 @@ public class Model {
         listener.modelListLoaded(listCode);
       }
     }
+
   }
   
   public void planLoaded() {

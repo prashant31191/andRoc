@@ -83,6 +83,9 @@ public class Connect extends Base implements ModelListener, SystemListener, OnIt
       progressPlan  = false;
       progressValue = 100;
     }
+    else if( MODELLIST == ModelListener.MODELLIST_PLAN_START ) {
+      progressValue = 5;
+    }
     else {
       // progress
       progressValue += 10;

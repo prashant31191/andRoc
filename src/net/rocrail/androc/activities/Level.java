@@ -31,6 +31,7 @@ import net.rocrail.androc.widgets.LevelItem;
 import android.os.Bundle;
 import android.widget.AbsoluteLayout.LayoutParams;
 
+@SuppressWarnings("deprecation")
 public class Level extends Base {
 
   
