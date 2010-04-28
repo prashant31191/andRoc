@@ -31,58 +31,86 @@ import android.graphics.RectF;
 public class FiddleYard extends Item  {
   int NrTracks = 3;
   int Occupied = 0;
+  String LocoID = "-";
 
   public FiddleYard(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
     NrTracks = Item.getAttrValue(atts, "nrtracks", 3 );
+    LocoID   = Item.getAttrValue(atts, "locid", ID); 
   }
+  
+  
+  public void updateTextColor() {
+    if( State.equals("closed") ) {
+      Text = "Closed";
+      colorName = "block_closed";
+    }
+    else if( LocoID.length() > 0 ) {
+      Text = LocoID;
+      if( Reserved ) 
+        colorName = "block_reserved";
+      else if( Entering ) 
+        colorName = "block_enter";
+      else 
+        colorName = "block_free";
+    }
+    else {
+      Text = ID;
+      colorName = "block_free";
+    }
+  }
+
   
   
   public String getImageName() {
     if( Ori.equals("west") || Ori.equals("east") ) {
       cX = NrTracks;
       cY = 1;
+      textVertical = false;
     }
     else {
       cX = 1;
       cY = NrTracks;
+      textVertical = true;
     }
+    updateTextColor();
     return null;
   }
   
+  
+  public void updateWithAttributes(Attributes atts ) {
+    LocoID   = Item.getAttrValue(atts, "locid", ID); 
+    State    = Item.getAttrValue(atts, "state", State); 
+
+    updateTextColor();
+    super.updateWithAttributes(atts);
+  }
+
+
   
   @Override
   public void Draw( Canvas canvas ) {
     Paint paint = new Paint();
     
     paint.setAntiAlias(true);
-    paint.setStyle(Paint.Style.FILL);
-    paint.setColor(Color.GRAY);
+    paint.setColor(Color.BLACK);
 
     if( Occupied == 1 ) {
       //(255,200,200)
       paint.setColor(Color.RED);
+      paint.setStyle(Paint.Style.FILL);
     }
     else if( Occupied == 2 ) {
       //(255,255,200)
       paint.setColor(Color.YELLOW);
+      paint.setStyle(Paint.Style.FILL);
+    }
+    else {
+      paint.setStyle(Paint.Style.STROKE);
     }
 
     paint.setStrokeWidth(2);
     
-    /*
-public void drawRoundRect (RectF rect, float rx, float ry, Paint paint)
-rect
-The rectangular bounds of the roundRect to be drawn
-rx
-The x-radius of the oval used to round the corners
-ry
-The y-radius of the oval used to round the corners
-paint
-The paint used to draw the roundRect
-
-     */
-
     if( Ori.equals("west") || Ori.equals("east") ) {
       RectF rect = new RectF(1,3, (32 * NrTracks) - 1, 28);
       canvas.drawRoundRect(rect, 10, 10, paint);
@@ -92,14 +120,6 @@ The paint used to draw the roundRect
       canvas.drawRoundRect(rect, 10, 10, paint);
     }
 
-/*
-    if( StrOp.equals( ori, wItem.south ) )
-      dc.DrawRotatedText( wxString(m_Label,wxConvUTF8), 32-5, 3, 270.0 );
-    else if( StrOp.equals( ori, wItem.north ) )
-      dc.DrawRotatedText( wxString(m_Label,wxConvUTF8), 5, (32 * nrtracks)-3, 90.0 );
-    else
-      dc.DrawRotatedText( wxString(m_Label,wxConvUTF8), 5, 5, 0.0 );
-*/
     
   }
 
