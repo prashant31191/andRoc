@@ -55,6 +55,7 @@ public class LevelItem extends ImageView implements OnGestureListener {
   
   protected void  onDraw  (Canvas canvas) {
     super.onDraw(canvas);
+    item.Draw(canvas);
     if( item.Text != null && item.Text.trim().length() > 0 ) {
       // draw the text on top of the image
       if( item.textVertical ) {

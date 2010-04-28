@@ -28,6 +28,7 @@ import org.xml.sax.Attributes;
 
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.objects.Block;
+import net.rocrail.androc.objects.FiddleYard;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.objects.Sensor;
@@ -163,6 +164,12 @@ public class Model {
       Block block = new Block(m_andRoc, atts);
       m_BlockMap.put(block.ID, block);
       m_ItemList.add(block);
+      return;
+    }
+
+    if( objName.equals("seltab") ) {
+      FiddleYard fy = new FiddleYard(m_andRoc, atts);
+      m_ItemList.add(fy);
       return;
     }
 

@@ -111,6 +111,10 @@ class XmlHandler extends DefaultHandler {
         // track handling
         m_Model.addObject(localName, atts);
       }
+      else if( localName.equals("seltab") ) {
+        // track handling
+        m_Model.addObject(localName, atts);
+      }
       else if( localName.equals("st") ) {
         // track handling
         m_Model.addObject(localName, atts);

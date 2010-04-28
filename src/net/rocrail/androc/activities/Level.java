@@ -70,20 +70,25 @@ public class Level extends Base {
     while( itemIt.hasNext() ) {
       Item item = itemIt.next();
       if( item.Z == Z && item.Show ) {
+        
         LevelItem image = new LevelItem(this, levelView, item );
         String imgname = item.getImageName();
-        int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
-        if( resId != 0 ) {
-          image.setImageResource(resId);
-          image.setOnClickListener(item);
-          item.imageView = image;
-          item.activity = this;
-          LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, item.X*32, item.Y*32);
-          if( item.X + item.cX > cx ) cx = item.X + item.cX;
-          if( item.Y + item.cY > cy ) cy = item.Y + item.cY;
-
-          levelView.addView(image, lp);
+        if( imgname != null ) {
+          int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
+          if( resId != 0 ) {
+            image.setImageResource(resId);
+          }
         }
+        
+        image.setOnClickListener(item);
+        item.imageView = image;
+        item.activity = this;
+        LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, item.X*32, item.Y*32);
+        if( item.X + item.cX > cx ) cx = item.X + item.cX;
+        if( item.Y + item.cY > cy ) cy = item.Y + item.cY;
+
+        levelView.addView(image, lp);
+
       }
       
     }

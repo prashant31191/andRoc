@@ -24,6 +24,7 @@ import net.rocrail.androc.RocrailService;
 import org.xml.sax.Attributes;
 
 import android.app.Activity;
+import android.graphics.Canvas;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -73,6 +74,10 @@ public class Item implements View.OnClickListener {
   
   public String getImageName(){
     return ImageName;
+  }
+  
+  public void Draw( Canvas canvas) {
+    
   }
   
   public static String getAttrValue(Attributes atts, String key, String defval) {
