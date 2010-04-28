@@ -22,8 +22,8 @@
   android:layout_width="fill_parent" android:orientation="vertical"
   android:layout_height="fill_parent">
   <net.rocrail.androc.widgets.LocoImage android:id="@+id/locoImage" android:layout_width="fill_parent"
-    android:clickable="true" android:layout_height="wrap_content"
-    android:src="@drawable/noimg" android:padding="4px"/>
+    android:clickable="true" android:layout_height="50px"
+    android:src="@drawable/noimg" android:padding="5dp"/>
 
   <LinearLayout android:id="@+id/locoLayout1" android:orientation="vertical"
     android:layout_width="fill_parent" android:layout_height="fill_parent">
@@ -49,7 +49,7 @@
       <Button
         android:text="@string/Set_in_block" android:textStyle="bold" android:id="@+id/locoSetInBlock"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="60dp" />
     </LinearLayout>
   </LinearLayout>
 

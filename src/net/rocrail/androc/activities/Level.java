@@ -29,10 +29,8 @@ import net.rocrail.androc.objects.ZLevel;
 import net.rocrail.androc.widgets.LevelCanvas;
 import net.rocrail.androc.widgets.LevelItem;
 import android.os.Bundle;
-//import android.widget.AbsoluteLayout.LayoutParams;
-import net.rocrail.androc.widgets.AbsoluteLayout.LayoutParams;
+import android.widget.AbsoluteLayout.LayoutParams;
 
-@SuppressWarnings("deprecation")
 public class Level extends Base {
 
   
