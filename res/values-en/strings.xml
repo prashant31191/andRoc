@@ -59,4 +59,7 @@
   <string name="FunctionGroup">FG</string>
   <string name="Lights">Lights</string>
   <string name="Recent">Recent</string>
+  <string name="Previous">Previous</string>
+  <string name="Next">Next</string>
+  <string name="Track">Track</string>
 </resources>

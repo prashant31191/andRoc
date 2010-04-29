@@ -27,11 +27,13 @@ import net.rocrail.androc.RocrailService;
 
 import org.xml.sax.Attributes;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.view.View;
 
 
 public class Turntable extends Item {
@@ -193,6 +195,23 @@ public class Turntable extends Item {
     p.lineTo(originX, originY);
     return p;
   }
+
+  public void onClick(View v) {
+    m_RocrailService.sendMessage("tt", String.format( "<tt id=\"%s\" state=\"%s\"/>", 
+        ID, State.equals("open")?"closed":"open" ) );
+  }
+  
+  public void propertiesView() {
+    try {
+      Intent intent = new Intent(activity,net.rocrail.androc.activities.ActTurntable.class);
+      intent.putExtra("id", Turntable.this.ID);
+      activity.startActivity(intent);
+    }
+    catch(Exception e) {
+      // invalid activity
+    }
+  }
+
 
 
 }

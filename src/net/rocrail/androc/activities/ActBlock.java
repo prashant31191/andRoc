@@ -41,7 +41,7 @@ public class ActBlock extends ActBase {
 
 
   public void initView() {
-    setContentView(R.layout.blockprops);
+    setContentView(R.layout.block);
     
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
