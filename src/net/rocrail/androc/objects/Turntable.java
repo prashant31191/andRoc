@@ -30,6 +30,7 @@ import org.xml.sax.Attributes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 
 
@@ -37,8 +38,9 @@ public class Turntable extends Item {
   List<TTTrack> Tracks = new ArrayList<TTTrack>();
   int Bridgepos = 0;
   double dBridgepos = 0;
+  boolean Sensor1 = false;
+  boolean Sensor2 = false;
 
-  static final double PI25DT = 3.141592653589793238462643;
 
   public Turntable(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
@@ -85,7 +87,7 @@ public class Turntable extends Item {
       TTTrack track = it.next();
       
       double degr = 7.5 * track.Nr;
-      double a = (degr*2*PI25DT)/360;
+      double a = (degr*2*StrictMath.PI)/360;
       double xa = StrictMath.cos(a) * 79.0;
       double ya = StrictMath.sin(a) * 79.0;
       int x = 79 + (int)xa;
@@ -118,47 +120,55 @@ public class Turntable extends Item {
 	  canvas.drawCircle(79, 79, 32, paint);
 
 
-    //dc.DrawPolygon( 5, rotateBridge( *bridgepos ) );
+    canvas.drawPath( rotateBridge( dBridgepos ), paint);
 
-    boolean sensor1 = false; //wTurntable.isstate1( m_Props );
-    boolean sensor2 = false; //wTurntable.isstate2( m_Props );
-
-    if( sensor1 && sensor2 )
+    if( Sensor1 && Sensor2 )
       paint.setColor(Color.RED);
-    else if( sensor1 || sensor2 ) {
+    else if( Sensor1 || Sensor2 ) {
       paint.setColor(Color.YELLOW);
     }
     else
       paint.setColor(Color.GREEN);
 
-    //dc.DrawPolygon( 5, rotateBridgeSensors( *bridgepos ) );
+    //dc.DrawPolygon( 5, rotateBridgeSensors( dBridgepos ) );
 
   }
 
-  /*
-  wxPoint* SymbolRenderer::rotateBridge( double ori ) {
-    TraceOp.trc( "render", TRCLEVEL_INFO, __LINE__, 9999, "rotate bridge pos=%f", ori );
-    static wxPoint p[5];
-    double bp[4] = { 10.0, 170.0, 190.0, 350.0 };
+  
+  Path rotateBridge( double ori ) {
+    Path p = new Path();
+    float originX = 0;
+    float originY = 0;
+    double[] bp = { 10.0, 170.0, 190.0, 350.0 };
 
     for( int i = 0; i < 4; i++ ) {
       double angle = ori+bp[i];
       if( angle > 360.0 )
         angle = angle -360.0;
-      double a = (angle*2*PI25DT)/360;
-      double xa = cos(a) * 32.0;
-      double ya = sin(a) * 32.0;
-      p[i].x = 79 + (int)xa;
-      p[i].y = 79 - (int)ya;
+      double a = (angle*2*StrictMath.PI)/360;
+      double xa = StrictMath.cos(a) * 32.0;
+      double ya = StrictMath.sin(a) * 32.0;
+      
+      //p[i].x = 79 + (int)xa;
+      //p[i].y = 79 - (int)ya;
       if( i == 0 ) {
+        originX = 79 + (int)xa;
+        originY = 79 - (int)ya;
+        p.moveTo(79 + (int)xa, 79 - (int)ya);
         // end point to close the polygon
-        p[4].x = p[i].x;
-        p[4].y = p[i].y;
+        //p[4].x = p[i].x;
+        //p[4].y = p[i].y;
+      }
+      else {
+        p.lineTo(79 + (int)xa, 79 - (int)ya);
       }
     }
+    
+    p.lineTo(originX, originY);
+    
     return p;
   }
-  */
+  
 
   /*
   wxPoint* SymbolRenderer::rotateBridgeSensors( double ori ) {
