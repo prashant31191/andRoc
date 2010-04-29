@@ -130,7 +130,8 @@ public class Turntable extends Item {
     else
       paint.setColor(Color.GREEN);
 
-    //dc.DrawPolygon( 5, rotateBridgeSensors( dBridgepos ) );
+    paint.setStyle(Paint.Style.FILL);
+    canvas.drawPath( rotateBridgeSensors( dBridgepos ), paint);
 
   }
 
@@ -149,51 +150,50 @@ public class Turntable extends Item {
       double xa = StrictMath.cos(a) * 32.0;
       double ya = StrictMath.sin(a) * 32.0;
       
-      //p[i].x = 79 + (int)xa;
-      //p[i].y = 79 - (int)ya;
       if( i == 0 ) {
         originX = 79 + (int)xa;
         originY = 79 - (int)ya;
         p.moveTo(79 + (int)xa, 79 - (int)ya);
-        // end point to close the polygon
-        //p[4].x = p[i].x;
-        //p[4].y = p[i].y;
       }
       else {
         p.lineTo(79 + (int)xa, 79 - (int)ya);
       }
     }
     
+    // end point to close the polygon
     p.lineTo(originX, originY);
     
     return p;
   }
   
 
-  /*
-  wxPoint* SymbolRenderer::rotateBridgeSensors( double ori ) {
-    TraceOp.trc( "render", TRCLEVEL_INFO, __LINE__, 9999, "rotate bridge pos=%f", ori );
-    static wxPoint p[5];
-    double bp[4] = { 10.0, 170.0, 190.0, 350.0 };
+  Path rotateBridgeSensors( double ori ) {
+    Path p = new Path();
+    float originX = 0;
+    float originY = 0;
+    double[] bp = { 10.0, 170.0, 190.0, 350.0 };
 
     for( int i = 0; i < 4; i++ ) {
       double angle = ori+bp[i];
       if( angle > 360.0 )
         angle = angle -360.0;
-      double a = (angle*2*PI25DT)/360;
-      double xa = cos(a) * 20.0;
-      double ya = sin(a) * 20.0;
-      p[i].x = 79 + (int)xa;
-      p[i].y = 79 - (int)ya;
+      double a = (angle*2*StrictMath.PI)/360;
+      double xa = StrictMath.cos(a) * 20.0;
+      double ya = StrictMath.sin(a) * 20.0;
       if( i == 0 ) {
-        // end point to close the polygon
-        p[4].x = p[i].x;
-        p[4].y = p[i].y;
+        originX = 79 + (int)xa;
+        originY = 79 - (int)ya;
+        p.moveTo(79 + (int)xa, 79 - (int)ya);
+      }
+      else {
+        p.lineTo(79 + (int)xa, 79 - (int)ya);
       }
     }
+    // end point to close the polygon
+    p.lineTo(originX, originY);
     return p;
   }
-  */
+
 
 }
 
