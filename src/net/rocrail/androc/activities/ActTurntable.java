@@ -37,8 +37,8 @@ public class ActTurntable  extends ActBase {
     fyNext.ON = false;
     fyNext.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_RocrailService.sendMessage("seltab", 
-              String.format("<seltab id=\"%s\" cmd=\"next\"/>", m_Turntable.ID));
+          m_RocrailService.sendMessage("tt", 
+              String.format("<tt id=\"%s\" cmd=\"next\"/>", m_Turntable.ID));
         }
     });
 
@@ -46,8 +46,8 @@ public class ActTurntable  extends ActBase {
     fyPrev.ON = false;
     fyPrev.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_RocrailService.sendMessage("seltab", 
-              String.format("<seltab id=\"%s\" cmd=\"prev\"/>", m_Turntable.ID));
+          m_RocrailService.sendMessage("tt", 
+              String.format("<tt id=\"%s\" cmd=\"prev\"/>", m_Turntable.ID));
         }
     });
 
