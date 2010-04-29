@@ -35,10 +35,11 @@ import net.rocrail.androc.objects.Sensor;
 import net.rocrail.androc.objects.Signal;
 import net.rocrail.androc.objects.Switch;
 import net.rocrail.androc.objects.Track;
+import net.rocrail.androc.objects.Turntable;
 import net.rocrail.androc.objects.ZLevel;
 
 public class Model {
-  RocrailService  m_andRoc  = null;
+  RocrailService  rocrailService  = null;
   private List<ModelListener>  m_Listeners = new ArrayList<ModelListener>();
   public List<Loco>  m_LocoList = new ArrayList<Loco>();
   public HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
@@ -47,16 +48,20 @@ public class Model {
   public HashMap<String,Signal> m_SignalMap = new HashMap<String,Signal>();
   public HashMap<String,Sensor> m_SensorMap = new HashMap<String,Sensor>();
   public HashMap<String,Block> m_BlockMap = new HashMap<String,Block>();
+  public HashMap<String,FiddleYard> m_FiddleYardMap = new HashMap<String,FiddleYard>();
+  public HashMap<String,Turntable> m_TurntableMap = new HashMap<String,Turntable>();
   public List<Item>   m_ItemList = new ArrayList<Item>();
   public List<String> m_ScheduleList = new ArrayList<String>();
   public List<String> m_RouteList = new ArrayList<String>();
   public String m_Title = "";  
   public String m_Name = "";  
   public String m_RocrailVersion = "";  
+  
+  Turntable m_CurrentTT = null;
 
   
   public Model(RocrailService rocrailService) {
-    m_andRoc = rocrailService;
+    this.rocrailService = rocrailService;
   }
   
   public void setup(Attributes atts) {
@@ -87,11 +92,6 @@ public class Model {
         return loco;
     }
     return null;
-  }
-  
-  public void addLoco(Loco loco, Attributes atts) {
-    m_LocoList.add(loco);
-    m_LocoMap.put(loco.ID, loco);
   }
   
   public void updateItem(String objName, Attributes atts) {
@@ -130,46 +130,90 @@ public class Model {
       }
       return;
     }
+    if( objName.equals("seltab") ) {
+      FiddleYard fy = m_FiddleYardMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( fy != null ) {
+        fy.updateWithAttributes(atts);
+      }
+      return;
+    }
+    if( objName.equals("tt") ) {
+      Turntable tt = m_TurntableMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( tt != null ) {
+        tt.updateWithAttributes(atts);
+      }
+      return;
+    }
   }
   
+  
   public void addObject(String objName, Attributes atts) {
+    if( objName.equals("zlevel") ) {
+      // zlevel handling
+      String id = atts.getValue("title");
+      if( id != null && id.length() > 0 ) {
+        addLevel(id, atts);
+      }
+      return;
+    }
+
+    if( objName.equals("lc") ) {
+      Loco loco = new Loco(rocrailService, atts);
+      m_LocoList.add(loco);
+      m_LocoMap.put(loco.ID, loco);
+      return;
+    }
+    
     if( objName.equals("sw") ) {
-      Switch sw = new Switch(m_andRoc, atts);
+      Switch sw = new Switch(rocrailService, atts);
       m_SwitchMap.put(sw.ID, sw);
       m_ItemList.add(sw);
       return;
     }
     
     if( objName.equals("tk") ) {
-      Track track = new Track(m_andRoc, atts);
+      Track track = new Track(rocrailService, atts);
       m_ItemList.add(track);
       return;
     }
     
     if( objName.equals("fb") ) {
-      Sensor sensor = new Sensor(m_andRoc, atts);
+      Sensor sensor = new Sensor(rocrailService, atts);
       m_SensorMap.put(sensor.ID, sensor);
       m_ItemList.add(sensor);
       return;
     }
     
     if( objName.equals("sg") ) {
-      Signal signal = new Signal(m_andRoc, atts);
+      Signal signal = new Signal(rocrailService, atts);
       m_SignalMap.put(signal.ID, signal);
       m_ItemList.add(signal);
       return;
     }
 
     if( objName.equals("bk") ) {
-      Block block = new Block(m_andRoc, atts);
+      Block block = new Block(rocrailService, atts);
       m_BlockMap.put(block.ID, block);
       m_ItemList.add(block);
       return;
     }
 
     if( objName.equals("seltab") ) {
-      FiddleYard fy = new FiddleYard(m_andRoc, atts);
+      FiddleYard fy = new FiddleYard(rocrailService, atts);
+      m_FiddleYardMap.put(fy.ID, fy);
       m_ItemList.add(fy);
+      return;
+    }
+
+    if( objName.equals("tt") ) {
+      Turntable tt = new Turntable(rocrailService, atts);
+      m_CurrentTT = tt;
+      m_TurntableMap.put(tt.ID, tt);
+      m_ItemList.add(tt);
+      return;
+    }
+    if( objName.equals("track") && m_CurrentTT != null ) {
+      m_CurrentTT.addTrack(atts);
       return;
     }
 

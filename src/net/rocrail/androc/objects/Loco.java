@@ -52,9 +52,9 @@ public class Loco {
   public Attributes properties = null;
   
 
-  public Loco( RocrailService rocrailService, String id, Attributes atts) {
+  public Loco( RocrailService rocrailService, Attributes atts) {
     this.rocrailService = rocrailService;
-    ID = id;
+    ID = atts.getValue("id");
     PicName = atts.getValue("image");
     properties = atts;
     /*

@@ -81,66 +81,16 @@ class XmlHandler extends DefaultHandler {
     }
     
     if( m_bParsingPlan ) {
-      if( localName.equals("lc") ) {
-        // loco handling
-        String id = atts.getValue("id");
-        if( id != null && id.length() > 0 ) {
-          Loco loco = new Loco(rocrailService, id, atts);
-          m_Model.addLoco(loco, atts);
-          // request image here?
-          //loco.requestLocoImg();
-        }
-      }
-      else if( localName.equals("sw") ) {
-        // switch handling
-        m_Model.addObject(localName, atts);
-      }
-      else if( localName.equals("tk") ) {
-        // track handling
-        m_Model.addObject(localName, atts);
-      }
-      else if( localName.equals("fb") ) {
-        // track handling
-        m_Model.addObject(localName, atts);
-      }
-      else if( localName.equals("sg") ) {
-        // track handling
-        m_Model.addObject(localName, atts);
-      }
-      else if( localName.equals("bk") ) {
-        // track handling
-        m_Model.addObject(localName, atts);
-      }
-      else if( localName.equals("seltab") ) {
-        // track handling
-        m_Model.addObject(localName, atts);
-      }
-      else if( localName.equals("st") ) {
-        // track handling
-        m_Model.addObject(localName, atts);
-      }
-      else if( localName.equals("sc") ) {
-        // track handling
-        m_Model.addObject(localName, atts);
-      }
-      else if( localName.equals("zlevel") ) {
-        // zlevel handling
-        String id = atts.getValue("title");
-        if( id != null && id.length() > 0 ) {
-          m_Model.addLevel(id, atts);
-        }
-      }
+      m_Model.addObject(localName, atts);
       return;
     }
     else {
-      if( localName.equals("sw") || localName.equals("sg") || localName.equals("fb") || 
-          localName.equals("bk") || localName.equals("lc") ) 
-      {
-        m_Model.updateItem(localName, atts);
-      }
-      else if( localName.equals("state") || localName.equals("auto") || 
+      if( localName.equals("state") || localName.equals("auto") || 
           localName.equals("sys") || localName.equals("exception") ) {
         rocrailService.event(localName, atts);
+      }
+      else {
+        m_Model.updateItem(localName, atts);
       }
       
     }
