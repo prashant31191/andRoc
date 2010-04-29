@@ -55,4 +55,7 @@
   <string name="FunctionGroup">FG</string>
   <string name="Lights">Licht</string>
   <string name="Recent">Verlauf</string>
+  <string name="Previous">Vorheriges</string>
+  <string name="Next">Nächste</string>
+  <string name="Track">Gleis</string>
 </resources>
