@@ -151,12 +151,17 @@ class UpdateImage implements Runnable {
 
   @Override
   public void run() {
-    int resId = item.imageView.getContext().getResources().getIdentifier(item.getImageName(), "raw", "net.rocrail.androc");
-    if( resId != 0 ) {
-      item.imageView.setImageResource(resId);
-      if( item.Text != null && item.Text.length() > 0 ) {
-        // update text
-        item.imageView.invalidate();
+    if( item.getImageName() == null || item.getImageName().length() == 0 ) {
+      item.imageView.invalidate();
+    }
+    else {
+      int resId = item.imageView.getContext().getResources().getIdentifier(item.getImageName(), "raw", "net.rocrail.androc");
+      if( resId != 0 ) {
+        item.imageView.setImageResource(resId);
+        if( item.Text != null && item.Text.length() > 0 ) {
+          // update text
+          item.imageView.invalidate();
+        }
       }
     }
   }
