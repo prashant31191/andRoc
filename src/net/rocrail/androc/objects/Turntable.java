@@ -32,7 +32,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.RectF;
 import android.view.View;
 
 
@@ -64,10 +63,12 @@ public class Turntable extends Item {
     Sensor1 = Item.getAttrValue(atts, "state1", Sensor1 );
     Sensor2 = Item.getAttrValue(atts, "state2", Sensor2 );
 
-    Iterator<TTTrack> it = Tracks.iterator();
-    while(it.hasNext()) {
-      TTTrack track = it.next();
-      track.State = ( track.Nr == Bridgepos );
+    if( Tracks != null ) {
+      Iterator<TTTrack> it = Tracks.iterator();
+      while(it.hasNext()) {
+        TTTrack track = it.next();
+        track.State = ( track.Nr == Bridgepos );
+      }
     }
 
     super.updateWithAttributes(atts);
