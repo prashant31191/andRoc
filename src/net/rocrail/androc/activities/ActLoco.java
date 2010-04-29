@@ -36,7 +36,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class LocoProps extends Base implements OnItemSelectedListener {
+public class ActLoco extends ActBase implements OnItemSelectedListener {
   Loco m_Loco = null;
   String ScheduleID = null;
   String BlockID    = null;

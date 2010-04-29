@@ -21,6 +21,7 @@
 package net.rocrail.androc.activities;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.interfaces.ServiceListener;
 import android.app.ListActivity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -28,14 +29,14 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class Info extends ListActivity implements ServiceListener {
-  Base m_Base = null;
+public class ActInfo extends ListActivity implements ServiceListener {
+  ActBase m_Base = null;
   String[] m_Items = null;
   
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    m_Base = new Base(this, this);
+    m_Base = new ActBase(this, this);
     m_Base.MenuSelection = 0;
     m_Base.connectWithService();
   }

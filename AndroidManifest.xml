@@ -26,23 +26,23 @@
           android:normalScreens="true" android:smallScreens="true"/>
       
     <application android:icon="@drawable/rocrail" android:label="@string/app_name" >
-        <activity android:name="net.rocrail.androc.activities.Connect" 
+        <activity android:name="net.rocrail.androc.activities.ActConnect" 
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.Throttle" />
-        <activity android:name=".activities.System" />
-        <activity android:name=".activities.Menu" />
-        <activity android:name=".activities.Layout" />
-        <activity android:name=".activities.LocoProps" />
-        <activity android:name=".activities.Level" />
-        <activity android:name=".activities.Info" />
-        <activity android:name=".activities.Routes" />
+        <activity android:name=".activities.ActThrottle" />
+        <activity android:name=".activities.ActSystem" />
+        <activity android:name=".activities.ActMenu" />
+        <activity android:name=".activities.ActLayout" />
+        <activity android:name=".activities.ActLoco" />
+        <activity android:name=".activities.ActLevel" />
+        <activity android:name=".activities.ActInfo" />
+        <activity android:name=".activities.ActRoutes" />
+        <activity android:name=".activities.ActBlock" />
         <service android:name=".RocrailService"/>
-        <activity android:name=".activities.BlockProps" />
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>

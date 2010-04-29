@@ -22,6 +22,7 @@ package net.rocrail.androc.activities;
 
 import net.rocrail.androc.R;
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.interfaces.ServiceListener;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -32,7 +33,7 @@ import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Base extends Activity implements ServiceListener {
+public class ActBase extends Activity implements ServiceListener {
   public static final String PREFS_NAME = "andRoc.ini";
 
   final static int MENU_CONNECT  = 0x01;
@@ -69,12 +70,12 @@ public class Base extends Activity implements ServiceListener {
     }
   };
   
-  public Base( Activity activity, ServiceListener listener ) {
+  public ActBase( Activity activity, ServiceListener listener ) {
     m_Activity = activity;
     m_Listener = listener;
   }
   
-  public Base() {
+  public ActBase() {
     m_Activity = this;
     m_Listener = this;
   }
@@ -156,42 +157,42 @@ public class Base extends Activity implements ServiceListener {
   }
   
   public void connectView() {
-    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Connect.class);
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActConnect.class);
     m_Activity.startActivity(intent);
     if(Finish) 
       m_Activity.finish();
   }
   
   public void throttleView() {
-    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Throttle.class);
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActThrottle.class);
     m_Activity.startActivityIfNeeded(intent,0);
     if(Finish) 
       m_Activity.finish();
   }
   
   public void systemView() {
-    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.System.class);
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActSystem.class);
     m_Activity.startActivityIfNeeded(intent,0);
     if(Finish) 
       m_Activity.finish();
   }
   
   public void menuView() {
-    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Menu.class);
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActMenu.class);
     m_Activity.startActivityIfNeeded(intent,0);
     if(Finish) 
       m_Activity.finish();
   }
   
   public void layoutView() {
-    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.Layout.class);
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLayout.class);
     m_Activity.startActivityIfNeeded(intent,0);
     if(Finish) 
       m_Activity.finish();
   }
   
   public void locoView() {
-    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.LocoProps.class);
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
     m_Activity.startActivityIfNeeded(intent,0);
     if(Finish) 
       m_Activity.finish();

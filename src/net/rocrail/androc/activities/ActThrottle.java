@@ -37,7 +37,7 @@ import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
 import net.rocrail.androc.widgets.LocoImage;
 
-public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
+public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
   int         m_iFunctionGroup = 0;
   int         m_iLocoCount     = 0;
   final static int FNGROUPSIZE = 6;
@@ -46,7 +46,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = Base.MENU_MENU | Base.MENU_LAYOUT | Base.MENU_SYSTEM | Base.MENU_LOCO;
+    MenuSelection = ActBase.MENU_MENU | ActBase.MENU_LAYOUT | ActBase.MENU_SYSTEM | ActBase.MENU_LOCO;
 
     connectWithService();
   }
@@ -280,7 +280,7 @@ public class Throttle extends Base implements ModelListener, SeekBar.OnSeekBarCh
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         if( m_Loco != null ) {
-          Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.LocoProps.class);
+          Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
           intent.putExtra("id", m_Loco.ID);
           startActivity(intent);
         }

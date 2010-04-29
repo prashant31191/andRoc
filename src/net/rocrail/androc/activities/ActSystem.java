@@ -29,12 +29,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class System extends Base implements MessageListener {
+public class ActSystem extends ActBase implements MessageListener {
   
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = Base.MENU_THROTTLE | Base.MENU_MENU | Base.MENU_LAYOUT;
+    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_LAYOUT;
     connectWithService();
   }
   
@@ -142,9 +142,9 @@ public class System extends Base implements MessageListener {
 
 
 class UpdateMessages implements Runnable {
-  System system = null;
+  ActSystem system = null;
   
-  public UpdateMessages(System system) {
+  public UpdateMessages(ActSystem system) {
     this.system = system;
     
   }

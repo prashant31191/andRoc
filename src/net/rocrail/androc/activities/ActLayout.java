@@ -22,45 +22,49 @@ package net.rocrail.androc.activities;
 import java.util.Iterator;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.interfaces.ServiceListener;
 import net.rocrail.androc.objects.ZLevel;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Routes extends ListActivity implements ServiceListener {
-  Base m_Base = null;
-  String[] m_Routes = null;
-
+public class ActLayout extends ListActivity implements ServiceListener {
+  ActBase m_Base = null;
+  String[] m_Levels = null;
+  
+  
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    m_Base = new Base(this, this);
-    m_Base.MenuSelection = 0; //Base.MENU_THROTTLE | Base.MENU_SYSTEM | Base.MENU_MENU;
+    m_Base = new ActBase(this, this);
+    m_Base.MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_SYSTEM | ActBase.MENU_MENU;
 
     m_Base.connectWithService();
   }
   
   public void connectedWithService() {
     initView();
-    m_Base.updateTitle("Routes");
+    m_Base.updateTitle();
   }
 
 
   public void initView() {
-    m_Routes = new String[m_Base.m_RocrailService.m_Model.m_RouteList.size()];
-    Iterator<String> it = m_Base.m_RocrailService.m_Model.m_RouteList.iterator();
+    m_Levels = new String[m_Base.m_RocrailService.m_Model.m_ZLevelList.size()];
+    Iterator<ZLevel> it = m_Base.m_RocrailService.m_Model.m_ZLevelList.iterator();
     int idx = 0;
     while( it.hasNext() ) {
-      m_Routes[idx] = it.next();
+      m_Levels[idx] = it.next().Title;
       idx++;
     }
-    setListAdapter(new ArrayAdapter<String>(this, R.layout.menuitem, m_Routes));
+    setListAdapter(new ArrayAdapter<String>(this, R.layout.layoutitem, m_Levels));
 
     ListView lv = getListView();
     lv.setTextFilterEnabled(true);
@@ -68,12 +72,29 @@ public class Routes extends ListActivity implements ServiceListener {
     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // When clicked, show a toast with the TextView text
-        Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
-        // send route command
-        m_Base.m_RocrailService.sendMessage("st", String.format("<st id=\"%s\" cmd=\"test\"/>",
-            ((TextView) view).getText() ) );
+        Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
+            Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ActLayout.this,net.rocrail.androc.activities.ActLevel.class);
+        intent.putExtra("level", position);
+        startActivity(intent);
       }
     });
+    
+    if( idx == 1 ) {
+      // show it
+      Intent intent = new Intent(ActLayout.this,net.rocrail.androc.activities.ActLevel.class);
+      intent.putExtra("level", 0);
+      startActivity(intent);
+      finish();
+    }
   }
 
+  public boolean onCreateOptionsMenu(Menu menu) {
+    return m_Base.onCreateOptionsMenu(menu);
+  }
+  
+  public boolean onOptionsItemSelected(MenuItem item) {
+    return m_Base.onOptionsItemSelected(item);
+  }
+  
 }

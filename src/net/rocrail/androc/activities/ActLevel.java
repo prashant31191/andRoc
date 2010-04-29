@@ -32,7 +32,7 @@ import android.os.Bundle;
 import android.widget.AbsoluteLayout.LayoutParams;
 
 @SuppressWarnings("deprecation")
-public class Level extends Base {
+public class ActLevel extends ActBase {
 
   
   @Override

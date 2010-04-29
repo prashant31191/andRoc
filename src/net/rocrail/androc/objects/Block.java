@@ -115,7 +115,7 @@ public class Block extends Item implements View.OnClickListener {
   
   public void propertiesView() {
     try {
-      Intent intent = new Intent(activity,net.rocrail.androc.activities.BlockProps.class);
+      Intent intent = new Intent(activity,net.rocrail.androc.activities.ActBlock.class);
       intent.putExtra("id", Block.this.ID);
       activity.startActivity(intent);
     }

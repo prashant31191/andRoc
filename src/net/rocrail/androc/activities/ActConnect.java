@@ -45,7 +45,7 @@ import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.SystemListener;
 import net.rocrail.androc.objects.Loco;
 
-public class Connect extends Base implements ModelListener, SystemListener, OnItemSelectedListener {
+public class ActConnect extends ActBase implements ModelListener, SystemListener, OnItemSelectedListener {
   static final int PROGRESS_DIALOG = 0;
   boolean progressPlan = false;
   int progressValue = 0;
@@ -98,8 +98,8 @@ public class Connect extends Base implements ModelListener, SystemListener, OnIt
     handler.sendMessage(msg);
     
     if( progressValue >= 100 ) {
-      Connect.this.throttleView();
-      Connect.this.finish();
+      ActConnect.this.throttleView();
+      ActConnect.this.finish();
     }
 
   }
@@ -107,7 +107,7 @@ public class Connect extends Base implements ModelListener, SystemListener, OnIt
   protected Dialog onCreateDialog(int id) {
     switch(id) {
     case PROGRESS_DIALOG:
-        progressDialog = new ProgressDialog(Connect.this);
+        progressDialog = new ProgressDialog(ActConnect.this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMessage("Loading plan...");
         return progressDialog;
@@ -142,7 +142,7 @@ public class Connect extends Base implements ModelListener, SystemListener, OnIt
     }
     catch( Exception e ) {
       e.printStackTrace();
-      AlertDialog.Builder builder = new AlertDialog.Builder(Connect.this); 
+      AlertDialog.Builder builder = new AlertDialog.Builder(ActConnect.this); 
       builder.setMessage(e.getClass().getName()+"\nCould not connect to " + 
           m_RocrailService.m_Host+":"+m_RocrailService.m_iPort)
       .setCancelable(false)
@@ -217,14 +217,14 @@ public class Connect extends Base implements ModelListener, SystemListener, OnIt
 
   @Override
   public void SystemDisconnected() {
-    Connect.this.connectView();
-    Connect.this.setVisible(true);
+    ActConnect.this.connectView();
+    ActConnect.this.setVisible(true);
   }
 
   @Override
   public void SystemShutdown() {
-    Connect.this.connectView();
-    Connect.this.setVisible(true);
+    ActConnect.this.connectView();
+    ActConnect.this.setVisible(true);
   }
 
   @Override

@@ -25,7 +25,7 @@ import net.rocrail.androc.objects.Block;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class BlockProps extends Base {
+public class ActBlock extends ActBase {
   Block m_Block = null;
   
   @Override
