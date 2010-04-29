@@ -39,15 +39,15 @@ import android.view.View;
 public class Turntable extends Item {
   List<TTTrack> Tracks = new ArrayList<TTTrack>();
   int Bridgepos = 0;
-  double dBridgepos = 0;
   boolean Sensor1 = false;
   boolean Sensor2 = false;
 
 
   public Turntable(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
-    //NrTracks = Item.getAttrValue(atts, "nrtracks", 3 );
-    //LocoID   = Item.getAttrValue(atts, "locid", ID); 
+    Bridgepos = Item.getAttrValue(atts, "bridgepos", Bridgepos );
+    Sensor1 = Item.getAttrValue(atts, "state1", Sensor1 );
+    Sensor2 = Item.getAttrValue(atts, "state2", Sensor2 );
   }
   
   public String getImageName() {
@@ -58,8 +58,20 @@ public class Turntable extends Item {
   
   
 
-  public void updateWithAttributes(Attributes atts ) {
+  public void updateWithAttributes(Attributes atts ) {    
+    // turntable bridge position
+    Bridgepos = Item.getAttrValue(atts, "bridgepos", Bridgepos );
+    Sensor1 = Item.getAttrValue(atts, "state1", Sensor1 );
+    Sensor2 = Item.getAttrValue(atts, "state2", Sensor2 );
+
+    Iterator<TTTrack> it = Tracks.iterator();
+    while(it.hasNext()) {
+      TTTrack track = it.next();
+      track.State = ( track.Nr == Bridgepos );
+    }
+
     super.updateWithAttributes(atts);
+    
   }
 
   public void addTrack(Attributes atts ) {
@@ -74,6 +86,7 @@ public class Turntable extends Item {
   
   @Override
   public void Draw( Canvas canvas ) {
+    double dBridgepos = 0;
 
     Paint paint = new Paint();
     paint.setAntiAlias(true);
