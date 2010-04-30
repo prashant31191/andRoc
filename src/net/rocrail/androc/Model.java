@@ -31,6 +31,7 @@ import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.FiddleYard;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
+import net.rocrail.androc.objects.Output;
 import net.rocrail.androc.objects.Sensor;
 import net.rocrail.androc.objects.Signal;
 import net.rocrail.androc.objects.Switch;
@@ -45,6 +46,7 @@ public class Model {
   public HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
   public List<ZLevel> m_ZLevelList = new ArrayList<ZLevel>();
   public HashMap<String,Switch> m_SwitchMap = new HashMap<String,Switch>();
+  public HashMap<String,Output> m_OutputMap = new HashMap<String,Output>();
   public HashMap<String,Signal> m_SignalMap = new HashMap<String,Signal>();
   public HashMap<String,Sensor> m_SensorMap = new HashMap<String,Sensor>();
   public HashMap<String,Block> m_BlockMap = new HashMap<String,Block>();
@@ -109,6 +111,13 @@ public class Model {
       }
       return;
     }
+    if( objName.equals("co") ) {
+      Output co = m_OutputMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( co != null ) {
+        co.updateWithAttributes(atts);
+      }
+      return;
+    }
     if( objName.equals("sg") ) {
       Signal sg = m_SignalMap.get(Item.getAttrValue(atts, "id", "?"));
       if( sg != null ) {
@@ -168,6 +177,13 @@ public class Model {
       Switch sw = new Switch(rocrailService, atts);
       m_SwitchMap.put(sw.ID, sw);
       m_ItemList.add(sw);
+      return;
+    }
+    
+    if( objName.equals("co") ) {
+      Output co = new Output(rocrailService, atts);
+      m_OutputMap.put(co.ID, co);
+      m_ItemList.add(co);
       return;
     }
     
