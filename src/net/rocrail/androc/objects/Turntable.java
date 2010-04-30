@@ -36,7 +36,7 @@ import android.view.View;
 
 
 public class Turntable extends Item {
-  List<TTTrack> Tracks = new ArrayList<TTTrack>();
+  public List<TTTrack> Tracks = new ArrayList<TTTrack>();
   int Bridgepos = 0;
   boolean Sensor1 = false;
   boolean Sensor2 = false;
@@ -227,13 +227,13 @@ public class Turntable extends Item {
   }
 
 
+  public class TTTrack {
+    public int Nr = 0;
+    public boolean State = false;
+    public boolean Show = true;
+  }
 
 }
 
 
-class TTTrack {
-  int Nr = 0;
-  boolean State = false;
-  boolean Show = true;
-}
 

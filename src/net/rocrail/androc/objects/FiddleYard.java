@@ -31,7 +31,7 @@ import android.graphics.RectF;
 import android.view.View;
 
 public class FiddleYard extends Item  {
-  int NrTracks = 3;
+  public int NrTracks = 3;
   int Occupied = 0;
   String LocoID = "-";
 

@@ -56,7 +56,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener {
 
 
   public void initView() {
-    setContentView(R.layout.locoprops);
+    setContentView(R.layout.loco);
     
     
     Bundle extras = getIntent().getExtras();

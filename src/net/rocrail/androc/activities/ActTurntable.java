@@ -1,13 +1,21 @@
 package net.rocrail.androc.activities;
 
+import java.util.Iterator;
+
 import net.rocrail.androc.R;
 import net.rocrail.androc.objects.Turntable;
 import net.rocrail.androc.widgets.LEDButton;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.AdapterView.OnItemSelectedListener;
 
-public class ActTurntable  extends ActBase {
+public class ActTurntable  extends ActBase implements OnItemSelectedListener {
   Turntable m_Turntable = null;
+  public int GotoTrack = 0;
   
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -51,9 +59,47 @@ public class ActTurntable  extends ActBase {
         }
     });
 
+    final Button fyTrack = (Button) findViewById(R.id.fyGotoTrack);
+    fyTrack.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          m_RocrailService.sendMessage("tt", 
+              String.format("<tt id=\"%s\" cmd=\"%s\"/>", m_Turntable.ID, GotoTrack));
+        }
+    });
+
+
+    // Track spinner
+    Spinner s = (Spinner) findViewById(R.id.fyTracks);
+    s.setPrompt(new String("Select Track"));
+
+    ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+    m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    s.setAdapter(m_adapterForSpinner);
+
+    
+    Iterator<Turntable.TTTrack> it = m_Turntable.Tracks.iterator();
+    while( it.hasNext() ) {
+      Turntable.TTTrack track = it.next();
+      m_adapterForSpinner.add(""+track.Nr);
+    }
+    
+    s.setOnItemSelectedListener(this);
+
 
     updateTitle("Turntable \'"+m_Turntable.ID+"\'");
  
+  }
+  
+  @Override
+  public void onItemSelected(AdapterView<?> arg0, View view, int position, long longid ) {
+    Spinner s = (Spinner) findViewById(R.id.fyTracks);
+    String trackNr = (String)s.getSelectedItem();
+    GotoTrack = Integer.parseInt(trackNr);
+    
+  }
+
+  @Override
+  public void onNothingSelected(AdapterView<?> arg0) {
   }
   
 }
