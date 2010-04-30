@@ -28,10 +28,12 @@ import net.rocrail.androc.RocrailService;
 
 public class Switch extends Item implements View.OnClickListener {
   boolean Dir = false;
+  int AccNr = 0;
 
   public Switch( RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
-    Dir = Item.getAttrValue(atts, "dir", false );
+    Dir   = Item.getAttrValue(atts, "dir", false );
+    AccNr = Item.getAttrValue(atts, "accnr", 0 );
   }
 
   public void onClick(View v) {
@@ -47,19 +49,43 @@ public class Switch extends Item implements View.OnClickListener {
     else if( orinr == 3 )
       orinr = 1;
     
-    if( Type.equals("right") ) {
+    if( Type.equals("accessory") ) {
+      if (getOriNr() % 2 == 0)
+        orinr = 2;
+      else
+        orinr = 1;
+      
+      switch( AccNr ) {
+      case 1:
+        cX = (orinr == 1 ? 2:1);
+        cY = (orinr == 1 ? 1:2);
+        break;
+      case 40:
+        cX = (orinr == 1 ? 4:2);
+        cY = (orinr == 1 ? 2:4);
+        break;
+      }
+      
+      if( State.equals("turnout"))
+        ImageName = String.format("accessory_%d_on_%d", AccNr, orinr);
+      else
+        ImageName = String.format("accessory_%d_off_%d", AccNr, orinr);
+    }
+    else if( Type.equals("right") ) {
       if( State.equals("straight"))
         ImageName = String.format("turnout_rs_%d", orinr);
       else 
         ImageName = String.format("turnout_rt_%d", orinr);
       
-    } else if( Type.equals("left")) {
+    } 
+    else if( Type.equals("left")) {
         if( State.equals("straight"))
           ImageName = String.format("turnout_ls_%d", orinr);
         else 
           ImageName = String.format("turnout_lt_%d", orinr);
     
-    } else if( Type.equals("threeway")) {
+    } 
+    else if( Type.equals("threeway")) {
       if( State.equals("straight"))
         ImageName = String.format("threeway_s_%d", orinr);
       else if( State.equals("left"))
@@ -67,7 +93,8 @@ public class Switch extends Item implements View.OnClickListener {
       else 
         ImageName = String.format("threeway_r_%d", orinr);
       
-    } else if( Type.equals("dcrossing") ){
+    } 
+    else if( Type.equals("dcrossing") ){
       char st = 's';
       
       if( State.equals("straight"))
@@ -83,13 +110,16 @@ public class Switch extends Item implements View.OnClickListener {
       
       cX = orinr % 2 == 0 ? 1:2; 
       cY = orinr % 2 == 0 ? 2:1; 
-    } else if( Type.equals("crossing") ) {
+    } 
+    else if( Type.equals("crossing") ) {
       ImageName = "cross";
-    } else if( Type.equals("ccrossing") ) {
+    } 
+    else if( Type.equals("ccrossing") ) {
       ImageName = String.format("ccrossing_%d", (orinr % 2 == 0 ? 2:1));
       cX = orinr % 2 == 0 ? 1:2; 
       cY = orinr % 2 == 0 ? 2:1; 
-    } else if( Type.equals("decoupler") ) {
+    } 
+    else if( Type.equals("decoupler") ) {
       ImageName = String.format("decoupler_%d", (orinr % 2 == 0 ? 2:1));
     }
     
