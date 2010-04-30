@@ -41,18 +41,26 @@ public class Item implements View.OnClickListener {
   public int cX = 1;
   public int cY = 1;
   public boolean Show = true;
+  public boolean Background = false;
   public String Type = "";
   public String State = "";
   public String Text = "";
   public boolean textVertical = false;
   public String ImageName = "";
   public ImageView imageView = null;
-  public String colorName = "";
+  public int colorName = 0;
   
   boolean Reserved = false;
   boolean Entering = false;
   
   public Activity activity = null;
+  
+  public static final int COLOR_OPEN     = 0;
+  public static final int COLOR_CLOSED   = 1;
+  public static final int COLOR_FREE     = 2;
+  public static final int COLOR_RESERVED = 3;
+  public static final int COLOR_ENTER    = 4;
+  public static final int COLOR_OCCUPIED = 5;
 
 
   public Item(RocrailService rocrailService, Attributes atts) {

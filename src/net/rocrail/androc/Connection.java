@@ -169,7 +169,7 @@ public class Connection extends Thread {
       } catch (IOException ioe) {
         // TODO Auto-generated catch block
         ioe.printStackTrace();
-      } catch (Exception e) {
+      } catch (InterruptedException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }

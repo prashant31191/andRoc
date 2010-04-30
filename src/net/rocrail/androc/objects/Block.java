@@ -25,6 +25,7 @@ import org.xml.sax.Attributes;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,31 +40,29 @@ public class Block extends Item implements View.OnClickListener {
     Reserved = Item.getAttrValue(atts, "reserved", false); 
     Entering = Item.getAttrValue(atts, "entering", false); 
     Text = LocoID;
+    Background = true;
   }
   
   public void updateTextColor() {
     if( State.equals("closed") ) {
       Text = "Closed";
-      colorName = "block_closed";
+      colorName = Item.COLOR_CLOSED;
     }
-    else if( LocoID.length() > 0 ) {
+    else if( LocoID != null && LocoID.trim().length() > 0 ) {
       Text = LocoID;
       if( Reserved ) 
-        colorName = "block_reserved";
+        colorName = Item.COLOR_RESERVED;
       else if( Entering ) 
-        colorName = "block_enter";
+        colorName = Item.COLOR_ENTER;
       else 
-        colorName = "block_free";
+        colorName = Item.COLOR_OCCUPIED;
     }
     else {
       Text = ID;
-      colorName = "block_free";
+      colorName = Item.COLOR_FREE;
     }
   }
-
-
-
-  
+ 
   public String getImageName() {
     int orinr = getOriNr();
 
@@ -98,7 +97,7 @@ public class Block extends Item implements View.OnClickListener {
 
   
   public void updateWithAttributes(Attributes atts ) {
-    LocoID   = Item.getAttrValue(atts, "locid", ID); 
+    LocoID   = Item.getAttrValue(atts, "locid", LocoID); 
     Reserved = Item.getAttrValue(atts, "reserved", false); 
     Entering = Item.getAttrValue(atts, "entering", false); 
     State    = Item.getAttrValue(atts, "state", State); 

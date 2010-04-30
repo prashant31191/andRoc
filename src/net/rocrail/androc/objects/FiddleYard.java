@@ -45,20 +45,20 @@ public class FiddleYard extends Item  {
   public void updateTextColor() {
     if( State.equals("closed") ) {
       Text = "Closed";
-      colorName = "block_closed";
+      colorName = Item.COLOR_CLOSED;
     }
-    else if( LocoID.length() > 0 ) {
+    else if( LocoID != null && LocoID.trim().length() > 0 ) {
       Text = LocoID;
       if( Reserved ) 
-        colorName = "block_reserved";
+        colorName = Item.COLOR_RESERVED;
       else if( Entering ) 
-        colorName = "block_enter";
+        colorName = Item.COLOR_ENTER;
       else 
-        colorName = "block_free";
+        colorName = Item.COLOR_OCCUPIED;
     }
     else {
       Text = ID;
-      colorName = "block_free";
+      colorName = Item.COLOR_FREE;
     }
   }
 

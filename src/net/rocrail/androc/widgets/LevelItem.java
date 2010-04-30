@@ -24,6 +24,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -56,6 +57,29 @@ public class LevelItem extends ImageView implements OnGestureListener {
   protected void  onDraw  (Canvas canvas) {
     super.onDraw(canvas);
     item.Draw(canvas);
+    
+    if( item.Background ) {
+      Paint paint = new Paint();
+      paint.setAntiAlias(true);
+      paint.setColor(Color.WHITE);
+      paint.setStyle(Style.FILL);
+      switch( item.colorName ) {
+      case Item.COLOR_OCCUPIED:
+        paint.setColor(Color.rgb(255, 200, 200));
+        break;
+      case Item.COLOR_ENTER:
+        paint.setColor(Color.rgb(200, 200, 255));
+        break;
+      case Item.COLOR_RESERVED:
+        paint.setColor(Color.rgb(255, 255, 200));
+        break;
+      case Item.COLOR_CLOSED:
+        paint.setColor(Color.rgb(200, 200, 200));
+        break;
+      }
+      canvas.drawRect(8, 8, item.cX*32-8, item.cY*32-8, paint);
+    }
+    
     if( item.Text != null && item.Text.trim().length() > 0 ) {
       // draw the text on top of the image
       if( item.textVertical ) {

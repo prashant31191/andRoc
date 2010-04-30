@@ -74,7 +74,7 @@ class XmlHandler extends DefaultHandler {
       return;
     }
     
-    if(localName.equals("plan")) {
+    if(!m_bParsingPlan && localName.equals("plan")) {
       m_bParsingPlan = true;
       m_Model.setup(atts);
       return;
