@@ -148,9 +148,14 @@ public class Connection extends Thread {
               readHdr = true;
             }
           }
+          else {
+            Thread.sleep(10);            
+          }
+        }
+        else {
+          Thread.sleep(10);
         }
         
-        Thread.sleep(10);
       } catch (SocketException soce) {
         // TODO: Inform the system
         soce.printStackTrace();
@@ -164,9 +169,9 @@ public class Connection extends Thread {
       } catch (IOException ioe) {
         // TODO Auto-generated catch block
         ioe.printStackTrace();
-      } catch (InterruptedException inte) {
+      } catch (Exception e) {
         // TODO Auto-generated catch block
-        inte.printStackTrace();
+        e.printStackTrace();
       }
     }
   }
