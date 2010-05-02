@@ -58,4 +58,8 @@
   <string name="Previous">Vorheriges</string>
   <string name="Next">Nächste</string>
   <string name="Track">Gleis</string>
+  <string name="SetLoco">Lok setzen</string>
+  <string name="ResetLoco">Lok zurücksetzen</string>
+  <string name="Close">Schließen</string>
+  <string name="Open">Öffnen</string>
 </resources>

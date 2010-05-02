@@ -61,4 +61,6 @@
   <string name="Previous">Voorgaande</string>
   <string name="Next">Volgende</string>
   <string name="Track">Spoor</string>
+  <string name="SetLoco">Zet Loc</string>
+  <string name="ResetLoco">Reset Loc</string>
 </resources>

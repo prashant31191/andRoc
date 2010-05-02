@@ -31,7 +31,8 @@ import android.widget.TextView;
 
 public class Block extends Item implements View.OnClickListener {
   boolean Small    = false;
-  String LocoID = "-";
+  public String LocoID = "-";
+  public boolean Closed = false;
   
   public Block(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
@@ -101,15 +102,16 @@ public class Block extends Item implements View.OnClickListener {
     Reserved = Item.getAttrValue(atts, "reserved", false); 
     Entering = Item.getAttrValue(atts, "entering", false); 
     State    = Item.getAttrValue(atts, "state", State); 
-
+    Closed   = State.equals("closed");
     updateTextColor();
     super.updateWithAttributes(atts);
   }
 
 
   public void onClick(View v) {
+    Closed = !Closed;
     m_RocrailService.sendMessage("bk", String.format( "<bk id=\"%s\" state=\"%s\"/>", 
-        ID, State.equals("open")?"closed":"open" ) );
+        ID, Closed?"closed":"open" ) );
   }
   
   public void propertiesView() {

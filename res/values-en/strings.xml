@@ -62,4 +62,6 @@
   <string name="Previous">Previous</string>
   <string name="Next">Next</string>
   <string name="Track">Track</string>
+  <string name="SetLoco">Set Loco</string>
+  <string name="ResetLoco">Reset Loco</string>
 </resources>
