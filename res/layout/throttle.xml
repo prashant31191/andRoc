@@ -23,7 +23,7 @@
 	android:layout_height="fill_parent"
    android:orientation="vertical">
       <net.rocrail.androc.widgets.LocoImage android:id="@+id/locoImage" android:layout_width="fill_parent" android:clickable="true"
-      android:layout_height="50px" android:src="@drawable/noimg" android:padding="5dp"/>
+      android:layout_height="60px" android:src="@drawable/noimg" android:padding="5dp"/>
 				<Spinner android:id="@+id/spinnerLoco" android:textStyle="bold" android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
 				<LinearLayout android:id="@+id/fun1"

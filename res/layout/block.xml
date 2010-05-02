@@ -25,7 +25,7 @@
     android:textStyle="bold"></TextView>
     
   <net.rocrail.androc.widgets.LocoImage android:id="@+id/blockLocoImage" android:layout_width="fill_parent"
-    android:clickable="true" android:layout_height="50px"
+    android:clickable="true" android:layout_height="60px"
     android:src="@drawable/noimg" android:padding="5dp"/>
 
 
