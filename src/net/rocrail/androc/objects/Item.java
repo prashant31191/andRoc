@@ -70,6 +70,10 @@ public class Item implements View.OnClickListener {
     ID   = getAttrValue(atts, "id", "?"); 
     X    = getAttrValue(atts, "x", 0); 
     Y    = getAttrValue(atts, "y", 0); 
+    X    = getAttrValue(atts, "prev_x", X); 
+    Y    = getAttrValue(atts, "prev_y", Y); 
+    Ori  = getAttrValue(atts, "ori", Ori); 
+    Ori  = getAttrValue(atts, "prev_ori", Ori); 
     Z    = getAttrValue(atts, "z", 0); 
     cX   = getAttrValue(atts, "cx", 1); 
     cY   = getAttrValue(atts, "cy", 1); 
@@ -111,7 +115,6 @@ public class Item implements View.OnClickListener {
   }
   
   public void updateWithAttributes(Attributes atts ) {
-    Ori   = getAttrValue(atts, "ori", Ori); 
     Type  = getAttrValue(atts, "type", Type); 
     State = getAttrValue(atts, "state", State); 
     
