@@ -54,11 +54,17 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
   
   void updateLoco() {
     TextView text = (TextView)findViewById(R.id.blockID);
-    text.setText(m_Block.ID + ": " + LocoID );
-    
-    Loco lc = m_RocrailService.m_Model.getLoco(LocoID);
+    text.setText(m_Block.ID + ": " + (LocoID==null?"-":LocoID) );
 
     LocoImage image = (LocoImage)findViewById(R.id.blockLocoImage);
+    
+    if( LocoID == null ) {
+      image.setImageResource(R.drawable.noimg);
+      image.ID = null;
+      return;
+    }
+    
+    Loco lc = m_RocrailService.m_Model.getLoco(LocoID);
     image.ID = LocoID;
     
     if (lc != null && lc.getLocoBmp(image) != null) {
@@ -102,7 +108,6 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     }
     
     s.setOnItemSelectedListener(this);
-    // s.setSelection(m_RocrailService.m_iSelectedLoco);    
     
 
     updateLoco();
@@ -118,16 +123,18 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     final Button setInBlock = (Button) findViewById(R.id.blockSetLoco);
     setInBlock.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          Spinner s = (Spinner) findViewById(R.id.blockLocos);
+          String id = (String)s.getSelectedItem();
+          LocoID = (id.equals("none")?null:id);
           if( LocoID != null ) {
             m_RocrailService.sendMessage("lc", 
                 String.format("<lc id=\"%s\" cmd=\"block\" blockid=\"%s\"/>", LocoID, m_Block.ID ) );
-            updateLoco();
           }
           else {
             m_RocrailService.sendMessage("bk", 
                 String.format("<bk id=\"%s\" cmd=\"loc\" locid=\"\"/>", m_Block.ID ) );
-            updateLoco();
           }
+          updateLoco();
         }
     });
 
@@ -148,9 +155,8 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
 
   @Override
   public void onItemSelected(AdapterView<?> adview, View view, int position, long longID) {
-    Spinner s = (Spinner) findViewById(R.id.blockLocos);
     String id = (String)adview.getSelectedItem();
-    LocoID = id.equals("none")?null:id;
+    LocoID = (id.equals("none")?null:id);
   }
 
   @Override
