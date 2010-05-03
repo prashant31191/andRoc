@@ -28,12 +28,17 @@ import javax.xml.parsers.SAXParser;
 
 import org.xml.sax.Attributes;
 
+import net.rocrail.androc.activities.ActSystem;
 import net.rocrail.androc.interfaces.MessageListener;
 import net.rocrail.androc.interfaces.SystemListener;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
@@ -61,7 +66,8 @@ public class RocrailService extends Service {
   public List<String>  MessageList = new ArrayList<String>();
 
   MessageListener messageListener = null;
-  
+  private static final int NOTIFICATION_POWER = 1;
+
   @Override
   public void onCreate() {
     m_Model = new Model(this);
@@ -193,7 +199,30 @@ public class RocrailService extends Service {
       return;
     }
     if( itemtype.equals("state") ) {
-      Power = Item.getAttrValue(atts, "power", false);
+      boolean l_Power = Item.getAttrValue(atts, "power", Power);
+      if( Power && !l_Power ) {
+      
+        int icon = R.drawable.system;        // icon from resources
+        CharSequence tickerText = "Power Down";              // ticker-text
+        long when = System.currentTimeMillis();         // notification time
+        Context context = getApplicationContext();      // application Context
+        CharSequence contentTitle = "Rocrail Event";  // expanded message title
+        CharSequence contentText = "Global Power is down.";      // expanded message text
+  
+        Intent notificationIntent = new Intent(this, ActSystem.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+  
+        // the next two lines initialize the Notification, using the configurations above
+        Notification notification = new Notification(icon, tickerText, when);
+        notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL;
+        notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);      
+
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
+        mNotificationManager.notify(NOTIFICATION_POWER, notification);
+      }
+      
+      Power = l_Power;
       return;
     }
     if( itemtype.equals("auto") ) {
