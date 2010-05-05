@@ -186,6 +186,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     button.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
             // Perform action on click
+          v.setEnabled(false);
           EditText s = (EditText) findViewById(R.id.connectHost);
           m_RocrailService.m_Host = s.getText().toString();
           s = (EditText) findViewById(R.id.connectPort);
@@ -230,6 +231,8 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
   @Override
   public void onItemSelected(AdapterView<?> arg0, View view, int position, long longID) {
     if( position > 0 ) {
+      Button button = (Button) findViewById(R.id.ButtonConnect);
+      button.setEnabled(false);
       ConnectionDetails con = conList.get(position-1);
       doConnect(con.HostName, con.Port);
     }
