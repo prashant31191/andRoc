@@ -24,6 +24,8 @@ import java.util.Iterator;
 import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.MessageListener;
 import net.rocrail.androc.widgets.LEDButton;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,11 +53,17 @@ public class ActSystem extends ActBase implements MessageListener {
 
   
   public void updateMessageList() {
-    final TextView msgList = (TextView) findViewById(R.id.systemMessages);
-    msgList.setText("");
-    Iterator<String> it = m_RocrailService.MessageList.iterator();
-    while( it.hasNext()) {
-      msgList.append(it.next()+"\n");
+    try {
+      TextView msgList = (TextView) findViewById(R.id.systemMessages);
+      msgList.setText("");
+      Iterator<String> it = m_RocrailService.MessageList.iterator();
+      while( it.hasNext()) {
+        msgList.append(it.next()+"\n");
+      }
+    }
+    catch(Exception e ) {
+      // msgList is no longer valid
+      e.printStackTrace();
     }
   }
   
@@ -119,9 +127,32 @@ public class ActSystem extends ActBase implements MessageListener {
     autoStart.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           // TODO: show alert if going from stop to start
-          m_RocrailService.AutoMode = !m_RocrailService.AutoStart;
+          if(!m_RocrailService.AutoStart) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(ActSystem.this);
+            builder.setMessage("Start all locos in auto mode?")
+                   .setCancelable(false)
+                   .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int id) {
+                          m_RocrailService.AutoStart = !m_RocrailService.AutoStart;
+                          m_RocrailService.sendMessage("sys", String.format("<auto cmd=\"%s\"/>", m_RocrailService.AutoStart?"start":"stop") );
+                          LEDButton v = (LEDButton) findViewById(R.id.systemAutoStart);
+                          v.ON = m_RocrailService.AutoStart;
+                       }
+                   })
+                   .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                       }
+                   });
+            AlertDialog alert = builder.create();
+            alert.show();
+          }
+          else {
+            m_RocrailService.AutoStart = !m_RocrailService.AutoStart;
+            m_RocrailService.sendMessage("sys", String.format("<auto cmd=\"%s\"/>", m_RocrailService.AutoStart?"start":"stop") );
+            ((LEDButton)v).ON = m_RocrailService.AutoStart;
+          }
           ((LEDButton)v).ON = m_RocrailService.AutoStart;
-          m_RocrailService.sendMessage("sys", String.format("<auto cmd=\"%s\"/>", m_RocrailService.AutoStart?"start":"stop") );
         }
     });
 
@@ -133,8 +164,8 @@ public class ActSystem extends ActBase implements MessageListener {
   public void newMessages() {
     // use post method to refresh the message list
     final TextView msgList = (TextView) findViewById(R.id.systemMessages);
-
-    msgList.post(new UpdateMessages(this));
+    if( msgList != null )
+      msgList.post(new UpdateMessages(this));
 
   }
 

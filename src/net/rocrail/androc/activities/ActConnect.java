@@ -43,7 +43,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.SystemListener;
-import net.rocrail.androc.objects.Loco;
 
 public class ActConnect extends ActBase implements ModelListener, SystemListener, OnItemSelectedListener {
   static final int PROGRESS_DIALOG = 0;
@@ -191,6 +190,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           m_RocrailService.m_Host = s.getText().toString();
           s = (EditText) findViewById(R.id.connectPort);
           m_RocrailService.m_iPort = Integer.parseInt(s.getText().toString());
+          conList = ConHisto.parse(m_RocrailService.m_Recent);
 
           ConHisto.addToList("-", m_RocrailService.m_Host, m_RocrailService.m_iPort, conList);
           m_RocrailService.m_Recent = ConHisto.serialize(conList);
