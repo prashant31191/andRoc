@@ -157,6 +157,17 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     }
   }
   
+  void saveConnection(String host, int port, boolean recent) {
+    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+    SharedPreferences.Editor editor = settings.edit();
+    editor.putString("host", host);
+    editor.putInt("port", port);
+    if( recent)
+      editor.putString("recent", m_RocrailService.m_Recent);
+    editor.commit();
+    
+  }
+  
   
   public void initView() {
     setContentView(R.layout.connect);
@@ -187,6 +198,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
         public void onClick(View v) {
             // Perform action on click
           v.setEnabled(false);
+          
           EditText s = (EditText) findViewById(R.id.connectHost);
           m_RocrailService.m_Host = s.getText().toString();
           s = (EditText) findViewById(R.id.connectPort);
@@ -195,12 +207,8 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
 
           ConHisto.addToList("-", m_RocrailService.m_Host, m_RocrailService.m_iPort, conList);
           m_RocrailService.m_Recent = ConHisto.serialize(conList);
-          SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-          SharedPreferences.Editor editor = settings.edit();
-          editor.putString("host", m_RocrailService.m_Host);
-          editor.putInt("port", m_RocrailService.m_iPort);
-          editor.putString("recent", m_RocrailService.m_Recent);
-          editor.commit();
+          
+          saveConnection(m_RocrailService.m_Host, m_RocrailService.m_iPort, true);
 
           doConnect(m_RocrailService.m_Host, m_RocrailService.m_iPort);
           
@@ -234,6 +242,14 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
       Button button = (Button) findViewById(R.id.ButtonConnect);
       button.setEnabled(false);
       ConnectionDetails con = conList.get(position-1);
+
+      EditText s = (EditText) findViewById(R.id.connectHost);
+      s.setText(con.HostName);
+      s = (EditText) findViewById(R.id.connectPort);
+      s.setText(""+con.Port);
+
+      saveConnection(con.HostName, con.Port, false);
+
       doConnect(con.HostName, con.Port);
     }
   }
