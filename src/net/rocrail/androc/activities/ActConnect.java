@@ -275,6 +275,7 @@ class ConHisto {
       ConnectionDetails c = it.next();
       if( c.equals(con) ) {
         conList.remove(c);
+        break;
       }
     }
     conList.add(0,con);
