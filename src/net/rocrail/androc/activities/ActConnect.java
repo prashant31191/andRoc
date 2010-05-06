@@ -153,7 +153,10 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
       
       AlertDialog alert = builder.create();
       alert.show();
-    
+      
+      Button v = (Button) findViewById(R.id.ButtonConnect);
+      v.setEnabled(true);
+
     }
   }
   
