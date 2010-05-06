@@ -30,6 +30,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -158,6 +159,7 @@ public class ActBase extends Activity implements ServiceListener {
   
   public void connectView() {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActConnect.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     m_Activity.startActivity(intent);
     if(Finish) 
       m_Activity.finish();
@@ -165,6 +167,7 @@ public class ActBase extends Activity implements ServiceListener {
   
   public void throttleView() {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActThrottle.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     m_Activity.startActivityIfNeeded(intent,0);
     if(Finish) 
       m_Activity.finish();
@@ -196,6 +199,11 @@ public class ActBase extends Activity implements ServiceListener {
     m_Activity.startActivityIfNeeded(intent,0);
     if(Finish) 
       m_Activity.finish();
+  }
+
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    // TODO Auto-generated method stub
+    return super.onKeyDown(keyCode, event);
   }
   
 }

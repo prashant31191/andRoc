@@ -21,9 +21,12 @@ package net.rocrail.androc.activities;
 
 import java.util.Iterator;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -382,5 +385,36 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     // TODO Auto-generated method stub
     
   }
+  
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+      //Handle the back button
+      if(keyCode == KeyEvent.KEYCODE_BACK) {
+          //Ask the user if they want to quit
+          new AlertDialog.Builder(this)
+          .setIcon(android.R.drawable.ic_dialog_alert)
+          .setTitle(R.string.quit)
+          .setMessage(R.string.really_quit)
+          .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+
+                  //Stop the activity
+                  ActThrottle.this.finish();    
+              }
+
+          })
+          .setNegativeButton(R.string.no, null)
+          .show();
+
+          return true;
+      }
+      else {
+          return super.onKeyDown(keyCode, event);
+      }
+
+  }
+
 
 }

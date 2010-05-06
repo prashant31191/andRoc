@@ -70,6 +70,16 @@ public class Model {
     m_LocoList.clear();
     m_LocoMap.clear();
     m_ZLevelList.clear();
+    m_SwitchMap.clear();
+    m_OutputMap.clear();
+    m_SignalMap.clear();
+    m_SensorMap.clear();
+    m_BlockMap.clear();
+    m_FiddleYardMap.clear();
+    m_TurntableMap.clear();
+    m_ItemList.clear();
+    m_ScheduleList.clear();
+    m_RouteList.clear();
     
     m_Title = Item.getAttrValue(atts, "title", "New");  
     m_Name = Item.getAttrValue(atts, "name", "plan.xml");  

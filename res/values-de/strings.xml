@@ -62,4 +62,9 @@
   <string name="ResetLoco">Lok zurücksetzen</string>
   <string name="Close">Schließen</string>
   <string name="Open">Öffnen</string>
+  <string name="quit">Beenden</string>
+  <string name="really_quit">andRoc beenden?</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nein</string>
+  <string name="start_all_locos">Start alle Loks in Automat?</string>
 </resources>

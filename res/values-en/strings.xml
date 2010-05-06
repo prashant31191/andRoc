@@ -64,4 +64,9 @@
   <string name="Track">Track</string>
   <string name="SetLoco">Set Loco</string>
   <string name="ResetLoco">Reset Loco</string>
+  <string name="quit">Quit</string>
+  <string name="really_quit">Quit andRoc?</string>
+  <string name="yes">Yes</string>
+  <string name="no">No</string>
+  <string name="start_all_locos">Start all locos in auto mode?</string>
 </resources>

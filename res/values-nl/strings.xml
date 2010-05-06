@@ -63,4 +63,9 @@
   <string name="Track">Spoor</string>
   <string name="SetLoco">Zet Loc</string>
   <string name="ResetLoco">Reset Loc</string>
+  <string name="quit">Stoppen</string>
+  <string name="really_quit">Stop andRoc?</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nee</string>
+  <string name="start_all_locos">Start alle locs in automaat?</string>
 </resources>

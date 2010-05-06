@@ -129,9 +129,9 @@ public class ActSystem extends ActBase implements MessageListener {
           // TODO: show alert if going from stop to start
           if(!m_RocrailService.AutoStart) {
             AlertDialog.Builder builder = new AlertDialog.Builder(ActSystem.this);
-            builder.setMessage("Start all locos in auto mode?")
+            builder.setMessage(R.string.start_all_locos)
                    .setCancelable(false)
-                   .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                   .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
                           m_RocrailService.AutoStart = !m_RocrailService.AutoStart;
                           m_RocrailService.sendMessage("sys", String.format("<auto cmd=\"%s\"/>", m_RocrailService.AutoStart?"start":"stop") );
@@ -139,7 +139,7 @@ public class ActSystem extends ActBase implements MessageListener {
                           v.ON = m_RocrailService.AutoStart;
                        }
                    })
-                   .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                   .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                        public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                        }
