@@ -71,4 +71,6 @@
   <string name="start_all_locos">Start all locos in auto mode?</string>
   <string name="Preferences">Preferences</string>
   <string name="Monitoring">System monitoring</string>
+  <string name="Address">Address</string>
+  <string name="Runtime">Runtime</string>
 </resources>

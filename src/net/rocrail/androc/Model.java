@@ -100,7 +100,7 @@ public class Model {
     Iterator<Loco> it = m_LocoList.iterator();
     while( it.hasNext()) {
       Loco loco = it.next();
-      if( ID.equals(loco.ID ))
+      if( ID.equals(loco.ID ) || ID.equals(loco.toString() ) )
         return loco;
     }
     return null;

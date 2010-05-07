@@ -70,4 +70,6 @@
   <string name="start_all_locos">Start alle locs in automaat?</string>
   <string name="Preferences">Instellingen</string>
   <string name="Monitoring">System monitoring</string>
+  <string name="Address">Adres</string>
+  <string name="Runtime">Looptijd</string>
 </resources>

@@ -141,8 +141,8 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
-      m_adapterForSpinner.add(loco.ID);
-      if( LocoID.length() > 0 && LocoID.equals(loco.ID) ) {
+      m_adapterForSpinner.add(loco.toString());
+      if( LocoID.length() > 0 && LocoID.equals(loco.toString()) ) {
         m_RocrailService.m_iSelectedLoco = m_iLocoCount;
       }
       m_iLocoCount++;
@@ -314,7 +314,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
             while (it.hasNext()) {
               Loco loco = (Loco) it.next();
               // TODO: invoke later?
-              m_adapterForSpinner.add(loco.ID);
+              m_adapterForSpinner.add(loco.toString());
 
             }
           }
@@ -357,7 +357,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
       
       SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
       SharedPreferences.Editor editor = settings.edit();
-      editor.putString("locoid", m_Loco.ID);
+      editor.putString("locoid", m_Loco.toString());
       editor.commit();
 
       LEDButton f0 = (LEDButton) findViewById(R.id.throttleLights);

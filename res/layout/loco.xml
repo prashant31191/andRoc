@@ -24,6 +24,15 @@
   <net.rocrail.androc.widgets.LocoImage android:id="@+id/locoImage" android:layout_width="fill_parent"
     android:clickable="true" android:layout_height="60px"
     android:src="@drawable/noimg" android:padding="5dp"/>
+    
+  <TextView android:text="address" android:id="@+id/locoAddress" 
+  android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+  <TextView android:text="runtime" android:id="@+id/locoRuntime" 
+  android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+  <TextView android:text="description" android:id="@+id/locoDesc" 
+  android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+  <TextView android:text="roadname" android:id="@+id/locoRoadname" 
+  android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
 
   <LinearLayout android:id="@+id/locoLayout1" android:orientation="vertical"
     android:layout_width="fill_parent" android:layout_height="fill_parent">
@@ -50,7 +59,7 @@
         android:text="@string/Set_in_block" android:textStyle="bold" android:id="@+id/locoSetInBlock"
         android:layout_width="fill_parent"
         android:layout_height="60dp" />
-    </LinearLayout>
+</LinearLayout>
   </LinearLayout>
 
 

@@ -31,8 +31,13 @@ public class Loco {
   RocrailService  rocrailService = null;
 
   public String  ID      = "?";
+  public String  Description = "";
+  public String  Roadname = "";
   public String  PicName = null;
   private Bitmap LocoBmp = null;
+  public int     Addr    = 0;
+  public int     Steps   = 0;
+  public long    RunTime = 0;
   public int     Speed   = 0;
   public int     Vmax    = 0;
   public int     Vprev   = 0;
@@ -58,30 +63,18 @@ public class Loco {
     PicName = atts.getValue("image");
     properties = atts;
     /*
-    Vmax     = [Globals getAttribute:@"V_max" fromDict:attributeDict withDefault:@""];
-    vmaxstr  = [Globals getAttribute:@"V_max" fromDict:attributeDict withDefault:@""];
     Vmid     = [Globals getAttribute:@"V_mid" fromDict:attributeDict withDefault:@""];
     Vmin     = [Globals getAttribute:@"V_min" fromDict:attributeDict withDefault:@""];
     Vmode    = [Globals getAttribute:@"V_mode" fromDict:attributeDict withDefault:@""];
-    Fn       = [Globals getAttribute:@"fn" fromDict:attributeDict withDefault:@""];
-    Fx       = [Globals getAttribute:@"fx" fromDict:attributeDict withDefault:@""];
-    SpCnt    = [Globals getAttribute:@"spcnt" fromDict:attributeDict withDefault:@""];
     Placing  = [Globals getAttribute:@"placing" fromDict:attributeDict withDefault:@""];
     Mode     = [Globals getAttribute:@"mode" fromDict:attributeDict withDefault:@""];
-    imgname  = [Globals getAttribute:@"image" fromDict:attributeDict withDefault:@""];
-    desc     = [Globals getAttribute:@"desc" fromDict:attributeDict withDefault:@""];
-    roadname = [Globals getAttribute:@"roadname" fromDict:attributeDict withDefault:@""];
-    dir      = [Globals getAttribute:@"dir" fromDict:attributeDict withDefault:@""];
-    vstr     = [Globals getAttribute:@"V" fromDict:attributeDict withDefault:@"0"];
     */
+    Description = Item.getAttrValue(atts, "desc","");
+    Roadname = Item.getAttrValue(atts, "roadname", "");
     Vmax  = Item.getAttrValue(atts, "V_max", 100);
-    int fx = Item.getAttrValue(atts, "fx", 0 );
-    
-    for(int i = 1; i < 32; i++) {
-      int mask = 1 << (i-1);
-      Function[i] = ( (fx & mask) == mask ) ? true:false; 
-    }
-
+    Addr  = Item.getAttrValue(atts, "addr", 0);
+    Steps  = Item.getAttrValue(atts, "spcnt", 0);
+    RunTime = Item.getAttrValue(atts, "runtime", 0);
     updateWithAttributes(atts);
   }
 
@@ -89,6 +82,20 @@ public class Loco {
     //Dir    = Item.getAttrValue(atts, "dir", Dir);
     //Speed  = Item.getAttrValue(atts, "V", Speed);
     //Lights = Item.getAttrValue(atts, "fn", Lights );
+
+    int fx = Item.getAttrValue(atts, "fx", 0 );
+    
+    for(int i = 1; i < 32; i++) {
+      int mask = 1 << (i-1);
+      Function[i] = ( (fx & mask) == mask ) ? true:false; 
+    }
+  }
+  
+  public String toString() {
+    if( Description.length() > 0 ) {
+      return ID + ", " + Description;
+    }
+    return ID;
   }
 
   public Bitmap getLocoBmp(LocoImage image) {

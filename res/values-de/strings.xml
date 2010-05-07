@@ -69,4 +69,6 @@
   <string name="start_all_locos">Start alle Loks in Automat?</string>
   <string name="Preferences">Einstellungen</string>
   <string name="Monitoring">System Meldungen</string>
+  <string name="Address">Adresse</string>
+  <string name="Runtime">Laufzeit</string>
 </resources>

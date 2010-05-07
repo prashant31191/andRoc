@@ -27,6 +27,7 @@ import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
 import net.rocrail.androc.widgets.LocoImage;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,6 +35,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class ActLoco extends ActBase implements OnItemSelectedListener {
@@ -70,6 +72,16 @@ public class ActLoco extends ActBase implements OnItemSelectedListener {
 
     if( m_Loco == null )
       return;
+
+    TextView addr = (TextView)findViewById(R.id.locoAddress);
+    addr.setText(getText(R.string.Address) + ": " + m_Loco.Addr + "/" + m_Loco.Steps);
+    TextView runtime = (TextView)findViewById(R.id.locoRuntime);
+    runtime.setText(getText(R.string.Runtime) + ": " + String.format("%d:%02d.%02d", 
+        (int)(m_Loco.RunTime/3600), (int)(m_Loco.RunTime/60), (int)(m_Loco.RunTime%60)) );
+    TextView desc = (TextView)findViewById(R.id.locoDesc);
+    desc.setText(m_Loco.Description);
+    TextView road = (TextView)findViewById(R.id.locoRoadname);
+    road.setText(m_Loco.Roadname);
     
     LocoImage image = (LocoImage)findViewById(R.id.locoImage);
     
