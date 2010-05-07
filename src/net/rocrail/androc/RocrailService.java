@@ -44,11 +44,12 @@ import android.os.Binder;
 import android.os.IBinder;
 
 public class RocrailService extends Service {
-  public String m_Recent   = "rocrail.dyndns.org:8080;";
-  public String m_Host     = "rocrail.dyndns.org";
-  public int    m_iPort    = 8080;
-  public Model  m_Model    = null;
-  public String m_DevideId = "andRoc";
+  public String  m_Recent      = "rocrail.dyndns.org:8080;";
+  public String  m_Host        = "rocrail.dyndns.org";
+  public int     m_iPort       = 8080;
+  public boolean m_bMonitoring = true;
+  public Model   m_Model       = null;
+  public String  m_DevideId    = "andRoc";
   
   public int    m_iSelectedLoco = 0;
   public Loco   SelectedLoco = null;
@@ -112,7 +113,7 @@ public class RocrailService extends Service {
     }
     
     m_Socket = new Socket(m_Host, m_iPort);
-    sendMessage("model","<model cmd=\"plan\" disablemonitor=\"false\"/>");
+    sendMessage("model",String.format("<model cmd=\"plan\" disablemonitor=\"%s\"/>", m_bMonitoring?"false":"true"));
     if( m_Connection == null ) {
       m_Connection = new Connection(this, m_Model, m_Socket);
       m_Connection.start();

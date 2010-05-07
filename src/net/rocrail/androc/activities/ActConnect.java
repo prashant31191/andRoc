@@ -122,6 +122,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           progressDialog.setProgress(total);
           if (total >= 100){
               dismissDialog(PROGRESS_DIALOG);
+              saveConnection(m_RocrailService.m_Host, m_RocrailService.m_iPort, true);
           }
       }
   };
@@ -211,8 +212,6 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           ConHisto.addToList("-", m_RocrailService.m_Host, m_RocrailService.m_iPort, conList);
           m_RocrailService.m_Recent = ConHisto.serialize(conList);
           
-          saveConnection(m_RocrailService.m_Host, m_RocrailService.m_iPort, true);
-
           doConnect(m_RocrailService.m_Host, m_RocrailService.m_iPort);
           
         }
@@ -250,8 +249,6 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
       s.setText(con.HostName);
       s = (EditText) findViewById(R.id.connectPort);
       s.setText(""+con.Port);
-
-      saveConnection(con.HostName, con.Port, false);
 
       doConnect(con.HostName, con.Port);
     }

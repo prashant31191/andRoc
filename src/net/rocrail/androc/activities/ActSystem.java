@@ -36,7 +36,7 @@ public class ActSystem extends ActBase implements MessageListener {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_LAYOUT;
+    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_LAYOUT | ActBase.MENU_PREFERENCES;
     connectWithService();
   }
   
