@@ -45,6 +45,7 @@ public class ActMenu extends  ListActivity implements ServiceListener {
   }
   
   public void connectedWithService() {
+    m_Base.connectedWithService();
     initView();
     m_Base.updateTitle("Menu");
   }

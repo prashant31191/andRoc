@@ -33,6 +33,7 @@ import android.os.IBinder;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 public class ActBase extends Activity implements ServiceListener {
   public static final String PREFS_NAME = "andRoc.ini";
@@ -88,7 +89,8 @@ public class ActBase extends Activity implements ServiceListener {
   }
 
   public void connectedWithService() {
-    
+    if(m_RocrailService.m_bKeepScreenOn )
+      getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
   }
   
   public void updateTitle(String title) {
@@ -98,8 +100,6 @@ public class ActBase extends Activity implements ServiceListener {
     m_Activity.setTitle("andRoc " + m_RocrailService.m_Model.m_Title);
   }
   
-
-  
   public void restorePreferences() {
   // Restore preferences
     SharedPreferences settings = m_Activity.getSharedPreferences(PREFS_NAME, 0);
@@ -107,7 +107,8 @@ public class ActBase extends Activity implements ServiceListener {
       m_RocrailService.m_Host   = settings.getString("host", "rocrail.dyndns.org");
       m_RocrailService.m_iPort  = settings.getInt("port", 8080);
       m_RocrailService.m_Recent = settings.getString("recent", "rocrail.dyndns.org:8080;");
-      m_RocrailService.m_bMonitoring = settings.getBoolean("monitoring", true);
+      m_RocrailService.m_bMonitoring = settings.getBoolean("monitoring", false);
+      m_RocrailService.m_bKeepScreenOn = settings.getBoolean("keepscreenon", false);
     }
   }
 

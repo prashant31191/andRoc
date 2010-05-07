@@ -40,6 +40,8 @@ public class Loco {
   public long    RunTime = 0;
   public int     Speed   = 0;
   public int     Vmax    = 0;
+  public int     Vmid    = 0;
+  public int     Vmin    = 0;
   public int     Vprev   = 0;
   
   public static final int VDelta = 5;
@@ -70,11 +72,10 @@ public class Loco {
     Mode     = [Globals getAttribute:@"mode" fromDict:attributeDict withDefault:@""];
     */
     Description = Item.getAttrValue(atts, "desc","");
-    Roadname = Item.getAttrValue(atts, "roadname", "");
-    Vmax  = Item.getAttrValue(atts, "V_max", 100);
-    Addr  = Item.getAttrValue(atts, "addr", 0);
-    Steps  = Item.getAttrValue(atts, "spcnt", 0);
-    RunTime = Item.getAttrValue(atts, "runtime", 0);
+    Roadname    = Item.getAttrValue(atts, "roadname", "");
+    Addr        = Item.getAttrValue(atts, "addr", 0);
+    Steps       = Item.getAttrValue(atts, "spcnt", 0);
+    RunTime     = Item.getAttrValue(atts, "runtime", 0);
     updateWithAttributes(atts);
   }
 
@@ -82,6 +83,9 @@ public class Loco {
     //Dir    = Item.getAttrValue(atts, "dir", Dir);
     //Speed  = Item.getAttrValue(atts, "V", Speed);
     //Lights = Item.getAttrValue(atts, "fn", Lights );
+    Vmax        = Item.getAttrValue(atts, "V_max", 100);
+    Vmid        = Item.getAttrValue(atts, "V_mid", 50);
+    Vmin        = Item.getAttrValue(atts, "V_min", 10);
 
     int fx = Item.getAttrValue(atts, "fx", 0 );
     

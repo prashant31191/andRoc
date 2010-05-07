@@ -47,7 +47,8 @@ public class RocrailService extends Service {
   public String  m_Recent      = "rocrail.dyndns.org:8080;";
   public String  m_Host        = "rocrail.dyndns.org";
   public int     m_iPort       = 8080;
-  public boolean m_bMonitoring = true;
+  public boolean m_bMonitoring = false;
+  public boolean m_bKeepScreenOn = false;
   public Model   m_Model       = null;
   public String  m_DevideId    = "andRoc";
   

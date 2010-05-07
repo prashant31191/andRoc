@@ -72,4 +72,5 @@
   <string name="Monitoring">System monitoring</string>
   <string name="Address">Adres</string>
   <string name="Runtime">Looptijd</string>
+  <string name="KeepScreenOn">Display aan laten</string>
 </resources>

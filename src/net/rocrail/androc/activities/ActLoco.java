@@ -34,11 +34,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
-public class ActLoco extends ActBase implements OnItemSelectedListener {
+public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBarChangeListener {
   Loco m_Loco = null;
   String ScheduleID = null;
   String BlockID    = null;
@@ -96,6 +98,17 @@ public class ActLoco extends ActBase implements OnItemSelectedListener {
         finish();
       }
   });
+    /*
+    SeekBar Vmax = (SeekBar)findViewById(R.id.locoVmax);
+    Vmax.setOnSeekBarChangeListener(this);
+    Vmax.setProgress(m_Loco.Vmax);
+    SeekBar Vmid = (SeekBar)findViewById(R.id.locoVmid);
+    Vmid.setOnSeekBarChangeListener(this);
+    Vmid.setProgress(m_Loco.Vmid);
+    SeekBar Vmin = (SeekBar)findViewById(R.id.locoVmin);
+    Vmin.setOnSeekBarChangeListener(this);
+    Vmin.setProgress(m_Loco.Vmin);
+*/
     
     final LEDButton autoStart = (LEDButton) findViewById(R.id.locoStart);
     autoStart.ON = m_Loco.AutoStart;
@@ -200,6 +213,24 @@ public class ActLoco extends ActBase implements OnItemSelectedListener {
 
   @Override
   public void onNothingSelected(AdapterView<?> arg0) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void onStartTrackingTouch(SeekBar arg0) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void onStopTrackingTouch(SeekBar arg0) {
     // TODO Auto-generated method stub
     
   }

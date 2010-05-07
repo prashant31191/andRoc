@@ -26,6 +26,7 @@ public class ActFiddleYard  extends ActBase implements OnItemSelectedListener {
   }
   
   public void connectedWithService() {
+    super.connectedWithService();
     initView();
   }
 

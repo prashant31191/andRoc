@@ -60,6 +60,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
   
   public void connectedWithService() {
     restorePreferences();
+    super.connectedWithService();
     conList = ConHisto.parse(m_RocrailService.m_Recent);
     
     TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);

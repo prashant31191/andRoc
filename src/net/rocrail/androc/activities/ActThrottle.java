@@ -57,6 +57,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
 
   public void connectedWithService() {
     m_RocrailService.m_Model.addListener(this);
+    super.connectedWithService();
     initView();
     updateTitle();
   }

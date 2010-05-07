@@ -34,6 +34,7 @@ public class ActPreferences extends ActBase {
   }
   
   public void connectedWithService() {
+    super.connectedWithService();
     initView();
   }
   
@@ -41,14 +42,19 @@ public class ActPreferences extends ActBase {
     setContentView(R.layout.preferences);
     CheckBox cb = (CheckBox)findViewById(R.id.prefMonitoring);
     cb.setChecked(m_RocrailService.m_bMonitoring);
+    cb = (CheckBox)findViewById(R.id.prefKeepScreenOn);
+    cb.setChecked(m_RocrailService.m_bKeepScreenOn);
   }
   
   void savePrefs() {
     CheckBox cb = (CheckBox)findViewById(R.id.prefMonitoring);
     m_RocrailService.m_bMonitoring = cb.isChecked();
+    cb = (CheckBox)findViewById(R.id.prefKeepScreenOn);
+    m_RocrailService.m_bKeepScreenOn = cb.isChecked();
     SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
     SharedPreferences.Editor editor = settings.edit();
     editor.putBoolean("monitoring", m_RocrailService.m_bMonitoring);
+    editor.putBoolean("keepscreenon", m_RocrailService.m_bKeepScreenOn);
     editor.commit();
   }
   

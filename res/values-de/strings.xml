@@ -71,4 +71,5 @@
   <string name="Monitoring">System Meldungen</string>
   <string name="Address">Adresse</string>
   <string name="Runtime">Laufzeit</string>
+  <string name="KeepScreenOn">Display an lassen</string>
 </resources>

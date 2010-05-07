@@ -29,6 +29,7 @@ import net.rocrail.androc.widgets.LEDButton;
 import net.rocrail.androc.widgets.LocoImage;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,6 +49,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
   }
   
   public void connectedWithService() {
+    super.connectedWithService();
     initView();
   }
   

@@ -44,6 +44,7 @@ public class ActLevel extends ActBase {
   }
   
   public void connectedWithService() {
+    super.connectedWithService();
     initView();
   }
 
