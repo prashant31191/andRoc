@@ -89,8 +89,9 @@ public class ActBase extends Activity implements ServiceListener {
   }
 
   public void connectedWithService() {
-    if(m_RocrailService.m_bKeepScreenOn )
+    if(m_RocrailService.m_bKeepScreenOn && getWindow() != null) {
       getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
   }
   
   public void updateTitle(String title) {
