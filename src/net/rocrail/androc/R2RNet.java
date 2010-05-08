@@ -21,9 +21,10 @@
 package net.rocrail.androc;
 
 import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+
+import android.util.Log;
 
 /**
  * Try to get all available Rocrail server client connections by the UDP RRNet protocol.
@@ -56,19 +57,25 @@ public class R2RNet extends Thread {
       
       MulticastSocket socket = new MulticastSocket(Port);
       socket.setTimeToLive(255);
+      socket.setSoTimeout(1000);
       InetAddress group = InetAddress.getByName(Host);
       socket.joinGroup(group);
 
       
       DatagramPacket packet = new DatagramPacket(buf, buf.length, group, Port);
+      Log.v(this.getName(), "multicast send...");
+      Log.v(this.getName(), msg);
       socket.send(packet);
       
       int rrcnt = 0;
       do {
         buf = new byte[4096];
         packet = new DatagramPacket(buf, buf.length, group, Port);
+        Log.v(this.getName(), "multicast receive...");
         socket.receive(packet);
         String clientConn = new String(packet.getData(), 0, packet.getLength());
+        Log.v(this.getName(), clientConn);
+
         // Inform the recent list...
         if( clientConn.contains("rsp=\"clientconn\"") ) {
           // format: <netreq title="Plan-F" rsp="clientconn" host="192.168.100.65" port="4711"/>

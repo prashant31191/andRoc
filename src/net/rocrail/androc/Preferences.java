@@ -20,7 +20,10 @@
 package net.rocrail.androc;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiManager.MulticastLock;
 
 public class Preferences {
   public static final String PREFS_NAME = "andRoc.ini";
@@ -60,6 +63,10 @@ public class Preferences {
     Monitoring   = settings.getBoolean(PREFS_MONITORING, false);
     KeepScreenOn = settings.getBoolean(PREFS_KEEPSCREENON, false);
     LocoID       = settings.getString(PREFS_LOCOID, "");
+    
+    WifiManager wifi = (WifiManager)activity.getSystemService(Context.WIFI_SERVICE);
+    MulticastLock lock = wifi.createMulticastLock("mylock");
+    lock.acquire();
     
     RrNet.set(RRHost, RRPort);
     // wait some time for the RRNet to get connections?
