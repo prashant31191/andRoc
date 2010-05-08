@@ -44,7 +44,7 @@ import android.os.Binder;
 import android.os.IBinder;
 
 public class RocrailService extends Service {
-  public Preferences Prefs = new Preferences();
+  public Preferences Prefs = new Preferences(this);
   public Model   m_Model       = null;
   public String  m_DeviceId    = "andRoc";
   

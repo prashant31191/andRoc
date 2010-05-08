@@ -51,10 +51,11 @@ public class R2RNet extends Thread {
   public void run() {
     try {
       byte[] buf = null;
-      String msg = "<NetReq req=\"clientconn\"/>";
+      String msg = "<netreq req=\"clientconn\"/>";
       buf = msg.getBytes("UTF-8");
       
       MulticastSocket socket = new MulticastSocket(Port);
+      socket.setTimeToLive(255);
       InetAddress group = InetAddress.getByName(Host);
       socket.joinGroup(group);
 
@@ -65,12 +66,12 @@ public class R2RNet extends Thread {
       int rrcnt = 0;
       do {
         buf = new byte[4096];
-        packet = new DatagramPacket(buf, buf.length);
+        packet = new DatagramPacket(buf, buf.length, group, Port);
         socket.receive(packet);
         String clientConn = new String(packet.getData(), 0, packet.getLength());
         // Inform the recent list...
         if( clientConn.contains("rsp=\"clientconn\"") ) {
-          // format: <NetReq title="Plan-F" rsp="clientconn" host="192.168.100.65" port="4711"/>
+          // format: <netreq title="Plan-F" rsp="clientconn" host="192.168.100.65" port="4711"/>
           int idx = clientConn.indexOf("host");
           String host = clientConn.substring(idx+"host".length()+2);
           idx = host.indexOf('"');
