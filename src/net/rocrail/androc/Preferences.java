@@ -30,23 +30,34 @@ public class Preferences {
   public static final String PREFS_LOCOID = "locoid";
   public static final String PREFS_MONITORING = "monitoring";
   public static final String PREFS_KEEPSCREENON = "keepscreenon";
+  public static final String PREFS_RRNETHOST = "rrnethost";
+  public static final String PREFS_RRNETPORT = "rrnetport";
   
   public String  Recent       = "rocrail.dyndns.org:8080;";
   public String  Host         = "rocrail.dyndns.org";
   public int     Port         = 8080;
+  public String  RRHost       = "224.0.0.1";
+  public int     RRPort       = 1234;
   public boolean Monitoring   = false;
   public boolean KeepScreenOn = false;
   public String  LocoID       = "";
+  
+  R2RNet RrNet = new R2RNet(this);
 
   public void restore(Activity activity) {
   // Restore preferences
     SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, 0);
     Host         = settings.getString(PREFS_HOST, "rocrail.dyndns.org");
     Port         = settings.getInt(PREFS_PORT, 8080);
+    RRHost       = settings.getString(PREFS_RRNETHOST, "224.0.0.1");
+    RRPort       = settings.getInt(PREFS_RRNETPORT, 1234);
     Recent       = settings.getString(PREFS_RECENT, "rocrail.dyndns.org:8080;");
     Monitoring   = settings.getBoolean(PREFS_MONITORING, false);
     KeepScreenOn = settings.getBoolean(PREFS_KEEPSCREENON, false);
     LocoID       = settings.getString(PREFS_LOCOID, "");
+    
+    RrNet.set(RRHost, RRPort);
+    // TODO: wait some time for the RRNet to get connections?
   }
   
   public void saveLoco(Activity activity, String ID) {
@@ -62,6 +73,8 @@ public class Preferences {
     editor.putString(PREFS_RECENT, Recent);
     editor.putBoolean(PREFS_MONITORING, Monitoring);
     editor.putBoolean(PREFS_KEEPSCREENON, KeepScreenOn);
+    editor.putString(PREFS_RRNETHOST, RRHost);
+    editor.putInt(PREFS_RRNETPORT, RRPort);
     editor.commit();
   }
   
