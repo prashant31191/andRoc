@@ -72,4 +72,5 @@
   <string name="Address">Adresse</string>
   <string name="Runtime">Laufzeit</string>
   <string name="KeepScreenOn">Display an lassen</string>
+  <string name="ClearRecent">Verbindungsliste löschen</string>
 </resources>

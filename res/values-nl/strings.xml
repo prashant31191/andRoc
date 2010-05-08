@@ -73,4 +73,5 @@
   <string name="Address">Adres</string>
   <string name="Runtime">Looptijd</string>
   <string name="KeepScreenOn">Display aan laten</string>
+  <string name="ClearRecent">Verbindingslijst legen</string>
 </resources>

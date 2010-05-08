@@ -44,13 +44,9 @@ import android.os.Binder;
 import android.os.IBinder;
 
 public class RocrailService extends Service {
-  public String  m_Recent      = "rocrail.dyndns.org:8080;";
-  public String  m_Host        = "rocrail.dyndns.org";
-  public int     m_iPort       = 8080;
-  public boolean m_bMonitoring = false;
-  public boolean m_bKeepScreenOn = false;
+  public Preferences Prefs = new Preferences();
   public Model   m_Model       = null;
-  public String  m_DevideId    = "andRoc";
+  public String  m_DeviceId    = "andRoc";
   
   public int    m_iSelectedLoco = 0;
   public Loco   SelectedLoco = null;
@@ -113,8 +109,8 @@ public class RocrailService extends Service {
       e.printStackTrace();
     }
     
-    m_Socket = new Socket(m_Host, m_iPort);
-    sendMessage("model",String.format("<model cmd=\"plan\" disablemonitor=\"%s\"/>", m_bMonitoring?"false":"true"));
+    m_Socket = new Socket(Prefs.Host, Prefs.Port);
+    sendMessage("model",String.format("<model cmd=\"plan\" disablemonitor=\"%s\"/>", Prefs.Monitoring?"false":"true"));
     if( m_Connection == null ) {
       m_Connection = new Connection(this, m_Model, m_Socket);
       m_Connection.start();
@@ -151,7 +147,7 @@ public class RocrailService extends Service {
   }
   
   public String getDeviceName() {
-    return m_DevideId;
+    return m_DeviceId;
   }
   
   public synchronized void sendMessage(String name, String msg) {

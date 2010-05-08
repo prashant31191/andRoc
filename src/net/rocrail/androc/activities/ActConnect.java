@@ -40,6 +40,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
+import net.rocrail.androc.Preferences;
 import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.SystemListener;
@@ -54,20 +55,21 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = 0;
+    MenuSelection = ActBase.MENU_PREFERENCES;
     connectWithService();
   }
   
   public void connectedWithService() {
-    restorePreferences();
+    m_RocrailService.Prefs.restore(this);
+    Preferences Prefs = m_RocrailService.Prefs; 
     super.connectedWithService();
-    conList = ConHisto.parse(m_RocrailService.m_Recent);
+    conList = ConHisto.parse(Prefs.Recent);
     
     TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
     if(tm.getLine1Number()!=null)
-      m_RocrailService.m_DevideId = tm.getLine1Number();
+      m_RocrailService.m_DeviceId = tm.getLine1Number();
     else
-      m_RocrailService.m_DevideId = tm.getDeviceId();
+      m_RocrailService.m_DeviceId = tm.getDeviceId();
     
     m_RocrailService.m_Model.addListener(this);
     m_RocrailService.addListener(this);
@@ -123,15 +125,15 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           progressDialog.setProgress(total);
           if (total >= 100){
               dismissDialog(PROGRESS_DIALOG);
-              saveConnection(m_RocrailService.m_Host, m_RocrailService.m_iPort, true);
+              m_RocrailService.Prefs.saveConnection(ActConnect.this);
           }
       }
   };
 
   
   void doConnect(String host, int port) {
-    m_RocrailService.m_Host  = host;
-    m_RocrailService.m_iPort = port;
+    m_RocrailService.Prefs.Host  = host;
+    m_RocrailService.Prefs.Port = port;
     
     try {
       m_RocrailService.connect();
@@ -145,7 +147,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
       e.printStackTrace();
       AlertDialog.Builder builder = new AlertDialog.Builder(ActConnect.this); 
       builder.setMessage(e.getClass().getName()+"\nCould not connect to " + 
-          m_RocrailService.m_Host+":"+m_RocrailService.m_iPort)
+          m_RocrailService.Prefs.Host+":"+m_RocrailService.Prefs.Port)
       .setCancelable(false)
       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
       public void onClick(DialogInterface dialog, int id) {
@@ -161,18 +163,6 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
 
     }
   }
-  
-  void saveConnection(String host, int port, boolean recent) {
-    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-    SharedPreferences.Editor editor = settings.edit();
-    editor.putString("host", host);
-    editor.putInt("port", port);
-    if( recent)
-      editor.putString("recent", m_RocrailService.m_Recent);
-    editor.commit();
-    
-  }
-  
   
   public void initView() {
     setContentView(R.layout.connect);
@@ -205,24 +195,24 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           v.setEnabled(false);
           
           EditText s = (EditText) findViewById(R.id.connectHost);
-          m_RocrailService.m_Host = s.getText().toString();
+          m_RocrailService.Prefs.Host = s.getText().toString();
           s = (EditText) findViewById(R.id.connectPort);
-          m_RocrailService.m_iPort = Integer.parseInt(s.getText().toString());
-          conList = ConHisto.parse(m_RocrailService.m_Recent);
+          m_RocrailService.Prefs.Port = Integer.parseInt(s.getText().toString());
+          conList = ConHisto.parse(m_RocrailService.Prefs.Recent);
 
-          ConHisto.addToList("-", m_RocrailService.m_Host, m_RocrailService.m_iPort, conList);
-          m_RocrailService.m_Recent = ConHisto.serialize(conList);
+          ConHisto.addToList("-", m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port, conList);
+          m_RocrailService.Prefs.Recent = ConHisto.serialize(conList);
           
-          doConnect(m_RocrailService.m_Host, m_RocrailService.m_iPort);
+          doConnect(m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port);
           
         }
     });
 
     if( m_RocrailService != null ) {
       EditText s = (EditText) findViewById(R.id.connectHost);
-      s.setText(m_RocrailService.m_Host);
+      s.setText(m_RocrailService.Prefs.Host);
       s = (EditText) findViewById(R.id.connectPort);
-      s.setText(""+m_RocrailService.m_iPort);
+      s.setText(""+m_RocrailService.Prefs.Port);
     }
 
   }

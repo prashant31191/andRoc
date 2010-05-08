@@ -23,6 +23,8 @@ package net.rocrail.androc.activities;
 import net.rocrail.androc.R;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 
 public class ActPreferences extends ActBase {
@@ -41,21 +43,26 @@ public class ActPreferences extends ActBase {
   public void initView() {
     setContentView(R.layout.preferences);
     CheckBox cb = (CheckBox)findViewById(R.id.prefMonitoring);
-    cb.setChecked(m_RocrailService.m_bMonitoring);
+    cb.setChecked(m_RocrailService.Prefs.Monitoring);
     cb = (CheckBox)findViewById(R.id.prefKeepScreenOn);
-    cb.setChecked(m_RocrailService.m_bKeepScreenOn);
+    cb.setChecked(m_RocrailService.Prefs.KeepScreenOn);
+    Button b = (Button)findViewById(R.id.prefClearRecent);
+    b.setEnabled(m_RocrailService.Prefs.Recent.length() > 0);
+    b.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        m_RocrailService.Prefs.Recent = "";
+        v.setEnabled(m_RocrailService.Prefs.Recent.length() > 0);
+      }
+    });
+
   }
   
   void savePrefs() {
     CheckBox cb = (CheckBox)findViewById(R.id.prefMonitoring);
-    m_RocrailService.m_bMonitoring = cb.isChecked();
+    m_RocrailService.Prefs.Monitoring = cb.isChecked();
     cb = (CheckBox)findViewById(R.id.prefKeepScreenOn);
-    m_RocrailService.m_bKeepScreenOn = cb.isChecked();
-    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-    SharedPreferences.Editor editor = settings.edit();
-    editor.putBoolean("monitoring", m_RocrailService.m_bMonitoring);
-    editor.putBoolean("keepscreenon", m_RocrailService.m_bKeepScreenOn);
-    editor.commit();
+    m_RocrailService.Prefs.KeepScreenOn = cb.isChecked();
+    m_RocrailService.Prefs.save(this);
   }
   
   @Override

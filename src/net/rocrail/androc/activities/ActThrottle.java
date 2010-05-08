@@ -69,11 +69,6 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
       String id = (String)s.getSelectedItem();
       if( id != null ) {
         m_Loco = m_RocrailService.m_Model.getLoco(id);
-        
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString("loco", id);
-        editor.commit();
       }
     }
   }
@@ -124,10 +119,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     m_iLocoCount = 0;
     String LocoID = "";
     
-    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-    LocoID = settings.getString("locoid", "");
-
-    
+    LocoID = m_RocrailService.Prefs.LocoID;
     setContentView(R.layout.throttle);
     
     Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
@@ -356,10 +348,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     if( m_Loco != null ) {
       m_RocrailService.SelectedLoco = m_Loco;
       
-      SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-      SharedPreferences.Editor editor = settings.edit();
-      editor.putString("locoid", m_Loco.toString());
-      editor.commit();
+      m_RocrailService.Prefs.saveLoco(this, m_Loco.toString());
 
       LEDButton f0 = (LEDButton) findViewById(R.id.throttleLights);
       f0.ON = m_Loco.Lights;

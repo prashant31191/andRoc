@@ -36,7 +36,6 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 public class ActBase extends Activity implements ServiceListener {
-  public static final String PREFS_NAME = "andRoc.ini";
 
   //final static int MENU_CONNECT  = 0x0001;
   final static int MENU_THROTTLE = 0x0002;
@@ -89,7 +88,7 @@ public class ActBase extends Activity implements ServiceListener {
   }
 
   public void connectedWithService() {
-    if(m_RocrailService.m_bKeepScreenOn && getWindow() != null) {
+    if(m_RocrailService.Prefs.KeepScreenOn && getWindow() != null) {
       getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
   }
@@ -101,19 +100,7 @@ public class ActBase extends Activity implements ServiceListener {
     m_Activity.setTitle("andRoc " + m_RocrailService.m_Model.m_Title);
   }
   
-  public void restorePreferences() {
-  // Restore preferences
-    SharedPreferences settings = m_Activity.getSharedPreferences(PREFS_NAME, 0);
-    if( m_RocrailService != null ) {
-      m_RocrailService.m_Host   = settings.getString("host", "rocrail.dyndns.org");
-      m_RocrailService.m_iPort  = settings.getInt("port", 8080);
-      m_RocrailService.m_Recent = settings.getString("recent", "rocrail.dyndns.org:8080;");
-      m_RocrailService.m_bMonitoring = settings.getBoolean("monitoring", false);
-      m_RocrailService.m_bKeepScreenOn = settings.getBoolean("keepscreenon", false);
-    }
-  }
-
-  
+ 
   /* Creates the menu items */
   public boolean onCreateOptionsMenu(Menu menu) {
     //if( (MenuSelection & MENU_CONNECT)  == MENU_CONNECT )
