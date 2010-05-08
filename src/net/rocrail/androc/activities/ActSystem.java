@@ -57,9 +57,11 @@ public class ActSystem extends ActBase implements MessageListener {
     try {
       TextView msgList = (TextView) findViewById(R.id.systemMessages);
       msgList.setText("");
-      Iterator<String> it = m_RocrailService.MessageList.iterator();
-      while( it.hasNext()) {
-        msgList.append(it.next()+"\n");
+      synchronized(m_RocrailService.MessageList) {
+        Iterator<String> it = m_RocrailService.MessageList.iterator();
+        while( it.hasNext()) {
+          msgList.append(it.next()+"\n");
+        }
       }
     }
     catch(Exception e ) {

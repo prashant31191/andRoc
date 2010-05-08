@@ -33,6 +33,7 @@ public class Loco {
   public String  ID      = "?";
   public String  Description = "";
   public String  Roadname = "";
+  public String  Mode    = "";
   public String  PicName = null;
   private Bitmap LocoBmp = null;
   public int     Addr    = 0;
@@ -42,6 +43,7 @@ public class Loco {
   public int     Vmax    = 0;
   public int     Vmid    = 0;
   public int     Vmin    = 0;
+  public String  Vmode   = "";
   public int     Vprev   = 0;
   
   public static final int VDelta = 5;
@@ -69,13 +71,15 @@ public class Loco {
     Vmin     = [Globals getAttribute:@"V_min" fromDict:attributeDict withDefault:@""];
     Vmode    = [Globals getAttribute:@"V_mode" fromDict:attributeDict withDefault:@""];
     Placing  = [Globals getAttribute:@"placing" fromDict:attributeDict withDefault:@""];
-    Mode     = [Globals getAttribute:@"mode" fromDict:attributeDict withDefault:@""];
     */
     Description = Item.getAttrValue(atts, "desc","");
     Roadname    = Item.getAttrValue(atts, "roadname", "");
     Addr        = Item.getAttrValue(atts, "addr", 0);
     Steps       = Item.getAttrValue(atts, "spcnt", 0);
     RunTime     = Item.getAttrValue(atts, "runtime", 0);
+    Dir         = Item.getAttrValue(atts, "dir", Dir);
+    Speed       = Item.getAttrValue(atts, "V", Speed);
+    Lights      = Item.getAttrValue(atts, "fn", Lights );
     updateWithAttributes(atts);
   }
 
@@ -83,9 +87,11 @@ public class Loco {
     //Dir    = Item.getAttrValue(atts, "dir", Dir);
     //Speed  = Item.getAttrValue(atts, "V", Speed);
     //Lights = Item.getAttrValue(atts, "fn", Lights );
-    Vmax        = Item.getAttrValue(atts, "V_max", 100);
-    Vmid        = Item.getAttrValue(atts, "V_mid", 50);
-    Vmin        = Item.getAttrValue(atts, "V_min", 10);
+    Vmax  = Item.getAttrValue(atts, "V_max", 100);
+    Vmid  = Item.getAttrValue(atts, "V_mid", 50);
+    Vmin  = Item.getAttrValue(atts, "V_min", 10);
+    Vmode = Item.getAttrValue(atts, "V_mode", "");
+    Mode  = Item.getAttrValue(atts, "mode","");
 
     int fx = Item.getAttrValue(atts, "fx", 0 );
     
@@ -93,6 +99,18 @@ public class Loco {
       int mask = 1 << (i-1);
       Function[i] = ( (fx & mask) == mask ) ? true:false; 
     }
+  }
+  
+  public boolean isPercentMode() {
+    return Vmode.equals("percent");
+  }
+  
+  public boolean isAutoMode() {
+    return Mode.equals("auto");
+  }
+  
+  public boolean isHalfAutoMode() {
+    return Mode.equals("halfauto");
   }
   
   public String toString() {

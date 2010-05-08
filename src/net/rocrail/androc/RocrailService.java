@@ -195,7 +195,7 @@ public class RocrailService extends Service {
     }
   }
   
-  public void event(String itemtype, Attributes atts) {
+  public synchronized void event(String itemtype, Attributes atts) {
     if( itemtype.equals("sys") ) {
       informListeners(Item.getAttrValue(atts, "cmd", ""));
       return;
@@ -236,18 +236,20 @@ public class RocrailService extends Service {
     if( itemtype.equals("exception") ) {
       String text = Item.getAttrValue(atts, "text", null);
       if( text != null && text.length() > 0 ) {
-        MessageList.add(0, text);
-        if( MessageList.size() > 100 ) {
-          MessageList.remove(MessageList.size()-1);
+        synchronized(MessageList) {
+          MessageList.add(0, text);
+          if( MessageList.size() > 50 ) {
+            MessageList.remove(MessageList.size()-1);
+          }
+          if( messageListener != null )
+            messageListener.newMessages();
         }
-        if( messageListener != null )
-          messageListener.newMessages();
       }
       return;
     }
   }
 
-  public void setMessageListener(MessageListener listener) {
+  public synchronized void setMessageListener(MessageListener listener) {
     messageListener = listener;
     
   }

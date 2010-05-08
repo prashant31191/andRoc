@@ -77,9 +77,13 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
 
     TextView addr = (TextView)findViewById(R.id.locoAddress);
     addr.setText(getText(R.string.Address) + ": " + m_Loco.Addr + "/" + m_Loco.Steps);
+    
     TextView runtime = (TextView)findViewById(R.id.locoRuntime);
-    runtime.setText(getText(R.string.Runtime) + ": " + String.format("%d:%02d.%02d", 
-        (int)(m_Loco.RunTime/3600), (int)(m_Loco.RunTime/60), (int)(m_Loco.RunTime%60)) );
+    int hours = (int)(m_Loco.RunTime/3600);
+    int mins  = (int)((m_Loco.RunTime - hours * 3600) / 60);
+    int secs  = (int)(m_Loco.RunTime%60);
+    runtime.setText(getText(R.string.Runtime) + ": " + String.format("%d:%02d.%02d", hours, mins, secs ) ); 
+    
     TextView desc = (TextView)findViewById(R.id.locoDesc);
     desc.setText(m_Loco.Description);
     TextView road = (TextView)findViewById(R.id.locoRoadname);

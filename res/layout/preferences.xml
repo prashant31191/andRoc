@@ -23,7 +23,7 @@
   android:orientation="vertical">
   
 <CheckBox android:text="@string/Monitoring" android:id="@+id/prefMonitoring" 
-android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
+android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
 <CheckBox android:text="@string/KeepScreenOn" android:id="@+id/prefKeepScreenOn" 
-android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
+android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
 </LinearLayout>
