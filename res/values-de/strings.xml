@@ -73,4 +73,6 @@
   <string name="Runtime">Laufzeit</string>
   <string name="KeepScreenOn">Display an lassen</string>
   <string name="ClearRecent">Verbindungsliste löschen</string>
+  <string name="R2RHost">R2R Adresse</string>
+  <string name="R2RPort">R2R Port</string>
 </resources>

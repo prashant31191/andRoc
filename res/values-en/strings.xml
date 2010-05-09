@@ -75,4 +75,6 @@
   <string name="Runtime">Runtime</string>
   <string name="KeepScreenOn">Keep screen on</string>
   <string name="ClearRecent">Clear recent list</string>
+  <string name="R2RHost">R2R Address</string>
+  <string name="R2RPort">R2R Port</string>
 </resources>

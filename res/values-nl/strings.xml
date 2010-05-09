@@ -74,4 +74,6 @@
   <string name="Runtime">Looptijd</string>
   <string name="KeepScreenOn">Display aan laten</string>
   <string name="ClearRecent">Verbindingslijst legen</string>
+  <string name="R2RHost">R2R Adres</string>
+  <string name="R2RPort">R2R Poort</string>
 </resources>

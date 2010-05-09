@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 
 public class ActPreferences extends ActBase {
   @Override
@@ -54,6 +55,11 @@ public class ActPreferences extends ActBase {
         v.setEnabled(m_RocrailService.Prefs.Recent.length() > 0);
       }
     });
+    
+    EditText et = (EditText)findViewById(R.id.prefR2RHost);
+    et.setText(m_RocrailService.Prefs.RRHost);
+    et = (EditText)findViewById(R.id.prefR2RPort);
+    et.setText(""+m_RocrailService.Prefs.RRPort);
 
   }
   
@@ -62,6 +68,12 @@ public class ActPreferences extends ActBase {
     m_RocrailService.Prefs.Monitoring = cb.isChecked();
     cb = (CheckBox)findViewById(R.id.prefKeepScreenOn);
     m_RocrailService.Prefs.KeepScreenOn = cb.isChecked();
+  
+    EditText et = (EditText)findViewById(R.id.prefR2RHost);
+    m_RocrailService.Prefs.RRHost = et.getText().toString();
+    et = (EditText)findViewById(R.id.prefR2RPort);
+    m_RocrailService.Prefs.RRPort = Integer.parseInt(et.getText().toString());
+    
     m_RocrailService.Prefs.save(this);
   }
   

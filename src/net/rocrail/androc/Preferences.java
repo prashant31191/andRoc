@@ -70,7 +70,7 @@ public class Preferences {
     
     RrNet.set(RRHost, RRPort);
     // wait some time for the RRNet to get connections?
-    try { Thread.sleep(10); } catch (InterruptedException e) { }
+    try { Thread.sleep(100); } catch (InterruptedException e) { }
   }
   
   public void saveLoco(Activity activity, String ID) {
