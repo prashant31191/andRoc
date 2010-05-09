@@ -44,6 +44,7 @@ public class Preferences {
   public boolean Monitoring   = false;
   public boolean KeepScreenOn = false;
   public String  LocoID       = "";
+  public String  Title        = "";
   RocrailService rocrailService = null;
   
   R2RNet RrNet = new R2RNet(this);
@@ -70,7 +71,7 @@ public class Preferences {
     
     RrNet.set(RRHost, RRPort);
     // wait some time for the RRNet to get connections?
-    try { Thread.sleep(100); } catch (InterruptedException e) { }
+    try { Thread.sleep(500); } catch (InterruptedException e) { }
   }
   
   public void saveLoco(Activity activity, String ID) {

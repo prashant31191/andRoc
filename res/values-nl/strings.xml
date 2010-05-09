@@ -19,6 +19,7 @@
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 <resources>
+  <string name="Title">Titel</string>
   <string name="Throttle">Regelaar</string>
 	<string name="Locomotives">Locomotieven</string>
 	<string name="Outputs">Uitgangen</string>

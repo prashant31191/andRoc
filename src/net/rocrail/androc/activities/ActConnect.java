@@ -39,6 +39,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import net.rocrail.androc.Preferences;
 import net.rocrail.androc.R;
@@ -213,6 +214,8 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
       s.setText(m_RocrailService.Prefs.Host);
       s = (EditText) findViewById(R.id.connectPort);
       s.setText(""+m_RocrailService.Prefs.Port);
+      TextView tv = (TextView) findViewById(R.id.connectTitle);
+      tv.setText(""+m_RocrailService.Prefs.Title);
     }
 
   }

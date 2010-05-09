@@ -89,6 +89,13 @@ public class R2RNet extends Thread {
           idx = port.indexOf('"');
           Prefs.Port = Integer.parseInt(port.substring(0, idx));
 
+          idx = clientConn.indexOf("plan");
+            if( idx != -1 ) {
+            String title = clientConn.substring(idx+"plan".length()+2);
+            idx = title.indexOf('"');
+            Prefs.Title = title.substring(0, idx);
+          }
+
           rrcnt++;
         }
         Thread.sleep(10);
