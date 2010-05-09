@@ -21,7 +21,6 @@ package net.rocrail.androc.objects;
 
 import org.xml.sax.Attributes;
 
-import android.app.Activity;
 import android.view.View;
 
 import net.rocrail.androc.RocrailService;

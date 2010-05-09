@@ -44,7 +44,7 @@ public class ActSystem extends ActBase implements MessageListener {
     super.connectedWithService();
     initView();
     m_RocrailService.setMessageListener(this);
-    updateTitle("System");
+    updateTitle(getText(R.string.System).toString());
   }
   
   protected void onDestroy() {

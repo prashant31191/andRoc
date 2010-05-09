@@ -23,7 +23,6 @@ import net.rocrail.androc.RocrailService;
 
 import org.xml.sax.Attributes;
 
-import android.app.Activity;
 import android.view.View;
 
 public class Signal extends Item implements View.OnClickListener {

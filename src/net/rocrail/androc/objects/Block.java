@@ -23,11 +23,8 @@ import net.rocrail.androc.RocrailService;
 
 import org.xml.sax.Attributes;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.view.View;
-import android.widget.TextView;
 
 public class Block extends Item implements View.OnClickListener {
   boolean Small    = false;

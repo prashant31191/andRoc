@@ -27,7 +27,7 @@ import android.net.wifi.WifiManager.MulticastLock;
 
 public class Preferences {
   public static final String PREFS_NAME = "andRoc.ini";
-  public static final String PREFS_RECENT = "recent";
+  public static final String PREFS_RECENT = "connections";
   public static final String PREFS_HOST = "host";
   public static final String PREFS_PORT = "port";
   public static final String PREFS_LOCOID = "locoid";
@@ -36,7 +36,7 @@ public class Preferences {
   public static final String PREFS_RRNETHOST = "rrnethost";
   public static final String PREFS_RRNETPORT = "rrnetport";
   
-  public String  Recent       = "rocrail.dyndns.org:8080;";
+  public String  Recent       = "Demo:rocrail.dyndns.org:8080;";
   public String  Host         = "rocrail.dyndns.org";
   public int     Port         = 8080;
   public String  RRHost       = "224.0.0.1";
@@ -56,14 +56,14 @@ public class Preferences {
   public void restore(Activity activity) {
   // Restore preferences
     SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, 0);
-    Host         = settings.getString(PREFS_HOST, "rocrail.dyndns.org");
-    Port         = settings.getInt(PREFS_PORT, 8080);
-    RRHost       = settings.getString(PREFS_RRNETHOST, "224.0.0.1");
-    RRPort       = settings.getInt(PREFS_RRNETPORT, 1234);
-    Recent       = settings.getString(PREFS_RECENT, "rocrail.dyndns.org:8080;");
-    Monitoring   = settings.getBoolean(PREFS_MONITORING, false);
-    KeepScreenOn = settings.getBoolean(PREFS_KEEPSCREENON, false);
-    LocoID       = settings.getString(PREFS_LOCOID, "");
+    Host         = settings.getString(PREFS_HOST, Host);
+    Port         = settings.getInt(PREFS_PORT, Port);
+    RRHost       = settings.getString(PREFS_RRNETHOST, RRHost);
+    RRPort       = settings.getInt(PREFS_RRNETPORT, RRPort);
+    Recent       = settings.getString(PREFS_RECENT, Recent);
+    Monitoring   = settings.getBoolean(PREFS_MONITORING, Monitoring);
+    KeepScreenOn = settings.getBoolean(PREFS_KEEPSCREENON, KeepScreenOn);
+    LocoID       = settings.getString(PREFS_LOCOID, LocoID);
     
     WifiManager wifi = (WifiManager)activity.getSystemService(Context.WIFI_SERVICE);
     MulticastLock lock = wifi.createMulticastLock("mylock");
@@ -105,5 +105,8 @@ public class Preferences {
     editor.commit();
     
   }
+  
+  
+  
   
 }

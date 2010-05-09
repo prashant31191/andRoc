@@ -1,9 +1,6 @@
 package net.rocrail.androc.activities;
 
-import java.util.Iterator;
-
 import net.rocrail.androc.R;
-import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.FiddleYard;
 import net.rocrail.androc.widgets.LEDButton;
 import android.os.Bundle;

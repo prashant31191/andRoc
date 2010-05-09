@@ -21,7 +21,6 @@
 package net.rocrail.androc.activities;
 
 import net.rocrail.androc.R;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +38,7 @@ public class ActPreferences extends ActBase {
   public void connectedWithService() {
     super.connectedWithService();
     initView();
+    updateTitle(getText(R.string.Preferences).toString());
   }
   
   public void initView() {

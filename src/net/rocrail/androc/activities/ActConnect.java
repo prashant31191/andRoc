@@ -19,16 +19,12 @@
 */
 package net.rocrail.androc.activities;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.StringTokenizer;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -45,13 +41,14 @@ import net.rocrail.androc.Preferences;
 import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.SystemListener;
+import net.rocrail.androc.objects.RRConnection;
 
 public class ActConnect extends ActBase implements ModelListener, SystemListener, OnItemSelectedListener {
   static final int PROGRESS_DIALOG = 0;
   boolean progressPlan = false;
   int progressValue = 0;
   ProgressDialog progressDialog = null;
-  List<ConnectionDetails> conList = null; 
+  List<RRConnection> conList = null; 
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +61,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     m_RocrailService.Prefs.restore(this);
     Preferences Prefs = m_RocrailService.Prefs; 
     super.connectedWithService();
-    conList = ConHisto.parse(Prefs.Recent);
+    conList = RRConnection.parse(Prefs.Recent);
     
     TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
     if(tm.getLine1Number()!=null)
@@ -181,9 +178,9 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     
     m_adapterForSpinner.add("none");
     // get the connections
-    Iterator<ConnectionDetails> it = conList.iterator();
+    Iterator<RRConnection> it = conList.iterator();
     while (it.hasNext()) {
-      ConnectionDetails con = it.next();
+      RRConnection con = it.next();
       m_adapterForSpinner.add(con.toString());
     }
     recent.setOnItemSelectedListener(this);
@@ -199,10 +196,10 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           m_RocrailService.Prefs.Host = s.getText().toString();
           s = (EditText) findViewById(R.id.connectPort);
           m_RocrailService.Prefs.Port = Integer.parseInt(s.getText().toString());
-          conList = ConHisto.parse(m_RocrailService.Prefs.Recent);
+          conList = RRConnection.parse(m_RocrailService.Prefs.Recent);
 
-          ConHisto.addToList("-", m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port, conList);
-          m_RocrailService.Prefs.Recent = ConHisto.serialize(conList);
+          RRConnection.addToList("", m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port, conList);
+          m_RocrailService.Prefs.Recent = RRConnection.serialize(conList);
           
           doConnect(m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port);
           
@@ -237,12 +234,14 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     if( position > 0 ) {
       Button button = (Button) findViewById(R.id.ButtonConnect);
       button.setEnabled(false);
-      ConnectionDetails con = conList.get(position-1);
+      RRConnection con = conList.get(position-1);
 
       EditText s = (EditText) findViewById(R.id.connectHost);
       s.setText(con.HostName);
       s = (EditText) findViewById(R.id.connectPort);
       s.setText(""+con.Port);
+      TextView tv = (TextView) findViewById(R.id.connectTitle);
+      tv.setText(""+con.Title);
 
       doConnect(con.HostName, con.Port);
     }
@@ -256,66 +255,3 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
 
 }
 
-class ConHisto {
-  /*
-   * Add a connection to the list.
-   * An existing connection with the same key will be removed first. 
-   */
-  public static void addToList(ConnectionDetails con, List<ConnectionDetails> conList) {
-    for (Iterator<ConnectionDetails> it = conList.iterator(); it.hasNext();) {
-      ConnectionDetails c = it.next();
-      if( c.equals(con) ) {
-        conList.remove(c);
-        break;
-      }
-    }
-    conList.add(0,con);
-  }
-
-  public static void addToList(String alias, String host, int port, List<ConnectionDetails> conList) {
-    ConnectionDetails con = new ConnectionDetails(alias, host, port);
-    ConHisto.addToList(con, conList);
-  }
-
-  public static List<ConnectionDetails> parse(String recent ) {
-    List<ConnectionDetails> conList = new ArrayList<ConnectionDetails>();
-    // parse the recent string and instantiate a class for each
-    StringTokenizer tok = new StringTokenizer( recent, ";");
-    while( tok.hasMoreTokens()) {
-      StringTokenizer constr = new StringTokenizer( tok.nextToken(), ":");
-      ConnectionDetails con = new ConnectionDetails("-", constr.nextToken(), Integer.parseInt(constr.nextToken()));
-      ConHisto.addToList(con, conList);
-    }
-    return conList;
-  }
-    
-  public static String serialize(List<ConnectionDetails> conList ) {
-    // construct the recent string new
-    String recent = "";
-    for (Iterator<ConnectionDetails> it = conList.iterator(); it.hasNext();) {
-      ConnectionDetails con = it.next();
-      recent = recent.concat(con.HostName+":"+con.Port+";");
-    }
-    return recent;
-  }
-  
-}
-
-class ConnectionDetails {
-  String Alias    = "";
-  String HostName = "";
-  int    Port     = 0;
-  public ConnectionDetails(String Alias, String HostName, int Port) {
-    this.Alias    = Alias;
-    this.HostName = HostName;
-    this.Port     = Port;
-  }
-  public boolean equals( ConnectionDetails con ) {
-    if( con.HostName.equals(this.HostName) && con.Port == this.Port )
-      return true;
-    return false;
-  }
-  public String toString() {
-    return HostName+":"+Port;
-  }
-}

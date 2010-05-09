@@ -89,17 +89,22 @@ public class R2RNet extends Thread {
           idx = port.indexOf('"');
           Prefs.Port = Integer.parseInt(port.substring(0, idx));
 
+          String title = "";
           idx = clientConn.indexOf("plan");
-            if( idx != -1 ) {
-            String title = clientConn.substring(idx+"plan".length()+2);
+          if( idx != -1 ) {
+            title = clientConn.substring(idx+"plan".length()+2);
             idx = title.indexOf('"');
             Prefs.Title = title.substring(0, idx);
           }
+            
+          // add the connection to the recent srtring
+          Prefs.Recent = Prefs.Recent.concat(title+":"+Prefs.Host+":"+Prefs.Port+";");
+          
 
           rrcnt++;
         }
         Thread.sleep(10);
-      } while(Run && rrcnt == 0 );
+      } while(Run && rrcnt < 5 );
      
       socket.leaveGroup(group);
       socket.close();
