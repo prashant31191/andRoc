@@ -95,6 +95,7 @@ public class R2RNet extends Thread {
             title = clientConn.substring(idx+"plan".length()+2);
             idx = title.indexOf('"');
             Prefs.Title = title.substring(0, idx);
+            title = Prefs.Title;
           }
             
           // add the connection to the recent srtring
