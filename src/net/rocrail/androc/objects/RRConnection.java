@@ -68,11 +68,24 @@ public class RRConnection {
   public static List<RRConnection> parse(String recent ) {
     List<RRConnection> conList = new ArrayList<RRConnection>();
     // parse the recent string and instantiate a class for each
-    StringTokenizer tok = new StringTokenizer( recent, ";");
-    while( tok.hasMoreTokens()) {
-      StringTokenizer constr = new StringTokenizer( tok.nextToken(), ":");
-      RRConnection con = new RRConnection(constr.nextToken(), constr.nextToken(), Integer.parseInt(constr.nextToken()));
-      addToList(con, conList);
+    try {
+      StringTokenizer tok = new StringTokenizer( recent, ";");
+      while( tok.hasMoreTokens()) {
+        String s = tok.nextToken();
+        StringTokenizer constr = new StringTokenizer( s, ":");
+        RRConnection con = null;
+        if( constr.countTokens() == 2)
+          con = new RRConnection("", constr.nextToken(), Integer.parseInt(constr.nextToken()));
+        else if( constr.countTokens() == 3)
+          con = new RRConnection(constr.nextToken(), constr.nextToken(), Integer.parseInt(constr.nextToken()));
+        else
+          continue;
+
+        addToList(con, conList);
+      }
+    }
+    catch( Exception e ) {
+      e.printStackTrace();
     }
     return conList;
   }
