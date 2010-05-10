@@ -347,7 +347,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     if( m_Loco != null ) {
       m_RocrailService.SelectedLoco = m_Loco;
       
-      m_RocrailService.Prefs.saveLoco(this, m_Loco.toString());
+      m_RocrailService.Prefs.saveLoco(m_Loco.toString());
 
       LEDButton f0 = (LEDButton) findViewById(R.id.throttleLights);
       f0.ON = m_Loco.Lights;

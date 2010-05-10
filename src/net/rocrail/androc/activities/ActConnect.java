@@ -20,7 +20,6 @@
 package net.rocrail.androc.activities;
 
 import java.util.Iterator;
-import java.util.List;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -28,7 +27,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,7 +35,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import net.rocrail.androc.Preferences;
 import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.interfaces.SystemListener;
@@ -48,7 +45,6 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
   boolean progressPlan = false;
   int progressValue = 0;
   ProgressDialog progressDialog = null;
-  List<RRConnection> conList = null; 
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -58,17 +54,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
   }
   
   public void connectedWithService() {
-    m_RocrailService.Prefs.restore(this);
-    Preferences Prefs = m_RocrailService.Prefs; 
     super.connectedWithService();
-    conList = RRConnection.parse(Prefs.Recent);
-    
-    TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-    if(tm.getLine1Number()!=null)
-      m_RocrailService.m_DeviceId = tm.getLine1Number();
-    else
-      m_RocrailService.m_DeviceId = tm.getDeviceId();
-    
     m_RocrailService.m_Model.addListener(this);
     m_RocrailService.addListener(this);
     initView();
@@ -123,7 +109,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           progressDialog.setProgress(total);
           if (total >= 100){
               dismissDialog(PROGRESS_DIALOG);
-              m_RocrailService.Prefs.saveConnection(ActConnect.this);
+              m_RocrailService.Prefs.saveConnection();
           }
       }
   };
@@ -178,7 +164,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     
     m_adapterForSpinner.add("none");
     // get the connections
-    Iterator<RRConnection> it = conList.iterator();
+    Iterator<RRConnection> it = m_RocrailService.Prefs.conList.iterator();
     while (it.hasNext()) {
       RRConnection con = it.next();
       m_adapterForSpinner.add(con.toString());
@@ -196,10 +182,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           m_RocrailService.Prefs.Host = s.getText().toString();
           s = (EditText) findViewById(R.id.connectPort);
           m_RocrailService.Prefs.Port = Integer.parseInt(s.getText().toString());
-          conList = RRConnection.parse(m_RocrailService.Prefs.Recent);
-
-          RRConnection.addToList("", m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port, conList);
-          m_RocrailService.Prefs.Recent = RRConnection.serialize(conList);
+          RRConnection.addToList(m_RocrailService.Prefs.Title, m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port, m_RocrailService.Prefs.conList);
           
           doConnect(m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port);
           
@@ -234,7 +217,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     if( position > 0 ) {
       Button button = (Button) findViewById(R.id.ButtonConnect);
       button.setEnabled(false);
-      RRConnection con = conList.get(position-1);
+      RRConnection con = m_RocrailService.Prefs.conList.get(position-1);
 
       EditText s = (EditText) findViewById(R.id.connectHost);
       s.setText(con.HostName);

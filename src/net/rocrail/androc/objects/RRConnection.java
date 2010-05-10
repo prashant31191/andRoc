@@ -74,10 +74,10 @@ public class RRConnection {
         String s = tok.nextToken();
         StringTokenizer constr = new StringTokenizer( s, ":");
         RRConnection con = null;
-        if( constr.countTokens() == 2)
-          con = new RRConnection("", constr.nextToken(), Integer.parseInt(constr.nextToken()));
-        else if( constr.countTokens() == 3)
+        if( constr.countTokens() == 3)
           con = new RRConnection(constr.nextToken(), constr.nextToken(), Integer.parseInt(constr.nextToken()));
+        else if( constr.countTokens() == 2)
+          con = new RRConnection("", constr.nextToken(), Integer.parseInt(constr.nextToken()));
         else
           continue;
 

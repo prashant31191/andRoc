@@ -74,7 +74,7 @@ public class ActPreferences extends ActBase {
     et = (EditText)findViewById(R.id.prefR2RPort);
     m_RocrailService.Prefs.RRPort = Integer.parseInt(et.getText().toString());
     
-    m_RocrailService.Prefs.save(this);
+    m_RocrailService.Prefs.save();
   }
   
   @Override
