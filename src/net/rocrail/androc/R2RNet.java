@@ -36,6 +36,7 @@ public class R2RNet extends Thread {
   String Host = "";
   int Port = 0;
   public boolean Run = true;
+  public boolean Started = false;
 
   
   public R2RNet( Preferences Prefs ) {
@@ -45,7 +46,10 @@ public class R2RNet extends Thread {
   public void set(String Host, int Port) {
     this.Host = Host;
     this.Port = Port;
-    start();
+    if( !Started ) {
+      Started = true;
+      start();
+    }
   }
   
   @Override
