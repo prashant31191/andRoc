@@ -19,6 +19,9 @@
 */
 package net.rocrail.androc;
 
+import java.util.List;
+
+import net.rocrail.androc.objects.RRConnection;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -46,16 +49,24 @@ public class Preferences {
   public String  LocoID       = "";
   public String  Title        = "";
   RocrailService rocrailService = null;
+  boolean Initialized = false;
   
-  R2RNet RrNet = new R2RNet(this);
+  public List<RRConnection> conList = null; 
+
+  R2RNet RrNet = null;
   
   public Preferences( RocrailService rocrailService) {
     this.rocrailService = rocrailService;
   }
 
-  public void restore(Activity activity) {
+  public void restore() {
+    if( Initialized ) {
+      return;
+    }
+    Initialized = true;
+    
   // Restore preferences
-    SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, 0);
+    SharedPreferences settings = rocrailService.getSharedPreferences(PREFS_NAME, 0);
     Host         = settings.getString(PREFS_HOST, Host);
     Port         = settings.getInt(PREFS_PORT, Port);
     RRHost       = settings.getString(PREFS_RRNETHOST, RRHost);
@@ -65,24 +76,32 @@ public class Preferences {
     KeepScreenOn = settings.getBoolean(PREFS_KEEPSCREENON, KeepScreenOn);
     LocoID       = settings.getString(PREFS_LOCOID, LocoID);
     
-    WifiManager wifi = (WifiManager)activity.getSystemService(Context.WIFI_SERVICE);
-    MulticastLock lock = wifi.createMulticastLock("mylock");
-    lock.acquire();
-    
-    RrNet.set(RRHost, RRPort);
-    // wait some time for the RRNet to get connections?
-    try { Thread.sleep(500); } catch (InterruptedException e) { }
+    conList = RRConnection.parse(Recent);
+
+    try {
+      WifiManager wifi = (WifiManager) rocrailService.getSystemService(Context.WIFI_SERVICE);
+      MulticastLock lock = wifi.createMulticastLock("r2rlock");
+      lock.acquire();
+
+      RrNet = new R2RNet(this);
+      RrNet.set(RRHost, RRPort);
+      // wait some time for the RRNet to get connections?
+      Thread.sleep(500);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
   
-  public void saveLoco(Activity activity, String ID) {
-    SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, 0);
+  public void saveLoco(String ID) {
+    SharedPreferences settings = rocrailService.getSharedPreferences(PREFS_NAME, 0);
     SharedPreferences.Editor editor = settings.edit();
     editor.putString(PREFS_LOCOID, ID);
     editor.commit();
   }
   
-  public void save(Activity activity) {
-    SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, 0);
+  public void save() {
+    Recent = RRConnection.serialize(conList);
+    SharedPreferences settings = rocrailService.getSharedPreferences(PREFS_NAME, 0);
     SharedPreferences.Editor editor = settings.edit();
     editor.putString(PREFS_RECENT, Recent);
     editor.putBoolean(PREFS_MONITORING, Monitoring);
@@ -92,16 +111,18 @@ public class Preferences {
     editor.commit();
   }
   
-  public void saveConnection(Activity activity) {
-    saveConnection(activity, Host, Port, true);
+  public void saveConnection() {
+    saveConnection(Host, Port, true);
   }
-  public void saveConnection(Activity activity, String host, int port, boolean recent) {
-    SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, 0);
+  public void saveConnection(String host, int port, boolean recent) {
+    SharedPreferences settings = rocrailService.getSharedPreferences(PREFS_NAME, 0);
     SharedPreferences.Editor editor = settings.edit();
     editor.putString(PREFS_HOST, host);
     editor.putInt(PREFS_PORT, port);
-    if( recent)
+    if( recent) {
+      Recent = RRConnection.serialize(conList);
       editor.putString(PREFS_RECENT, Recent);
+    }
     editor.commit();
     
   }
