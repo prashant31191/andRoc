@@ -197,8 +197,8 @@ public class ActAccessory extends ActBase {
       port = 0;
     }
     else if( type.equals(Preferences.ACCTYPE_PADA)) {
-      addr = 0;
       port = addr + row * 2;
+      addr = 0;
     }
     
     String cmd = col == 0 ? "turnout":"straight";
