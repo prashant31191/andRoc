@@ -77,4 +77,5 @@
   <string name="ClearRecent">Verbindingslijst legen</string>
   <string name="R2RHost">R2R Adres</string>
   <string name="R2RPort">R2R Poort</string>
+  <string name="Accessory">Accessory</string>
 </resources>

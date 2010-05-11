@@ -45,7 +45,7 @@ public class ActLayout extends ListActivity implements ServiceListener {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     m_Base = new ActBase(this, this);
-    m_Base.MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_SYSTEM | ActBase.MENU_MENU;
+    m_Base.MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_SYSTEM | ActBase.MENU_ACCESSORY;
 
     m_Base.connectWithService();
   }

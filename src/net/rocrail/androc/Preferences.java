@@ -34,6 +34,12 @@ public class Preferences {
   public static final String PREFS_KEEPSCREENON = "keepscreenon";
   public static final String PREFS_RRNETHOST = "rrnethost";
   public static final String PREFS_RRNETPORT = "rrnetport";
+  public static final String PREFS_ACCNR = "accnr";
+  public static final String PREFS_ACCTYPE = "acctype";
+  
+  public static final String ACCTYPE_NMRA = "NMRA";
+  public static final String ACCTYPE_FADA = "FADA";
+  public static final String ACCTYPE_PADA = "PADA";
   
   public String  Recent       = "Demo:rocrail.dyndns.org:8080;";
   public String  Host         = "rocrail.dyndns.org";
@@ -44,6 +50,8 @@ public class Preferences {
   public boolean KeepScreenOn = false;
   public String  LocoID       = "";
   public String  Title        = "";
+  public int     AccNr        = 1;
+  public String  AccType      = ACCTYPE_NMRA;
   RocrailService rocrailService = null;
   boolean Initialized = false;
   
@@ -69,6 +77,8 @@ public class Preferences {
     Monitoring   = settings.getBoolean(PREFS_MONITORING, Monitoring);
     KeepScreenOn = settings.getBoolean(PREFS_KEEPSCREENON, KeepScreenOn);
     LocoID       = settings.getString(PREFS_LOCOID, LocoID);
+    AccType      = settings.getString(PREFS_ACCTYPE, AccType);
+    AccNr        = settings.getInt(PREFS_ACCNR, AccNr);
     
     conList = RRConnection.parse(Recent);
 
@@ -89,6 +99,14 @@ public class Preferences {
     SharedPreferences settings = rocrailService.getSharedPreferences(PREFS_NAME, 0);
     SharedPreferences.Editor editor = settings.edit();
     editor.putString(PREFS_LOCOID, ID);
+    editor.commit();
+  }
+  
+  public void saveAccessory(String type, int nr) {
+    SharedPreferences settings = rocrailService.getSharedPreferences(PREFS_NAME, 0);
+    SharedPreferences.Editor editor = settings.edit();
+    editor.putString(PREFS_ACCTYPE, type);
+    editor.putInt(PREFS_ACCNR, nr);
     editor.commit();
   }
   

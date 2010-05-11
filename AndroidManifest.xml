@@ -45,6 +45,7 @@
         <activity android:name=".activities.ActFiddleYard" />
         <activity android:name=".activities.ActTurntable" />
         <activity android:name=".activities.ActPreferences" />
+        <activity android:name=".activities.ActAccessory" />
         <service android:name=".RocrailService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
