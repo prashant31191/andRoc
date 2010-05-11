@@ -24,6 +24,9 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
+import android.content.Context;
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiManager.MulticastLock;
 import android.util.Log;
 
 /**
@@ -39,8 +42,12 @@ public class R2RNet extends Thread {
   public boolean Started = false;
 
   
-  public R2RNet( Preferences Prefs ) {
+  public R2RNet( RocrailService rocrailService, Preferences Prefs ) {
     this.Prefs = Prefs;  
+
+    WifiManager wifi = (WifiManager) rocrailService.getSystemService(Context.WIFI_SERVICE);
+    MulticastLock lock = wifi.createMulticastLock("r2rlock");
+    lock.acquire();
   }
   
   public void set(String Host, int Port) {

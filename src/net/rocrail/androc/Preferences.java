@@ -22,11 +22,7 @@ package net.rocrail.androc;
 import java.util.List;
 
 import net.rocrail.androc.objects.RRConnection;
-import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.wifi.WifiManager;
-import android.net.wifi.WifiManager.MulticastLock;
 
 public class Preferences {
   public static final String PREFS_NAME = "andRoc.ini";
@@ -53,8 +49,6 @@ public class Preferences {
   
   public List<RRConnection> conList = null; 
 
-  R2RNet RrNet = null;
-  
   public Preferences( RocrailService rocrailService) {
     this.rocrailService = rocrailService;
   }
@@ -79,17 +73,16 @@ public class Preferences {
     conList = RRConnection.parse(Recent);
 
     try {
-      WifiManager wifi = (WifiManager) rocrailService.getSystemService(Context.WIFI_SERVICE);
-      MulticastLock lock = wifi.createMulticastLock("r2rlock");
-      lock.acquire();
-
-      RrNet = new R2RNet(this);
-      RrNet.set(RRHost, RRPort);
-      // wait some time for the RRNet to get connections?
-      Thread.sleep(500);
-    } catch (InterruptedException e) {
+      if( Integer.parseInt(android.os.Build.VERSION.SDK) >= 4 ) {
+        R2RNet RrNet = new R2RNet(rocrailService, this);
+        RrNet.set(RRHost, RRPort);
+        // wait some time for the RRNet to get connections?
+        Thread.sleep(500);
+      }
+    } catch (Exception e) {
       e.printStackTrace();
     }
+    
   }
   
   public void saveLoco(String ID) {
