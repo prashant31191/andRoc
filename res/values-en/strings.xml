@@ -79,4 +79,5 @@
   <string name="R2RHost">R2R Address</string>
   <string name="R2RPort">R2R Port</string>
   <string name="Accessory">Accessory</string>
+  <string name="back_again_quit">Press Back once more to exit.</string>
 </resources>

@@ -33,6 +33,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SeekBar;
 import android.widget.AdapterView;
+import android.widget.TextView;
+import android.widget.Toast;
 import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.objects.Loco;
@@ -44,7 +46,8 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
   int         m_iLocoCount     = 0;
   final static int FNGROUPSIZE = 6;
   private Loco m_Loco = null;
-  
+  boolean quitShowed = false;
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -152,6 +155,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Button Lights = (Button) findViewById(R.id.throttleLights);
     Lights.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipLights();
             ((LEDButton)v).ON = m_Loco.Lights;
@@ -163,6 +167,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Button fn = (Button) findViewById(R.id.throttleFn);
     fn.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          quitShowed = false;
           m_iFunctionGroup++;
           if( m_iFunctionGroup > 3 )
             m_iFunctionGroup = 0;
@@ -173,6 +178,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     LEDButton f1 = (LEDButton) findViewById(R.id.throttleF1);
     f1.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(1+m_iFunctionGroup*FNGROUPSIZE);
             ((LEDButton)v).ON = m_Loco.Function[1+m_iFunctionGroup*FNGROUPSIZE];
@@ -184,6 +190,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Button f2 = (Button) findViewById(R.id.throttleF2);
     f2.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(2+m_iFunctionGroup*FNGROUPSIZE);
             ((LEDButton)v).ON = m_Loco.Function[2+m_iFunctionGroup*FNGROUPSIZE];
@@ -195,6 +202,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Button f3 = (Button) findViewById(R.id.throttleF3);
     f3.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(3+m_iFunctionGroup*FNGROUPSIZE);
             ((LEDButton)v).ON = m_Loco.Function[3+m_iFunctionGroup*FNGROUPSIZE];
@@ -206,6 +214,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Button f4 = (Button) findViewById(R.id.throttleF4);
     f4.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(4+m_iFunctionGroup*FNGROUPSIZE);
             ((LEDButton)v).ON = m_Loco.Function[4+m_iFunctionGroup*FNGROUPSIZE];
@@ -217,6 +226,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Button f5 = (Button) findViewById(R.id.throttleF5);
     f5.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(5+m_iFunctionGroup*FNGROUPSIZE);
             ((LEDButton)v).ON = m_Loco.Function[5+m_iFunctionGroup*FNGROUPSIZE];
@@ -228,6 +238,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Button f6 = (Button) findViewById(R.id.throttleF6);
     f6.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(6+m_iFunctionGroup*FNGROUPSIZE);
             ((LEDButton)v).ON = m_Loco.Function[6+m_iFunctionGroup*FNGROUPSIZE];
@@ -240,6 +251,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Go.setEnabled(m_RocrailService.AutoMode);
     Go.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipGo();
             ((LEDButton)v).ON = m_Loco.Go;
@@ -251,6 +263,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Button Release = (Button) findViewById(R.id.throttleRelease);
     Release.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.doRelease();
             ((LEDButton)v).ON = false;
@@ -262,6 +275,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     Dir.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           if( m_Loco != null ) {
+            quitShowed = false;
             m_Loco.flipDir();
             ((LEDButton)v).ON = m_Loco.Dir;
             v.invalidate();
@@ -274,6 +288,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     ImageView image = (ImageView)findViewById(R.id.locoImage);
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
+        quitShowed = false;
         if( m_Loco != null ) {
           Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
           intent.putExtra("id", m_Loco.ID);
@@ -317,6 +332,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
 
   @Override
   public void onProgressChanged(SeekBar seekbar, int progress, boolean fromTouch) {
+    quitShowed = false;
     if( m_Loco != null )
       m_Loco.setSpeed(progress, false);
   }
@@ -329,12 +345,14 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
 
   @Override
   public void onStopTrackingTouch(SeekBar seekbar) {
+    quitShowed = false;
     if( m_Loco != null )
       m_Loco.setSpeed(seekbar.getProgress(), true);
   }
 
   protected void  onResume() {
     super.onResume();
+    quitShowed = false;
     if( m_Loco != null ) {
       updateFunctions();
     }
@@ -342,6 +360,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
 
   @Override
   public void onItemSelected(AdapterView<?> arg0, View view, int position, long longID) {
+    quitShowed = false;
     m_RocrailService.m_iSelectedLoco = position;
     findLoco();
     if( m_Loco != null ) {
@@ -375,11 +394,23 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     
   }
   
+  
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
       //Handle the back button
       if(keyCode == KeyEvent.KEYCODE_BACK) {
+        
+        if(quitShowed) {
+          ActThrottle.this.finish();
+          return true;
+        }
+        
+        Toast.makeText(getApplicationContext(), R.string.back_again_quit,
+            Toast.LENGTH_SHORT).show();
+        quitShowed = true;
+        
           //Ask the user if they want to quit
+          /*
           new AlertDialog.Builder(this)
           .setIcon(android.R.drawable.ic_dialog_alert)
           .setTitle(R.string.quit)
@@ -396,11 +427,13 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
           })
           .setNegativeButton(R.string.no, null)
           .show();
+          */
 
-          return true;
+        return true;
       }
       else {
-          return super.onKeyDown(keyCode, event);
+        quitShowed = false;
+        return super.onKeyDown(keyCode, event);
       }
 
   }
