@@ -203,7 +203,7 @@ public class ActAccessory extends ActBase {
       port = 0;
     }
     else if( type.equals(Preferences.ACCTYPE_PADA)) {
-      port = addr + row * 2;
+      port = ((addr -1) * 4) + row * 2;
       addr = 0;
     }
     
