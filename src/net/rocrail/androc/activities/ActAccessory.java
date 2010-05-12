@@ -32,7 +32,7 @@ public class ActAccessory extends ActBase {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_LAYOUT | ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
+    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_LAYOUT | ActBase.MENU_PREFERENCES | ActBase.MENU_SYSTEM;
     connectWithService();
   }
   
@@ -57,31 +57,20 @@ public class ActAccessory extends ActBase {
       public void onClick(View v) {
         Button btType = (Button)v;
         String Type = btType.getText().toString();
-        if( Type.equals(Preferences.ACCTYPE_NMRA))
+        if( Type.equals(Preferences.ACCTYPE_MADA))
           btType.setText(Preferences.ACCTYPE_FADA);
         else if( Type.equals(Preferences.ACCTYPE_FADA))
           btType.setText(Preferences.ACCTYPE_PADA);
-        else if( Type.equals(Preferences.ACCTYPE_PADA))
-          btType.setText(Preferences.ACCTYPE_NMRA);
+        else
+          btType.setText(Preferences.ACCTYPE_MADA);
+        
+        m_RocrailService.Prefs.AccType = btType.getText().toString();
         updateAddress();
       }
     });
     
     
     bt = (Button) findViewById(R.id.accM);
-    bt.setOnClickListener(new View.OnClickListener() {
-      public void onClick(View v) {
-        EditText et = (EditText)findViewById(R.id.accAddress);
-        int addr = Integer.parseInt(et.getText().toString());
-        if( addr > 1 ) {
-          addr--;
-          et.setText(""+addr);
-          updateAddress();
-        }
-      }
-    });
-
-    bt = (Button) findViewById(R.id.accMM);
     bt.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         EditText et = (EditText)findViewById(R.id.accAddress);
@@ -96,13 +85,30 @@ public class ActAccessory extends ActBase {
       }
     });
 
+    bt = (Button) findViewById(R.id.accMM);
+    bt.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        EditText et = (EditText)findViewById(R.id.accAddress);
+        int addr = Integer.parseInt(et.getText().toString());
+        if( addr > 1 ) {
+          addr -= getGroupSize()*4;
+          if( addr < 1 )
+            addr = 1;
+          et.setText(""+addr);
+          updateAddress();
+        }
+      }
+    });
+
     bt = (Button) findViewById(R.id.accP);
     bt.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         EditText et = (EditText)findViewById(R.id.accAddress);
         int addr = Integer.parseInt(et.getText().toString());
         if( addr < 64*1024 ) {
-          addr++;
+          addr += getGroupSize();
+          if( addr > 64*1024 )
+            addr = 64*1024;
           et.setText(""+addr);
           updateAddress();
         }
@@ -115,7 +121,7 @@ public class ActAccessory extends ActBase {
         EditText et = (EditText)findViewById(R.id.accAddress);
         int addr = Integer.parseInt(et.getText().toString());
         if( addr < 64*1024 ) {
-          addr += getGroupSize();
+          addr += getGroupSize()*4;
           if( addr > 64*1024 )
             addr = 64*1024;
           et.setText(""+addr);
@@ -189,7 +195,7 @@ public class ActAccessory extends ActBase {
     int addr = Integer.parseInt(et.getText().toString());
     int port = row + 1;
 
-    if( type.equals(Preferences.ACCTYPE_NMRA)) {
+    if( type.equals(Preferences.ACCTYPE_MADA)) {
       port = row + 1;
     }
     else if( type.equals(Preferences.ACCTYPE_FADA)) {
@@ -210,28 +216,28 @@ public class ActAccessory extends ActBase {
   int getGroupSize() {
     Button bt = (Button)findViewById(R.id.accAddressing);
     String type = bt.getText().toString();
-    if( type.equals(Preferences.ACCTYPE_NMRA)) {
-     return 4; 
+    if( type.equals(Preferences.ACCTYPE_MADA)) {
+     return 1; 
     }
     else if( type.equals(Preferences.ACCTYPE_FADA)) {
       return 8; 
     }
     else if( type.equals(Preferences.ACCTYPE_PADA)) {
-      return 4; 
+      return 1; 
     }
-    return 4;
+    return 1;
   }
   
   int makeButtonAddr(String type, int addr, int row, int col) {
     int btAddr = 0;
-    if( type.equals(Preferences.ACCTYPE_NMRA)) {
+    if( type.equals(Preferences.ACCTYPE_MADA)) {
       btAddr = row + 1; 
     }
     else if( type.equals(Preferences.ACCTYPE_FADA)) {
       btAddr = addr + row * 2 + col; 
     }
     else if( type.equals(Preferences.ACCTYPE_PADA)) {
-      btAddr = addr + row * 2; 
+      btAddr = ((addr -1) * 4) + row * 2; 
     }
     return btAddr;
   }

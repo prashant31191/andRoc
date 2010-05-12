@@ -22,7 +22,8 @@
   android:layout_width="fill_parent" android:layout_height="fill_parent"
   android:orientation="vertical">
 
-  <LinearLayout android:id="@+id/accLayout1" android:layout_width="fill_parent" android:layout_height="wrap_content">
+  <LinearLayout android:id="@+id/accLayout1" android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" android:paddingTop="4dp" >
     <Button android:id="@+id/accAddressing" android:text="NMRA"
       android:textStyle="bold" android:layout_weight="30" android:layout_width="0px" 
       android:layout_height="wrap_content" />
@@ -33,37 +34,37 @@
 
   <LinearLayout android:id="@+id/accLayout2" android:paddingTop="10dp"
     android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <Button android:id="@+id/acc1R" android:text="1R" android:layout_width="0px"
+    <Button android:id="@+id/acc1G" android:text="1G" android:layout_width="0px"
       android:textStyle="bold" android:layout_weight="50"
       android:layout_height="60dp" />
-    <Button android:id="@+id/acc1G" android:text="1G" android:layout_width="0px"
+    <Button android:id="@+id/acc1R" android:text="1R" android:layout_width="0px"
       android:textStyle="bold" android:layout_weight="50"
       android:layout_height="60dp" />
   </LinearLayout>
   <LinearLayout android:id="@+id/accLayout3" android:layout_width="fill_parent"
     android:layout_height="wrap_content">
-    <Button android:id="@+id/acc2R" android:text="2R" android:layout_width="0px"
+    <Button android:id="@+id/acc2G" android:text="2G" android:layout_width="0px"
       android:textStyle="bold" android:layout_weight="50"
       android:layout_height="60dp" />
-    <Button android:id="@+id/acc2G" android:text="2G" android:layout_width="0px"
+    <Button android:id="@+id/acc2R" android:text="2R" android:layout_width="0px"
       android:textStyle="bold" android:layout_weight="50"
       android:layout_height="60dp" />
   </LinearLayout>
   <LinearLayout android:id="@+id/accLayout4" android:layout_width="fill_parent"
     android:layout_height="wrap_content">
-    <Button android:id="@+id/acc3R" android:text="3R" android:layout_width="0px"
+    <Button android:id="@+id/acc3G" android:text="3G" android:layout_width="0px"
       android:textStyle="bold" android:layout_weight="50"
       android:layout_height="60dp" />
-    <Button android:id="@+id/acc3G" android:text="3G" android:layout_width="0px"
+    <Button android:id="@+id/acc3R" android:text="3R" android:layout_width="0px"
       android:textStyle="bold" android:layout_weight="50"
       android:layout_height="60dp" />
   </LinearLayout>
   <LinearLayout android:id="@+id/accLayout5" android:layout_width="fill_parent"
     android:layout_height="wrap_content">
-    <Button android:id="@+id/acc4R" android:text="4R" android:layout_width="0px"
+    <Button android:id="@+id/acc4G" android:text="4G" android:layout_width="0px"
       android:textStyle="bold" android:layout_weight="50"
       android:layout_height="60dp" />
-    <Button android:id="@+id/acc4G" android:text="4G" android:layout_width="0px"
+    <Button android:id="@+id/acc4R" android:text="4R" android:layout_width="0px"
       android:textStyle="bold" android:layout_weight="50"
       android:layout_height="60dp" />
   </LinearLayout>

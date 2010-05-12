@@ -37,9 +37,9 @@ public class Preferences {
   public static final String PREFS_ACCNR = "accnr";
   public static final String PREFS_ACCTYPE = "acctype";
   
-  public static final String ACCTYPE_NMRA = "NMRA";
-  public static final String ACCTYPE_FADA = "FADA";
-  public static final String ACCTYPE_PADA = "PADA";
+  public static final String ACCTYPE_MADA = "M";
+  public static final String ACCTYPE_FADA = "F";
+  public static final String ACCTYPE_PADA = "P";
   
   public String  Recent       = "Demo:rocrail.dyndns.org:8080;";
   public String  Host         = "rocrail.dyndns.org";
@@ -51,7 +51,7 @@ public class Preferences {
   public String  LocoID       = "";
   public String  Title        = "";
   public int     AccNr        = 1;
-  public String  AccType      = ACCTYPE_NMRA;
+  public String  AccType      = ACCTYPE_MADA;
   RocrailService rocrailService = null;
   boolean Initialized = false;
   
