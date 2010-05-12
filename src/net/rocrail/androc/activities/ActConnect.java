@@ -45,12 +45,24 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
   boolean progressPlan = false;
   int progressValue = 0;
   ProgressDialog progressDialog = null;
-
+  private final int SPLASH_DISPLAY_LENGHT = 1000; 
+  
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = ActBase.MENU_PREFERENCES;
-    connectWithService();
+    setContentView(R.layout.splash);
+    
+    /* New Handler to start the Menu-Activity
+     * and close this Splash-Screen after some seconds.*/
+    new Handler().postDelayed(new Runnable(){
+         @Override
+         public void run() {
+           MenuSelection = ActBase.MENU_PREFERENCES;
+           connectWithService();
+         }
+    }, SPLASH_DISPLAY_LENGHT);
+
+    
   }
   
   public void connectedWithService() {
