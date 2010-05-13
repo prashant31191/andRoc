@@ -224,7 +224,7 @@ public class RocrailService extends Service {
       String cmd = Item.getAttrValue(atts, "cmd", "");
       int cv = Item.getAttrValue(atts, "cv", 0);
       int val = Item.getAttrValue(atts, "value", 0);
-      if (cmd.equals("datarsp") || cmd.equals("statusrsp")) {
+      if (cmd.equals("7") || cmd.equals("8")) {
         informPoMListeners(0, cv, val);
       }
       return;  
