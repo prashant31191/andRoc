@@ -211,8 +211,39 @@ public class Loco {
             rocrailService.getDeviceName(), ID, Speed, (Dir?"true":"false"), (Lights?"true":"false") ) );
     
   }
+  
+  public void CVWrite(int cv, int val) {
+    boolean longAddr = Addr > 127;
+    rocrailService.sendMessage("program", 
+        String.format("<program cmd=\"1\" addr=\"%d\" cv=\"%d\" value=\"%d\" longaddr=\"%s\" pom=\"true\"/>", 
+            Addr, cv, val, longAddr?"true":"false" ) 
+            );
+  }
 
+  public void CVRead(int cv) {
+    boolean longAddr = Addr > 127;
+    rocrailService.sendMessage("program", 
+        String.format("<program cmd=\"0\" addr=\"%d\" cv=\"%d\" longaddr=\"%s\" pom=\"true\"/>", 
+            Addr, cv, longAddr?"true":"false" ) 
+            );
+  }
 
+  public void setVmin(int v) {
+    Vmin = v;
+    rocrailService.sendMessage("model",
+        String.format("<model cmd=\"modify\"><lc id=\"%s\" V_min=\"%d\"/></model>", ID, v ) );
+  }
+  public void setVmid(int v) {
+    Vmid = v;
+    rocrailService.sendMessage("model",
+        String.format("<model cmd=\"modify\"><lc id=\"%s\" V_mid=\"%d\"/></model>", ID, v ) );
+  }
+  public void setVmax(int v) {
+    Vmax = v;
+    rocrailService.sendMessage("model",
+        String.format("<model cmd=\"modify\"><lc id=\"%s\" V_max=\"%d\"/></model>", ID, v ) );
+  }
+  
 }
 
 class UpdateLocoImage implements Runnable {

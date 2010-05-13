@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -83,6 +84,34 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
     SeekBar Vmax = (SeekBar)findViewById(R.id.locoVmax);
     Vmax.setOnSeekBarChangeListener(this);
     Vmax.setProgress(m_Loco.Vmax);
+    
+    
+    Button Write = (Button) findViewById(R.id.locoCVWrite);
+    Write.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          if( m_Loco != null ) {
+            EditText cvTxt = (EditText)findViewById(R.id.locoCV);
+            int cv = Integer.parseInt(cvTxt.getText().toString());
+            EditText valTxt = (EditText)findViewById(R.id.locoVal);
+            int val = Integer.parseInt(valTxt.getText().toString());
+            m_Loco.CVWrite(cv, val);
+          }
+        }
+    });
+    
+
+    Button Read = (Button) findViewById(R.id.locoCVRead);
+    Read.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          if( m_Loco != null ) {
+            EditText cvTxt = (EditText)findViewById(R.id.locoCV);
+            int cv = Integer.parseInt(cvTxt.getText().toString());
+            m_Loco.CVRead(cv);
+          }
+        }
+    });
+    
+
 
   }
   
@@ -112,8 +141,19 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
   }
 
   @Override
-  public void onStopTrackingTouch(SeekBar arg0) {
-    // TODO Auto-generated method stub
+  public void onStopTrackingTouch(SeekBar bar) {
+    if( m_Loco == null )
+      return;
+    
+    if( bar.getId() == R.id.locoVmin ) {
+      m_Loco.setVmin(bar.getProgress());
+    }
+    else if( bar.getId() == R.id.locoVmid ) {
+      m_Loco.setVmid(bar.getProgress());
+    }
+    else if( bar.getId() == R.id.locoVmax ) {
+      m_Loco.setVmax(bar.getProgress());
+    }
     
   }
 
