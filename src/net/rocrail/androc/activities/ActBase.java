@@ -46,6 +46,7 @@ public class ActBase extends Activity implements ServiceListener {
   final static int MENU_BLOCK    = 0x0080;
   final static int MENU_PREFERENCES = 0x0100;
   final static int MENU_ACCESSORY   = 0x0200;
+  final static int MENU_LOCOSETUP   = 0x0400;
   
   Activity        m_Activity = null;
   ServiceListener m_Listener = null;
@@ -121,6 +122,8 @@ public class ActBase extends Activity implements ServiceListener {
       menu.add(0, MENU_PREFERENCES    , 0, R.string.Preferences).setIcon(R.drawable.preferences);
     if( (MenuSelection & MENU_ACCESSORY)  == MENU_ACCESSORY )
       menu.add(0, MENU_ACCESSORY    , 0, R.string.Accessory).setIcon(R.drawable.accessory);
+    if( (MenuSelection & MENU_LOCOSETUP)  == MENU_LOCOSETUP )
+      menu.add(0, MENU_LOCOSETUP    , 0, R.string.LocoSetup).setIcon(R.drawable.locosetup);
     return true;
   }
 
@@ -150,6 +153,9 @@ public class ActBase extends Activity implements ServiceListener {
       return true;
     case MENU_ACCESSORY:
       accessoryView();
+      return true;
+    case MENU_LOCOSETUP:
+      locosetupView();
       return true;
     case MENU_QUIT:
       m_Activity.finish();
@@ -190,6 +196,13 @@ public class ActBase extends Activity implements ServiceListener {
   
   public void accessoryView() {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActAccessory.class);
+    m_Activity.startActivityIfNeeded(intent,0);
+    if(Finish) 
+      m_Activity.finish();
+  }
+  
+  public void locosetupView() {
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoSetup.class);
     m_Activity.startActivityIfNeeded(intent,0);
     if(Finish) 
       m_Activity.finish();

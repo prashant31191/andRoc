@@ -38,6 +38,7 @@
         <activity android:name=".activities.ActMenu" />
         <activity android:name=".activities.ActLayout" />
         <activity android:name=".activities.ActLoco" />
+        <activity android:name=".activities.ActLocoSetup" />
         <activity android:name=".activities.ActLevel" />
         <activity android:name=".activities.ActInfo" />
         <activity android:name=".activities.ActRoutes" />

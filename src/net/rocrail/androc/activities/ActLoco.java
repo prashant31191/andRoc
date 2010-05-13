@@ -27,6 +27,7 @@ import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
 import net.rocrail.androc.widgets.LocoImage;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,7 +47,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = 0; //Base.MENU_THROTTLE | Base.MENU_SYSTEM | Base.MENU_MENU | Base.MENU_LAYOUT;
+    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_LOCOSETUP;
     Finish = true;
     connectWithService();
   }
@@ -97,7 +98,12 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
 
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        finish();
+        //finish();
+        if( m_Loco != null ) {
+          Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoSetup.class);
+          intent.putExtra("id", m_Loco.ID);
+          startActivity(intent);
+        }
       }
   });
     /*
