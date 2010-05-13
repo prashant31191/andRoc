@@ -55,6 +55,7 @@ public class Model {
   public List<Item>   m_ItemList = new ArrayList<Item>();
   public List<String> m_ScheduleList = new ArrayList<String>();
   public List<String> m_RouteList = new ArrayList<String>();
+  public List<String> m_ActionList = new ArrayList<String>();
   public String m_Title = "";  
   public String m_Name = "";  
   public String m_RocrailVersion = "";  
@@ -80,6 +81,7 @@ public class Model {
     m_ItemList.clear();
     m_ScheduleList.clear();
     m_RouteList.clear();
+    m_ActionList.clear();
     
     m_Title = Item.getAttrValue(atts, "title", "New");  
     m_Name = Item.getAttrValue(atts, "name", "plan.xml");  
@@ -249,6 +251,10 @@ public class Model {
     }
     if( objName.equals("st") ) {
       m_RouteList.add(Item.getAttrValue(atts, "id", "?"));
+      return;
+    }
+    if( objName.equals("ac") ) {
+      m_ActionList.add(Item.getAttrValue(atts, "id", "?"));
       return;
     }
   }

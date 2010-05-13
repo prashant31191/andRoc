@@ -17,13 +17,13 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-
 package net.rocrail.androc.activities;
+
+import java.util.Iterator;
 
 import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.ServiceListener;
 import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,32 +32,36 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ActMenu extends  ListActivity implements ServiceListener {
+public class ActActions extends ListActivity implements ServiceListener  {
+
   ActBase m_Base = null;
-  String[] m_Items = null;
-  
+  String[] m_Actions = null;
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     m_Base = new ActBase(this, this);
-    m_Base.MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_SYSTEM | ActBase.MENU_LAYOUT | ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
+    m_Base.MenuSelection = 0; //Base.MENU_THROTTLE | Base.MENU_SYSTEM | Base.MENU_MENU;
+
     m_Base.connectWithService();
   }
   
   public void connectedWithService() {
     m_Base.connectedWithService();
     initView();
-    m_Base.updateTitle("Menu");
+    m_Base.updateTitle("Actions");
   }
 
 
   public void initView() {
-    m_Items = new String[3];
-    m_Items[0] = "Info";
-    m_Items[1] = "Routes";
-    m_Items[2] = "Actions";
-      
-    setListAdapter(new ArrayAdapter<String>(this, R.layout.menuitem, m_Items));
+    m_Actions = new String[m_Base.m_RocrailService.m_Model.m_ActionList.size()];
+    Iterator<String> it = m_Base.m_RocrailService.m_Model.m_ActionList.iterator();
+    int idx = 0;
+    while( it.hasNext() ) {
+      m_Actions[idx] = it.next();
+      idx++;
+    }
+    setListAdapter(new ArrayAdapter<String>(this, R.layout.menuitem, m_Actions));
 
     ListView lv = getListView();
     lv.setTextFilterEnabled(true);
@@ -65,35 +69,11 @@ public class ActMenu extends  ListActivity implements ServiceListener {
     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // When clicked, show a toast with the TextView text
-        Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
-            Toast.LENGTH_SHORT).show();
-        switch( position ) {
-          case 0: {
-            Intent intent = new Intent(ActMenu.this,net.rocrail.androc.activities.ActInfo.class);
-            startActivity(intent);
-          }
-          break;
-          case 1: {
-            Intent intent = new Intent(ActMenu.this,net.rocrail.androc.activities.ActRoutes.class);
-            startActivity(intent);
-          }
-          break;
-          case 2: {
-            Intent intent = new Intent(ActMenu.this,net.rocrail.androc.activities.ActActions.class);
-            startActivity(intent);
-          }
-          break;
-        }
+        Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+        // send route command
+        m_Base.m_RocrailService.sendMessage("ac", String.format("<ac id=\"%s\" cmd=\"test\"/>",
+            ((TextView) view).getText() ) );
       }
     });
   }
-
-  public boolean onCreateOptionsMenu(android.view.Menu menu) {
-    return m_Base.onCreateOptionsMenu(menu);
-  }
-  
-  public boolean onOptionsItemSelected(android.view.MenuItem item) {
-    return m_Base.onOptionsItemSelected(item);
-  }
-  
 }
