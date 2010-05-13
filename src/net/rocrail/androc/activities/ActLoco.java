@@ -106,17 +106,6 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
         }
       }
   });
-    /*
-    SeekBar Vmax = (SeekBar)findViewById(R.id.locoVmax);
-    Vmax.setOnSeekBarChangeListener(this);
-    Vmax.setProgress(m_Loco.Vmax);
-    SeekBar Vmid = (SeekBar)findViewById(R.id.locoVmid);
-    Vmid.setOnSeekBarChangeListener(this);
-    Vmid.setProgress(m_Loco.Vmid);
-    SeekBar Vmin = (SeekBar)findViewById(R.id.locoVmin);
-    Vmin.setOnSeekBarChangeListener(this);
-    Vmin.setProgress(m_Loco.Vmin);
-*/
     
     final LEDButton autoStart = (LEDButton) findViewById(R.id.locoStart);
     autoStart.ON = m_Loco.AutoStart;

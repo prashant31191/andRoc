@@ -47,11 +47,11 @@
       <net.rocrail.androc.widgets.LEDButton
         android:text="@string/START" android:textStyle="bold"
         android:id="@+id/locoStart" android:layout_width="0px"
-        android:layout_weight="50" android:layout_height="fill_parent" />
+        android:layout_weight="50" android:layout_height="60dp" />
       <net.rocrail.androc.widgets.LEDButton
         android:text="@string/HalfAuto" android:textStyle="bold"
         android:id="@+id/locoHalfAuto" android:layout_width="0px"
-        android:layout_weight="50" android:layout_height="fill_parent" />
+        android:layout_weight="50" android:layout_height="60dp" />
     </LinearLayout>
     <LinearLayout android:id="@+id/locoLayout3"
       android:orientation="vertical" android:layout_width="fill_parent"
@@ -64,41 +64,7 @@
         android:drawSelectorOnTop="true" />
       <Button android:text="@string/Set_in_block"
         android:textStyle="bold" android:id="@+id/locoSetInBlock"
-        android:layout_width="fill_parent" android:layout_height="50dp" />
+        android:layout_width="fill_parent" android:layout_height="60dp" />
     </LinearLayout>
   </LinearLayout>
-<!-- 
-  <LinearLayout android:id="@+id/locoLayout4"
-    android:orientation="horizontal" android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-    <TextView android:id="@+id/locoLabVmax" android:text="Vmax"
-      android:paddingLeft="5px" android:layout_height="wrap_content"
-      android:layout_weight="20"></TextView>
-    <SeekBar android:id="@+id/locoVmax" android:max="100"
-      android:progress="0" android:layout_width="0px"
-      android:layout_weight="80" android:layout_height="wrap_content"
-      android:paddingRight="5px" />
-  </LinearLayout>
-  <LinearLayout android:id="@+id/locoLayout5"
-    android:orientation="horizontal" android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-    <TextView android:id="@+id/locoLabVmid" android:text="Vmid"
-      android:paddingLeft="5px" android:layout_height="wrap_content"
-      android:layout_weight="20"></TextView>
-    <SeekBar android:id="@+id/locoVmid" android:max="100"
-      android:progress="0" android:layout_width="0px"
-      android:layout_weight="80" android:layout_height="wrap_content"
-      android:paddingRight="5px" />
-  </LinearLayout>
-  <LinearLayout android:id="@+id/locoLayout6" android:orientation="horizontal"
-    android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <TextView android:id="@+id/locoLabVmin" android:text="Vmin"
-      android:paddingLeft="5px" android:layout_height="wrap_content"
-      android:layout_weight="20"></TextView>
-    <SeekBar android:id="@+id/locoVmin" android:max="100"
-      android:progress="0" android:layout_width="0px"
-      android:layout_weight="80" android:layout_height="wrap_content"
-      android:paddingRight="5px" />
-  </LinearLayout>
--->
 </LinearLayout>

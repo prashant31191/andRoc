@@ -26,6 +26,7 @@ import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.PoMListener;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LocoImage;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -78,6 +79,12 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
         image.setImageBitmap(m_Loco.getLocoBmp(null));
       }
     }
+    
+    image.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        throttleView();
+      }
+    });
 
     SeekBar Vmin = (SeekBar)findViewById(R.id.locoVmin);
     Vmin.setOnSeekBarChangeListener(this);
