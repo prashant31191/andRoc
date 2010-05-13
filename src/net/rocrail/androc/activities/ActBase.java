@@ -107,7 +107,7 @@ public class ActBase extends Activity implements ServiceListener {
     //if( (MenuSelection & MENU_CONNECT)  == MENU_CONNECT )
     //  menu.add(0, MENU_CONNECT , 0, R.string.Connect).setIcon(R.drawable.connect);
     if( (MenuSelection & MENU_THROTTLE)  == MENU_THROTTLE )
-      menu.add(0, MENU_THROTTLE, 0, R.string.Throttle ).setIcon(R.drawable.loco);
+      menu.add(0, MENU_THROTTLE, 0, R.string.Throttle ).setIcon(R.drawable.throttle);
     if( (MenuSelection & MENU_SYSTEM)  == MENU_SYSTEM )
       menu.add(0, MENU_SYSTEM  , 0, R.string.System).setIcon(R.drawable.system);
     if( (MenuSelection & MENU_LAYOUT)  == MENU_LAYOUT )
