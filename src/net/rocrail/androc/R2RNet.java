@@ -67,7 +67,7 @@ public class R2RNet extends Thread {
       buf = msg.getBytes("UTF-8");
       
       MulticastSocket socket = new MulticastSocket(Port);
-      socket.setTimeToLive(255);
+      //socket.setTimeToLive(255);
       socket.setSoTimeout(1000);
       InetAddress group = InetAddress.getByName(Host);
       socket.joinGroup(group);
