@@ -20,21 +20,26 @@
 
 package net.rocrail.androc.activities;
 
+import java.util.Iterator;
+
 import net.rocrail.androc.R;
+import net.rocrail.androc.interfaces.PoMListener;
 import net.rocrail.androc.objects.Loco;
-import net.rocrail.androc.widgets.LEDButton;
 import net.rocrail.androc.widgets.LocoImage;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnSeekBarChangeListener {
+public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnSeekBarChangeListener, PoMListener {
   Loco m_Loco = null;
+  int CvVal = 0;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,7 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
   public void connectedWithService() {
     initView();
     updateTitle(m_Loco!=null?m_Loco.ID:"Loco setup");
+    m_RocrailService.addPoMListener(this);
   }
 
 
@@ -85,7 +91,10 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
     Vmax.setOnSeekBarChangeListener(this);
     Vmax.setProgress(m_Loco.Vmax);
     
-    
+
+    EditText cvTxt = (EditText)findViewById(R.id.locoCV);
+    cvTxt.setText(""+m_RocrailService.Prefs.CvNr);
+
     Button Write = (Button) findViewById(R.id.locoCVWrite);
     Write.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
@@ -95,6 +104,7 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
             EditText valTxt = (EditText)findViewById(R.id.locoVal);
             int val = Integer.parseInt(valTxt.getText().toString());
             m_Loco.CVWrite(cv, val);
+            m_RocrailService.Prefs.saveProgramming(cv);
           }
         }
     });
@@ -107,6 +117,7 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
             EditText cvTxt = (EditText)findViewById(R.id.locoCV);
             int cv = Integer.parseInt(cvTxt.getText().toString());
             m_Loco.CVRead(cv);
+            m_RocrailService.Prefs.saveProgramming(cv);
           }
         }
     });
@@ -155,6 +166,18 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
       m_Loco.setVmax(bar.getProgress());
     }
     
+  }
+
+  @Override
+  public void ReadResponse(int addr, int cv, int value) {
+    CvVal = value;
+    EditText valTxt = (EditText)findViewById(R.id.locoVal);
+    valTxt.post(new Runnable() {
+      public void run() {
+        EditText valTxt = (EditText)findViewById(R.id.locoVal);
+        valTxt.setText(""+CvVal);
+      }
+    });
   }
 
 }

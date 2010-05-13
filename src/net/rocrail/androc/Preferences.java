@@ -36,6 +36,7 @@ public class Preferences {
   public static final String PREFS_RRNETPORT = "rrnetport";
   public static final String PREFS_ACCNR = "accnr";
   public static final String PREFS_ACCTYPE = "acctype";
+  public static final String PREFS_CVNR = "cvnr";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -51,6 +52,7 @@ public class Preferences {
   public String  LocoID       = "";
   public String  Title        = "";
   public int     AccNr        = 1;
+  public int     CvNr         = 1;
   public String  AccType      = ACCTYPE_MADA;
   RocrailService rocrailService = null;
   boolean Initialized = false;
@@ -79,6 +81,7 @@ public class Preferences {
     LocoID       = settings.getString(PREFS_LOCOID, LocoID);
     AccType      = settings.getString(PREFS_ACCTYPE, AccType);
     AccNr        = settings.getInt(PREFS_ACCNR, AccNr);
+    CvNr         = settings.getInt(PREFS_CVNR, CvNr);
     
     conList = RRConnection.parse(Recent);
 
@@ -107,6 +110,14 @@ public class Preferences {
     SharedPreferences.Editor editor = settings.edit();
     editor.putString(PREFS_ACCTYPE, type);
     editor.putInt(PREFS_ACCNR, nr);
+    editor.commit();
+  }
+  
+  public void saveProgramming(int cv) {
+    CvNr = cv;
+    SharedPreferences settings = rocrailService.getSharedPreferences(PREFS_NAME, 0);
+    SharedPreferences.Editor editor = settings.edit();
+    editor.putInt(PREFS_CVNR, cv);
     editor.commit();
   }
   

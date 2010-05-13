@@ -30,6 +30,7 @@ import org.xml.sax.Attributes;
 
 import net.rocrail.androc.activities.ActSystem;
 import net.rocrail.androc.interfaces.MessageListener;
+import net.rocrail.androc.interfaces.PoMListener;
 import net.rocrail.androc.interfaces.SystemListener;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
@@ -62,6 +63,7 @@ public class RocrailService extends Service {
   
   SAXParser m_Parser = null;
   private List<SystemListener>  m_Listeners = new ArrayList<SystemListener>();
+  private List<PoMListener>  m_PoMListeners = new ArrayList<PoMListener>();
   public List<String>  MessageList = new ArrayList<String>();
 
   MessageListener messageListener = null;
@@ -103,6 +105,9 @@ public class RocrailService extends Service {
   
   public void addListener( SystemListener listener ) {
     m_Listeners.add(listener);
+  }
+  public void addPoMListener( PoMListener listener ) {
+    m_PoMListeners.add(listener);
   }
   
 
@@ -176,6 +181,14 @@ public class RocrailService extends Service {
     }
   }
 
+  public void informPoMListeners(int addr, int cv, int value) {
+    Iterator<PoMListener> it = m_PoMListeners.iterator();
+    while( it.hasNext() ) {
+      PoMListener listener = it.next();
+      listener.ReadResponse(addr, cv, value);
+    }
+  }
+  
   public void informListeners(String event) {
     if( SystemListener.EVENT_SHUTDOWN.equals(event) ) {
       disConnect(false);
@@ -206,6 +219,17 @@ public class RocrailService extends Service {
       informListeners(Item.getAttrValue(atts, "cmd", ""));
       return;
     }
+    
+    if( itemtype.equals("program") ) {
+      String cmd = Item.getAttrValue(atts, "cmd", "");
+      int cv = Item.getAttrValue(atts, "cv", 0);
+      int val = Item.getAttrValue(atts, "value", 0);
+      if (cmd.equals("datarsp") || cmd.equals("statusrsp")) {
+        informPoMListeners(0, cv, val);
+      }
+      return;  
+    }
+    
     if( itemtype.equals("state") ) {
       boolean l_Power = Item.getAttrValue(atts, "power", Power);
       if( Power && !l_Power ) {

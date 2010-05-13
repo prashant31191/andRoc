@@ -86,7 +86,7 @@ class XmlHandler extends DefaultHandler {
     }
     else {
       if( localName.equals("state") || localName.equals("auto") || 
-          localName.equals("sys") || localName.equals("exception") ) {
+          localName.equals("sys") || localName.equals("exception") || localName.equals("program") ) {
         rocrailService.event(localName, atts);
       }
       else {
