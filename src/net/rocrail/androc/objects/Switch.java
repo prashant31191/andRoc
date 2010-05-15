@@ -36,6 +36,11 @@ public class Switch extends Item implements View.OnClickListener {
   }
 
   public void onClick(View v) {
+    flip();
+  }
+
+  
+  public void flip() {
     m_RocrailService.sendMessage("sw", String.format( "<sw id=\"%s\" cmd=\"flip\"/>", ID ) );
   }
 

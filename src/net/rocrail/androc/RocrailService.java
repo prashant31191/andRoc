@@ -234,7 +234,7 @@ public class RocrailService extends Service {
       boolean l_Power = Item.getAttrValue(atts, "power", Power);
       if( Power && !l_Power ) {
       
-        int icon = R.drawable.system;        // icon from resources
+        int icon = R.drawable.power_notify;        // icon from resources
         CharSequence tickerText = "Power Down";              // ticker-text
         long when = System.currentTimeMillis();         // notification time
         Context context = getApplicationContext();      // application Context

@@ -56,6 +56,7 @@ public class Model {
   public List<String> m_ScheduleList = new ArrayList<String>();
   public List<String> m_RouteList = new ArrayList<String>();
   public List<String> m_ActionList = new ArrayList<String>();
+  public List<String> m_SwitchList = new ArrayList<String>();
   public String m_Title = "";  
   public String m_Name = "";  
   public String m_RocrailVersion = "";  
@@ -82,6 +83,7 @@ public class Model {
     m_ScheduleList.clear();
     m_RouteList.clear();
     m_ActionList.clear();
+    m_SwitchList.clear();
     
     m_Title = Item.getAttrValue(atts, "title", "New");  
     m_Name = Item.getAttrValue(atts, "name", "plan.xml");  
@@ -188,6 +190,7 @@ public class Model {
     if( objName.equals("sw") ) {
       Switch sw = new Switch(rocrailService, atts);
       m_SwitchMap.put(sw.ID, sw);
+      m_SwitchList.add(sw.ID);
       m_ItemList.add(sw);
       return;
     }
