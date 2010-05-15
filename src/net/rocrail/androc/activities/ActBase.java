@@ -41,7 +41,6 @@ public class ActBase extends Activity implements ServiceListener {
   final static int MENU_SYSTEM   = 0x0004;
   final static int MENU_LAYOUT   = 0x0008;
   final static int MENU_MENU     = 0x0010;
-  final static int MENU_QUIT     = 0x0020;
   final static int MENU_LOCO     = 0x0040;
   final static int MENU_BLOCK    = 0x0080;
   final static int MENU_PREFERENCES = 0x0100;
@@ -51,7 +50,7 @@ public class ActBase extends Activity implements ServiceListener {
   Activity        m_Activity = null;
   ServiceListener m_Listener = null;
   
-  public int MenuSelection = MENU_THROTTLE | MENU_SYSTEM | MENU_LAYOUT | MENU_MENU | MENU_QUIT;
+  public int MenuSelection = MENU_THROTTLE | MENU_SYSTEM | MENU_LAYOUT | MENU_MENU;
   public boolean Finish = false;
   
   public RocrailService             m_RocrailService       = null;
@@ -114,8 +113,6 @@ public class ActBase extends Activity implements ServiceListener {
       menu.add(0, MENU_LAYOUT  , 0, R.string.Layout).setIcon(R.drawable.layout);
     if( (MenuSelection & MENU_MENU)  == MENU_MENU )
       menu.add(0, MENU_MENU    , 0, R.string.Menu).setIcon(R.drawable.menu);
-    if( (MenuSelection & MENU_QUIT)  == MENU_QUIT )
-      menu.add(0, MENU_QUIT    , 0, R.string.Quit).setIcon(R.drawable.quit);
     if( (MenuSelection & MENU_LOCO)  == MENU_LOCO )
       menu.add(0, MENU_LOCO    , 0, R.string.Loco).setIcon(R.drawable.loco);
     if( (MenuSelection & MENU_PREFERENCES)  == MENU_PREFERENCES )
@@ -156,9 +153,6 @@ public class ActBase extends Activity implements ServiceListener {
       return true;
     case MENU_LOCOSETUP:
       locosetupView();
-      return true;
-    case MENU_QUIT:
-      m_Activity.finish();
       return true;
     }
     return false;
