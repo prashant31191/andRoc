@@ -27,6 +27,7 @@ import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
 import net.rocrail.androc.widgets.LocoImage;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -116,7 +117,16 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        // TODO: reset loco?
+        if( LocoID!=null ) {
+          Loco lc = m_RocrailService.m_Model.getLoco(LocoID);
+          if( lc != null ) {
+            locoView();
+            Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
+            intent.putExtra("id", lc.ID);
+            startActivity(intent);
+            finish();
+          }
+        }
       }
     });
     
