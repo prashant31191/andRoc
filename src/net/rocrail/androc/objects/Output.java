@@ -32,6 +32,10 @@ public class Output extends Item implements View.OnClickListener {
   }
 
   public void onClick(View v) {
+    flip();
+  }
+
+  public void flip() {
     m_RocrailService.sendMessage("co", String.format( "<co id=\"%s\" cmd=\"flip\"/>", ID ) );
   }
 

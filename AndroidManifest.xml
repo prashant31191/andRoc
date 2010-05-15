@@ -20,8 +20,8 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.rocrail.androc"
-      android:versionCode="163"
-      android:versionName="0.9.163">
+      android:versionCode="164"
+      android:versionName="0.9.164">
     <supports-screens android:anyDensity="false" android:largeScreens="true"
           android:normalScreens="true" android:smallScreens="true"/>
       
@@ -49,6 +49,7 @@
         <activity android:name=".activities.ActAccessory" />
         <activity android:name=".activities.ActActions" />
         <activity android:name=".activities.ActSwitches" />
+        <activity android:name=".activities.ActOutputs" />
         <service android:name=".RocrailService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
