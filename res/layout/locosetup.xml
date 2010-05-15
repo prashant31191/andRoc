@@ -21,70 +21,86 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent" android:orientation="vertical"
   android:layout_height="fill_parent">
-  <net.rocrail.androc.widgets.LocoImage
-    android:id="@+id/locoImage" android:layout_width="fill_parent"
-    android:clickable="true" android:layout_height="60px" android:src="@drawable/noimg"
-    android:padding="5dp" />
+  <ScrollView android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout android:layout_width="fill_parent"
+      android:layout_height="fill_parent" android:orientation="vertical">
+      <net.rocrail.androc.widgets.LocoImage
+        android:id="@+id/locoImage" android:layout_width="fill_parent"
+        android:clickable="true" android:layout_height="60px"
+        android:src="@drawable/noimg" android:padding="5dp" />
 
-  <LinearLayout  android:paddingTop="10dp" android:id="@+id/locoLayout4"
-    android:orientation="horizontal" android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-    <TextView android:id="@+id/locoLabVmax" android:text="Vmax"
-      android:paddingLeft="5px" android:layout_height="wrap_content"
-      android:layout_width="0px" android:layout_weight="20"></TextView>
-    <SeekBar android:id="@+id/locoVmax" android:max="100"
-      android:progress="0" android:layout_width="0px"
-      android:layout_weight="80" android:layout_height="wrap_content"
-      android:paddingRight="5px" />
-  </LinearLayout>
-  <LinearLayout  android:paddingTop="10dp" android:id="@+id/locoLayout5"
-    android:orientation="horizontal" android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-    <TextView android:id="@+id/locoLabVmid" android:text="Vmid"
-      android:paddingLeft="5px" android:layout_height="wrap_content"
-      android:layout_width="0px" android:layout_weight="20"></TextView>
-    <SeekBar android:id="@+id/locoVmid" android:max="100"
-      android:progress="0" android:layout_width="0px"
-      android:layout_weight="80" android:layout_height="wrap_content"
-      android:paddingRight="5px" />
-  </LinearLayout>
-  <LinearLayout  android:paddingTop="10dp" android:id="@+id/locoLayout6" android:orientation="horizontal"
-    android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <TextView android:id="@+id/locoLabVmin" android:text="Vmin"
-      android:paddingLeft="5px" android:layout_height="wrap_content"
-      android:layout_width="0px" android:layout_weight="20"></TextView>
-    <SeekBar android:id="@+id/locoVmin" android:max="100"
-      android:progress="0" android:layout_width="0px"
-      android:layout_weight="80" android:layout_height="wrap_content"
-      android:paddingRight="5px" />
-  </LinearLayout>
+      <LinearLayout android:paddingTop="10dp" android:id="@+id/locoLayout4"
+        android:orientation="horizontal" android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView android:id="@+id/locoLabVmax" android:text="Vmax"
+          android:paddingLeft="5px" android:layout_height="wrap_content"
+          android:layout_width="0px" android:layout_weight="20"></TextView>
+        <SeekBar android:id="@+id/locoVmax" android:max="100"
+          android:progress="0" android:layout_width="0px"
+          android:layout_weight="80" android:layout_height="wrap_content"
+          android:paddingRight="5px" />
+      </LinearLayout>
+      <LinearLayout android:paddingTop="10dp" android:id="@+id/locoLayout5"
+        android:orientation="horizontal" android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView android:id="@+id/locoLabVmid" android:text="Vmid"
+          android:paddingLeft="5px" android:layout_height="wrap_content"
+          android:layout_width="0px" android:layout_weight="20"></TextView>
+        <SeekBar android:id="@+id/locoVmid" android:max="100"
+          android:progress="0" android:layout_width="0px"
+          android:layout_weight="80" android:layout_height="wrap_content"
+          android:paddingRight="5px" />
+      </LinearLayout>
+      <LinearLayout android:paddingTop="10dp" android:id="@+id/locoLayout6"
+        android:orientation="horizontal" android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView android:id="@+id/locoLabVmin" android:text="Vmin"
+          android:paddingLeft="5px" android:layout_height="wrap_content"
+          android:layout_width="0px" android:layout_weight="20"></TextView>
+        <SeekBar android:id="@+id/locoVmin" android:max="100"
+          android:progress="0" android:layout_width="0px"
+          android:layout_weight="80" android:layout_height="wrap_content"
+          android:paddingRight="5px" />
+      </LinearLayout>
 
-  <LinearLayout android:paddingTop="10dp" android:id="@+id/locoLayout7" android:orientation="horizontal"
-    android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <TextView android:id="@+id/locoLabCV" android:text="CV" android:textStyle="bold"
-      android:paddingLeft="5px" android:layout_height="wrap_content"
-      android:layout_width="0px" android:layout_weight="50"></TextView>
-    <TextView android:id="@+id/locoLabVal" android:text="Value" android:textStyle="bold"
-      android:paddingLeft="5px" android:layout_height="wrap_content"
-      android:layout_width="0px" android:layout_weight="50"></TextView>
-  </LinearLayout>
-  <LinearLayout android:id="@+id/locoLayout8" android:orientation="horizontal"
-    android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <EditText android:numeric="decimal" android:id="@+id/locoCV" android:text="0" 
-      android:paddingLeft="5px" android:layout_height="wrap_content" android:gravity="center"
-      android:layout_width="0px" android:layout_weight="50"/>
-    <EditText android:numeric="decimal" android:id="@+id/locoVal" android:text="0"
-      android:paddingLeft="5px" android:layout_height="wrap_content" android:gravity="center"
-      android:layout_width="0px" android:layout_weight="50"/>
-  </LinearLayout>
-  <LinearLayout android:id="@+id/locoLayout9" android:orientation="horizontal"
-    android:layout_width="fill_parent" android:layout_height="wrap_content">
-    <Button android:id="@+id/locoCVWrite" android:text="Write" android:textSize="20sp"
-      android:paddingLeft="5px" android:layout_height="60dp"
-      android:layout_width="0px" android:layout_weight="50"/>
-    <Button android:id="@+id/locoCVRead" android:text="Read" android:textSize="20sp"
-      android:paddingLeft="5px" android:layout_height="60dp"
-      android:layout_width="0px" android:layout_weight="50"/>
-  </LinearLayout>
+      <LinearLayout android:paddingTop="10dp" android:id="@+id/locoLayout7"
+        android:orientation="horizontal" android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView android:id="@+id/locoLabCV" android:text="CV"
+          android:textStyle="bold" android:paddingLeft="5px"
+          android:layout_height="wrap_content" android:layout_width="0px"
+          android:layout_weight="50"></TextView>
+        <TextView android:id="@+id/locoLabVal" android:text="Value"
+          android:textStyle="bold" android:paddingLeft="5px"
+          android:layout_height="wrap_content" android:layout_width="0px"
+          android:layout_weight="50"></TextView>
+      </LinearLayout>
+      <LinearLayout android:id="@+id/locoLayout8"
+        android:orientation="horizontal" android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <EditText android:numeric="decimal" android:id="@+id/locoCV"
+          android:text="0" android:paddingLeft="5px"
+          android:layout_height="wrap_content" android:gravity="center"
+          android:layout_width="0px" android:layout_weight="50" />
+        <EditText android:numeric="decimal" android:id="@+id/locoVal"
+          android:text="0" android:paddingLeft="5px"
+          android:layout_height="wrap_content" android:gravity="center"
+          android:layout_width="0px" android:layout_weight="50" />
+      </LinearLayout>
+      <LinearLayout android:id="@+id/locoLayout9"
+        android:orientation="horizontal" android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/locoCVWrite" android:text="Write"
+          android:textSize="20sp" android:paddingLeft="5px"
+          android:layout_height="60dp" android:layout_width="0px"
+          android:layout_weight="50" />
+        <Button android:id="@+id/locoCVRead" android:text="Read"
+          android:textSize="20sp" android:paddingLeft="5px"
+          android:layout_height="60dp" android:layout_width="0px"
+          android:layout_weight="50" />
+      </LinearLayout>
 
+    </LinearLayout>
+  </ScrollView>
 </LinearLayout>
