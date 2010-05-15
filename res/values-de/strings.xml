@@ -79,4 +79,5 @@
   <string name="Accessory">Accessory</string>
   <string name="back_again_quit">Press Back once more to exit.</string>
   <string name="LocoSetup">Lok Konfig</string>
+  <!-- string name="System">System</string-->
 </resources>
