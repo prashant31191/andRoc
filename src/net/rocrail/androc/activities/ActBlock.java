@@ -117,15 +117,11 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
-        if( LocoID!=null ) {
-          Loco lc = m_RocrailService.m_Model.getLoco(LocoID);
-          if( lc != null ) {
-            locoView();
-            Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
-            intent.putExtra("id", lc.ID);
-            startActivity(intent);
-            finish();
-          }
+        if( m_Block.LocoID!=null ) {
+          Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
+          intent.putExtra("id", m_Block.LocoID);
+          startActivity(intent);
+          finish();
         }
       }
     });
