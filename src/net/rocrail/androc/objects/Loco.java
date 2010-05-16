@@ -92,6 +92,9 @@ public class Loco {
     Vmin  = Item.getAttrValue(atts, "V_min", 10);
     Vmode = Item.getAttrValue(atts, "V_mode", "");
     Mode  = Item.getAttrValue(atts, "mode","");
+    
+    AutoStart = Mode.equals("auto");
+    HalfAuto  = Mode.equals("halfauto");
 
     int fx = Item.getAttrValue(atts, "fx", 0 );
     
