@@ -50,7 +50,6 @@ public class RocrailService extends Service {
   public Model   m_Model       = null;
   public String  m_DeviceId    = "andRoc";
   
-  public int    m_iSelectedLoco = 0;
   public Loco   SelectedLoco = null;
   
   public boolean Power     = false;

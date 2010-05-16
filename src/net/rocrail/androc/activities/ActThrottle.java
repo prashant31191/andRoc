@@ -71,6 +71,9 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
       String id = (String)s.getSelectedItem();
       if( id != null ) {
         m_Loco = m_RocrailService.m_Model.getLoco(id);
+        if( m_Loco != null ) {
+          m_RocrailService.Prefs.LocoID = m_Loco.toString();
+        }
       }
     }
   }
@@ -133,19 +136,20 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
         .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
 
+    int iSelectedLoco = 0;
     Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
       m_adapterForSpinner.add(loco.toString());
       if( LocoID.length() > 0 && LocoID.equals(loco.toString()) ) {
-        m_RocrailService.m_iSelectedLoco = m_iLocoCount;
+        iSelectedLoco = m_iLocoCount;
       }
       m_iLocoCount++;
     }
     
     s.setOnItemSelectedListener(this);
-    if( m_iLocoCount > 0 && m_RocrailService.m_iSelectedLoco < m_iLocoCount)
-      s.setSelection(m_RocrailService.m_iSelectedLoco);    
+    if( m_iLocoCount > 0 && iSelectedLoco < m_iLocoCount)
+      s.setSelection(iSelectedLoco);    
     
     findLoco();
     
@@ -361,7 +365,6 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
   @Override
   public void onItemSelected(AdapterView<?> arg0, View view, int position, long longID) {
     quitShowed = false;
-    m_RocrailService.m_iSelectedLoco = position;
     findLoco();
     if( m_Loco != null ) {
       m_RocrailService.SelectedLoco = m_Loco;
