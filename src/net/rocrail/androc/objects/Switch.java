@@ -45,8 +45,9 @@ public class Switch extends Item implements View.OnClickListener {
   }
 
   
-  public String getImageName() {
-    int orinr = getOriNr();
+  public String getImageName(boolean ModPlan) {
+    this.ModPlan = ModPlan;
+    int orinr = getOriNr(ModPlan);
     
     if( orinr == 1 )
       orinr = 3;
@@ -54,7 +55,7 @@ public class Switch extends Item implements View.OnClickListener {
       orinr = 1;
     
     if( Type.equals("accessory") ) {
-      if (getOriNr() % 2 == 0)
+      if (getOriNr(ModPlan) % 2 == 0)
         orinr = 2;
       else
         orinr = 1;

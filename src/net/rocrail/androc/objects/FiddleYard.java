@@ -64,8 +64,10 @@ public class FiddleYard extends Item  {
 
   
   
-  public String getImageName() {
-    if( Ori.equals("west") || Ori.equals("east") ) {
+  public String getImageName(boolean ModPlan) {
+    this.ModPlan = ModPlan;
+    String ori = (ModPlan ? Mod_Ori:Ori);
+    if( ori.equals("west") || ori.equals("east") ) {
       cX = NrTracks;
       cY = 1;
       textVertical = false;

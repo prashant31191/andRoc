@@ -31,8 +31,9 @@ public class Signal extends Item implements View.OnClickListener {
     super(rocrailService, atts);
   }
   
-  public String getImageName() {
-    int orinr = getOriNr();
+  public String getImageName(boolean ModPlan) {
+    this.ModPlan = ModPlan;
+    int orinr = getOriNr(ModPlan);
     if (orinr == 1)
       orinr = 3;
     else if (orinr == 3)

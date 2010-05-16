@@ -38,6 +38,10 @@ public class Item implements View.OnClickListener {
   public int Y = 0;
   public int Z = 0;
 
+  public String Mod_Ori = "west";
+  public int Mod_X = 0;
+  public int Mod_Y = 0;
+
   public int cX = 1;
   public int cY = 1;
   public boolean Show = true;
@@ -52,6 +56,7 @@ public class Item implements View.OnClickListener {
   
   boolean Reserved = false;
   boolean Entering = false;
+  boolean ModPlan = false;
   
   public Activity activity = null;
   
@@ -67,24 +72,25 @@ public class Item implements View.OnClickListener {
     m_RocrailService = rocrailService;
     Properties = atts;
     updateWithAttributes(atts);
-    ID   = getAttrValue(atts, "id", "?"); 
-    X    = getAttrValue(atts, "x", 0); 
-    Y    = getAttrValue(atts, "y", 0); 
-    X    = getAttrValue(atts, "prev_x", X); 
-    Y    = getAttrValue(atts, "prev_y", Y); 
-    Ori  = getAttrValue(atts, "ori", Ori); 
-    Ori  = getAttrValue(atts, "prev_ori", Ori); 
-    Z    = getAttrValue(atts, "z", 0); 
-    cX   = getAttrValue(atts, "cx", 1); 
-    cY   = getAttrValue(atts, "cy", 1); 
-    Show = getAttrValue(atts, "show", true);
+    ID      = getAttrValue(atts, "id", "?"); 
+    Mod_X   = getAttrValue(atts, "x", 0); 
+    Mod_Y   = getAttrValue(atts, "y", 0); 
+    X       = getAttrValue(atts, "prev_x", Mod_X); 
+    Y       = getAttrValue(atts, "prev_y", Mod_Y); 
+    Mod_Ori = getAttrValue(atts, "ori", Ori); 
+    Ori     = getAttrValue(atts, "prev_ori", Mod_Ori); 
+    Z       = getAttrValue(atts, "z", 0); 
+    cX      = getAttrValue(atts, "cx", 1); 
+    cY      = getAttrValue(atts, "cy", 1); 
+    Show    = getAttrValue(atts, "show", true);
     
     if( cX < 1 ) cX = 1;
     if( cY < 1 ) cY = 1;
       
   }
   
-  public String getImageName(){
+  public String getImageName(boolean ModPlan){
+    this.ModPlan = ModPlan;
     return ImageName;
   }
   
@@ -130,7 +136,17 @@ public class Item implements View.OnClickListener {
 
 
   
-  public int getOriNr() {
+  public int getOriNr(boolean ModPlan) {
+    if( ModPlan ) {
+      if(Mod_Ori.equals("north"))
+        return 2;
+      if(Mod_Ori.equals("east"))
+        return 3;
+      if(Mod_Ori.equals("south"))
+        return 4;
+      return 1;
+    }
+    
     if(Ori.equals("north"))
       return 2;
     if(Ori.equals("east"))
@@ -162,11 +178,11 @@ class UpdateImage implements Runnable {
 
   @Override
   public void run() {
-    if( item.getImageName() == null || item.getImageName().length() == 0 ) {
+    if( item.getImageName(item.ModPlan) == null || item.getImageName(item.ModPlan).length() == 0 ) {
       item.imageView.invalidate();
     }
     else {
-      int resId = item.imageView.getContext().getResources().getIdentifier(item.getImageName(), "raw", "net.rocrail.androc");
+      int resId = item.imageView.getContext().getResources().getIdentifier(item.getImageName(item.ModPlan), "raw", "net.rocrail.androc");
       if( resId != 0 ) {
         item.imageView.setImageResource(resId);
         if( item.Text != null && item.Text.length() > 0 ) {

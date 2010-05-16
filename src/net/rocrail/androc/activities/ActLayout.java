@@ -58,9 +58,13 @@ public class ActLayout extends ListActivity implements ServiceListener {
 
 
   public void initView() {
-    m_Levels = new String[m_Base.m_RocrailService.m_Model.m_ZLevelList.size()];
+    m_Levels = new String[m_Base.m_RocrailService.m_Model.m_ZLevelList.size() + (m_Base.m_RocrailService.m_Model.ModPlan?1:0)];
     Iterator<ZLevel> it = m_Base.m_RocrailService.m_Model.m_ZLevelList.iterator();
     int idx = 0;
+    if( m_Base.m_RocrailService.m_Model.ModPlan ) {
+      m_Levels[idx] = m_Base.m_RocrailService.m_Model.m_Title;
+      idx++;
+    }
     while( it.hasNext() ) {
       m_Levels[idx] = it.next().Title;
       idx++;
@@ -76,7 +80,7 @@ public class ActLayout extends ListActivity implements ServiceListener {
         Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
             Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ActLayout.this,net.rocrail.androc.activities.ActLevel.class);
-        intent.putExtra("level", position);
+        intent.putExtra("level", position - (m_Base.m_RocrailService.m_Model.ModPlan?1:0));
         startActivity(intent);
       }
     });

@@ -34,8 +34,9 @@ public class Sensor extends Item implements View.OnClickListener {
   }
   
   
-  public String getImageName() {
-    int orinr = getOriNr();
+  public String getImageName(boolean ModPlan) {
+    this.ModPlan = ModPlan;
+    int orinr = getOriNr(ModPlan);
     String prefix = "";
 
     if (Curve)

@@ -33,8 +33,9 @@ public class Track extends Item {
   }
   
   
-  public String getImageName() {
-    int orinr = getOriNr();
+  public String getImageName(boolean ModPlan) {
+    this.ModPlan = ModPlan;
+    int orinr = getOriNr(ModPlan);
 
     if (Type.equals("curve")) {
       ImageName = String.format("curve_%d", orinr);

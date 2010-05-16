@@ -61,8 +61,9 @@ public class Block extends Item implements View.OnClickListener {
     }
   }
  
-  public String getImageName() {
-    int orinr = getOriNr();
+  public String getImageName(boolean ModPlan) {
+    this.ModPlan = ModPlan;
+    int orinr = getOriNr(ModPlan);
 
     if (orinr % 2 == 0) {
       // vertical

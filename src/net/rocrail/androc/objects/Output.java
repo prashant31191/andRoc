@@ -39,7 +39,8 @@ public class Output extends Item implements View.OnClickListener {
     m_RocrailService.sendMessage("co", String.format( "<co id=\"%s\" cmd=\"flip\"/>", ID ) );
   }
 
-  public String getImageName() {
+  public String getImageName(boolean ModPlan) {
+    this.ModPlan = ModPlan;
     if (State.equals("on")) {
       ImageName = String.format("button_on");
     }

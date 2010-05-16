@@ -61,6 +61,7 @@ public class Model {
   public String m_Title = "";  
   public String m_Name = "";  
   public String m_RocrailVersion = "";  
+  public boolean ModPlan = false;
   
   Turntable m_CurrentTT = null;
 
@@ -89,7 +90,8 @@ public class Model {
     
     m_Title = Item.getAttrValue(atts, "title", "New");  
     m_Name = Item.getAttrValue(atts, "name", "plan.xml");  
-    m_RocrailVersion = atts.getValue("rocrailversion");  
+    m_RocrailVersion = atts.getValue("rocrailversion"); 
+    ModPlan = Item.getAttrValue(atts, "modplan", false);
     
     informListeners(ModelListener.MODELLIST_PLAN_START);
   }  
@@ -270,7 +272,15 @@ public class Model {
     int z = 0;
     if( sZ != null && sZ.length() > 0 )
       z = Integer.parseInt(sZ);
-    m_ZLevelList.add(new ZLevel(level, z));
+    ZLevel zlevel = new ZLevel(level, z);
+    m_ZLevelList.add(zlevel);
+    if( ModPlan ) {
+      zlevel.X = Item.getAttrValue(atts, "modviewx", 0);
+      zlevel.Y = Item.getAttrValue(atts, "modviewy", 0);
+      zlevel.cX = Item.getAttrValue(atts, "modviewcx", 0);
+      zlevel.cY = Item.getAttrValue(atts, "modviewcy", 0);
+      zlevel.ModID = Item.getAttrValue(atts, "modid", "");
+    }
   }
   
   public void addListener( ModelListener listener ) {

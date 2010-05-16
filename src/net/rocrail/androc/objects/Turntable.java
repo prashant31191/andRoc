@@ -49,7 +49,8 @@ public class Turntable extends Item {
     Sensor2 = Item.getAttrValue(atts, "state2", Sensor2 );
   }
   
-  public String getImageName() {
+  public String getImageName(boolean ModPlan) {
+    this.ModPlan = ModPlan;
     cX = 6;
     cY = 6;
     return null;

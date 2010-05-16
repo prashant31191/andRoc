@@ -33,7 +33,7 @@ import android.widget.AbsoluteLayout.LayoutParams;
 
 @SuppressWarnings("deprecation")
 public class ActLevel extends ActBase {
-
+  boolean ModPlan = false;
   
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -50,22 +50,52 @@ public class ActLevel extends ActBase {
 
   public void initView() {
     setContentView(R.layout.level);
-    
-    int Z = 0;
-
-    Bundle extras = getIntent().getExtras();
-    if (extras != null) {
-      int level = extras.getInt("level", 0);
-      ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(level);
-      setTitle(zlevel.Title);
-      Z = zlevel.Z;
-    }
 
     LevelCanvas levelView = (LevelCanvas)findViewById(R.id.levelView);
     levelView.setPadding(0,0,0,0);
+    
+    int Z = 0;
+    
+    Bundle extras = getIntent().getExtras();
+    if (extras != null) {
+      Z = extras.getInt("level", 0);
+      ModPlan = (Z == -1 ? true:false);
+    }
 
+    if( ModPlan ) {
+      setTitle(m_RocrailService.m_Model.m_Title);
+      Iterator<ZLevel> it = m_RocrailService.m_Model.m_ZLevelList.iterator();
+      while( it.hasNext() ) {
+        ZLevel zlevel = it.next();
+        doLevel(levelView, zlevel);
+      }
+    }
+    else {
+      ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(Z);
+      setTitle(zlevel.Title);
+      Z = zlevel.Z;
+      doLevel(levelView, zlevel);
+    }
+    
+/*    
+    plansize = CGSizeMake(ITEMSIZE*cx, ITEMSIZE*cy); 
+    scrollView.contentSize = plansize;
+*/
+
+  }
+
+  
+  void doLevel(LevelCanvas levelView, ZLevel zlevel) {
+    int Z = zlevel.Z;
     int cx = 0;
     int cy = 0;
+    int xOffset = 0;
+    int yOffset = 0;
+    
+    if( ModPlan ) {
+      xOffset = zlevel.X;
+      yOffset = zlevel.Y;
+    }
 
     Iterator<Item> itemIt = m_RocrailService.m_Model.m_ItemList.iterator();
     while( itemIt.hasNext() ) {
@@ -73,7 +103,7 @@ public class ActLevel extends ActBase {
       if( item.Z == Z && item.Show ) {
         
         LevelItem image = new LevelItem(this, levelView, item );
-        String imgname = item.getImageName();
+        String imgname = item.getImageName(ModPlan);
         if( imgname != null ) {
           int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
           if( resId != 0 ) {
@@ -84,7 +114,9 @@ public class ActLevel extends ActBase {
         image.setOnClickListener(item);
         item.imageView = image;
         item.activity = this;
-        LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, item.X*32, item.Y*32);
+        int x = ModPlan?item.Mod_X:item.X;
+        int y = ModPlan?item.Mod_Y:item.Y;
+        LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, (x+xOffset)*32, (y+yOffset)*32);
         if( item.X + item.cX > cx ) cx = item.X + item.cX;
         if( item.Y + item.cY > cy ) cy = item.Y + item.cY;
 
@@ -93,11 +125,7 @@ public class ActLevel extends ActBase {
       }
       
     }
-/*    
-    plansize = CGSizeMake(ITEMSIZE*cx, ITEMSIZE*cy); 
-    scrollView.contentSize = plansize;
-*/
-
+    
   }
-
+  
 }
