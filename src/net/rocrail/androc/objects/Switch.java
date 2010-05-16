@@ -116,8 +116,18 @@ public class Switch extends Item implements View.OnClickListener {
       cX = orinr % 2 == 0 ? 1:2; 
       cY = orinr % 2 == 0 ? 2:1; 
     } 
-    else if( Type.equals("crossing") ) {
-      ImageName = "cross";
+    else if( Type.equals("crossing") ){
+      char st = 's';
+      
+      if( State.equals("straight"))
+        st = 's';
+      else if( State.equals("turnout"))
+        st = 't';
+      
+      ImageName = String.format("crossing%s_%c_%d", (Dir?"left":"right"), st, orinr);
+      
+      cX = orinr % 2 == 0 ? 1:2; 
+      cY = orinr % 2 == 0 ? 2:1; 
     } 
     else if( Type.equals("ccrossing") ) {
       ImageName = String.format("ccrossing_%d", (orinr % 2 == 0 ? 2:1));
