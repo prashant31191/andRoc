@@ -43,6 +43,7 @@ import net.rocrail.androc.objects.RRConnection;
 public class ActConnect extends ActBase implements ModelListener, SystemListener, OnItemSelectedListener {
   static final int PROGRESS_DIALOG = 0;
   boolean progressPlan = false;
+  boolean Reconnect = false;
   int progressValue = 0;
   ProgressDialog progressDialog = null;
   private final int SPLASH_DISPLAY_LENGHT = 1000; 
@@ -132,7 +133,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     m_RocrailService.Prefs.Port = port;
     
     try {
-      m_RocrailService.connect();
+      m_RocrailService.connect(Reconnect);
       progressPlan = true;
       progressValue = 0;
       
@@ -214,12 +215,14 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
 
   @Override
   public void SystemDisconnected() {
+    Reconnect = true;
     ActConnect.this.connectView();
     ActConnect.this.setVisible(true);
   }
 
   @Override
   public void SystemShutdown() {
+    Reconnect = false;
     ActConnect.this.connectView();
     ActConnect.this.setVisible(true);
   }

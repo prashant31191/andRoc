@@ -111,7 +111,7 @@ public class RocrailService extends Service {
   }
   
 
-  public void connect() throws Exception {
+  public void connect(boolean reconnect) throws Exception {
     // TODO: clean up all activities and model
     
     try {
@@ -125,7 +125,11 @@ public class RocrailService extends Service {
     }
     
     m_Socket = new Socket(Prefs.Host, Prefs.Port);
-    sendMessage("model",String.format("<model cmd=\"plan\" disablemonitor=\"%s\"/>", Prefs.Monitoring?"false":"true"));
+    
+    if( !reconnect ) {
+      sendMessage("model",String.format("<model cmd=\"plan\" disablemonitor=\"%s\"/>", Prefs.Monitoring?"false":"true"));
+    }
+    
     if( m_Connection == null ) {
       m_Connection = new Connection(this, m_Model, m_Socket);
       m_Connection.start();
@@ -166,7 +170,9 @@ public class RocrailService extends Service {
   }
   
   public synchronized void sendMessage(String name, String msg) {
-    if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() ) {
+    if( m_Socket != null && m_Socket.isConnected() && !m_Socket.isClosed() &&
+        !m_Socket.isOutputShutdown() && !m_Socket.isInputShutdown() ) 
+    {
       try {
         int msgLen = msg.getBytes("UTF-8").length;
         String stringToSend = String.format("<xmlh><xml size=\"%d\" name=\"%s\"/></xmlh>%s", msgLen, name, msg);
@@ -178,6 +184,9 @@ public class RocrailService extends Service {
         e.printStackTrace();
         informListeners(SystemListener.EVENT_DISCONNECTED);
       }
+    }
+    else if( m_Socket != null ) {
+      informListeners(SystemListener.EVENT_DISCONNECTED);
     }
   }
 
