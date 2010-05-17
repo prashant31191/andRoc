@@ -115,7 +115,8 @@ public class FiddleYard extends Item  {
 
     paint.setStrokeWidth(2);
     
-    if( Ori.equals("west") || Ori.equals("east") ) {
+    //if( Ori.equals("west") || Ori.equals("east") ) {
+    if( !textVertical ) {
       RectF rect = new RectF(1,3, (32 * NrTracks) - 1, 28);
       canvas.drawRoundRect(rect, 10, 10, paint);
     }

@@ -38,7 +38,7 @@ public class ActLevel extends ActBase {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = 0; //Base.MENU_THROTTLE | Base.MENU_SYSTEM | Base.MENU_MENU | Base.MENU_LAYOUT;
+    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_SYSTEM;
     Finish = true;
     connectWithService();
   }
