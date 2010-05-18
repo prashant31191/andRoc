@@ -37,6 +37,7 @@ public class Preferences {
   public static final String PREFS_ACCNR = "accnr";
   public static final String PREFS_ACCTYPE = "acctype";
   public static final String PREFS_CVNR = "cvnr";
+  public static final String PREFS_MODVIEW = "modview";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -49,6 +50,7 @@ public class Preferences {
   public int     RRPort       = 1234;
   public boolean Monitoring   = false;
   public boolean KeepScreenOn = false;
+  public boolean Modview      = true;
   public String  LocoID       = "";
   public String  Title        = "";
   public int     AccNr        = 1;
@@ -82,6 +84,7 @@ public class Preferences {
     AccType      = settings.getString(PREFS_ACCTYPE, AccType);
     AccNr        = settings.getInt(PREFS_ACCNR, AccNr);
     CvNr         = settings.getInt(PREFS_CVNR, CvNr);
+    Modview      = settings.getBoolean(PREFS_MODVIEW, Modview);
     
     conList = RRConnection.parse(Recent);
 
@@ -130,6 +133,7 @@ public class Preferences {
     editor.putBoolean(PREFS_KEEPSCREENON, KeepScreenOn);
     editor.putString(PREFS_RRNETHOST, RRHost);
     editor.putInt(PREFS_RRNETPORT, RRPort);
+    editor.putBoolean(PREFS_MODVIEW, Modview);
     editor.commit();
   }
   

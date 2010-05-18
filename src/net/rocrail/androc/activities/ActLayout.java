@@ -92,6 +92,15 @@ public class ActLayout extends ListActivity implements ServiceListener {
       startActivity(intent);
       finish();
     }
+
+    if( m_Base.m_RocrailService.m_Model.ModPlan && m_Base.m_RocrailService.Prefs.Modview ) {
+      Intent intent = new Intent(ActLayout.this,net.rocrail.androc.activities.ActLevel.class);
+      intent.putExtra("level", -1);
+      startActivity(intent);
+      finish();
+    }
+
+    
   }
 
   public boolean onCreateOptionsMenu(Menu menu) {

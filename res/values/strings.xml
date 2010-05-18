@@ -81,4 +81,12 @@
   <string name="Accessory">Accessory</string>
   <string name="back_again_quit">Press Back once more to exit.</string>
   <string name="LocoSetup">Loco setup</string>
+  <string name="FreeBlock">Free Block</string>
+  <string name="OpenBlock">Open Block</string>
+  <string name="CloseBlock">Close Block</string>
+  <string name="SelectBlock">Select Block</string>
+  <string name="BlockList">Block list</string>
+  <string name="SelectSchedule">Select Schedule</string>
+  <string name="ScheduleList">Schedule list</string>
+  <string name="Modview">Module view</string>
 </resources>

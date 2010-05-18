@@ -65,6 +65,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
       String id = extras.getString("id");
+      BlockID = extras.getString("blockid");
       m_Loco = m_RocrailService.m_Model.getLoco(id);
     }
     else {
@@ -150,33 +151,41 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
    
     // Block spinner
     Spinner s = (Spinner) findViewById(R.id.locoBlocks);
-    s.setPrompt(new String("Select Block"));
+    s.setPrompt(getText(R.string.SelectBlock));
 
     ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
     m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
 
-    m_adapterForSpinner.add("none");
-
+    int idx = 0;
+    int select = 0;
+    m_adapterForSpinner.add(getText(R.string.BlockList).toString());
+    idx++;
+    
     Iterator<Block> it = m_RocrailService.m_Model.m_BlockMap.values().iterator();
     while( it.hasNext() ) {
       Block block = it.next();
       m_adapterForSpinner.add(block.ID);
+      if( BlockID != null && BlockID.equals(block.ID)) {
+        select = idx;
+      }
+      idx++;
     }
     
+    s.setSelection(select);
     s.setOnItemSelectedListener(this);
     // s.setSelection(m_RocrailService.m_iSelectedLoco);    
     
 
     // Schedule spinner
     s = (Spinner) findViewById(R.id.locoSchedules);
-    s.setPrompt(new String("Select Schedule"));
+    s.setPrompt(getText(R.string.SelectSchedule));
 
     m_adapterForSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
     m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
 
-    m_adapterForSpinner.add("none");
+    m_adapterForSpinner.add(getText(R.string.ScheduleList).toString());
 
     Iterator<String> itSc = m_RocrailService.m_Model.m_ScheduleList.iterator();
     while( itSc.hasNext() ) {
@@ -199,11 +208,11 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     Spinner sc = (Spinner) findViewById(R.id.locoSchedules);
     String id = (String)adview.getSelectedItem();
     if( bk == adview ) {
-      BlockID = id.equals("none")?null:id;
+      BlockID = id.equals(getText(R.string.BlockList).toString())?null:id;
       ScheduleID = null;
     }
     else if(sc == adview) {
-      ScheduleID = id.equals("none")?null:id;
+      ScheduleID = id.equals(getText(R.string.ScheduleList).toString())?null:id;
       BlockID = null;
     }
   }

@@ -26,6 +26,8 @@
 android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
 <CheckBox android:text="@string/KeepScreenOn" android:id="@+id/prefKeepScreenOn" 
 android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
+<CheckBox android:text="@string/Modview" android:id="@+id/prefModview" 
+android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
       <Button android:text="@string/ClearRecent" android:textSize="18sp"
         android:id="@+id/prefClearRecent" android:layout_width="fill_parent"
         android:layout_height="wrap_content" android:paddingBottom="5px" android:paddingTop="5px" ></Button>

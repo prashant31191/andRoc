@@ -101,14 +101,20 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
 
-    m_adapterForSpinner.add("none");
-
+    int idx = 0;
+    int select = 0;
+    m_adapterForSpinner.add(getText(R.string.FreeBlock).toString());
+    idx++;
     Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
       m_adapterForSpinner.add(loco.ID);
+      if( LocoID != null && LocoID.equals(loco.ID)) {
+        select = idx;
+      }
+      idx++;
     }
-    
+    s.setSelection(select);
     s.setOnItemSelectedListener(this);
     
 
@@ -127,31 +133,28 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     });
     
     
-    final Button setInBlock = (Button) findViewById(R.id.blockSetLoco);
-    setInBlock.setOnClickListener(new View.OnClickListener() {
+    final Button Loco = (Button) findViewById(R.id.blockLoco);
+    Loco.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          Spinner s = (Spinner) findViewById(R.id.blockLocos);
-          String id = (String)s.getSelectedItem();
-          LocoID = (id.equals("none")?null:id);
-          if( LocoID != null ) {
-            m_RocrailService.sendMessage("lc", 
-                String.format("<lc id=\"%s\" cmd=\"block\" blockid=\"%s\"/>", LocoID, m_Block.ID ) );
+          if( m_Block.LocoID!=null ) {
+            Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
+            intent.putExtra("id", m_Block.LocoID);
+            intent.putExtra("blockid", m_Block.ID);
+            startActivity(intent);
+            finish();
           }
-          else {
-            m_RocrailService.sendMessage("bk", 
-                String.format("<bk id=\"%s\" cmd=\"loc\" locid=\"\"/>", m_Block.ID ) );
-          }
-          updateLoco();
         }
     });
 
     
     final LEDButton openBlock = (LEDButton) findViewById(R.id.blockOpen);
     openBlock.ON = !m_Block.Closed;
+    openBlock.setText(m_Block.Closed?getText(R.string.OpenBlock):getText(R.string.CloseBlock));
     openBlock.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_Block.onClick(v);
+          m_Block.OpenClose();
           ((LEDButton)v).ON = !m_Block.Closed;
+          ((LEDButton)v).setText(m_Block.Closed?getText(R.string.OpenBlock):getText(R.string.CloseBlock));
         }
     });
 
@@ -163,7 +166,16 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
   @Override
   public void onItemSelected(AdapterView<?> adview, View view, int position, long longID) {
     String id = (String)adview.getSelectedItem();
-    LocoID = (id.equals("none")?null:id);
+    LocoID = (id.equals(getText(R.string.FreeBlock).toString())?null:id);
+    if( LocoID != null ) {
+      m_RocrailService.sendMessage("lc", 
+          String.format("<lc id=\"%s\" cmd=\"block\" blockid=\"%s\"/>", LocoID, m_Block.ID ) );
+    }
+    else {
+      m_RocrailService.sendMessage("bk", 
+          String.format("<bk id=\"%s\" cmd=\"loc\" locid=\"\"/>", m_Block.ID ) );
+    }
+    updateLoco();
   }
 
   @Override

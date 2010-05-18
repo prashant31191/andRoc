@@ -47,6 +47,8 @@ public class ActPreferences extends ActBase {
     cb.setChecked(m_RocrailService.Prefs.Monitoring);
     cb = (CheckBox)findViewById(R.id.prefKeepScreenOn);
     cb.setChecked(m_RocrailService.Prefs.KeepScreenOn);
+    cb = (CheckBox)findViewById(R.id.prefModview);
+    cb.setChecked(m_RocrailService.Prefs.Modview);
     Button b = (Button)findViewById(R.id.prefClearRecent);
     b.setEnabled(m_RocrailService.Prefs.Recent.length() > 0);
     b.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +70,8 @@ public class ActPreferences extends ActBase {
     m_RocrailService.Prefs.Monitoring = cb.isChecked();
     cb = (CheckBox)findViewById(R.id.prefKeepScreenOn);
     m_RocrailService.Prefs.KeepScreenOn = cb.isChecked();
+    cb = (CheckBox)findViewById(R.id.prefModview);
+    m_RocrailService.Prefs.Modview = cb.isChecked();
   
     EditText et = (EditText)findViewById(R.id.prefR2RHost);
     m_RocrailService.Prefs.RRHost = et.getText().toString();

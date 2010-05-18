@@ -24,6 +24,7 @@ import net.rocrail.androc.R;
 import net.rocrail.androc.RocrailService;
 import net.rocrail.androc.interfaces.ServiceListener;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;

@@ -106,17 +106,31 @@ public class Block extends Item implements View.OnClickListener {
   }
 
 
-  public void onClick(View v) {
+  public void OpenClose() {
     Closed = !Closed;
     m_RocrailService.sendMessage("bk", String.format( "<bk id=\"%s\" state=\"%s\"/>", 
         ID, Closed?"closed":"open" ) );
   }
   
-  public void propertiesView() {
+  public void onClick(View v) {
     try {
       Intent intent = new Intent(activity,net.rocrail.androc.activities.ActBlock.class);
       intent.putExtra("id", Block.this.ID);
       activity.startActivity(intent);
+    }
+    catch(Exception e) {
+      // invalid activity
+    }
+  }
+  
+  public void propertiesView() {
+    try {
+      if( Block.this.LocoID != null && m_RocrailService.m_Model.getLoco(Block.this.LocoID) != null ) {
+        Intent intent = new Intent(activity,net.rocrail.androc.activities.ActLoco.class);
+        intent.putExtra("id", Block.this.LocoID);
+        intent.putExtra("blockid", Block.this.ID);
+        activity.startActivity(intent);
+      }
     }
     catch(Exception e) {
       // invalid activity
