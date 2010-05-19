@@ -38,6 +38,7 @@ public class ActLevel extends ActBase {
   boolean ModPlan = false;
   int Z = 0;
   ProgressDialog Progress = null;
+  LevelCanvas levelView = null;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -67,34 +68,35 @@ public class ActLevel extends ActBase {
   public void initView() {
     setContentView(R.layout.level);
 
-    LevelCanvas levelView = (LevelCanvas)findViewById(R.id.levelView);
+    levelView = (LevelCanvas)findViewById(R.id.levelView);
     levelView.setPadding(0,0,0,0);
 
+    if( ModPlan )
+      setTitle(m_RocrailService.m_Model.m_Title);
+    else {
+      ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(Z);
+      setTitle(zlevel.Title);
+    }
     
-
-    levelView.post(new Runnable() {
+    /*new Thread() {
       public void run() {
+      */  
+      if( ModPlan ) {
+        Iterator<ZLevel> it = m_RocrailService.m_Model.m_ZLevelList.iterator();
+        while( it.hasNext() ) {
+          ZLevel zlevel = it.next();
+          ActLevel.this.levelView.post(new levelThread(ActLevel.this.levelView, ActLevel.this, zlevel, !it.hasNext()));
+        }
         
-        LevelCanvas levelView = (LevelCanvas)findViewById(R.id.levelView);
-        if( ModPlan ) {
-          setTitle(m_RocrailService.m_Model.m_Title);
-          
-          Iterator<ZLevel> it = m_RocrailService.m_Model.m_ZLevelList.iterator();
-          while( it.hasNext() ) {
-            ZLevel zlevel = it.next();
-            levelView.post(new levelThread(ActLevel.this, zlevel, !it.hasNext()));
-          }
-          
-        }
-        else {
-          ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(Z);
-          setTitle(zlevel.Title);
-          Z = zlevel.Z;
-          doLevel(zlevel);
-        }
       }
-    });
-    
+      else {
+        ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(Z);
+        ActLevel.this.levelView.post(new levelThread(ActLevel.this.levelView, ActLevel.this, zlevel, false));
+      }
+    /*
+      }
+    }.start();
+    */
    
     
 /*    
@@ -105,8 +107,7 @@ public class ActLevel extends ActBase {
   }
 
   
-  void doLevel(ZLevel zlevel) {
-    LevelCanvas levelView = (LevelCanvas)findViewById(R.id.levelView);
+  void doLevel(LevelCanvas levelView, ZLevel zlevel) {
     int Z = zlevel.Z;
     int cx = 0;
     int cy = 0;
@@ -156,19 +157,23 @@ class levelThread implements Runnable {
   ActLevel level = null;
   ZLevel zlevel = null;
   boolean stopProgress = false;
+  LevelCanvas levelView = null;
   
-  public levelThread(ActLevel level, ZLevel zlevel, boolean stopProgress) {
+  public levelThread(LevelCanvas levelView, ActLevel level, ZLevel zlevel, boolean stopProgress) {
     this.level = level;
     this.zlevel = zlevel;
     this.stopProgress = stopProgress;
+    this.levelView = levelView;
     
   }
   
   @Override
   public void run() {
-    level.doLevel(zlevel);
-    if( stopProgress )
+    level.doLevel(levelView, zlevel);
+    if( stopProgress ) {
       level.Progress.cancel();
+      //levelView.invalidate();
+    }
   }
   
 }
