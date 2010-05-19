@@ -34,6 +34,7 @@ public class FiddleYard extends Item  {
   public int NrTracks = 3;
   int Occupied = 0;
   String LocoID = "-";
+  public boolean Closed = false;
 
   public FiddleYard(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
@@ -85,6 +86,7 @@ public class FiddleYard extends Item  {
   public void updateWithAttributes(Attributes atts ) {
     LocoID   = Item.getAttrValue(atts, "locid", ID); 
     State    = Item.getAttrValue(atts, "state", State); 
+    Closed   = State.equals("closed");
 
     updateTextColor();
     super.updateWithAttributes(atts);
@@ -129,8 +131,13 @@ public class FiddleYard extends Item  {
   }
 
   public void onClick(View v) {
+    propertiesView();
+  }
+  
+  public void OpenClose() {
+    Closed = !Closed;
     m_RocrailService.sendMessage("seltab", String.format( "<seltab id=\"%s\" state=\"%s\"/>", 
-        ID, State.equals("open")?"closed":"open" ) );
+        ID, Closed?"closed":"open" ) );
   }
   
   public void propertiesView() {

@@ -216,6 +216,8 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
   @Override
   public void SystemDisconnected() {
     Reconnect = true;
+    Finish = true;
+    m_RocrailService.removeListener(this);
     ActConnect.this.connectView();
     ActConnect.this.setVisible(true);
   }
@@ -223,6 +225,8 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
   @Override
   public void SystemShutdown() {
     Reconnect = false;
+    Finish = true;
+    m_RocrailService.removeListener(this);
     ActConnect.this.connectView();
     ActConnect.this.setVisible(true);
   }

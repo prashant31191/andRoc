@@ -40,6 +40,7 @@ public class Turntable extends Item {
   int Bridgepos = 0;
   boolean Sensor1 = false;
   boolean Sensor2 = false;
+  public boolean Closed = false;
 
 
   public Turntable(RocrailService rocrailService, Attributes atts) {
@@ -63,6 +64,7 @@ public class Turntable extends Item {
     Bridgepos = Item.getAttrValue(atts, "bridgepos", Bridgepos );
     Sensor1 = Item.getAttrValue(atts, "state1", Sensor1 );
     Sensor2 = Item.getAttrValue(atts, "state2", Sensor2 );
+    Closed   = State.equals("closed");
 
     if( Tracks != null ) {
       Iterator<TTTrack> it = Tracks.iterator();
@@ -212,10 +214,16 @@ public class Turntable extends Item {
   }
 
   public void onClick(View v) {
-    m_RocrailService.sendMessage("tt", String.format( "<tt id=\"%s\" state=\"%s\"/>", 
-        ID, State.equals("open")?"closed":"open" ) );
+    propertiesView();
   }
   
+  public void OpenClose() {
+    Closed = !Closed;
+    m_RocrailService.sendMessage("tt", String.format( "<tt id=\"%s\" state=\"%s\"/>", 
+        ID, Closed?"closed":"open" ) );
+  }
+  
+ 
   public void propertiesView() {
     try {
       Intent intent = new Intent(activity,net.rocrail.androc.activities.ActTurntable.class);

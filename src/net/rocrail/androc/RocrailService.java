@@ -108,6 +108,9 @@ public class RocrailService extends Service {
   public void addPoMListener( PoMListener listener ) {
     m_PoMListeners.add(listener);
   }
+  public void removeListener( SystemListener listener ) {
+    m_Listeners.remove(listener);
+  }
   
 
   public void connect(boolean reconnect) throws Exception {

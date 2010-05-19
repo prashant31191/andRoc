@@ -67,6 +67,17 @@ public class ActFiddleYard  extends ActBase implements OnItemSelectedListener {
     });
 
 
+    final LEDButton fyOpen = (LEDButton) findViewById(R.id.fyOpen);
+    fyOpen.ON = m_FiddleYard.Closed;
+    fyOpen.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          m_FiddleYard.OpenClose();
+          ((LEDButton)v).ON = !m_FiddleYard.Closed;
+          v.invalidate();
+        }
+    });
+
+
     // Track spinner
     Spinner s = (Spinner) findViewById(R.id.fyTracks);
     s.setPrompt(new String("Select Track"));

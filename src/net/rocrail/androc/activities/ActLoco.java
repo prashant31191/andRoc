@@ -109,6 +109,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
   });
     
     final LEDButton autoStart = (LEDButton) findViewById(R.id.locoStart);
+    autoStart.setEnabled(m_RocrailService.AutoMode);
     autoStart.ON = m_Loco.AutoStart;
     autoStart.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
@@ -210,6 +211,8 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     if( bk == adview ) {
       BlockID = id.equals(getText(R.string.BlockList).toString())?null:id;
       ScheduleID = null;
+      Button setInBlock = (Button) findViewById(R.id.locoSetInBlock);
+      setInBlock.setEnabled(BlockID != null);
     }
     else if(sc == adview) {
       ScheduleID = id.equals(getText(R.string.ScheduleList).toString())?null:id;
