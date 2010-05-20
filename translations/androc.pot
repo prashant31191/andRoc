@@ -1,0 +1,287 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: andRoc 0.9\n"
+"POT-Creation-Date: 2010-05-19 13:24+0200\n"
+"PO-Revision-Date: 2010-05-19 18:00+ZONE\n"
+"Last-Translator: Rob Versluis <team@rocrail.net>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: res/values/strings.xml:22(string)
+msgid "Title"
+msgstr ""
+
+#: res/values/strings.xml:23(string)
+msgid "Throttle"
+msgstr ""
+
+#: res/values/strings.xml:24(string)
+msgid "Locomotives"
+msgstr ""
+
+#: res/values/strings.xml:25(string)
+msgid "Outputs"
+msgstr ""
+
+#: res/values/strings.xml:26(string)
+msgid "Routes"
+msgstr ""
+
+#: res/values/strings.xml:27(string)
+msgid "Switches"
+msgstr ""
+
+#: res/values/strings.xml:28(string)
+msgid "Signals"
+msgstr ""
+
+#: res/values/strings.xml:29(string)
+msgid "Blocks"
+msgstr ""
+
+#: res/values/strings.xml:30(string)
+msgid "Schedules"
+msgstr ""
+
+#: res/values/strings.xml:31(string)
+msgid "System"
+msgstr ""
+
+#: res/values/strings.xml:32(string)
+msgid "Power ON"
+msgstr ""
+
+#: res/values/strings.xml:33(string)
+msgid "Power OFF"
+msgstr ""
+
+#: res/values/strings.xml:34(string)
+msgid "Init Field"
+msgstr ""
+
+#: res/values/strings.xml:35(string)
+msgid "Auto ON"
+msgstr ""
+
+#: res/values/strings.xml:36(string)
+msgid "Auto Start"
+msgstr ""
+
+#: res/values/strings.xml:37(string)
+msgid "RE"
+msgstr ""
+
+#: res/values/strings.xml:38(string)
+msgid "none"
+msgstr ""
+
+#: res/values/strings.xml:39(string)
+msgid "START"
+msgstr ""
+
+#: res/values/strings.xml:40(string)
+msgid "STOP"
+msgstr ""
+
+#: res/values/strings.xml:41(string)
+msgid "Half Auto"
+msgstr ""
+
+#: res/values/strings.xml:42(string)
+msgid "Set in block"
+msgstr ""
+
+#: res/values/strings.xml:43(string)
+msgid "Normal"
+msgstr ""
+
+#: res/values/strings.xml:44(string)
+msgid "Swapped"
+msgstr ""
+
+#: res/values/strings.xml:45(string)
+msgid "Placing"
+msgstr ""
+
+#: res/values/strings.xml:46(string)
+msgid "Automatic"
+msgstr ""
+
+#: res/values/strings.xml:47(string)
+msgid "Settings"
+msgstr ""
+
+#: res/values/strings.xml:48(string)
+msgid "Loco"
+msgstr ""
+
+#: res/values/strings.xml:49(string)
+msgid "Close"
+msgstr ""
+
+#: res/values/strings.xml:50(string)
+msgid "Open"
+msgstr ""
+
+#: res/values/strings.xml:51(string)
+msgid "Connect"
+msgstr ""
+
+#: res/values/strings.xml:52(string)
+msgid "Menu"
+msgstr ""
+
+#: res/values/strings.xml:53(string)
+msgid "Layout"
+msgstr ""
+
+#: res/values/strings.xml:54(string)
+msgid "Level"
+msgstr ""
+
+#: res/values/strings.xml:55(string) res/values/strings.xml:68(string)
+msgid "Quit"
+msgstr ""
+
+#: res/values/strings.xml:56(string)
+msgid "Direction"
+msgstr ""
+
+#: res/values/strings.xml:57(string)
+msgid "Host"
+msgstr ""
+
+#: res/values/strings.xml:58(string)
+msgid "Port"
+msgstr ""
+
+#: res/values/strings.xml:59(string)
+msgid "ST"
+msgstr ""
+
+#: res/values/strings.xml:60(string)
+msgid "FG"
+msgstr ""
+
+#: res/values/strings.xml:61(string)
+msgid "Lights"
+msgstr ""
+
+#: res/values/strings.xml:62(string)
+msgid "Recent"
+msgstr ""
+
+#: res/values/strings.xml:63(string)
+msgid "Previous"
+msgstr ""
+
+#: res/values/strings.xml:64(string)
+msgid "Next"
+msgstr ""
+
+#: res/values/strings.xml:65(string)
+msgid "Track"
+msgstr ""
+
+#: res/values/strings.xml:66(string)
+msgid "Set Loco"
+msgstr ""
+
+#: res/values/strings.xml:67(string)
+msgid "Reset Loco"
+msgstr ""
+
+#: res/values/strings.xml:69(string)
+msgid "Quit andRoc?"
+msgstr ""
+
+#: res/values/strings.xml:70(string)
+msgid "Yes"
+msgstr ""
+
+#: res/values/strings.xml:71(string)
+msgid "No"
+msgstr ""
+
+#: res/values/strings.xml:72(string)
+msgid "Start all locos in auto mode?"
+msgstr ""
+
+#: res/values/strings.xml:73(string)
+msgid "Preferences"
+msgstr ""
+
+#: res/values/strings.xml:74(string)
+msgid "System monitoring"
+msgstr ""
+
+#: res/values/strings.xml:75(string)
+msgid "Address"
+msgstr ""
+
+#: res/values/strings.xml:76(string)
+msgid "Runtime"
+msgstr ""
+
+#: res/values/strings.xml:77(string)
+msgid "Keep screen on"
+msgstr ""
+
+#: res/values/strings.xml:78(string)
+msgid "Clear recent list"
+msgstr ""
+
+#: res/values/strings.xml:79(string)
+msgid "R2R Address"
+msgstr ""
+
+#: res/values/strings.xml:80(string)
+msgid "R2R Port"
+msgstr ""
+
+#: res/values/strings.xml:81(string)
+msgid "Accessory"
+msgstr ""
+
+#: res/values/strings.xml:82(string)
+msgid "Press Back once more to exit."
+msgstr ""
+
+#: res/values/strings.xml:83(string)
+msgid "Loco setup"
+msgstr ""
+
+#: res/values/strings.xml:84(string)
+msgid "Free Block"
+msgstr ""
+
+#: res/values/strings.xml:85(string)
+msgid "Open Block"
+msgstr ""
+
+#: res/values/strings.xml:86(string)
+msgid "Close Block"
+msgstr ""
+
+#: res/values/strings.xml:87(string)
+msgid "Select Block"
+msgstr ""
+
+#: res/values/strings.xml:88(string)
+msgid "Block list"
+msgstr ""
+
+#: res/values/strings.xml:89(string)
+msgid "Select Schedule"
+msgstr ""
+
+#: res/values/strings.xml:90(string)
+msgid "Schedule list"
+msgstr ""
+
+#: res/values/strings.xml:91(string)
+msgid "Module view"
+msgstr ""
+
