@@ -28,11 +28,15 @@ import net.rocrail.androc.RocrailService;
 public class Switch extends Item implements View.OnClickListener {
   boolean Dir = false;
   int AccNr = 0;
+  String SWType = "";
+  boolean Raster = false;
 
   public Switch( RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
     Dir   = Item.getAttrValue(atts, "dir", false );
     AccNr = Item.getAttrValue(atts, "accnr", 0 );
+    SWType = Item.getAttrValue(atts, "swtype", "default" );
+    Raster = SWType.equals("raster");
   }
 
   public void onClick(View v) {
@@ -48,98 +52,101 @@ public class Switch extends Item implements View.OnClickListener {
   public String getImageName(boolean ModPlan) {
     this.ModPlan = ModPlan;
     int orinr = getOriNr(ModPlan);
+    String rasterStr = (Raster?"_r":"");
     
-    if( orinr == 1 )
+    if (orinr == 1)
       orinr = 3;
-    else if( orinr == 3 )
+    else if (orinr == 3)
       orinr = 1;
-    
-    if( Type.equals("accessory") ) {
+
+    if (Type.equals("accessory")) {
       if (getOriNr(ModPlan) % 2 == 0)
         orinr = 2;
       else
         orinr = 1;
-      
-      switch( AccNr ) {
+
+      switch (AccNr) {
       case 1:
-        cX = (orinr == 1 ? 2:1);
-        cY = (orinr == 1 ? 1:2);
+        cX = (orinr == 1 ? 2 : 1);
+        cY = (orinr == 1 ? 1 : 2);
         break;
       case 40:
-        cX = (orinr == 1 ? 4:2);
-        cY = (orinr == 1 ? 2:4);
+        cX = (orinr == 1 ? 4 : 2);
+        cY = (orinr == 1 ? 2 : 4);
         break;
       }
-      
-      if( State.equals("turnout"))
+
+      if (State.equals("turnout"))
         ImageName = String.format("accessory_%d_on_%d", AccNr, orinr);
       else
         ImageName = String.format("accessory_%d_off_%d", AccNr, orinr);
     }
-    else if( Type.equals("right") ) {
-      if( State.equals("straight"))
-        ImageName = String.format("turnout_rs_%d", orinr);
-      else 
-        ImageName = String.format("turnout_rt_%d", orinr);
-      
-    } 
-    else if( Type.equals("left")) {
-        if( State.equals("straight"))
-          ImageName = String.format("turnout_ls_%d", orinr);
-        else 
-          ImageName = String.format("turnout_lt_%d", orinr);
-    
-    } 
-    else if( Type.equals("threeway")) {
-      if( State.equals("straight"))
-        ImageName = String.format("threeway_s_%d", orinr);
-      else if( State.equals("left"))
-        ImageName = String.format("threeway_l_%d", orinr);
-      else 
-        ImageName = String.format("threeway_r_%d", orinr);
-      
-    } 
-    else if( Type.equals("dcrossing") ){
-      char st = 's';
-      
-      if( State.equals("straight"))
-        st = 's';
-      else if( State.equals("turnout"))
-        st = 't';
-      else if( State.equals("left"))
-        st = 'l';
-      else if( State.equals("right"))
-        st = 'r';
-      
-      ImageName = String.format("dcrossing%s_%c_%d", (Dir?"left":"right"), st, orinr);
-      
-      cX = orinr % 2 == 0 ? 1:2; 
-      cY = orinr % 2 == 0 ? 2:1; 
-    } 
-    else if( Type.equals("crossing") ){
-      char st = 's';
-      
-      if( State.equals("straight"))
-        st = 's';
-      else if( State.equals("turnout"))
-        st = 't';
-      
-      ImageName = String.format("crossing%s_%c_%d", (Dir?"left":"right"), st, orinr);
-      
-      cX = orinr % 2 == 0 ? 1:2; 
-      cY = orinr % 2 == 0 ? 2:1; 
-    } 
-    else if( Type.equals("ccrossing") ) {
-      ImageName = String.format("ccrossing_%d", (orinr % 2 == 0 ? 2:1));
-      cX = orinr % 2 == 0 ? 1:2; 
-      cY = orinr % 2 == 0 ? 2:1; 
-    } 
-    else if( Type.equals("decoupler") ) {
-      ImageName = String.format("decoupler_%d", (orinr % 2 == 0 ? 2:1));
+    else if (Type.equals("right")) {
+      if (State.equals("straight"))
+        ImageName = String.format("turnout%s_rs_%d", rasterStr, orinr);
+      else
+        ImageName = String.format("turnout%s_rt_%d", rasterStr, orinr);
+
     }
-    
+    else if (Type.equals("left")) {
+      if (State.equals("straight"))
+        ImageName = String.format("turnout%s_ls_%d", rasterStr, orinr);
+      else
+        ImageName = String.format("turnout%s_lt_%d", rasterStr, orinr);
+
+    }
+    else if (Type.equals("threeway")) {
+      if (State.equals("straight"))
+        ImageName = String.format("threeway_s_%d", orinr);
+      else if (State.equals("left"))
+        ImageName = String.format("threeway_l_%d", orinr);
+      else
+        ImageName = String.format("threeway_r_%d", orinr);
+
+    }
+    else if (Type.equals("dcrossing")) {
+      char st = 's';
+
+      if (State.equals("straight"))
+        st = 's';
+      else if (State.equals("turnout"))
+        st = 't';
+      else if (State.equals("left"))
+        st = 'l';
+      else if (State.equals("right"))
+        st = 'r';
+
+      ImageName = String.format("dcrossing%s_%c_%d", (Dir ? "left" : "right"),
+          st, orinr);
+
+      cX = orinr % 2 == 0 ? 1 : 2;
+      cY = orinr % 2 == 0 ? 2 : 1;
+    }
+    else if (Type.equals("crossing")) {
+      char st = 's';
+
+      if (State.equals("straight"))
+        st = 's';
+      else if (State.equals("turnout"))
+        st = 't';
+
+      ImageName = String.format("crossing%s_%c_%d", (Dir ? "left" : "right"),
+          st, orinr);
+
+      cX = orinr % 2 == 0 ? 1 : 2;
+      cY = orinr % 2 == 0 ? 2 : 1;
+    }
+    else if (Type.equals("ccrossing")) {
+      ImageName = String.format("ccrossing_%d", (orinr % 2 == 0 ? 2 : 1));
+      cX = orinr % 2 == 0 ? 1 : 2;
+      cY = orinr % 2 == 0 ? 2 : 1;
+    }
+    else if (Type.equals("decoupler")) {
+      ImageName = String.format("decoupler_%d", (orinr % 2 == 0 ? 2 : 1));
+    }
+
     return ImageName;
-    
+
   }
 
 }
