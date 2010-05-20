@@ -19,6 +19,8 @@
 */
 package net.rocrail.androc.objects;
 
+import java.util.List;
+
 public class ZLevel {
   public String Title = "";
   public int Z = 0;
@@ -26,7 +28,9 @@ public class ZLevel {
   public int Y = 0;
   public int cX = 0;
   public int cY = 0;
+  public int progressIdx = 0;
   public String ModID = "";
+  public List<Item> itemList = null;
   public ZLevel( String title, int z ) {
     Title = title;
     Z = z;

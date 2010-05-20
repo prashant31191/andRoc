@@ -21,23 +21,27 @@
 
 package net.rocrail.androc.activities;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import net.rocrail.androc.R;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.ZLevel;
 import net.rocrail.androc.widgets.LevelCanvas;
 import net.rocrail.androc.widgets.LevelItem;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.AbsoluteLayout.LayoutParams;
 
 @SuppressWarnings("deprecation")
 public class ActLevel extends ActBase {
+  public static final int PROGRESS_DIALOG = 0;
   boolean ModPlan = false;
   int Z = 0;
-  ProgressDialog Progress = null;
+  ProgressDialog progressDialog = null;
   LevelCanvas levelView = null;
 
   @Override
@@ -49,12 +53,14 @@ public class ActLevel extends ActBase {
       Z = extras.getInt("level", 0);
       ModPlan = (Z == -1 ? true:false);
     }
-    
+
     if( ModPlan ) {
-      Progress = ProgressDialog.show(this, "", 
-          "Loading. Please wait...", true, true);
-      
+      showDialog(PROGRESS_DIALOG);
+
+//      Progress = ProgressDialog.show(this, "", 
+  //        "Loading. Please wait...", true, true);
     }
+    
     MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_SYSTEM;
     Finish = true;
     connectWithService();
@@ -64,6 +70,22 @@ public class ActLevel extends ActBase {
     super.connectedWithService();
     initView();
   }
+  
+  
+  
+  protected Dialog onCreateDialog(int id) {
+    switch(id) {
+    case PROGRESS_DIALOG:
+        progressDialog = new ProgressDialog(ActLevel.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setMessage("Creating module view...");
+        return progressDialog;
+    default:
+        return null;
+    }
+  }
+  
+
 
   public void initView() {
     setContentView(R.layout.level);
@@ -71,31 +93,30 @@ public class ActLevel extends ActBase {
     levelView = (LevelCanvas)findViewById(R.id.levelView);
     levelView.setPadding(0,0,0,0);
 
-    if( ModPlan )
+    if( ModPlan ) {
       setTitle(m_RocrailService.m_Model.m_Title);
+    }
     else {
       ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(Z);
       setTitle(zlevel.Title);
     }
     
-    /*new Thread() {
-      public void run() {
-      */  
-      if( ModPlan ) {
-        Iterator<ZLevel> it = m_RocrailService.m_Model.m_ZLevelList.iterator();
-        while( it.hasNext() ) {
-          ZLevel zlevel = it.next();
-          ActLevel.this.levelView.post(new levelThread(ActLevel.this.levelView, ActLevel.this, zlevel, !it.hasNext()));
-        }
-        
-      }
-      else {
-        ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(Z);
-        ActLevel.this.levelView.post(new levelThread(ActLevel.this.levelView, ActLevel.this, zlevel, false));
-      }
+    new LevelTask().execute(this);
+
+    
     /*
+    if( ModPlan ) {
+      Iterator<ZLevel> it = m_RocrailService.m_Model.m_ZLevelList.iterator();
+      while( it.hasNext() ) {
+        ZLevel zlevel = it.next();
+        ActLevel.this.levelView.post(new levelThread(ActLevel.this.levelView, ActLevel.this, zlevel, !it.hasNext()));
       }
-    }.start();
+      
+    }
+    else {
+      ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(Z);
+      ActLevel.this.levelView.post(new levelThread(ActLevel.this.levelView, ActLevel.this, zlevel, false));
+    }
     */
    
     
@@ -108,7 +129,6 @@ public class ActLevel extends ActBase {
 
   
   void doLevel(LevelCanvas levelView, ZLevel zlevel) {
-    int Z = zlevel.Z;
     int cx = 0;
     int cy = 0;
     int xOffset = 0;
@@ -119,63 +139,109 @@ public class ActLevel extends ActBase {
       yOffset = zlevel.Y;
     }
 
-    Iterator<Item> itemIt = m_RocrailService.m_Model.m_ItemList.iterator();
+    Iterator<Item> itemIt = zlevel.itemList.iterator();
     while( itemIt.hasNext() ) {
       Item item = itemIt.next();
-      if( item.Z == Z && item.Show ) {
-        
-        LevelItem image = new LevelItem(this, levelView, item );
-        String imgname = item.getImageName(ModPlan);
-        if( imgname != null ) {
-          int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
-          if( resId != 0 ) {
-            image.setImageResource(resId);
-          }
+      
+      LevelItem image = new LevelItem(ActLevel.this, levelView, item );
+      String imgname = item.getImageName(ModPlan);
+      if( imgname != null ) {
+        int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
+        if( resId != 0 ) {
+          image.setImageResource(resId);
         }
-        
-        image.setOnClickListener(item);
-        item.imageView = image;
-        item.activity = this;
-        int x = ModPlan?item.Mod_X:item.X;
-        int y = ModPlan?item.Mod_Y:item.Y;
-        LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, (x+xOffset)*32, (y+yOffset)*32);
-        if( item.X + item.cX > cx ) cx = item.X + item.cX;
-        if( item.Y + item.cY > cy ) cy = item.Y + item.cY;
-
-        levelView.addView(image, lp);
-
       }
+      
+      image.setOnClickListener(item);
+      item.imageView = image;
+      item.activity = this;
+      
+      int x = ModPlan?item.Mod_X:item.X;
+      int y = ModPlan?item.Mod_Y:item.Y;
+      LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, (x+xOffset)*32, (y+yOffset)*32);
+      if( item.X + item.cX > cx ) cx = item.X + item.cX;
+      if( item.Y + item.cY > cy ) cy = item.Y + item.cY;
+
+      levelView.addView(item.imageView, lp);
+
       
     }
     
   }
   
+  
+  List<Item> createLevelList(LevelCanvas levelView, ZLevel zlevel) {
+    List<Item> list = new ArrayList<Item>();
+    int Z = zlevel.Z;
+
+    Iterator<Item> itemIt = m_RocrailService.m_Model.m_ItemList.iterator();
+    while( itemIt.hasNext() ) {
+      Item item = itemIt.next();
+      if( item.Z == Z && item.Show ) {
+        list.add(item);
+      }
+      Thread.yield();
+
+    }
+    return list;
+  }
+  
+  
 }
 
 
-class levelThread implements Runnable {
+class LevelTask extends AsyncTask<ActLevel, ZLevel, Void> {
   ActLevel level = null;
-  ZLevel zlevel = null;
-  boolean stopProgress = false;
-  LevelCanvas levelView = null;
+  int levelIdx = 0;
+  int levelCnt = 0;
+  int levelWeight = 1;
   
-  public levelThread(LevelCanvas levelView, ActLevel level, ZLevel zlevel, boolean stopProgress) {
-    this.level = level;
-    this.zlevel = zlevel;
-    this.stopProgress = stopProgress;
-    this.levelView = levelView;
+  @Override
+  protected void onPreExecute() {
     
   }
   
   @Override
-  public void run() {
-    level.doLevel(levelView, zlevel);
-    if( stopProgress ) {
-      level.Progress.cancel();
-      //levelView.invalidate();
+  protected Void doInBackground(ActLevel... levels) {
+    level = levels[0];
+    if( level.ModPlan ) {
+      levelCnt = level.m_RocrailService.m_Model.m_ZLevelList.size();
+      levelWeight = (100 / levelCnt);
+      Iterator<ZLevel> it = level.m_RocrailService.m_Model.m_ZLevelList.iterator();
+      while( it.hasNext() ) {
+        ZLevel zlevel = it.next();
+        zlevel.itemList = level.createLevelList(level.levelView, zlevel);
+        levelIdx++;
+        zlevel.progressIdx = levelIdx;
+        publishProgress(zlevel);
+        Thread.yield();
+      }
+      
+    }
+    else {
+      ZLevel zlevel = level.m_RocrailService.m_Model.m_ZLevelList.get(level.Z);
+      zlevel.itemList = level.createLevelList(level.levelView, zlevel);
+      publishProgress(zlevel);
+    }
+    return null;
+  }
+
+  @Override
+  protected void onProgressUpdate(ZLevel...zlevels) {
+    if( level.progressDialog != null ) {
+      level.progressDialog.setProgress(zlevels[0].progressIdx*levelWeight);
+    }
+
+    level.doLevel(level.levelView, zlevels[0]);
+  }
+
+  @Override
+  protected void onPostExecute(Void v) {
+    if( level.progressDialog != null ) {
+      level.dismissDialog(ActLevel.PROGRESS_DIALOG);
     }
   }
-  
 }
+
 
 
