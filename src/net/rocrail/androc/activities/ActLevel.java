@@ -56,9 +56,6 @@ public class ActLevel extends ActBase {
 
     if( ModPlan ) {
       showDialog(PROGRESS_DIALOG);
-
-//      Progress = ProgressDialog.show(this, "", 
-  //        "Loading. Please wait...", true, true);
     }
     
     MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_SYSTEM;
@@ -78,7 +75,7 @@ public class ActLevel extends ActBase {
     case PROGRESS_DIALOG:
         progressDialog = new ProgressDialog(ActLevel.this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setMessage("Creating module view...");
+        progressDialog.setMessage(getText(R.string.CreatingModview));
         return progressDialog;
     default:
         return null;
@@ -103,22 +100,6 @@ public class ActLevel extends ActBase {
     
     new LevelTask().execute(this);
 
-    
-    /*
-    if( ModPlan ) {
-      Iterator<ZLevel> it = m_RocrailService.m_Model.m_ZLevelList.iterator();
-      while( it.hasNext() ) {
-        ZLevel zlevel = it.next();
-        ActLevel.this.levelView.post(new levelThread(ActLevel.this.levelView, ActLevel.this, zlevel, !it.hasNext()));
-      }
-      
-    }
-    else {
-      ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(Z);
-      ActLevel.this.levelView.post(new levelThread(ActLevel.this.levelView, ActLevel.this, zlevel, false));
-    }
-    */
-   
     
 /*    
     plansize = CGSizeMake(ITEMSIZE*cx, ITEMSIZE*cy); 

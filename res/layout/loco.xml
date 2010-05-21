@@ -32,16 +32,16 @@
         android:clickable="true" android:layout_height="60px"
         android:src="@drawable/noimg" android:padding="5dp" />
 
-      <TextView android:text="address" android:id="@+id/locoAddress"
+      <TextView android:text="@string/Address" android:id="@+id/locoAddress"
         android:paddingLeft="5px" android:layout_width="fill_parent"
         android:layout_height="wrap_content"></TextView>
-      <TextView android:text="runtime" android:id="@+id/locoRuntime"
+      <TextView android:text="@string/Runtime" android:id="@+id/locoRuntime"
         android:paddingLeft="5px" android:layout_width="fill_parent"
         android:layout_height="wrap_content"></TextView>
-      <TextView android:text="description" android:id="@+id/locoDesc"
+      <TextView android:text="@string/Description" android:id="@+id/locoDesc"
         android:paddingLeft="5px" android:layout_width="fill_parent"
         android:layout_height="wrap_content"></TextView>
-      <TextView android:text="roadname" android:id="@+id/locoRoadname"
+      <TextView android:text="@string/Roadname" android:id="@+id/locoRoadname"
         android:paddingLeft="5px" android:layout_width="fill_parent"
         android:layout_height="wrap_content"></TextView>
 
@@ -70,7 +70,7 @@
             android:textStyle="bold" android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:drawSelectorOnTop="true" />
-          <Button android:text="@string/Set_in_block"
+          <Button android:text="@string/SetInBlock"
             android:textStyle="bold" android:id="@+id/locoSetInBlock"
             android:layout_width="fill_parent" android:layout_height="60dp" />
         </LinearLayout>

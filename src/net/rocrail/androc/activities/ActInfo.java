@@ -64,10 +64,10 @@ public class ActInfo extends ListActivity implements ServiceListener {
 
     m_Items = new String[5];
     m_Items[0] = "Copyright 2010 Rob Versluis\nhttp://www.rocrail.net";
-    m_Items[1] = "License:\nGNU GENERAL PUBLIC LICENSE";
-    m_Items[2] = "andRoc Version:\n"+versionName+"-"+versionCode;
-    m_Items[3] = "Throttle ID:\n"+m_Base.m_RocrailService.getDeviceName();
-    m_Items[4] = "Rocrail Version:\n" + m_Base.m_RocrailService.m_Model.m_RocrailVersion;
+    m_Items[1] = getText(R.string.License) + ":\nGNU GENERAL PUBLIC LICENSE";
+    m_Items[2] = "andRoc " + getText(R.string.Version) + ":\n"+versionName+"-"+versionCode;
+    m_Items[3] = getText(R.string.ThrottleID) + ":\n"+m_Base.m_RocrailService.getDeviceName();
+    m_Items[4] = "Rocrail " + getText(R.string.Version) + ":\n" + m_Base.m_RocrailService.m_Model.m_RocrailVersion;
       
     setListAdapter(new ArrayAdapter<String>(this, R.layout.menuitem, m_Items));
 

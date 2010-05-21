@@ -33,7 +33,7 @@
       <LinearLayout android:paddingTop="10dp" android:id="@+id/locoLayout4"
         android:orientation="horizontal" android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-        <TextView android:id="@+id/locoLabVmax" android:text="Vmax"
+        <TextView android:id="@+id/locoLabVmax" android:text="@string/Vmax"
           android:paddingLeft="5px" android:layout_height="wrap_content"
           android:layout_width="0px" android:layout_weight="20"></TextView>
         <SeekBar android:id="@+id/locoVmax" android:max="100"
@@ -44,7 +44,7 @@
       <LinearLayout android:paddingTop="10dp" android:id="@+id/locoLayout5"
         android:orientation="horizontal" android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-        <TextView android:id="@+id/locoLabVmid" android:text="Vmid"
+        <TextView android:id="@+id/locoLabVmid" android:text="@string/Vmid"
           android:paddingLeft="5px" android:layout_height="wrap_content"
           android:layout_width="0px" android:layout_weight="20"></TextView>
         <SeekBar android:id="@+id/locoVmid" android:max="100"
@@ -55,7 +55,7 @@
       <LinearLayout android:paddingTop="10dp" android:id="@+id/locoLayout6"
         android:orientation="horizontal" android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-        <TextView android:id="@+id/locoLabVmin" android:text="Vmin"
+        <TextView android:id="@+id/locoLabVmin" android:text="@string/Vmin"
           android:paddingLeft="5px" android:layout_height="wrap_content"
           android:layout_width="0px" android:layout_weight="20"></TextView>
         <SeekBar android:id="@+id/locoVmin" android:max="100"
@@ -67,11 +67,11 @@
       <LinearLayout android:paddingTop="10dp" android:id="@+id/locoLayout7"
         android:orientation="horizontal" android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-        <TextView android:id="@+id/locoLabCV" android:text="CV"
+        <TextView android:id="@+id/locoLabCV" android:text="@string/CV"
           android:textStyle="bold" android:paddingLeft="5px"
           android:layout_height="wrap_content" android:layout_width="0px"
           android:layout_weight="50"></TextView>
-        <TextView android:id="@+id/locoLabVal" android:text="Value"
+        <TextView android:id="@+id/locoLabVal" android:text="@string/Value"
           android:textStyle="bold" android:paddingLeft="5px"
           android:layout_height="wrap_content" android:layout_width="0px"
           android:layout_weight="50"></TextView>
@@ -91,11 +91,11 @@
       <LinearLayout android:id="@+id/locoLayout9"
         android:orientation="horizontal" android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-        <Button android:id="@+id/locoCVWrite" android:text="Write"
+        <Button android:id="@+id/locoCVWrite" android:text="@string/Write"
           android:textSize="20sp" android:paddingLeft="5px"
           android:layout_height="60dp" android:layout_width="0px"
           android:layout_weight="50" />
-        <Button android:id="@+id/locoCVRead" android:text="Read"
+        <Button android:id="@+id/locoCVRead" android:text="@string/Read"
           android:textSize="20sp" android:paddingLeft="5px"
           android:layout_height="60dp" android:layout_width="0px"
           android:layout_weight="50" />

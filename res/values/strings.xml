@@ -39,7 +39,7 @@
   <string name="START">START</string>
   <string name="STOP">STOP</string>
   <string name="HalfAuto">Half Auto</string>
-  <string name="Set_in_block">Set in block</string>
+  <string name="SetInBlock">Set in block</string>
   <string name="Normal">Normal</string>
   <string name="Swapped">Swapped</string>
   <string name="Placing">Placing</string>
@@ -66,7 +66,7 @@
   <string name="SetLoco">Set Loco</string>
   <string name="ResetLoco">Reset Loco</string>
   <string name="quit">Quit</string>
-  <string name="really_quit">Quit andRoc?</string>
+  <string name="ReallyQuit">Quit andRoc?</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
   <string name="start_all_locos">Start all locos in auto mode?</string>
@@ -79,7 +79,7 @@
   <string name="R2RHost">R2R Address</string>
   <string name="R2RPort">R2R Port</string>
   <string name="Accessory">Accessory</string>
-  <string name="back_again_quit">Press Back once more to exit.</string>
+  <string name="BackAgainQuit">Press Back once more to exit.</string>
   <string name="LocoSetup">Loco setup</string>
   <string name="FreeBlock">Free Block</string>
   <string name="OpenBlock">Open Block</string>
@@ -89,4 +89,25 @@
   <string name="SelectSchedule">Select Schedule</string>
   <string name="ScheduleList">Schedule list</string>
   <string name="Modview">Module view</string>
+  <string name="Read">Read</string>
+  <string name="Write">Write</string>
+  <string name="CV">CV</string>
+  <string name="Value">Value</string>
+  <string name="DeviceID">DeviceID</string>
+  <string name="BlockID">BlockID</string>
+  <string name="Description">Description</string>
+  <string name="Roadname">Roadname</string>
+  <string name="Vmax">Vmax</string>
+  <string name="Vmid">Vmid</string>
+  <string name="Vmin">Vmin</string>
+  <string name="LoadingPlan">Loading plan...</string>
+  <string name="License">License</string>
+  <string name="Version">Version</string>
+  <string name="ThrottleID">Throttle ID</string>
+  <string name="CreatingModview">Creating module view...</string>
+  <string name="LocoProps">Loco properties</string>
+  <string name="Info">Info</string>
+  <string name="Actions">Actions</string>
+  <string name="Turntable">Turntable</string>
+  <string name="FiddleYard">Fiddle Yard</string>
 </resources>

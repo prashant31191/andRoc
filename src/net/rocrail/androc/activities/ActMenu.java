@@ -47,17 +47,17 @@ public class ActMenu extends  ListActivity implements ServiceListener {
   public void connectedWithService() {
     m_Base.connectedWithService();
     initView();
-    m_Base.updateTitle("Menu");
+    m_Base.updateTitle(getText(R.string.Menu).toString());
   }
 
 
   public void initView() {
     m_Items = new String[5];
-    m_Items[0] = "Info";
-    m_Items[1] = "Routes";
-    m_Items[2] = "Actions";
-    m_Items[3] = "Switches";
-    m_Items[4] = "Outputs";
+    m_Items[0] = getText(R.string.Info).toString();
+    m_Items[1] = getText(R.string.Routes).toString();
+    m_Items[2] = getText(R.string.Actions).toString();
+    m_Items[3] = getText(R.string.Switches).toString();
+    m_Items[4] = getText(R.string.Outputs).toString();
       
     setListAdapter(new ArrayAdapter<String>(this, R.layout.menuitem, m_Items));
 

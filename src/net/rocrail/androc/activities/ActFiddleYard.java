@@ -94,7 +94,7 @@ public class ActFiddleYard  extends ActBase implements OnItemSelectedListener {
 
     
     
-    updateTitle("FiddleYard \'"+m_FiddleYard.ID+"\'");
+    updateTitle(getText(R.string.FiddleYard) + " \'"+m_FiddleYard.ID+"\'");
  
   }
 

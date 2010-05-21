@@ -52,7 +52,7 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
   
   public void connectedWithService() {
     initView();
-    updateTitle(m_Loco!=null?m_Loco.ID:"Loco setup");
+    updateTitle(m_Loco!=null?m_Loco.ID:getText(R.string.LocoSetup).toString());
     m_RocrailService.addPoMListener(this);
   }
 

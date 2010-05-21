@@ -98,7 +98,7 @@ public class ActTurntable  extends ActBase implements OnItemSelectedListener {
     s.setOnItemSelectedListener(this);
 
 
-    updateTitle("Turntable \'"+m_Turntable.ID+"\'");
+    updateTitle(getText(R.string.Turntable) + " \'"+m_Turntable.ID+"\'");
  
   }
   

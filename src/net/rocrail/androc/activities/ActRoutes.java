@@ -48,7 +48,7 @@ public class ActRoutes extends ListActivity implements ServiceListener {
   public void connectedWithService() {
     m_Base.connectedWithService();
     initView();
-    m_Base.updateTitle("Routes");
+    m_Base.updateTitle(getText(R.string.Routes).toString());
   }
 
 

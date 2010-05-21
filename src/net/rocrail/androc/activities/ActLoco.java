@@ -54,7 +54,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
   
   public void connectedWithService() {
     initView();
-    updateTitle(m_Loco!=null?m_Loco.ID:"Loco properties");
+    updateTitle(m_Loco!=null?m_Loco.ID:getText(R.string.LocoProps).toString());
   }
 
 
@@ -85,9 +85,9 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     runtime.setText(getText(R.string.Runtime) + ": " + String.format("%d:%02d.%02d", hours, mins, secs ) ); 
     
     TextView desc = (TextView)findViewById(R.id.locoDesc);
-    desc.setText(m_Loco.Description);
+    desc.setText(getText(R.string.Description) + ": " + m_Loco.Description);
     TextView road = (TextView)findViewById(R.id.locoRoadname);
-    road.setText(m_Loco.Roadname);
+    road.setText(getText(R.string.Roadname) + ": " + m_Loco.Roadname);
     
     LocoImage image = (LocoImage)findViewById(R.id.locoImage);
     

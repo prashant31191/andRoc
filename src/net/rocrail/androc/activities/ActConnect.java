@@ -108,7 +108,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     case PROGRESS_DIALOG:
         progressDialog = new ProgressDialog(ActConnect.this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setMessage("Loading plan...");
+        progressDialog.setMessage(getText(R.string.LoadingPlan));
         return progressDialog;
     default:
         return null;

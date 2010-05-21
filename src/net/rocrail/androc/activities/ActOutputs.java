@@ -50,7 +50,7 @@ public class ActOutputs extends ListActivity implements ServiceListener   {
   public void connectedWithService() {
     m_Base.connectedWithService();
     initView();
-    m_Base.updateTitle("Switches");
+    m_Base.updateTitle(getText(R.string.Outputs).toString());
   }
 
 
