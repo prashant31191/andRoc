@@ -47,7 +47,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_LOCOSETUP;
+    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_LOCOSETUP | ActBase.MENU_SYSTEM;
     Finish = true;
     connectWithService();
   }
@@ -150,6 +150,14 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     });
 
    
+    final Button swapLoco = (Button) findViewById(R.id.locoSwap);
+    swapLoco.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          m_Loco.swap();
+        }
+    });
+
+   
     // Block spinner
     Spinner s = (Spinner) findViewById(R.id.locoBlocks);
     s.setPrompt(getText(R.string.SelectBlock));
@@ -202,6 +210,20 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     
     
   }
+  
+  @Override
+  protected void  onResume() {
+    super.onResume();
+    if( m_Loco != null ) {
+      final LEDButton autoStart = (LEDButton) findViewById(R.id.locoStart);
+      autoStart.setEnabled(m_RocrailService.AutoMode);
+      autoStart.ON = m_Loco.AutoStart;
+      
+      final LEDButton halfAuto = (LEDButton) findViewById(R.id.locoHalfAuto);
+      halfAuto.ON = m_Loco.HalfAuto;
+    }
+  }
+
 
   @Override
   public void onItemSelected(AdapterView<?> adview, View view, int position, long longID) {

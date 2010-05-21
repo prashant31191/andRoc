@@ -247,6 +247,11 @@ public class Loco {
         String.format("<model cmd=\"modify\"><lc id=\"%s\" V_max=\"%d\"/></model>", ID, v ) );
   }
   
+  public void swap() {
+    rocrailService.sendMessage("lc",
+        String.format("<lc id=\"%s\" cmd=\"swap\"/>", ID ) );
+  }
+  
 }
 
 class UpdateLocoImage implements Runnable {

@@ -126,6 +126,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
         if( m_Block.LocoID!=null ) {
           Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
           intent.putExtra("id", m_Block.LocoID);
+          intent.putExtra("blockid", m_Block.ID);
           startActivity(intent);
           finish();
         }
