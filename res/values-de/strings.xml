@@ -39,7 +39,7 @@
   <string name="START">START</string>
   <string name="STOP">STOP</string>
   <string name="HalfAuto">Halbautomatik</string>
-  <string name="Set_in_block">Block zuweisen</string>
+  <string name="SetInBlock">Block zuweisen</string>
   <string name="Normal">Normal</string>
   <string name="Swapped">Gedreht</string>
   <string name="Placing">Ausrichtung</string>
@@ -58,7 +58,7 @@
   <string name="Port">Port</string>
   <string name="Start">ST</string>
   <string name="FunctionGroup">FG</string>
-  <string name="Lights">Beleuchtung</string>
+  <string name="Lights">Licht</string>
   <string name="Recent">Kürzlich</string>
   <string name="Previous">Zurück</string>
   <string name="Next">Weiter</string>
@@ -66,7 +66,7 @@
   <string name="SetLoco">Lok zuweisen</string>
   <string name="ResetLoco">Lok rücksetzen</string>
   <string name="quit">Beenden</string>
-  <string name="really_quit">andRoc beenden ?</string>
+  <string name="ReallyQuit">andRoc beenden ?</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
   <string name="start_all_locos">Automatikmodus für alle Loks starten ?</string>
@@ -79,7 +79,7 @@
   <string name="R2RHost">R2R Adresse</string>
   <string name="R2RPort">R2R Port</string>
   <string name="Accessory">Zubehör</string>
-  <string name="back_again_quit">Drücke Zurück um zu Beenden</string>
+  <string name="BackAgainQuit">Drücke Zurück um zu Beenden</string>
   <string name="LocoSetup">Lok-Setup</string>
   <string name="FreeBlock">Block freigeben</string>
   <string name="OpenBlock">Block entsperren</string>
@@ -89,4 +89,25 @@
   <string name="SelectSchedule">Fahrplan wählen</string>
   <string name="ScheduleList">Fahrplanliste</string>
   <string name="Modview">Modul-Ansicht</string>
+  <string name="Read">Lese</string>
+  <string name="Write">Schreiben</string>
+  <string name="CV">CV</string>
+  <string name="Value">Wert</string>
+  <string name="DeviceID">GeräteID</string>
+  <string name="BlockID">BlockID</string>
+  <string name="Description">Bezeichnung</string>
+  <string name="Roadname">Strassenname</string>
+  <string name="Vmax">V-max</string>
+  <string name="Vmid">V-mid</string>
+  <string name="Vmin">V-min</string>
+  <string name="LoadingPlan">Lade Layout</string>
+  <string name="License">Lizenz</string>
+  <string name="Version">Version</string>
+  <string name="ThrottleID">Fahrpult ID</string>
+  <string name="CreatingModview">Erzeuge Modulansicht</string>
+  <string name="LocoProps">Lok Eigenschaften</string>
+  <string name="Info">Info</string>
+  <string name="Actions">Aktionen</string>
+  <string name="Turntable">Drehscheibe</string>
+  <string name="FiddleYard">Fiddle Yard</string>
 </resources>
