@@ -96,6 +96,16 @@ public class Model {
     informListeners(ModelListener.MODELLIST_PLAN_START);
   }  
 
+  public Block findBlock4Loco( String ID ) {
+    Iterator<Block> it = m_BlockMap.values().iterator();
+    while( it.hasNext() ) {
+      Block block = it.next();
+      if( block.LocoID.equals(ID))
+        return block;
+    }
+    
+    return null;
+  }
  
   public Loco getLoco(String ID) {
     /* Rob:

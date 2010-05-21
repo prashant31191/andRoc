@@ -89,6 +89,12 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     if( m_Loco == null )
       return;
 
+    if( BlockID == null || BlockID.length() == 0 ) {
+      Block block = m_RocrailService.m_Model.findBlock4Loco(m_Loco.ID);
+      if( block != null )
+        BlockID = block.ID;
+    }
+    
     TextView addr = (TextView)findViewById(R.id.locoAddress);
     addr.setText(getText(R.string.Address) + ": " + m_Loco.Addr + "/" + m_Loco.Steps);
     
