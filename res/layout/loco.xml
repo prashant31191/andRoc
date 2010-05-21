@@ -75,7 +75,7 @@
             <Button android:text="@string/SetInBlock"
               android:textStyle="bold" android:id="@+id/locoSetInBlock"
               android:layout_width="0px" android:layout_height="60dp" android:layout_weight="50"/>
-            <Button android:text="@string/Swap"
+            <net.rocrail.androc.widgets.LEDButton android:text="@string/Swap"
               android:textStyle="bold" android:id="@+id/locoSwap"
               android:layout_width="0px" android:layout_height="60dp" android:layout_weight="50"/>
           </LinearLayout>

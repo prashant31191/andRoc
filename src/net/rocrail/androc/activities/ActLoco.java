@@ -58,6 +58,20 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
   }
 
 
+  void updateLoco() {
+    LocoImage image = (LocoImage)findViewById(R.id.locoImage);
+    
+    image.ID = m_Loco.ID;
+    
+    if (m_Loco.getLocoBmp(image) != null) {
+      image.setImageBitmap(m_Loco.getLocoBmp(null));
+    }
+    else {
+      image.setImageResource(R.drawable.noimg);
+    }
+  }
+
+
   public void initView() {
     setContentView(R.layout.loco);
     
@@ -89,14 +103,9 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     TextView road = (TextView)findViewById(R.id.locoRoadname);
     road.setText(getText(R.string.Roadname) + ": " + m_Loco.Roadname);
     
+    updateLoco();
     LocoImage image = (LocoImage)findViewById(R.id.locoImage);
     
-    if( m_Loco.getLocoBmp(null) != null ) {
-      if( image != null ) {
-        image.setImageBitmap(m_Loco.getLocoBmp(null));
-      }
-    }
-
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         //finish();
@@ -150,10 +159,13 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     });
 
    
-    final Button swapLoco = (Button) findViewById(R.id.locoSwap);
+    final LEDButton swapLoco = (LEDButton) findViewById(R.id.locoSwap);
+    swapLoco.ON = m_Loco.Placing;
     swapLoco.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
+          m_Loco.Placing = !m_Loco.Placing;
           m_Loco.swap();
+          ((LEDButton)v).ON = m_Loco.Placing;
         }
     });
 

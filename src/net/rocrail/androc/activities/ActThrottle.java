@@ -104,7 +104,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
       f6.ON = m_Loco.Function[6+m_iFunctionGroup*FNGROUPSIZE];
       Direction.ON = m_Loco.Dir;
       Go.setEnabled(m_RocrailService.AutoMode);
-      Go.ON = m_Loco.Go;
+      Go.ON = m_Loco.AutoStart;
       Release.ON = false;
       f1.invalidate();
       f2.invalidate();
@@ -251,14 +251,15 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
         }
     });
 
-    Button Go = (Button) findViewById(R.id.throttleGo);
+    LEDButton Go = (LEDButton) findViewById(R.id.throttleGo);
+    Go.ON = m_Loco.AutoStart;
     Go.setEnabled(m_RocrailService.AutoMode);
     Go.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipGo();
-            ((LEDButton)v).ON = m_Loco.Go;
+            ((LEDButton)v).ON = m_Loco.AutoStart;
             v.invalidate();
           }
         }

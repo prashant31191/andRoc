@@ -52,13 +52,15 @@ public class Loco {
   public boolean   HalfAuto  = false;
   public boolean   Lights    = false;
   public boolean   Dir       = true;
-  public boolean   Go        = false;
+  public boolean   Placing   = true;
   public boolean[] Function  = new boolean[32];
   
   private boolean   ImageRequested = false;
   public  LocoImage imageView      = null;
   
   public Attributes properties = null;
+  
+  int fx = 0;
   
 
   public Loco( RocrailService rocrailService, Attributes atts) {
@@ -76,7 +78,6 @@ public class Loco {
     Roadname    = Item.getAttrValue(atts, "roadname", "");
     Addr        = Item.getAttrValue(atts, "addr", 0);
     Steps       = Item.getAttrValue(atts, "spcnt", 0);
-    RunTime     = Item.getAttrValue(atts, "runtime", 0);
     Dir         = Item.getAttrValue(atts, "dir", Dir);
     Speed       = Item.getAttrValue(atts, "V", Speed);
     Lights      = Item.getAttrValue(atts, "fn", Lights );
@@ -92,11 +93,14 @@ public class Loco {
     Vmin  = Item.getAttrValue(atts, "V_min", 10);
     Vmode = Item.getAttrValue(atts, "V_mode", "");
     Mode  = Item.getAttrValue(atts, "mode","");
+
+    RunTime = Item.getAttrValue(atts, "runtime", 0);
+    Placing = Item.getAttrValue(atts, "placing", Placing);
     
     AutoStart = Mode.equals("auto");
     HalfAuto  = Mode.equals("halfauto");
 
-    int fx = Item.getAttrValue(atts, "fx", 0 );
+    fx = Item.getAttrValue(atts, "fx", fx );
     
     for(int i = 1; i < 32; i++) {
       int mask = 1 << (i-1);
@@ -182,9 +186,9 @@ public class Loco {
   
   public void flipGo() {
     if( rocrailService.AutoMode ) {
-      Go = !Go; // TODO: use the reported mode of the loco
+      AutoStart = !AutoStart;
       rocrailService.sendMessage("lc", String.format("<lc id=\"%s\" cmd=\"%s\"/>", 
-          ID, (Go?"go":"stop") ) );
+          ID, (AutoStart?"go":"stop") ) );
     }
   }
   public void doRelease() {
