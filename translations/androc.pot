@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: andRoc 0.9\n"
-"POT-Creation-Date: 2010-05-19 13:24+0200\n"
-"PO-Revision-Date: 2010-05-19 18:00+ZONE\n"
+"POT-Creation-Date: 2010-05-21 07:34+0200\n"
+"PO-Revision-Date: 2010-05-21 07:34+0200\n"
 "Last-Translator: Rob Versluis <team@rocrail.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -283,5 +283,89 @@ msgstr ""
 
 #: res/values/strings.xml:91(string)
 msgid "Module view"
+msgstr ""
+
+#: res/values/strings.xml:92(string)
+msgid "Read"
+msgstr ""
+
+#: res/values/strings.xml:93(string)
+msgid "Write"
+msgstr ""
+
+#: res/values/strings.xml:94(string)
+msgid "CV"
+msgstr ""
+
+#: res/values/strings.xml:95(string)
+msgid "Value"
+msgstr ""
+
+#: res/values/strings.xml:96(string)
+msgid "DeviceID"
+msgstr ""
+
+#: res/values/strings.xml:97(string)
+msgid "BlockID"
+msgstr ""
+
+#: res/values/strings.xml:98(string)
+msgid "Description"
+msgstr ""
+
+#: res/values/strings.xml:99(string)
+msgid "Roadname"
+msgstr ""
+
+#: res/values/strings.xml:100(string)
+msgid "Vmax"
+msgstr ""
+
+#: res/values/strings.xml:101(string)
+msgid "Vmid"
+msgstr ""
+
+#: res/values/strings.xml:102(string)
+msgid "Vmin"
+msgstr ""
+
+#: res/values/strings.xml:103(string)
+msgid "Loading plan..."
+msgstr ""
+
+#: res/values/strings.xml:104(string)
+msgid "License"
+msgstr ""
+
+#: res/values/strings.xml:105(string)
+msgid "Version"
+msgstr ""
+
+#: res/values/strings.xml:106(string)
+msgid "Throttle ID"
+msgstr ""
+
+#: res/values/strings.xml:107(string)
+msgid "Creating module view..."
+msgstr ""
+
+#: res/values/strings.xml:108(string)
+msgid "Loco properties"
+msgstr ""
+
+#: res/values/strings.xml:109(string)
+msgid "Info"
+msgstr ""
+
+#: res/values/strings.xml:110(string)
+msgid "Actions"
+msgstr ""
+
+#: res/values/strings.xml:111(string)
+msgid "Turntable"
+msgstr ""
+
+#: res/values/strings.xml:112(string)
+msgid "Fiddle Yard"
 msgstr ""
 

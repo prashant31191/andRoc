@@ -408,7 +408,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
           return true;
         }
         
-        Toast.makeText(getApplicationContext(), R.string.back_again_quit,
+        Toast.makeText(getApplicationContext(), R.string.BackAgainQuit,
             Toast.LENGTH_SHORT).show();
         quitShowed = true;
         
