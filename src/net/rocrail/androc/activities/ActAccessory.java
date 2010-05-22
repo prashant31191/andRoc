@@ -50,6 +50,7 @@ public class ActAccessory extends ActBase {
     
     Button bt = (Button) findViewById(R.id.accAddressing);
     bt.setText(m_RocrailService.Prefs.AccType);
+    bt.requestFocus();
 
     updateAddress();
     

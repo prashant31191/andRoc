@@ -118,6 +118,7 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
     
 
     Button Read = (Button) findViewById(R.id.locoCVRead);
+    Read.requestFocus();
     Read.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           if( m_Loco != null ) {
