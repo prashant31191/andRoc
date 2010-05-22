@@ -34,7 +34,7 @@ public class Switch extends Item implements View.OnClickListener {
   public Switch( RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
     Dir   = Item.getAttrValue(atts, "dir", false );
-    AccNr = Item.getAttrValue(atts, "accnr", 0 );
+    AccNr = Item.getAttrValue(atts, "accnr", 1 );
     SWType = Item.getAttrValue(atts, "swtype", "default" );
     Raster = SWType.equals("raster");
   }
@@ -67,8 +67,8 @@ public class Switch extends Item implements View.OnClickListener {
 
       switch (AccNr) {
       case 1:
-        cX = (orinr == 1 ? 2 : 1);
-        cY = (orinr == 1 ? 1 : 2);
+        cX = (orinr == 1 ? 1 : 2);
+        cY = (orinr == 1 ? 2 : 1);
         break;
       case 40:
         cX = (orinr == 1 ? 4 : 2);
