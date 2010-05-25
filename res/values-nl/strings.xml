@@ -69,17 +69,17 @@
   <string name="ReallyQuit">Afsluiten</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
-  <string name="start_all_locos">Alle locs starten in Auto Mode</string>
+  <string name="start_all_locos">Alle locs starten in automaat?</string>
   <string name="Preferences">Voorkeuren</string>
-  <string name="Monitoring">Systeem</string>
+  <string name="Monitoring">Systeem monitor</string>
   <string name="Address">Adres</string>
   <string name="Runtime">Looptijd</string>
-  <string name="KeepScreenOn">Houdt scherm</string>
+  <string name="KeepScreenOn">Houdt scherm aan</string>
   <string name="ClearRecent">Maak lijst schoon</string>
   <string name="R2RHost">R2R Adres</string>
   <string name="R2RPort">R2R poort</string>
   <string name="Accessory">Accessoire</string>
-  <string name="BackAgainQuit">Klik nogmaals op terug om af te sluiten</string>
+  <string name="BackAgainQuit">Klik nogmaals om af te sluiten.</string>
   <string name="LocoSetup">Loc setup</string>
   <string name="FreeBlock">Vrij Blok</string>
   <string name="OpenBlock">Open Blok</string>
@@ -110,4 +110,5 @@
   <string name="Actions">Acties</string>
   <string name="Turntable">Draaischijf</string>
   <string name="FiddleYard">Fiddle Yard</string>
+  <string name="Swap">Swap</string>
 </resources>
