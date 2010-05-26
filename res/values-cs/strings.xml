@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Rocrail - Model Railroad Software
+
+ Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-->
+<resources>
+  <string name="Title">Název</string>
+  <string name="Throttle">Ovladač</string>
+  <string name="Locomotives">Lokomotivy</string>
+  <string name="Outputs">Výstupy</string>
+  <string name="Routes">Vlakové cesty</string>
+  <string name="Switches">Přepínače</string>
+  <string name="Signals">Signály</string>
+  <string name="Blocks">Bloky</string>
+  <string name="Schedules">Jízdní řády</string>
+  <string name="System">Systém</string>
+  <string name="Power_ON">Zapnout napájení</string>
+  <string name="Power_OFF">Vypnout napájení</string>
+  <string name="Init_Field">Inicializační pole</string>
+  <string name="Auto_ON">Automaticky zapnout</string>
+  <string name="Auto_Start">Automatický start</string>
+  <string name="Release">RE</string>
+  <string name="none">žádný</string>
+  <string name="START">START</string>
+  <string name="STOP">STOP</string>
+  <string name="HalfAuto">Poloviční automatický režim</string>
+  <string name="SetInBlock">Nastav v bloku</string>
+  <string name="Normal">Normální</string>
+  <string name="Swapped">Prohozený</string>
+  <string name="Placing">Umísění</string>
+  <string name="Automatic">Automaticky</string>
+  <string name="Settings">Nastavení</string>
+  <string name="Loco">Lokomotiva</string>
+  <string name="Close">Zavřít</string>
+  <string name="Open">Otevřít</string>
+  <string name="Connect">Připojit</string>
+  <string name="Menu">Menu</string>
+  <string name="Layout">Rozložení</string>
+  <string name="Level">Úroveň</string>
+  <string name="Quit">Ukončit</string>
+  <string name="Direction">Směr</string>
+  <string name="Host">Hostitel</string>
+  <string name="Port">Port</string>
+  <string name="Start">ST</string>
+  <string name="FunctionGroup">FG</string>
+  <string name="Lights">Světla</string>
+  <string name="Recent">Poslední</string>
+  <string name="Previous">Předchozí</string>
+  <string name="Next">Následující</string>
+  <string name="Track">Vozová cesta (track)</string>
+  <string name="SetLoco">Sada lokomotiv</string>
+  <string name="ResetLoco">Resetuj lokomotivu</string>
+  <string name="quit">Ukončit</string>
+  <string name="ReallyQuit">Ukončit andRoc?</string>
+  <string name="yes">Ano</string>
+  <string name="no">Ne</string>
+  <string name="start_all_locos">Zapnout všechny lokomotivy v automatickém módu?</string>
+  <string name="Preferences">Možnosti</string>
+  <string name="Monitoring">Monitorování systému</string>
+  <string name="Address">Adresa</string>
+  <string name="Runtime">Čas běhu</string>
+  <string name="KeepScreenOn">Udržuj na obrazovce</string>
+  <string name="ClearRecent">Smazání posledního seznamu</string>
+  <string name="R2RHost">Adresa R2R</string>
+  <string name="R2RPort">R2R Port</string>
+  <string name="Accessory">Příslušenství</string>
+  <string name="BackAgainQuit">Zmáčkni Zpět znovu pro ukončení</string>
+  <string name="LocoSetup">Nastavení lokomotivy</string>
+  <string name="FreeBlock">Volný blok</string>
+  <string name="OpenBlock">Otevřený blok</string>
+  <string name="CloseBlock">Uzavřený blok</string>
+  <string name="SelectBlock">Vybraný blok</string>
+  <string name="BlockList">Seznam bloků</string>
+  <string name="SelectSchedule">Vybraný plán</string>
+  <string name="ScheduleList">Seznam plánů</string>
+  <string name="Modview">Zobrazení modulu</string>
+  <string name="Read">Čtení</string>
+  <string name="Write">Zapsat</string>
+  <string name="CV">CV</string>
+  <string name="Value">Hodnota</string>
+  <string name="DeviceID">Zařízení ID</string>
+  <string name="BlockID">Blok ID</string>
+  <string name="Description">Popis</string>
+  <string name="Roadname">Jméno cesty</string>
+  <string name="Vmax">Vmax</string>
+  <string name="Vmid">Vmid</string>
+  <string name="Vmin">Vmin</string>
+  <string name="LoadingPlan">Nahrávám plán ...</string>
+  <string name="License">Licence</string>
+  <string name="Version">Verze</string>
+  <string name="ThrottleID">ID Ovladače</string>
+  <string name="CreatingModview">Vytváření pohledu na modul ...</string>
+  <string name="LocoProps">Vlastnosti lokomotivy</string>
+  <string name="Info">Info</string>
+  <string name="Actions">Akce</string>
+  <string name="Turntable">Točna</string>
+  <string name="FiddleYard">Skryté nádraží</string>
+  <string name="Swap">Swap</string>
+</resources>
