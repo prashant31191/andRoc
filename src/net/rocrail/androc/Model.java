@@ -128,7 +128,18 @@ public class Model {
     if( objName.equals("lc") ) {
       Loco lc = m_LocoMap.get(Item.getAttrValue(atts, "id", "?"));
       if( lc != null ) {
-        lc.updateWithAttributes(atts);
+        if( !rocrailService.getDeviceName().equals(Item.getAttrValue(atts, "throttleid", "?"))) {
+          lc.updateWithAttributes(atts);
+          informListeners(ModelListener.MODELLIST_LC, lc.ID);
+        }
+      }
+      return;
+    }
+    if( objName.equals("fn") ) {
+      Loco lc = m_LocoMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( lc != null ) {
+        lc.updateFunctions(atts);
+        informListeners(ModelListener.MODELLIST_LC, lc.ID);
       }
       return;
     }
@@ -329,6 +340,17 @@ public class Model {
       while( it.hasNext() ) {
         ModelListener listener = it.next();
         listener.modelListLoaded(listCode);
+      }
+    }
+
+  }
+  
+  void informListeners( int listCode, String ID ) {
+    if( listCode != -1 ) {
+      Iterator<ModelListener> it = m_Listeners.iterator();
+      while( it.hasNext() ) {
+        ModelListener listener = it.next();
+        listener.modelUpdate(listCode, ID);
       }
     }
 

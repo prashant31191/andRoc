@@ -32,4 +32,5 @@ public interface ModelListener {
   public static int MODELLIST_SG = 8;
   public static int MODELLIST_CO = 9;
   public void modelListLoaded(int MODELLIST);
+  public void modelUpdate(int MODELLIST, String ID);
 }

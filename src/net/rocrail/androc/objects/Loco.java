@@ -81,24 +81,11 @@ public class Loco {
     Dir         = Item.getAttrValue(atts, "dir", Dir);
     Speed       = Item.getAttrValue(atts, "V", Speed);
     Lights      = Item.getAttrValue(atts, "fn", Lights );
-    updateWithAttributes(atts);
-  }
-
-  public void updateWithAttributes(Attributes atts) {
-    //Dir    = Item.getAttrValue(atts, "dir", Dir);
-    //Speed  = Item.getAttrValue(atts, "V", Speed);
-    //Lights = Item.getAttrValue(atts, "fn", Lights );
+    
     Vmax  = Item.getAttrValue(atts, "V_max", 100);
     Vmid  = Item.getAttrValue(atts, "V_mid", 50);
     Vmin  = Item.getAttrValue(atts, "V_min", 10);
     Vmode = Item.getAttrValue(atts, "V_mode", "");
-    Mode  = Item.getAttrValue(atts, "mode","");
-
-    RunTime = Item.getAttrValue(atts, "runtime", 0);
-    Placing = Item.getAttrValue(atts, "placing", Placing);
-    
-    AutoStart = Mode.equals("auto");
-    HalfAuto  = Mode.equals("halfauto");
 
     fx = Item.getAttrValue(atts, "fx", fx );
     
@@ -106,6 +93,33 @@ public class Loco {
       int mask = 1 << (i-1);
       Function[i] = ( (fx & mask) == mask ) ? true:false; 
     }
+    updateWithAttributes(atts);
+  }
+  
+
+  public void updateFunctions(Attributes atts) {
+    for( int i = 1; i <= 24; i++ ) {
+      Function[i] = Item.getAttrValue(atts, "f"+i, Function[i]);
+    }
+  }
+  
+  
+  public void updateWithAttributes(Attributes atts) {
+    Dir    = Item.getAttrValue(atts, "dir", Dir);
+    Speed  = Item.getAttrValue(atts, "V", Speed);
+    Lights = Item.getAttrValue(atts, "fn", Lights );
+    Mode  = Item.getAttrValue(atts, "mode","");
+
+    RunTime = Item.getAttrValue(atts, "runtime", 0);
+    Placing = Item.getAttrValue(atts, "placing", Placing);
+    
+    if( Mode.length() > 0 ) {
+      AutoStart = Mode.equals("auto");
+      HalfAuto  = Mode.equals("halfauto");
+    }
+    
+    Speed = (int)((Speed * 100.0) / Vmax); 
+
   }
   
   public boolean isPercentMode() {

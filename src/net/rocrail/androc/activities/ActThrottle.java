@@ -443,4 +443,22 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
   }
 
 
+  @Override
+  public void modelUpdate(int MODELLIST, String ID) {
+    if( MODELLIST == ModelListener.MODELLIST_LC && m_Loco != null && m_Loco.ID == ID ) {
+      SeekBar bar = (SeekBar)findViewById(R.id.SeekBarSpeed);
+      if( bar != null ) {
+        bar.post(new Runnable() {
+          public void run() {
+            ActThrottle.this.updateFunctions();
+            SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
+            if( !mSeekBar.isPressed() )
+              mSeekBar.setProgress(m_Loco.Speed);
+          }
+        });
+      }
+    }
+  }
+
+
 }
