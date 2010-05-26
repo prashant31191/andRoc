@@ -338,7 +338,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
   @Override
   public void onProgressChanged(SeekBar seekbar, int progress, boolean fromTouch) {
     quitShowed = false;
-    if( m_Loco != null )
+    if( m_Loco != null && fromTouch )
       m_Loco.setSpeed(progress, false);
   }
 
