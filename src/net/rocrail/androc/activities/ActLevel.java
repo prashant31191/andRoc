@@ -59,7 +59,7 @@ public class ActLevel extends ActBase {
     }
     
     MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_SYSTEM;
-    Finish = true;
+    Finish = false;
     connectWithService();
   }
   

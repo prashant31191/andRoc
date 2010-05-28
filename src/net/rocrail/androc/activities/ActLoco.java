@@ -48,7 +48,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_LOCOSETUP | ActBase.MENU_SYSTEM;
-    Finish = true;
+    Finish = false;
     connectWithService();
   }
   
