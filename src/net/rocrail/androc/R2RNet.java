@@ -90,21 +90,22 @@ public class R2RNet extends Thread {
         // Inform the recent list...
         if( clientConn.contains("rsp=\"clientconn\"") ) {
           // format: <netreq title="Plan-F" rsp="clientconn" host="192.168.100.65" port="4711"/>
-          int idx = clientConn.indexOf("host");
-          String host = clientConn.substring(idx+"host".length()+2);
+          //         <netrsp host="planf" port="62842" plan="Plan-F" rsp="clientconn"/>
+          int idx = clientConn.indexOf(" host=\"");
+          String host = clientConn.substring(idx+" host=\"".length());
           idx = host.indexOf('"');
           Prefs.Host = host.substring(0, idx);
 
-          idx = clientConn.indexOf("port");
-          String port = clientConn.substring(idx+"port".length()+2);
+          idx = clientConn.indexOf(" port=\"");
+          String port = clientConn.substring(idx+" port=\"".length());
           idx = port.indexOf('"');
           Prefs.Port = Integer.parseInt(port.substring(0, idx));
 
           String title = "";
           Prefs.Title = "";
-          idx = clientConn.indexOf("plan");
+          idx = clientConn.indexOf(" plan=\"");
           if( idx != -1 ) {
-            title = clientConn.substring(idx+"plan".length()+2);
+            title = clientConn.substring(idx+" plan=\"".length());
             idx = title.indexOf('"');
             Prefs.Title = title.substring(0, idx);
           }
