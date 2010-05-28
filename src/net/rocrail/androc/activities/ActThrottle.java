@@ -131,7 +131,7 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     setContentView(R.layout.throttle);
     
     Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
-    s.setPrompt(new String("Select Loco"));
+    s.setPrompt(getText(R.string.SelectLoco));
 
     ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(this,
         android.R.layout.simple_spinner_item);

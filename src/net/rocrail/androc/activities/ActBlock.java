@@ -95,7 +95,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     
     // Loco spinner
     Spinner s = (Spinner) findViewById(R.id.blockLocos);
-    s.setPrompt(new String("Select Loco"));
+    s.setPrompt(getText(R.string.SelectLoco));
 
     ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
     m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

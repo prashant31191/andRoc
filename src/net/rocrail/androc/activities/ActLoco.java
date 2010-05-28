@@ -136,10 +136,10 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
                 String.format("<lc id=\"%s\" cmd=\"useschedule\" scheduleid=\"%s\"/>", 
                     m_Loco.ID, ScheduleID ) );
           }
-          else {
-            m_RocrailService.sendMessage("lc", String.format("<lc id=\"%s\" cmd=\"%s\"/>", 
-                m_Loco.ID, m_Loco.AutoStart?(m_Loco.HalfAuto?"gomanual":"go"):"stop") );
-          }
+
+          m_RocrailService.sendMessage("lc", String.format("<lc id=\"%s\" cmd=\"%s\"/>", 
+              m_Loco.ID, m_Loco.AutoStart?(m_Loco.HalfAuto?"gomanual":"go"):"stop") );
+
         }
     });
 

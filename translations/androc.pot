@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: andRoc 0.9\n"
 "POT-Creation-Date: 2010-05-21 07:34+0200\n"
-"PO-Revision-Date: 2010-05-21 07:34+0200\n"
+"PO-Revision-Date: 2010-05-28 07:34+0200\n"
 "Last-Translator: Rob Versluis <team@rocrail.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -367,5 +367,13 @@ msgstr ""
 
 #: res/values/strings.xml:112(string)
 msgid "Fiddle Yard"
+msgstr ""
+
+#: res/values/strings.xml:113(string)
+msgid "Swap"
+msgstr ""
+
+#: res/values/strings.xml:114(string)
+msgid "Select loco"
 msgstr ""
 
