@@ -110,5 +110,6 @@
   <string name="Actions">Acties</string>
   <string name="Turntable">Draaischijf</string>
   <string name="FiddleYard">Fiddle Yard</string>
-  <string name="Swap">Swap</string>
+  <string name="Swap">Omkeren</string>
+  <string name="SelectLoco">Kies Lok</string>
 </resources>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Rocrail - Model Railroad Software
+
+ Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-->
+<resources>
+  <string name="Title">தலைப்பு</string>
+  <string name="Throttle">ஆர்முடுக்கு</string>
+  <string name="Locomotives">Locomotives</string>
+  <string name="Outputs">Outputs</string>
+  <string name="Routes">பாதைகள்</string>
+  <string name="Switches">மாற்றிகள்</string>
+  <string name="Signals">சைகைகள்</string>
+  <string name="Blocks">தடுப்புகள்</string>
+  <string name="Schedules">Schedules</string>
+  <string name="System">அமைப்பு</string>
+  <string name="Power_ON">Power ON</string>
+  <string name="Power_OFF">Power OFF</string>
+  <string name="Init_Field">Init Field</string>
+  <string name="Auto_ON">Auto ON</string>
+  <string name="Auto_Start">தானியங்கி தொடக்கம்</string>
+  <string name="Release">RE</string>
+  <string name="none">ஒன்றுமில்லை</string>
+  <string name="START">தொடங்கு</string>
+  <string name="STOP">நிறுத்து</string>
+  <string name="HalfAuto">Half Auto</string>
+  <string name="SetInBlock">Set in block</string>
+  <string name="Normal">இயல்பான</string>
+  <string name="Swapped">Swapped</string>
+  <string name="Placing">Placing</string>
+  <string name="Automatic">தானியங்கி</string>
+  <string name="Settings">அமைப்புகள்</string>
+  <string name="Loco">Loco</string>
+  <string name="Close">மூடு</string>
+  <string name="Open">திற</string>
+  <string name="Connect">இணை</string>
+  <string name="Menu">பட்டி</string>
+  <string name="Layout">இட அமைவு</string>
+  <string name="Level">மட்டம்</string>
+  <string name="Quit">வெளியேறு</string>
+  <string name="Direction">திசை</string>
+  <string name="Host">Host</string>
+  <string name="Port">துறை</string>
+  <string name="Start">ST</string>
+  <string name="FunctionGroup">FG</string>
+  <string name="Lights">விளக்குகள்</string>
+  <string name="Recent">சமீபத்திய</string>
+  <string name="Previous">முந்தைய</string>
+  <string name="Next">அடுத்த</string>
+  <string name="Track">தடம்</string>
+  <string name="SetLoco">Set Loco</string>
+  <string name="ResetLoco">Reset Loco</string>
+  <string name="quit">வெளியேறு</string>
+  <string name="ReallyQuit">Quit andRoc?</string>
+  <string name="yes">ஆம்</string>
+  <string name="no">இல்லை</string>
+  <string name="start_all_locos">Start all locos in auto mode?</string>
+  <string name="Preferences">விருப்பத்தேர்வுகள்</string>
+  <string name="Monitoring">அமைப்பு கண்காணிப்பு</string>
+  <string name="Address">முகவரி</string>
+  <string name="Runtime">Runtime</string>
+  <string name="KeepScreenOn">Keep screen on</string>
+  <string name="ClearRecent">Clear recent list</string>
+  <string name="R2RHost">R2R Address</string>
+  <string name="R2RPort">R2R Port</string>
+  <string name="Accessory">Accessory</string>
+  <string name="BackAgainQuit">Press Back once more to exit.</string>
+  <string name="LocoSetup">Loco setup</string>
+  <string name="FreeBlock">Free Block</string>
+  <string name="OpenBlock">Open Block</string>
+  <string name="CloseBlock">Close Block</string>
+  <string name="SelectBlock">Select Block</string>
+  <string name="BlockList">தடுப்புப் பட்டியல்</string>
+  <string name="SelectSchedule">Select Schedule</string>
+  <string name="ScheduleList">Schedule list</string>
+  <string name="Modview">Module view</string>
+  <string name="Read">வாசி</string>
+  <string name="Write">Write</string>
+  <string name="CV">CV</string>
+  <string name="Value">மதிப்பு</string>
+  <string name="DeviceID">DeviceID</string>
+  <string name="BlockID">BlockID</string>
+  <string name="Description">விளக்கம்</string>
+  <string name="Roadname">வீதியின் பெயர்</string>
+  <string name="Vmax">Vmax</string>
+  <string name="Vmid">Vmid</string>
+  <string name="Vmin">Vmin</string>
+  <string name="LoadingPlan">Loading plan...</string>
+  <string name="License">உரிமம்</string>
+  <string name="Version">பதிப்பு</string>
+  <string name="ThrottleID">Throttle ID</string>
+  <string name="CreatingModview">Creating module view...</string>
+  <string name="LocoProps">Loco properties</string>
+  <string name="Info">தகவல்</string>
+  <string name="Actions">செயல்கள்</string>
+  <string name="Turntable">Turntable</string>
+  <string name="FiddleYard">Fiddle Yard</string>
+  <string name="Swap">இடமாற்று</string>
+  <string name="SelectLoco">Select loco</string>
+</resources>
