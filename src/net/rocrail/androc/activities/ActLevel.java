@@ -54,10 +54,6 @@ public class ActLevel extends ActBase {
       ModPlan = (Z == -1 ? true:false);
     }
 
-    if( ModPlan ) {
-      showDialog(PROGRESS_DIALOG);
-    }
-    
     MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_SYSTEM;
     Finish = false;
     connectWithService();
@@ -168,61 +164,64 @@ public class ActLevel extends ActBase {
   }
   
   
-}
 
 
-class LevelTask extends AsyncTask<ActLevel, ZLevel, Void> {
-  ActLevel level = null;
-  int levelIdx = 0;
-  int levelCnt = 0;
-  int levelWeight = 1;
-  
-  @Override
-  protected void onPreExecute() {
+  class LevelTask extends AsyncTask<ActLevel, ZLevel, Void> {
+    ActLevel level = null;
+    int levelIdx = 0;
+    int levelCnt = 0;
+    int levelWeight = 1;
     
-  }
-  
-  @Override
-  protected Void doInBackground(ActLevel... levels) {
-    level = levels[0];
-    if( level.ModPlan ) {
-      levelCnt = level.m_RocrailService.m_Model.m_ZLevelList.size();
-      levelWeight = (100 / levelCnt);
-      Iterator<ZLevel> it = level.m_RocrailService.m_Model.m_ZLevelList.iterator();
-      while( it.hasNext() ) {
-        ZLevel zlevel = it.next();
-        zlevel.itemList = level.createLevelList(level.levelView, zlevel);
-        levelIdx++;
-        zlevel.progressIdx = levelIdx;
-        publishProgress(zlevel);
-        Thread.yield();
+    @Override
+    protected void onPreExecute() {
+      if( ActLevel.this.ModPlan ) {
+        ActLevel.this.showDialog(ActLevel.PROGRESS_DIALOG);
       }
-      
+  
     }
-    else {
-      ZLevel zlevel = level.m_RocrailService.m_Model.m_ZLevelList.get(level.Z);
-      zlevel.itemList = level.createLevelList(level.levelView, zlevel);
-      publishProgress(zlevel);
+    
+    @Override
+    protected Void doInBackground(ActLevel... levels) {
+      level = levels[0];
+      if( level.ModPlan ) {
+        levelCnt = level.m_RocrailService.m_Model.m_ZLevelList.size();
+        levelWeight = (100 / levelCnt);
+        Iterator<ZLevel> it = level.m_RocrailService.m_Model.m_ZLevelList.iterator();
+        while( it.hasNext() ) {
+          ZLevel zlevel = it.next();
+          zlevel.itemList = level.createLevelList(level.levelView, zlevel);
+          levelIdx++;
+          zlevel.progressIdx = levelIdx;
+          publishProgress(zlevel);
+          Thread.yield();
+        }
+        
+      }
+      else {
+        ZLevel zlevel = level.m_RocrailService.m_Model.m_ZLevelList.get(level.Z);
+        zlevel.itemList = level.createLevelList(level.levelView, zlevel);
+        publishProgress(zlevel);
+      }
+      return null;
     }
-    return null;
+  
+    @Override
+    protected void onProgressUpdate(ZLevel...zlevels) {
+      if( level.progressDialog != null ) {
+        level.progressDialog.setProgress(zlevels[0].progressIdx*levelWeight);
+      }
+  
+      level.doLevel(level.levelView, zlevels[0]);
+    }
+  
+    @Override
+    protected void onPostExecute(Void v) {
+      if( level.progressDialog != null ) {
+        level.dismissDialog(ActLevel.PROGRESS_DIALOG);
+      }
+    }
   }
 
-  @Override
-  protected void onProgressUpdate(ZLevel...zlevels) {
-    if( level.progressDialog != null ) {
-      level.progressDialog.setProgress(zlevels[0].progressIdx*levelWeight);
-    }
 
-    level.doLevel(level.levelView, zlevels[0]);
-  }
-
-  @Override
-  protected void onPostExecute(Void v) {
-    if( level.progressDialog != null ) {
-      level.dismissDialog(ActLevel.PROGRESS_DIALOG);
-    }
-  }
 }
-
-
 
