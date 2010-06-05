@@ -104,7 +104,7 @@
   <string name="License">Licentie</string>
   <string name="Version">Versie</string>
   <string name="ThrottleID">Regelaar ID</string>
-  <string name="CreatingModview">Module aanzich samenstellen...</string>
+  <string name="CreatingModview">Module aanzicht samenstellen...</string>
   <string name="LocoProps">Lok eigenschappen</string>
   <string name="Info">Info</string>
   <string name="Actions">Acties</string>

@@ -110,6 +110,6 @@
   <string name="Actions">Akce</string>
   <string name="Turntable">Točna</string>
   <string name="FiddleYard">Skryté nádraží</string>
-  <string name="Swap">Swap</string>
-  <string name="SelectLoco">Select loco</string>
+  <string name="Swap">swap</string>
+  <string name="SelectLoco">Vyber lokomotivu</string>
 </resources>
