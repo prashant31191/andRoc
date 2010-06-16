@@ -142,7 +142,11 @@ public class Switch extends Item implements View.OnClickListener {
       cY = orinr % 2 == 0 ? 2 : 1;
     }
     else if (Type.equals("decoupler")) {
-      ImageName = String.format("decoupler_%d", (orinr % 2 == 0 ? 2 : 1));
+      String st = "off";
+
+      if (State.equals("straight"))
+        st = "on";
+      ImageName = String.format("decoupler_%s_%d", st, (orinr % 2 == 0 ? 2 : 1));
     }
 
     return ImageName;

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Rocrail - Model Railroad Software
+
+ Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-->
+<resources>
+  <string name="Title">Título</string>
+  <string name="Throttle">Acelerador</string>
+  <string name="Locomotives">Locomotoras</string>
+  <string name="Outputs">Salidas</string>
+  <string name="Routes">Rutas</string>
+  <string name="Switches">Desvío</string>
+  <string name="Signals">Señales</string>
+  <string name="Blocks">Bloques</string>
+  <string name="Schedules">Horarios</string>
+  <string name="System">Sistema</string>
+  <string name="Power_ON">Encendido</string>
+  <string name="Power_OFF">Apagado</string>
+  <string name="Init_Field">Init Field</string>
+  <string name="Auto_ON">Automático Encendido</string>
+  <string name="Auto_Start">Autoarranque</string>
+  <string name="Release">RE</string>
+  <string name="none">ninguno</string>
+  <string name="START">ENCENDER</string>
+  <string name="STOP">ALTO</string>
+  <string name="HalfAuto">Half Auto</string>
+  <string name="SetInBlock">Aplicar en el bloque</string>
+  <string name="Normal">Normal</string>
+  <string name="Swapped">Swapped</string>
+  <string name="Placing">Emplazamiento</string>
+  <string name="Automatic">Automático</string>
+  <string name="Settings">Ajustes</string>
+  <string name="Loco">Lomotora</string>
+  <string name="Close">Cerrar</string>
+  <string name="Open">Abrir</string>
+  <string name="Connect">Conectar</string>
+  <string name="Menu">Menú</string>
+  <string name="Layout">Layout</string>
+  <string name="Level">Nivel</string>
+  <string name="Quit">Abandonar</string>
+  <string name="Direction">Dirección</string>
+  <string name="Host">Equipo</string>
+  <string name="Port">Puerto</string>
+  <string name="Start">ST</string>
+  <string name="FunctionGroup">FG</string>
+  <string name="Lights">Luces</string>
+  <string name="Recent">Reciente</string>
+  <string name="Previous">Anterior</string>
+  <string name="Next">Siguiente</string>
+  <string name="Track">Pista</string>
+  <string name="SetLoco">Aplicar Locomotora</string>
+  <string name="ResetLoco">Reset Loco</string>
+  <string name="quit">Abandonar</string>
+  <string name="ReallyQuit">Quit andRoc?</string>
+  <string name="yes">Sí</string>
+  <string name="no">No</string>
+  <string name="start_all_locos">Start all locos in auto mode?</string>
+  <string name="Preferences">Preferencias</string>
+  <string name="Monitoring">System monitoring</string>
+  <string name="Address">Dirección IP</string>
+  <string name="Runtime">Tiempo</string>
+  <string name="KeepScreenOn">Mantener la pantalla encendida</string>
+  <string name="ClearRecent">Limpiar la lista reciente</string>
+  <string name="R2RHost">Dirección R2R</string>
+  <string name="R2RPort">Puerto R2R</string>
+  <string name="Accessory">Accesorio</string>
+  <string name="BackAgainQuit">Presione "Atrás" una vez más para salir</string>
+  <string name="LocoSetup">Configuración de Locomotora</string>
+  <string name="FreeBlock">Liberar Bloque</string>
+  <string name="OpenBlock">Abrir Bloque</string>
+  <string name="CloseBlock">Cerrar Bloque</string>
+  <string name="SelectBlock">Seleccionar Bloque</string>
+  <string name="BlockList">Lista de Bloque</string>
+  <string name="SelectSchedule">Seleccionar Horario</string>
+  <string name="ScheduleList">Listar Horario</string>
+  <string name="Modview">Vista de Modulo</string>
+  <string name="Read">Leer</string>
+  <string name="Write">Escribir</string>
+  <string name="CV">CV</string>
+  <string name="Value">Valor</string>
+  <string name="DeviceID">DeviceID</string>
+  <string name="BlockID">BlockID</string>
+  <string name="Description">Descripción</string>
+  <string name="Roadname">Nombre de Ruta</string>
+  <string name="Vmax">Vmax</string>
+  <string name="Vmid">Vmid</string>
+  <string name="Vmin">Vmin</string>
+  <string name="LoadingPlan">Cargando plan</string>
+  <string name="License">Licencia</string>
+  <string name="Version">Versión</string>
+  <string name="ThrottleID">Throttle ID</string>
+  <string name="CreatingModview">Creando vista de módulo</string>
+  <string name="LocoProps">Propiedades de Locomotora</string>
+  <string name="Info">Información</string>
+  <string name="Actions">Acciones</string>
+  <string name="Turntable">Plataforma giratoria</string>
+  <string name="FiddleYard">Fiddle Yard</string>
+  <string name="Swap">Swap</string>
+  <string name="SelectLoco">Seleccionar Locomotora</string>
+</resources>
