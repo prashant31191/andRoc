@@ -196,6 +196,8 @@ public class Loco {
   public void flipLights() {
     Lights = !Lights;
     setSpeed();
+    rocrailService.sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>",
+        ID, 0, 1, 0, (Lights?"true":"false")) );
   }
   
   public void flipGo() {
