@@ -18,7 +18,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
-<net.rocrail.androc.widgets.LevelCanvas xmlns:android="http://schemas.android.com/apk/res/android"
+<com.rocrail.androc.widgets.LevelCanvas xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="1024px" android:id="@+id/levelView"
   android:background="@drawable/solid_white" android:layout_height="1024px"
   android:padding="0px"/>

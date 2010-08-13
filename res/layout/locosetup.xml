@@ -25,7 +25,7 @@
     android:layout_height="fill_parent">
     <LinearLayout android:layout_width="fill_parent"
       android:layout_height="fill_parent" android:orientation="vertical">
-      <net.rocrail.androc.widgets.LocoImage
+      <com.rocrail.androc.widgets.LocoImage
         android:id="@+id/locoImage" android:layout_width="fill_parent"
         android:clickable="true" android:layout_height="60px"
         android:src="@drawable/noimg" android:padding="5dp" />

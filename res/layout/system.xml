@@ -27,10 +27,10 @@
     android:layout_weight="60" android:orientation="vertical">
     <LinearLayout android:id="@+id/systemLayout1"
       android:layout_width="fill_parent" android:layout_height="0px" android:layout_weight="33">
-      <net.rocrail.androc.widgets.LEDButton android:text="@string/Power_ON" android:textStyle="bold"
+      <com.rocrail.androc.widgets.LEDButton android:text="@string/Power_ON" android:textStyle="bold"
         android:id="@+id/systemPowerON" android:layout_width="0px" android:textSize="20sp"
         android:layout_weight="50" android:layout_height="fill_parent"/>
-      <net.rocrail.androc.widgets.LEDButton android:text="@string/Power_OFF" android:textStyle="bold"
+      <com.rocrail.androc.widgets.LEDButton android:text="@string/Power_OFF" android:textStyle="bold"
         android:id="@+id/systemPowerOFF" android:layout_width="0px" android:textSize="20sp"
         android:layout_weight="50" android:layout_height="fill_parent"/>
     </LinearLayout>
@@ -42,10 +42,10 @@
     </LinearLayout>
     <LinearLayout android:id="@+id/systemLayout1"
       android:layout_width="fill_parent" android:layout_height="0px" android:layout_weight="33">
-      <net.rocrail.androc.widgets.LEDButton android:text="@string/Auto_ON" android:textStyle="bold"
+      <com.rocrail.androc.widgets.LEDButton android:text="@string/Auto_ON" android:textStyle="bold"
         android:id="@+id/systemAutoON" android:layout_width="0px" android:textSize="20sp"
         android:layout_weight="50" android:layout_height="fill_parent"/>
-      <net.rocrail.androc.widgets.LEDButton android:text="@string/Auto_Start" android:textStyle="bold"
+      <com.rocrail.androc.widgets.LEDButton android:text="@string/Auto_Start" android:textStyle="bold"
         android:id="@+id/systemAutoStart" android:layout_width="0px" android:textSize="20sp"
         android:layout_weight="50" android:layout_height="fill_parent"/>
     </LinearLayout>

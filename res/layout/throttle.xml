@@ -22,49 +22,49 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
    android:orientation="vertical">
-      <net.rocrail.androc.widgets.LocoImage android:id="@+id/locoImage" android:layout_width="fill_parent" android:clickable="true"
+      <com.rocrail.androc.widgets.LocoImage android:id="@+id/locoImage" android:layout_width="fill_parent" android:clickable="true"
       android:layout_height="60px" android:src="@drawable/noimg" android:padding="5dp"/>
 				<Spinner android:id="@+id/spinnerLoco" android:textStyle="bold" android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
 				<LinearLayout android:id="@+id/fun1"
 					android:orientation="horizontal" android:layout_width="fill_parent"
           android:layout_height="0px" android:layout_weight="25">
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF1"
+					<com.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF1"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F1" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF2"
+					<com.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF2"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F2" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF3"
+					<com.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF3"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F3" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleGo"
+					<com.rocrail.androc.widgets.LEDButton android:id="@+id/throttleGo"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="@string/Start" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun2"
 					android:orientation="horizontal" android:layout_width="fill_parent"
 					android:layout_height="0px" android:layout_weight="25">
-          <net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF4"
+          <com.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF4"
             android:layout_width="0px" android:layout_weight="25"
             android:layout_height="fill_parent" android:text="F4" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF5"
+					<com.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF5"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F5" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF6"
+					<com.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF6"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="F6" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleRelease"
+					<com.rocrail.androc.widgets.LEDButton android:id="@+id/throttleRelease"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="@string/Release" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun3"
 					android:orientation="horizontal" android:layout_width="fill_parent"
           android:layout_height="0px" android:layout_weight="25">
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleDirection"
+					<com.rocrail.androc.widgets.LEDButton android:id="@+id/throttleDirection"
 						android:layout_width="0px" android:layout_weight="50"
 						android:layout_height="fill_parent" android:text="@string/Direction" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleLights"
+					<com.rocrail.androc.widgets.LEDButton android:id="@+id/throttleLights"
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="@string/Lights" android:textStyle="bold" />
 					<Button android:id="@+id/throttleFn"

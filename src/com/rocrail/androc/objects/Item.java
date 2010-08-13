@@ -183,7 +183,7 @@ class UpdateImage implements Runnable {
       item.imageView.invalidate();
     }
     else {
-      int resId = item.imageView.getContext().getResources().getIdentifier(item.getImageName(item.ModPlan), "raw", "net.rocrail.androc");
+      int resId = item.imageView.getContext().getResources().getIdentifier(item.getImageName(item.ModPlan), "raw", "com.rocrail.androc");
       if( resId != 0 ) {
         item.imageView.setImageResource(resId);
         if( item.Text != null && item.Text.length() > 0 ) {

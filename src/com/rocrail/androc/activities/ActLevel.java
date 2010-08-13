@@ -124,7 +124,7 @@ public class ActLevel extends ActBase {
       LevelItem image = new LevelItem(ActLevel.this, levelView, item );
       String imgname = item.getImageName(ModPlan);
       if( imgname != null ) {
-        int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
+        int resId = getResources().getIdentifier(imgname, "raw", "com.rocrail.androc");
         if( resId != 0 ) {
           image.setImageResource(resId);
         }
