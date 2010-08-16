@@ -273,6 +273,11 @@ public class Loco {
         String.format("<lc id=\"%s\" cmd=\"swap\"/>", ID ) );
   }
   
+  public void Dispatch() {
+    rocrailService.sendMessage("lc",
+        String.format("<lc id=\"%s\" cmd=\"dispatch\"/>", ID ) );
+  }
+  
 }
 
 class UpdateLocoImage implements Runnable {

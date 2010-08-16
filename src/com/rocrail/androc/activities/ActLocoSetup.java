@@ -133,6 +133,17 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
     
 
 
+    Button Dispatch = (Button) findViewById(R.id.locoDispatch);
+    Dispatch.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          if( m_Loco != null ) {
+            m_Loco.Dispatch();
+          }
+        }
+    });
+    
+
+
   }
   
   

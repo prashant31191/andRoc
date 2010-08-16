@@ -100,6 +100,14 @@
           android:layout_height="60dp" android:layout_width="0px"
           android:layout_weight="50" />
       </LinearLayout>
+      <LinearLayout android:id="@+id/locoLayout10"
+        android:orientation="horizontal" android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/locoDispatch" android:text="@string/Dispatch"
+          android:textSize="20sp" android:paddingLeft="5px"
+          android:layout_height="60dp" android:layout_width="0px"
+          android:layout_weight="100" />
+      </LinearLayout>
 
     </LinearLayout>
   </ScrollView>
