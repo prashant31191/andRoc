@@ -31,6 +31,7 @@ public class Block extends Item implements View.OnClickListener {
   boolean Small    = false;
   public String LocoID = "-";
   public boolean Closed = false;
+  public boolean Accept = false;
   
   public Block(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
@@ -53,6 +54,8 @@ public class Block extends Item implements View.OnClickListener {
         colorName = Item.COLOR_RESERVED;
       else if( Entering ) 
         colorName = Item.COLOR_ENTER;
+      else if( Accept ) 
+        colorName = Item.COLOR_ACCEPTIDENT;
       else 
         colorName = Item.COLOR_OCCUPIED;
     }
@@ -101,6 +104,7 @@ public class Block extends Item implements View.OnClickListener {
     Reserved = Item.getAttrValue(atts, "reserved", false); 
     Entering = Item.getAttrValue(atts, "entering", false); 
     State    = Item.getAttrValue(atts, "state", State); 
+    Accept   = Item.getAttrValue(atts, "acceptident", Accept); 
     Closed   = State.equals("closed");
     updateTextColor();
     super.updateWithAttributes(atts);
@@ -111,6 +115,11 @@ public class Block extends Item implements View.OnClickListener {
     Closed = !Closed;
     m_RocrailService.sendMessage("bk", String.format( "<bk id=\"%s\" state=\"%s\"/>", 
         ID, Closed?"closed":"open" ) );
+  }
+  
+  public void AcceptIdent() {
+    m_RocrailService.sendMessage("bk", String.format( "<bk id=\"%s\" acceptident=\"%s\"/>", 
+        ID, "true" ) );
   }
   
   public void onClick(View v) {

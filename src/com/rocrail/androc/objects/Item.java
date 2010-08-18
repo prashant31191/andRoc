@@ -67,6 +67,7 @@ public class Item implements View.OnClickListener {
   public static final int COLOR_RESERVED = 3;
   public static final int COLOR_ENTER    = 4;
   public static final int COLOR_OCCUPIED = 5;
+  public static final int COLOR_ACCEPTIDENT = 6;
 
 
   public Item(RocrailService rocrailService, Attributes atts) {

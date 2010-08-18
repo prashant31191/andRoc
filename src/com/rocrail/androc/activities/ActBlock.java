@@ -160,6 +160,15 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
         }
     });
 
+    final Button acceptIdentBlock = (Button) findViewById(R.id.blockAcceptIdent);
+    acceptIdentBlock.setText(getText(R.string.AcceptIdent));
+    acceptIdentBlock.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          m_Block.AcceptIdent();
+        }
+    });
+
+
 
  
   }

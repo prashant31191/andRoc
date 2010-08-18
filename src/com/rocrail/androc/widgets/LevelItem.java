@@ -77,6 +77,9 @@ public class LevelItem extends ImageView implements OnGestureListener {
       case Item.COLOR_CLOSED:
         paint.setColor(Color.rgb(200, 200, 200));
         break;
+      case Item.COLOR_ACCEPTIDENT:
+        paint.setColor(Color.rgb(200, 255, 200));
+        break;
       }
       canvas.drawRect(8, 8, item.cX*32-8, item.cY*32-8, paint);
     }
