@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  Rocrail - Model Railroad Software
 
  Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
@@ -17,9 +16,21 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
--->
-<net.rocrail.androc.widgets.LevelCanvas xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="1024px" android:id="@+id/levelView"
-  android:background="@drawable/solid_white" android:layout_height="1024px"
-  android:padding="0px"/>
+*/
+package net.rocrail.androc.interfaces;
 
+public interface ModelListener {
+  public static int MODELLIST_PLAN_START = 100;
+  public static int MODELLIST_PLAN = 0;
+  public static int MODELLIST_LC = 1;
+  public static int MODELLIST_TK = 2;
+  public static int MODELLIST_BK = 3;
+  public static int MODELLIST_FB = 4;
+  public static int MODELLIST_ST = 5;
+  public static int MODELLIST_SC = 6;
+  public static int MODELLIST_SW = 7;
+  public static int MODELLIST_SG = 8;
+  public static int MODELLIST_CO = 9;
+  public void modelListLoaded(int MODELLIST);
+  public void modelUpdate(int MODELLIST, String ID);
+}

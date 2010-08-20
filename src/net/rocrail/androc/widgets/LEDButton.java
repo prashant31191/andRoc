@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  Rocrail - Model Railroad Software
 
  Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
@@ -17,9 +16,36 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
--->
-<net.rocrail.androc.widgets.LevelCanvas xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="1024px" android:id="@+id/levelView"
-  android:background="@drawable/solid_white" android:layout_height="1024px"
-  android:padding="0px"/>
+*/
+package net.rocrail.androc.widgets;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.widget.Button;
+
+public class LEDButton extends Button {
+  public boolean ON = true;
+
+  public LEDButton(Context context) {
+    super(context);
+  }
+  public LEDButton(Context context, AttributeSet attrs) {
+    super(context, attrs);
+  }
+  
+  protected void  onDraw  (Canvas canvas) {
+    super.onDraw(canvas);
+    if( ON ) {
+      Paint paint = new Paint();
+      paint.setAntiAlias(true);
+      paint.setColor(Color.GRAY);
+      canvas.drawCircle(15, 12, 6, paint);
+      paint.setColor(Color.YELLOW);
+      canvas.drawCircle(15, 12, 4, paint);
+    }
+  }
+
+}

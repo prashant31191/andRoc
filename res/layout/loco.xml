@@ -27,7 +27,7 @@
       android:orientation="vertical" android:layout_height="fill_parent">
 
 
-      <com.rocrail.androc.widgets.LocoImage
+      <net.rocrail.androc.widgets.LocoImage
         android:id="@+id/locoImage" android:layout_width="fill_parent"
         android:clickable="true" android:layout_height="60px"
         android:src="@drawable/noimg" android:padding="5dp" />
@@ -50,11 +50,11 @@
         android:layout_height="wrap_content">
         <LinearLayout android:id="@+id/locoLayout2"
           android:layout_width="fill_parent" android:layout_height="wrap_content">
-          <com.rocrail.androc.widgets.LEDButton
+          <net.rocrail.androc.widgets.LEDButton
             android:text="@string/START" android:textStyle="bold"
             android:id="@+id/locoStart" android:layout_width="0px"
             android:layout_weight="50" android:layout_height="60dp" />
-          <com.rocrail.androc.widgets.LEDButton
+          <net.rocrail.androc.widgets.LEDButton
             android:text="@string/HalfAuto" android:textStyle="bold"
             android:id="@+id/locoHalfAuto" android:layout_width="0px"
             android:layout_weight="50" android:layout_height="60dp" />
@@ -75,7 +75,7 @@
             <Button android:text="@string/SetInBlock"
               android:textStyle="bold" android:id="@+id/locoSetInBlock"
               android:layout_width="0px" android:layout_height="60dp" android:layout_weight="50"/>
-            <com.rocrail.androc.widgets.LEDButton android:text="@string/Swap"
+            <net.rocrail.androc.widgets.LEDButton android:text="@string/Swap"
               android:textStyle="bold" android:id="@+id/locoSwap"
               android:layout_width="0px" android:layout_height="60dp" android:layout_weight="50"/>
           </LinearLayout>

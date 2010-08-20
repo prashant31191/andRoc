@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  Rocrail - Model Railroad Software
 
  Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
@@ -17,9 +16,23 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
--->
-<net.rocrail.androc.widgets.LevelCanvas xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="1024px" android:id="@+id/levelView"
-  android:background="@drawable/solid_white" android:layout_height="1024px"
-  android:padding="0px"/>
+*/
+package net.rocrail.androc.objects;
 
+import java.util.List;
+
+public class ZLevel {
+  public String Title = "";
+  public int Z = 0;
+  public int X = 0;
+  public int Y = 0;
+  public int cX = 0;
+  public int cY = 0;
+  public int progressIdx = 0;
+  public String ModID = "";
+  public List<Item> itemList = null;
+  public ZLevel( String title, int z ) {
+    Title = title;
+    Z = z;
+  }
+}
