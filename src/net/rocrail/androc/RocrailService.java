@@ -78,10 +78,15 @@ public class RocrailService extends Service {
     Prefs.restore();
     
     TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-    if(tm.getLine1Number()!=null)
-      m_DeviceId = tm.getLine1Number();
-    else
-      m_DeviceId = tm.getDeviceId();
+    if( tm != null ) {
+      if(tm.getLine1Number()!=null)
+        m_DeviceId = tm.getLine1Number();
+      else
+        m_DeviceId = tm.getDeviceId();
+    }
+    else {
+      m_DeviceId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
+    }
     
   }
 
