@@ -46,6 +46,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 public class RocrailService extends Service {
@@ -77,6 +78,7 @@ public class RocrailService extends Service {
     Prefs = new Preferences(this);
     Prefs.restore();
     
+    /*
     TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
     if( tm != null ) {
       if(tm.getLine1Number()!=null)
@@ -84,9 +86,8 @@ public class RocrailService extends Service {
       else
         m_DeviceId = tm.getDeviceId();
     }
-    else {
-      m_DeviceId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
-    }
+    */
+    m_DeviceId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
     
   }
 
