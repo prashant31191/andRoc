@@ -21,7 +21,7 @@
 <resources>
   <string name="Title">Naam</string>
   <string name="Throttle">Handbediening</string>
-  <string name="Locomotives">Loc\'s</string>
+  <string name="Locomotives">Loc's</string>
   <string name="Outputs">Uitgangen</string>
   <string name="Routes">Rijwegen</string>
   <string name="Switches">Wissels</string>
@@ -112,4 +112,6 @@
   <string name="FiddleYard">Fiddle Yard</string>
   <string name="Swap">Omkeren</string>
   <string name="SelectLoco">Kies Lok</string>
+  <string name="Dispatch">Dispatch</string>
+  <string name="AcceptIdent">Accept BiDi Ident</string>
 </resources>

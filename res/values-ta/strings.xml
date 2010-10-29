@@ -112,4 +112,6 @@
   <string name="FiddleYard">Fiddle Yard</string>
   <string name="Swap">இடமாற்று</string>
   <string name="SelectLoco">Select loco</string>
+  <string name="Dispatch">Dispatch</string>
+  <string name="AcceptIdent">Accept BiDi Ident</string>
 </resources>

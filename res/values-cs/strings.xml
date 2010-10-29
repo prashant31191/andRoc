@@ -112,4 +112,6 @@
   <string name="FiddleYard">Skryté nádraží</string>
   <string name="Swap">swap</string>
   <string name="SelectLoco">Vyber lokomotivu</string>
+  <string name="Dispatch">Dispatch</string>
+  <string name="AcceptIdent">Accept BiDi Ident</string>
 </resources>
