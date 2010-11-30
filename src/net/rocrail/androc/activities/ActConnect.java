@@ -126,7 +126,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           {
             int total = msg.getData().getInt("total");
             progressDialog.setProgress(total);
-            if (total >= 100){
+            if (total >= 100 && progressDialog != null && progressDialog.isShowing() ){
                 dismissDialog(PROGRESS_DIALOG);
                 m_RocrailService.Prefs.saveConnection();
             }
