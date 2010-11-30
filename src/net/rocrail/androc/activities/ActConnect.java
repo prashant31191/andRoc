@@ -121,12 +121,18 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
   // Define the Handler that receives messages from the thread and update the progress
   final Handler handler = new Handler() {
       public void handleMessage(Message msg) {
-          int total = msg.getData().getInt("total");
-          progressDialog.setProgress(total);
-          if (total >= 100){
-              dismissDialog(PROGRESS_DIALOG);
-              m_RocrailService.Prefs.saveConnection();
+        switch (msg.what) {
+          case PROGRESS_DIALOG:
+          {
+            int total = msg.getData().getInt("total");
+            progressDialog.setProgress(total);
+            if (total >= 100){
+                dismissDialog(PROGRESS_DIALOG);
+                m_RocrailService.Prefs.saveConnection();
+            }
           }
+          break;
+        }
       }
   };
 
