@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Rocrail - Model Railroad Software
+
+ Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-->
+<resources>
+  <string name="Title">Titel</string>
+  <string name="Throttle">Halvautomatik</string>
+  <string name="Locomotives">Lok</string>
+  <string name="Outputs">Utgångar</string>
+  <string name="Routes">Tågväg</string>
+  <string name="Switches">Växlar</string>
+  <string name="Signals">Signaler</string>
+  <string name="Blocks">Block</string>
+  <string name="Schedules">Tidtabell</string>
+  <string name="System">System</string>
+  <string name="Power_ON">Ström PÅ</string>
+  <string name="Power_OFF">Ström AV</string>
+  <string name="Init_Field">Init Field</string>
+  <string name="Auto_ON">Auto PÅ</string>
+  <string name="Auto_Start">Auto startad</string>
+  <string name="Release">Åter</string>
+  <string name="none">ingen</string>
+  <string name="START">STARTA</string>
+  <string name="STOP">STOPP</string>
+  <string name="HalfAuto">Halv Autoläge</string>
+  <string name="SetInBlock">Sätta in block</string>
+  <string name="Normal">Normal</string>
+  <string name="Swapped">Bytte</string>
+  <string name="Placing">Plats</string>
+  <string name="Automatic">Automatisk</string>
+  <string name="Settings">Inställningar</string>
+  <string name="Loco">Lok</string>
+  <string name="Close">Stäng</string>
+  <string name="Open">Öppna</string>
+  <string name="Connect">Ansluta</string>
+  <string name="Menu">Meny</string>
+  <string name="Layout">Spårplan</string>
+  <string name="Level">Nivå</string>
+  <string name="Quit">Avsluta</string>
+  <string name="Direction">Riktning</string>
+  <string name="Host">Värd</string>
+  <string name="Port">Port</string>
+  <string name="Start">ST</string>
+  <string name="FunctionGroup">FG</string>
+  <string name="Lights">Belysning</string>
+  <string name="Recent">Senaste</string>
+  <string name="Previous">Föregående</string>
+  <string name="Next">Nästa</string>
+  <string name="Track">Spår</string>
+  <string name="SetLoco">Välj Lok</string>
+  <string name="ResetLoco">Frigör Lok</string>
+  <string name="quit">Avsluta</string>
+  <string name="ReallyQuit">Avsluta andRoc?</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nej</string>
+  <string name="start_all_locos">Starta alla loken i autoläge?</string>
+  <string name="Preferences">Inställningar</string>
+  <string name="Monitoring">Systemövervakning</string>
+  <string name="Address">Adress</string>
+  <string name="Runtime">Driftstid</string>
+  <string name="KeepScreenOn">Håll skärmen igång</string>
+  <string name="ClearRecent">Töm senaste lista</string>
+  <string name="R2RHost">R2R Adress</string>
+  <string name="R2RPort">R2R Port</string>
+  <string name="Accessory">Tillbehör</string>
+  <string name="BackAgainQuit">Tryck på Tillbaka engång till för att avsluta.</string>
+  <string name="LocoSetup">Lok uppsättning</string>
+  <string name="FreeBlock">Ledigt block</string>
+  <string name="OpenBlock">Öppna block</string>
+  <string name="CloseBlock">Stäng block</string>
+  <string name="SelectBlock">Välj block</string>
+  <string name="BlockList">Block lista</string>
+  <string name="SelectSchedule">Välj schema</string>
+  <string name="ScheduleList">Schedule list</string>
+  <string name="Modview">Modul översikt</string>
+  <string name="Read">Läs</string>
+  <string name="Write">Skriv</string>
+  <string name="CV">CV</string>
+  <string name="Value">Värde</string>
+  <string name="DeviceID">Apparat ID</string>
+  <string name="BlockID">Block ID</string>
+  <string name="Description">Beskrivning</string>
+  <string name="Roadname">Väg namn</string>
+  <string name="Vmax">Vmax</string>
+  <string name="Vmid">Vmid</string>
+  <string name="Vmin">Vmin</string>
+  <string name="LoadingPlan">Laddar inställningar</string>
+  <string name="License">Licens</string>
+  <string name="Version">Version</string>
+  <string name="ThrottleID">Throttle ID</string>
+  <string name="CreatingModview">Skapa modul översikt</string>
+  <string name="LocoProps">Lokets egenskaper</string>
+  <string name="Info">Information</string>
+  <string name="Actions">Aktiviteter</string>
+  <string name="Turntable">Vändskiva</string>
+  <string name="FiddleYard">Fiddle Yard</string>
+  <string name="Swap">Byta</string>
+  <string name="SelectLoco">Välj lok</string>
+  <string name="Dispatch">Dispatch</string>
+  <string name="AcceptIdent">Accept BiDi Ident</string>
+</resources>

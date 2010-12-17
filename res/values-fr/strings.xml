@@ -27,7 +27,7 @@
   <string name="Switches">Aiguillages</string>
   <string name="Signals">Signaux</string>
   <string name="Blocks">Blocs</string>
-  <string name="Schedules">Horaires</string>
+  <string name="Schedules">Trajet et horaires</string>
   <string name="System">Système</string>
   <string name="Power_ON">Allumer</string>
   <string name="Power_OFF">Éteindre</string>
