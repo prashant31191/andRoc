@@ -273,7 +273,8 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     });
 
     LEDButton Go = (LEDButton) findViewById(R.id.throttleGo);
-    Go.ON = m_Loco.AutoStart;
+    if( m_Loco != null )
+      Go.ON = m_Loco.AutoStart;
     Go.setEnabled(m_RocrailService.AutoMode);
     Go.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
