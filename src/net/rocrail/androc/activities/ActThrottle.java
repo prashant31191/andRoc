@@ -64,8 +64,9 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     super.connectedWithService();
     initView();
     updateTitle();
-    if( !m_RocrailService.m_Model.m_bDonKey ) {
+    if( !m_RocrailService.m_Model.m_bDonKey && !m_RocrailService.m_bDidShowDonate ) {
       showDonate();
+      m_RocrailService.m_bDidShowDonate = true;
     }
   }
   
