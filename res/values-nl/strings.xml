@@ -21,7 +21,7 @@
 <resources>
   <string name="Title">Naam</string>
   <string name="Throttle">Handbediening</string>
-  <string name="Locomotives">Loc's</string>
+  <string name="Locomotives">Loc\'s</string>
   <string name="Outputs">Uitgangen</string>
   <string name="Routes">Rijwegen</string>
   <string name="Switches">Wissels</string>

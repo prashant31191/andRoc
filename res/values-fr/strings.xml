@@ -73,8 +73,8 @@
   <string name="Preferences">Préférences</string>
   <string name="Monitoring">Surveillance système</string>
   <string name="Address">Adresse</string>
-  <string name="Runtime">Durée d'exécution</string>
-  <string name="KeepScreenOn">Conserver l'écran</string>
+  <string name="Runtime">Durée d\'exécution</string>
+  <string name="KeepScreenOn">Conserver l\'écran</string>
   <string name="ClearRecent">Effacer la liste des récents</string>
   <string name="R2RHost">Adresse R2R</string>
   <string name="R2RPort">Port R2R</string>
@@ -86,7 +86,7 @@
   <string name="CloseBlock">Bloc fermé</string>
   <string name="SelectBlock">Sélectionner le bloc</string>
   <string name="BlockList">Liste des blocs</string>
-  <string name="SelectSchedule">Sélectionner l'horaire</string>
+  <string name="SelectSchedule">Sélectionner l\'horaire</string>
   <string name="ScheduleList">Liste des horaires</string>
   <string name="Modview">Vue module</string>
   <string name="Read">Lire</string>
