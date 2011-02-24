@@ -203,10 +203,16 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           EditText s = (EditText) findViewById(R.id.connectHost);
           m_RocrailService.Prefs.Host = s.getText().toString();
           s = (EditText) findViewById(R.id.connectPort);
-          m_RocrailService.Prefs.Port = Integer.parseInt(s.getText().toString());
-          RRConnection.addToList(m_RocrailService.Prefs.Title, m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port, m_RocrailService.Prefs.conList);
-          
-          doConnect(m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port);
+          try {
+            m_RocrailService.Prefs.Port = Integer.parseInt(s.getText().toString());
+            RRConnection.addToList(m_RocrailService.Prefs.Title, m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port, m_RocrailService.Prefs.conList);
+            
+            doConnect(m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port);
+          }
+          catch(Exception e) {
+            // port not a number
+            v.setEnabled(true);
+          }
           
         }
     });
