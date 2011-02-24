@@ -114,4 +114,5 @@
   <string name="SelectLoco">Kies Lok</string>
   <string name="Dispatch">Dispatch</string>
   <string name="AcceptIdent">Accept BiDi Ident</string>
+  <string name="EmergencyStop">Nood stop</string>
 </resources>

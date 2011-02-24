@@ -114,4 +114,5 @@
   <string name="SelectLoco">Select loco</string>
   <string name="Dispatch">Dispatch</string>
   <string name="AcceptIdent">Accept BiDi Ident</string>
+  <string name="EmergencyStop">Emergency stop</string>
 </resources>

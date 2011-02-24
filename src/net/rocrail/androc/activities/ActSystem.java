@@ -117,6 +117,13 @@ public class ActSystem extends ActBase implements MessageListener {
         }
     });
     
+    final Button eBreak = (Button) findViewById(R.id.systemEmergencyStop);
+    eBreak.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\"/>");
+        }
+    });
+    
     final LEDButton autoON = (LEDButton) findViewById(R.id.systemAutoON);
     autoON.ON = m_RocrailService.AutoMode;
     autoON.setOnClickListener(new View.OnClickListener() {

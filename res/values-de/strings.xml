@@ -114,4 +114,5 @@
   <string name="SelectLoco">Lok auswählen</string>
   <string name="Dispatch">Dispatch</string>
   <string name="AcceptIdent">Accept BiDi Ident</string>
+  <string name="EmergencyStop">Not Halt</string>
 </resources>
