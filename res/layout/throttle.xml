@@ -71,7 +71,7 @@
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="@string/FunctionGroup" android:textStyle="bold" />
 				</LinearLayout>
-				<SeekBar android:id="@+id/SeekBarSpeed" android:max="100"
+				      <net.rocrail.android.widgets.Slider android:id="@+id/SeekBarSpeed" android:max="100"
 					android:progress="0" android:layout_width="fill_parent"
           android:layout_height="0px" android:layout_weight="25" android:paddingLeft="20px" android:paddingRight="20px"/>
 </LinearLayout>

@@ -42,8 +42,12 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.rocrail.androc.R;
+import net.rocrail.android.widgets.Slider;
+import net.rocrail.android.widgets.Slider;
 
-public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener {
+public class ActThrottle extends ActBase 
+  implements ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener, net.rocrail.android.widgets.SliderListener 
+{
   int         m_iFunctionGroup = 0;
   int         m_iLocoCount     = 0;
   final static int FNGROUPSIZE = 6;
@@ -175,8 +179,9 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
     
     findLoco();
     
-    SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
-    mSeekBar.setOnSeekBarChangeListener(this);
+    Slider mSeekBar = (Slider)findViewById(R.id.SeekBarSpeed);
+    //mSeekBar.setOnSeekBarChangeListener(this);
+    mSeekBar.addListener(this);
     
     Button Lights = (Button) findViewById(R.id.throttleLights);
     Lights.setOnClickListener(new View.OnClickListener() {
@@ -307,8 +312,9 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
             m_Loco.flipDir();
             ((LEDButton)v).ON = m_Loco.Dir;
             v.invalidate();
-            SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
-            mSeekBar.setProgress(m_Loco.Speed);
+            Slider mSeekBar = (Slider)findViewById(R.id.SeekBarSpeed);
+            //mSeekBar.setProgress(m_Loco.Speed);
+            mSeekBar.setV(m_Loco.Speed);
           }
         }
     });
@@ -408,8 +414,9 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
         image.setImageResource(R.drawable.noimg);
       }
 
-      SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
-      mSeekBar.setProgress(m_Loco.Speed);
+      Slider mSeekBar = (Slider)findViewById(R.id.SeekBarSpeed);
+      //mSeekBar.setProgress(m_Loco.Speed);
+      mSeekBar.setV(m_Loco.Speed);
 
     }
   }
@@ -474,13 +481,21 @@ public class ActThrottle extends ActBase implements ModelListener, SeekBar.OnSee
         bar.post(new Runnable() {
           public void run() {
             ActThrottle.this.updateFunctions();
-            SeekBar mSeekBar = (SeekBar)findViewById(R.id.SeekBarSpeed);
+            Slider mSeekBar = (Slider)findViewById(R.id.SeekBarSpeed);
             if( !mSeekBar.isPressed() )
-              mSeekBar.setProgress(m_Loco.Speed);
+              mSeekBar.setV(m_Loco.Speed);
           }
         });
       }
     }
+  }
+
+
+  @Override
+  public void onSliderChange(Slider slider, int V) {
+    quitShowed = false;
+    if( m_Loco != null )
+      m_Loco.setSpeed(V, false);
   }
 
 
