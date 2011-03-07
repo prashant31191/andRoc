@@ -89,6 +89,9 @@ public class RocrailService extends Service {
     }
     */
     m_DeviceId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
+    if( m_DeviceId == null ) {
+      m_DeviceId = "unknown";
+    }
     
   }
 

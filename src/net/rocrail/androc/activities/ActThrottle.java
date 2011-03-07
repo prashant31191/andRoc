@@ -37,16 +37,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SeekBar;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.rocrail.androc.R;
 import net.rocrail.android.widgets.Slider;
-import net.rocrail.android.widgets.Slider;
 
 public class ActThrottle extends ActBase 
-  implements ModelListener, SeekBar.OnSeekBarChangeListener, AdapterView.OnItemSelectedListener, net.rocrail.android.widgets.SliderListener 
+  implements ModelListener, AdapterView.OnItemSelectedListener, net.rocrail.android.widgets.SliderListener 
 {
   int         m_iFunctionGroup = 0;
   int         m_iLocoCount     = 0;
@@ -179,11 +177,11 @@ public class ActThrottle extends ActBase
     
     findLoco();
     
-    Slider mSeekBar = (Slider)findViewById(R.id.SeekBarSpeed);
+    Slider mSeekBar = (Slider)findViewById(R.id.Speed);
     //mSeekBar.setOnSeekBarChangeListener(this);
     mSeekBar.addListener(this);
     
-    Button Lights = (Button) findViewById(R.id.throttleLights);
+    LEDButton Lights = (LEDButton) findViewById(R.id.throttleLights);
     Lights.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -195,7 +193,7 @@ public class ActThrottle extends ActBase
         }
     });
 
-    Button fn = (Button) findViewById(R.id.throttleFn);
+    LEDButton fn = (LEDButton) findViewById(R.id.throttleFn);
     fn.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -218,7 +216,7 @@ public class ActThrottle extends ActBase
         }
     });
 
-    Button f2 = (Button) findViewById(R.id.throttleF2);
+    LEDButton f2 = (LEDButton) findViewById(R.id.throttleF2);
     f2.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -230,7 +228,7 @@ public class ActThrottle extends ActBase
         }
     });
 
-    Button f3 = (Button) findViewById(R.id.throttleF3);
+    LEDButton f3 = (LEDButton) findViewById(R.id.throttleF3);
     f3.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -242,7 +240,7 @@ public class ActThrottle extends ActBase
         }
     });
 
-    Button f4 = (Button) findViewById(R.id.throttleF4);
+    LEDButton f4 = (LEDButton) findViewById(R.id.throttleF4);
     f4.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -254,7 +252,7 @@ public class ActThrottle extends ActBase
         }
     });
 
-    Button f5 = (Button) findViewById(R.id.throttleF5);
+    LEDButton f5 = (LEDButton) findViewById(R.id.throttleF5);
     f5.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -266,7 +264,7 @@ public class ActThrottle extends ActBase
         }
     });
 
-    Button f6 = (Button) findViewById(R.id.throttleF6);
+    LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
     f6.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -293,7 +291,7 @@ public class ActThrottle extends ActBase
         }
     });
 
-    Button Release = (Button) findViewById(R.id.throttleRelease);
+    LEDButton Release = (LEDButton) findViewById(R.id.throttleRelease);
     Release.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -304,7 +302,7 @@ public class ActThrottle extends ActBase
         }
     });
 
-    Button Dir = (Button) findViewById(R.id.throttleDirection);
+    LEDButton Dir = (LEDButton) findViewById(R.id.throttleDirection);
     Dir.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           if( m_Loco != null ) {
@@ -312,7 +310,7 @@ public class ActThrottle extends ActBase
             m_Loco.flipDir();
             ((LEDButton)v).ON = m_Loco.Dir;
             v.invalidate();
-            Slider mSeekBar = (Slider)findViewById(R.id.SeekBarSpeed);
+            Slider mSeekBar = (Slider)findViewById(R.id.Speed);
             //mSeekBar.setProgress(m_Loco.Speed);
             mSeekBar.setV(m_Loco.Speed);
           }
@@ -363,7 +361,7 @@ public class ActThrottle extends ActBase
       }
     }
   }
-
+/*
   @Override
   public void onProgressChanged(SeekBar seekbar, int progress, boolean fromTouch) {
     quitShowed = false;
@@ -383,7 +381,7 @@ public class ActThrottle extends ActBase
     if( m_Loco != null )
       m_Loco.setSpeed(seekbar.getProgress(), true);
   }
-
+*/
   protected void  onResume() {
     super.onResume();
     quitShowed = false;
@@ -414,7 +412,7 @@ public class ActThrottle extends ActBase
         image.setImageResource(R.drawable.noimg);
       }
 
-      Slider mSeekBar = (Slider)findViewById(R.id.SeekBarSpeed);
+      Slider mSeekBar = (Slider)findViewById(R.id.Speed);
       //mSeekBar.setProgress(m_Loco.Speed);
       mSeekBar.setV(m_Loco.Speed);
 
@@ -476,12 +474,12 @@ public class ActThrottle extends ActBase
   @Override
   public void modelUpdate(int MODELLIST, String ID) {
     if( MODELLIST == ModelListener.MODELLIST_LC && m_Loco != null && m_Loco.ID == ID ) {
-      SeekBar bar = (SeekBar)findViewById(R.id.SeekBarSpeed);
+      Slider bar = (Slider)findViewById(R.id.Speed);
       if( bar != null ) {
         bar.post(new Runnable() {
           public void run() {
             ActThrottle.this.updateFunctions();
-            Slider mSeekBar = (Slider)findViewById(R.id.SeekBarSpeed);
+            Slider mSeekBar = (Slider)findViewById(R.id.Speed);
             if( !mSeekBar.isPressed() )
               mSeekBar.setV(m_Loco.Speed);
           }

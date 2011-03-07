@@ -27,7 +27,7 @@ import android.util.AttributeSet;
 import android.widget.Button;
 
 public class LEDButton extends Button {
-  public boolean ON = true;
+  public boolean ON = false;
 
   public LEDButton(Context context) {
     super(context);
