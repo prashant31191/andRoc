@@ -29,6 +29,7 @@ import android.view.View;
 
 public class Switch extends Item implements View.OnClickListener {
   boolean Dir = false;
+  boolean RectCrossing = true;
   int AccNr = 0;
   String SWType = "";
   boolean Raster = false;
@@ -36,6 +37,7 @@ public class Switch extends Item implements View.OnClickListener {
   public Switch( RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
     Dir   = Item.getAttrValue(atts, "dir", false );
+    RectCrossing = Item.getAttrValue(atts, "rectcrossing", true );
     AccNr = Item.getAttrValue(atts, "accnr", 1 );
     SWType = Item.getAttrValue(atts, "swtype", "default" );
     Raster = SWType.equals("raster");
@@ -125,18 +127,23 @@ public class Switch extends Item implements View.OnClickListener {
       cY = orinr % 2 == 0 ? 2 : 1;
     }
     else if (Type.equals("crossing")) {
-      char st = 's';
+      if( RectCrossing ) {
+		    ImageName = "cross";
+      }
+      else {
+		    char st = 's';
 
-      if (State.equals("straight"))
-        st = 's';
-      else if (State.equals("turnout"))
-        st = 't';
+		    if (State.equals("straight"))
+		      st = 's';
+		    else if (State.equals("turnout"))
+		      st = 't';
 
-      ImageName = String.format("crossing%s_%c_%d", (Dir ? "left" : "right"),
-          st, orinr);
+		    ImageName = String.format("crossing%s_%c_%d", (Dir ? "left" : "right"),
+		        st, orinr);
 
-      cX = orinr % 2 == 0 ? 1 : 2;
-      cY = orinr % 2 == 0 ? 2 : 1;
+		    cX = orinr % 2 == 0 ? 1 : 2;
+		    cY = orinr % 2 == 0 ? 2 : 1;
+      }
     }
     else if (Type.equals("ccrossing")) {
       ImageName = String.format("ccrossing_%d", (orinr % 2 == 0 ? 2 : 1));
