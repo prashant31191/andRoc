@@ -19,6 +19,7 @@
 */
 package net.rocrail.androc.activities;
 
+import java.util.Comparator;
 import java.util.Iterator;
 
 import net.rocrail.androc.interfaces.ModelListener;
@@ -144,6 +145,13 @@ public class ActThrottle extends ActBase
   }
   
 
+  class LocoComparator implements Comparator<String> {
+    @Override
+    public int compare(String loco1, String loco2) {
+      return loco1.toLowerCase().compareTo(loco2.toLowerCase());
+    }
+  }
+  
   public void initView() {
     m_iLocoCount = 0;
     String LocoID = "";
@@ -170,6 +178,8 @@ public class ActThrottle extends ActBase
       }
       m_iLocoCount++;
     }
+    
+    m_adapterForSpinner.sort(new LocoComparator());
     
     s.setOnItemSelectedListener(this);
     if( m_iLocoCount > 0 && iSelectedLoco < m_iLocoCount)
