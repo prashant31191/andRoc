@@ -173,14 +173,14 @@ public class ActThrottle extends ActBase
     while( it.hasNext() ) {
       Loco loco = it.next();
       m_adapterForSpinner.add(loco.toString());
-      if( LocoID.length() > 0 && LocoID.equals(loco.toString()) ) {
-        iSelectedLoco = m_iLocoCount;
-      }
       m_iLocoCount++;
     }
     
     m_adapterForSpinner.sort(new LocoComparator());
-    
+    if( LocoID != null && LocoID.length() > 0 ) {
+      iSelectedLoco = m_adapterForSpinner.getPosition(LocoID);
+    }
+
     s.setOnItemSelectedListener(this);
     if( m_iLocoCount > 0 && iSelectedLoco < m_iLocoCount)
       s.setSelection(iSelectedLoco);    

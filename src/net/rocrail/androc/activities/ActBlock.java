@@ -20,6 +20,7 @@
 
 package net.rocrail.androc.activities;
 
+import java.util.Comparator;
 import java.util.Iterator;
 
 import net.rocrail.androc.objects.Block;
@@ -80,6 +81,13 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
   }
 
 
+  class LocoComparator implements Comparator<String> {
+    @Override
+    public int compare(String loco1, String loco2) {
+      return loco1.toLowerCase().compareTo(loco2.toLowerCase());
+    }
+  }
+  
   public void initView() {
     setContentView(R.layout.block);
     
@@ -103,22 +111,19 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
 
-    int idx = 0;
-    int select = 0;
     m_adapterForSpinner.add(getText(R.string.FreeBlock).toString());
-    idx++;
     Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
       m_adapterForSpinner.add(loco.ID);
-      if( LocoID != null && LocoID.equals(loco.ID)) {
-        select = idx;
-      }
-      idx++;
     }
-    s.setSelection(select);
-    s.setOnItemSelectedListener(this);
     
+    m_adapterForSpinner.sort(new LocoComparator());
+    if( LocoID != null ) {
+      int select = m_adapterForSpinner.getPosition(LocoID);
+      s.setSelection(select);
+    }
+    s.setOnItemSelectedListener(this);
 
     updateLoco();
     LocoImage image = (LocoImage)findViewById(R.id.blockLocoImage);
