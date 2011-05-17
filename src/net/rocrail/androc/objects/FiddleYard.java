@@ -33,14 +33,14 @@ import android.graphics.RectF;
 import android.view.View;
 
 public class FiddleYard extends Item  {
-  public int NrTracks = 3;
+  public int NrTracks = 12;
   int Occupied = 0;
   String LocoID = "-";
   public boolean Closed = false;
 
   public FiddleYard(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
-    NrTracks = Item.getAttrValue(atts, "nrtracks", 3 );
+    NrTracks = Item.getAttrValue(atts, "nrtracks", 12 );
     LocoID   = Item.getAttrValue(atts, "locid", ID); 
   }
   
