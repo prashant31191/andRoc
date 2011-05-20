@@ -33,6 +33,7 @@ import net.rocrail.androc.objects.Output;
 import net.rocrail.androc.objects.Sensor;
 import net.rocrail.androc.objects.Signal;
 import net.rocrail.androc.objects.Switch;
+import net.rocrail.androc.objects.Text;
 import net.rocrail.androc.objects.Track;
 import net.rocrail.androc.objects.Turntable;
 import net.rocrail.androc.objects.ZLevel;
@@ -49,6 +50,7 @@ public class Model {
   public List<ZLevel> m_ZLevelList = new ArrayList<ZLevel>();
   public HashMap<String,Switch> m_SwitchMap = new HashMap<String,Switch>();
   public HashMap<String,Output> m_OutputMap = new HashMap<String,Output>();
+  public HashMap<String,Text> m_TextMap = new HashMap<String,Text>();
   public HashMap<String,Signal> m_SignalMap = new HashMap<String,Signal>();
   public HashMap<String,Sensor> m_SensorMap = new HashMap<String,Sensor>();
   public HashMap<String,Block> m_BlockMap = new HashMap<String,Block>();
@@ -60,6 +62,7 @@ public class Model {
   public List<String> m_ActionList = new ArrayList<String>();
   public List<String> m_SwitchList = new ArrayList<String>();
   public List<String> m_OutputList = new ArrayList<String>();
+  public List<String> m_TextList = new ArrayList<String>();
   public String m_Title = "";  
   public String m_Name = "";  
   public String m_RocrailVersion = "";  
@@ -79,6 +82,7 @@ public class Model {
     m_ZLevelList.clear();
     m_SwitchMap.clear();
     m_OutputMap.clear();
+    m_TextMap.clear();
     m_SignalMap.clear();
     m_SensorMap.clear();
     m_BlockMap.clear();
@@ -90,6 +94,7 @@ public class Model {
     m_ActionList.clear();
     m_SwitchList.clear();
     m_OutputList.clear();
+    m_TextList.clear();
     
     m_Title = Item.getAttrValue(atts, "title", "New");  
     m_Name = Item.getAttrValue(atts, "name", "plan.xml");  
@@ -182,6 +187,13 @@ public class Model {
       }
       return;
     }
+    if( objName.equals("tx") ) {
+      Text tx = m_TextMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( tx != null ) {
+        tx.updateWithAttributes(atts);
+      }
+      return;
+    }
     if( objName.equals("seltab") ) {
       FiddleYard fy = m_FiddleYardMap.get(Item.getAttrValue(atts, "id", "?"));
       if( fy != null ) {
@@ -259,6 +271,13 @@ public class Model {
       return;
     }
 
+    if( objName.equals("tx") ) {
+      Text text = new Text(rocrailService, atts);
+      m_TextMap.put(text.ID, text);
+      m_ItemList.add(text);
+      return;
+    }
+
     if( objName.equals("seltab") ) {
       FiddleYard fy = new FiddleYard(rocrailService, atts);
       m_FiddleYardMap.put(fy.ID, fy);
@@ -332,6 +351,8 @@ public class Model {
       listCode = ModelListener.MODELLIST_ST;
     else if( listName.equals("tklist") )
       listCode = ModelListener.MODELLIST_TK;
+    else if( listName.equals("txlist") )
+      listCode = ModelListener.MODELLIST_TX;
     else if( listName.equals("plan") )
       listCode = ModelListener.MODELLIST_PLAN;
     
