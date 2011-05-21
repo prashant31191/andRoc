@@ -28,9 +28,16 @@ import org.xml.sax.Attributes;
 import android.view.View;
 
 public class Signal extends Item implements View.OnClickListener {
+  int Aspects = 3;
 
   public Signal(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
+    Aspects = Item.getAttrValue(atts, "aspects", Aspects );
+  }
+
+  public void updateWithAttributes(Attributes atts ) {
+    Aspects = Item.getAttrValue(atts, "aspects", Aspects );
+    super.updateWithAttributes(atts);
   }
   
   public String getImageName(boolean ModPlan) {
@@ -40,15 +47,20 @@ public class Signal extends Item implements View.OnClickListener {
       orinr = 3;
     else if (orinr == 3)
       orinr = 1;
+    
+    if(Aspects < 2)
+      Aspects = 2;
+    if(Aspects > 3)
+      Aspects = 3;
 
     if (State.equals("red"))
-      ImageName = String.format("signal_r_%d", orinr);
+      ImageName = String.format("signal%d_r_%d", Aspects, orinr);
     else if (State.equals("green"))
-      ImageName = String.format("signal_g_%d", orinr);
+      ImageName = String.format("signal%d_g_%d", Aspects, orinr);
     else if (State.equals("yellow"))
-      ImageName = String.format("signal_y_%d", orinr);
+      ImageName = String.format("signal%d_y_%d", Aspects, orinr);
     else
-      ImageName = String.format("signal_w_%d", orinr);
+      ImageName = String.format("signal%d_w_%d", Aspects, orinr);
 
     return ImageName;
   }  
