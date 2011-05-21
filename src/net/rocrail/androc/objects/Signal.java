@@ -31,18 +31,21 @@ public class Signal extends Item implements View.OnClickListener {
   int Aspects = 3;
   String Signal = "main";
   boolean Distant = false;
+  boolean Shunting = false;
 
   public Signal(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
     Aspects = Item.getAttrValue(atts, "aspects", Aspects );
     Signal = Item.getAttrValue(atts, "signal", Signal );
     Distant = Signal.equals("distant");
+    Shunting = Signal.equals("shunting");
   }
 
   public void updateWithAttributes(Attributes atts ) {
     Aspects = Item.getAttrValue(atts, "aspects", Aspects );
     Signal = Item.getAttrValue(atts, "signal", Signal );
     Distant = Signal.equals("distant");
+    Shunting = Signal.equals("shunting");
     super.updateWithAttributes(atts);
   }
   
@@ -68,6 +71,12 @@ public class Signal extends Item implements View.OnClickListener {
         ImageName = String.format("signaldistant_y_%d", orinr);
       else
         ImageName = String.format("signaldistant_w_%d", orinr);
+    }
+    else if(Shunting) {
+      if (State.equals("red"))
+        ImageName = String.format("signalshunting_r_%d", orinr);
+      else
+        ImageName = String.format("signalshunting_w_%d", orinr);
     }
     else {
       if (State.equals("red"))
