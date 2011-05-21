@@ -29,14 +29,20 @@ import android.view.View;
 
 public class Signal extends Item implements View.OnClickListener {
   int Aspects = 3;
+  String Signal = "main";
+  boolean Distant = false;
 
   public Signal(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
     Aspects = Item.getAttrValue(atts, "aspects", Aspects );
+    Signal = Item.getAttrValue(atts, "signal", Signal );
+    Distant = Signal.equals("distant");
   }
 
   public void updateWithAttributes(Attributes atts ) {
     Aspects = Item.getAttrValue(atts, "aspects", Aspects );
+    Signal = Item.getAttrValue(atts, "signal", Signal );
+    Distant = Signal.equals("distant");
     super.updateWithAttributes(atts);
   }
   
@@ -52,16 +58,28 @@ public class Signal extends Item implements View.OnClickListener {
       Aspects = 2;
     if(Aspects > 3)
       Aspects = 3;
-
-    if (State.equals("red"))
-      ImageName = String.format("signal%d_r_%d", Aspects, orinr);
-    else if (State.equals("green"))
-      ImageName = String.format("signal%d_g_%d", Aspects, orinr);
-    else if (State.equals("yellow"))
-      ImageName = String.format("signal%d_y_%d", Aspects, orinr);
-    else
-      ImageName = String.format("signal%d_w_%d", Aspects, orinr);
-
+    
+    if(Distant) {
+      if (State.equals("red"))
+        ImageName = String.format("signaldistant_r_%d", orinr);
+      else if (State.equals("green"))
+        ImageName = String.format("signaldistant_g_%d", orinr);
+      else if (State.equals("yellow"))
+        ImageName = String.format("signaldistant_y_%d", orinr);
+      else
+        ImageName = String.format("signaldistant_w_%d", orinr);
+    }
+    else {
+      if (State.equals("red"))
+        ImageName = String.format("signal%d_r_%d", Aspects, orinr);
+      else if (State.equals("green"))
+        ImageName = String.format("signal%d_g_%d", Aspects, orinr);
+      else if (State.equals("yellow"))
+        ImageName = String.format("signal%d_y_%d", Aspects, orinr);
+      else
+        ImageName = String.format("signal%d_w_%d", Aspects, orinr);
+    }
+    
     return ImageName;
   }  
 
