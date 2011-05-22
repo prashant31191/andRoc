@@ -32,6 +32,7 @@ import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.objects.Output;
 import net.rocrail.androc.objects.Sensor;
 import net.rocrail.androc.objects.Signal;
+import net.rocrail.androc.objects.StageBlock;
 import net.rocrail.androc.objects.Switch;
 import net.rocrail.androc.objects.Text;
 import net.rocrail.androc.objects.Track;
@@ -54,6 +55,7 @@ public class Model {
   public HashMap<String,Signal> m_SignalMap = new HashMap<String,Signal>();
   public HashMap<String,Sensor> m_SensorMap = new HashMap<String,Sensor>();
   public HashMap<String,Block> m_BlockMap = new HashMap<String,Block>();
+  public HashMap<String,StageBlock> m_StageBlockMap = new HashMap<String,StageBlock>();
   public HashMap<String,FiddleYard> m_FiddleYardMap = new HashMap<String,FiddleYard>();
   public HashMap<String,Turntable> m_TurntableMap = new HashMap<String,Turntable>();
   public List<Item>   m_ItemList = new ArrayList<Item>();
@@ -86,6 +88,7 @@ public class Model {
     m_SignalMap.clear();
     m_SensorMap.clear();
     m_BlockMap.clear();
+    m_StageBlockMap.clear();
     m_FiddleYardMap.clear();
     m_TurntableMap.clear();
     m_ItemList.clear();
@@ -187,6 +190,13 @@ public class Model {
       }
       return;
     }
+    if( objName.equals("sb") ) {
+      StageBlock sb = m_StageBlockMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( sb != null ) {
+        sb.updateWithAttributes(atts);
+      }
+      return;
+    }
     if( objName.equals("tx") ) {
       Text tx = m_TextMap.get(Item.getAttrValue(atts, "id", "?"));
       if( tx != null ) {
@@ -268,6 +278,13 @@ public class Model {
       Block block = new Block(rocrailService, atts);
       m_BlockMap.put(block.ID, block);
       m_ItemList.add(block);
+      return;
+    }
+
+    if( objName.equals("sb") ) {
+      StageBlock stageblock = new StageBlock(rocrailService, atts);
+      m_StageBlockMap.put(stageblock.ID, stageblock);
+      m_ItemList.add(stageblock);
       return;
     }
 
