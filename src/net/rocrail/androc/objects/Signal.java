@@ -44,12 +44,6 @@ public class Signal extends Item implements View.OnClickListener {
   public void updateWithAttributes(Attributes atts ) {
     Aspects = Item.getAttrValue(atts, "aspects", Aspects );
     Signal = Item.getAttrValue(atts, "signal", Signal );
-    if( Signal == null ) {
-      System.out.println("the signal attributes is null; reset to main...");
-      Signal = "main";
-    }
-    Distant = Signal.equals("distant");
-    Shunting = Signal.equals("shunting");
     super.updateWithAttributes(atts);
   }
   
@@ -65,7 +59,10 @@ public class Signal extends Item implements View.OnClickListener {
       Aspects = 2;
     if(Aspects > 3)
       Aspects = 3;
-    
+
+    Distant  = Signal.equals("distant");
+    Shunting = Signal.equals("shunting");
+
     if(Distant) {
       if (State.equals("red"))
         ImageName = String.format("signaldistant_r_%d", orinr);
