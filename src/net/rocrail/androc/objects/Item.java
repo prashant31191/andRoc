@@ -74,7 +74,7 @@ public class Item implements View.OnClickListener {
   public Item(RocrailService rocrailService, Attributes atts) {
     m_RocrailService = rocrailService;
     Properties = atts;
-    updateWithAttributes(atts);
+    __updateWithAttributes(atts);
     ID      = getAttrValue(atts, "id", "?"); 
     Mod_X   = getAttrValue(atts, "x", 0); 
     Mod_Y   = getAttrValue(atts, "y", 0); 
@@ -123,7 +123,7 @@ public class Item implements View.OnClickListener {
       return defval;
   }
   
-  public void updateWithAttributes(Attributes atts ) {
+  void __updateWithAttributes(Attributes atts ) {
     Type  = getAttrValue(atts, "type", Type); 
     State = getAttrValue(atts, "state", State); 
     
@@ -136,6 +136,12 @@ public class Item implements View.OnClickListener {
       // Probably not a valid ImageView...
     }
   }
+
+
+  public void updateWithAttributes(Attributes atts ) {
+    __updateWithAttributes(atts);
+  }
+
 
 
   
