@@ -45,9 +45,9 @@ public class Preferences {
   public static final String ACCTYPE_FADA = "F";
   public static final String ACCTYPE_PADA = "P";
   
-  public String  Recent       = "Demo:rocrail.dyndns.org:8080;";
+  public String  Recent       = "Demo:rocrail.dyndns.org:8051;";
   public String  Host         = "rocrail.dyndns.org";
-  public int     Port         = 8080;
+  public int     Port         = 8051;
   public String  RRHost       = "224.0.0.1";
   public int     RRPort       = 1234;
   public boolean Monitoring   = false;
