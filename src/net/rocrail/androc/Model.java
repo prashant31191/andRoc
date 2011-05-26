@@ -30,6 +30,7 @@ import net.rocrail.androc.objects.FiddleYard;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.objects.Output;
+import net.rocrail.androc.objects.Route;
 import net.rocrail.androc.objects.Sensor;
 import net.rocrail.androc.objects.Signal;
 import net.rocrail.androc.objects.StageBlock;
@@ -58,6 +59,7 @@ public class Model {
   public HashMap<String,StageBlock> m_StageBlockMap = new HashMap<String,StageBlock>();
   public HashMap<String,FiddleYard> m_FiddleYardMap = new HashMap<String,FiddleYard>();
   public HashMap<String,Turntable> m_TurntableMap = new HashMap<String,Turntable>();
+  public HashMap<String,Route> m_RouteMap = new HashMap<String,Route>();
   public List<Item>   m_ItemList = new ArrayList<Item>();
   public List<String> m_ScheduleList = new ArrayList<String>();
   public List<String> m_RouteList = new ArrayList<String>();
@@ -91,6 +93,7 @@ public class Model {
     m_StageBlockMap.clear();
     m_FiddleYardMap.clear();
     m_TurntableMap.clear();
+    m_RouteMap.clear();
     m_ItemList.clear();
     m_ScheduleList.clear();
     m_RouteList.clear();
@@ -218,6 +221,13 @@ public class Model {
       }
       return;
     }
+    if( objName.equals("st") ) {
+      Route st = m_RouteMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( st != null ) {
+        st.updateWithAttributes(atts);
+      }
+      return;
+    }
   }
   
   
@@ -319,7 +329,10 @@ public class Model {
       return;
     }
     if( objName.equals("st") ) {
-      m_RouteList.add(Item.getAttrValue(atts, "id", "?"));
+      Route route = new Route(rocrailService, atts);
+      m_RouteMap.put(route.ID, route);
+      m_RouteList.add(route.ID);
+      m_ItemList.add(route);
       return;
     }
     if( objName.equals("ac") ) {
