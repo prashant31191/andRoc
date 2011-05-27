@@ -28,6 +28,7 @@ public class Route extends Item implements View.OnClickListener {
 
   public Route(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
+    Show    = getAttrValue(atts, "show", false);
   }
   
   public void onClick(View v) {
