@@ -26,7 +26,7 @@
       
     <application android:icon="@drawable/rocrail" android:label="@string/app_name" >
         <activity android:name="net.rocrail.androc.activities.ActConnect" 
-                  android:label="@string/app_name">
+                  android:label="@string/app_name" android:theme="@style/FullHeightDialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -40,7 +40,7 @@
         <activity android:name=".activities.ActLocoSetup" android:theme="@style/FullHeightDialog"/>
         <activity android:name=".activities.ActLevel" />
         <activity android:name=".activities.ActInfo" android:theme="@style/FullHeightDialog" />
-        <activity android:name=".activities.ActRoutes" />
+        <activity android:name=".activities.ActRoutes" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActBlock" android:theme="@style/FullHeightDialog"/>
         <activity android:name=".activities.ActFiddleYard" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActTurntable" android:theme="@style/FullHeightDialog" />

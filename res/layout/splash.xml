@@ -23,6 +23,6 @@
   android:layout_height="wrap_content" android:layout_gravity="center" >
   
   <ImageView android:layout_gravity="center" android:id="@+id/splashAndRoc" android:layout_width="wrap_content"
-    android:layout_height="wrap_content" android:src="@drawable/androc"></ImageView>
+    android:layout_height="wrap_content" android:src="@drawable/androc" android:padding="10dp"></ImageView>
 
 </LinearLayout>
