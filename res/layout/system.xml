@@ -24,7 +24,7 @@
 
   <LinearLayout android:id="@+id/systemLayout3"
     android:layout_width="fill_parent" android:layout_height="0px"
-    android:layout_weight="60" android:orientation="vertical">
+    android:layout_weight="70" android:orientation="vertical">
     <LinearLayout android:id="@+id/systemLayout1"
       android:layout_width="fill_parent" android:layout_height="0px" android:layout_weight="33">
       <net.rocrail.androc.widgets.LEDButton android:text="@string/Power_ON" android:textStyle="bold"
@@ -56,7 +56,7 @@
 
   <LinearLayout android:id="@+id/systemLayout4"
     android:layout_width="fill_parent" android:layout_height="0px"
-    android:layout_weight="40">
+    android:layout_weight="30">
     <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
   <TextView android:text="System messages..." android:id="@+id/systemMessages"
     android:layout_width="fill_parent" android:layout_height="fill_parent"

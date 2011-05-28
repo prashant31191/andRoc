@@ -33,7 +33,7 @@ public class ActAccessory extends ActBase {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_LAYOUT | ActBase.MENU_PREFERENCES | ActBase.MENU_SYSTEM;
+    MenuSelection = 0;
     connectWithService();
   }
   

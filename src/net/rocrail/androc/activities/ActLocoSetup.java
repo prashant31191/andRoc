@@ -47,7 +47,7 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_LOCO;
+    MenuSelection = 0;
     Finish = true;
     connectWithService();
   }
