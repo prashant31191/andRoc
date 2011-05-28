@@ -20,6 +20,6 @@
 -->
 <net.rocrail.androc.widgets.LevelCanvas xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="1024px" android:id="@+id/levelView"
-  android:background="@drawable/solid_white" android:layout_height="1024px"
+  android:background="#ffCCEECC" android:layout_height="1024px"
   android:padding="0px"/>
 
