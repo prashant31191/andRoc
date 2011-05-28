@@ -24,16 +24,16 @@
     <LinearLayout android:id="@+id/fyLayout4" android:orientation="vertical"
       android:layout_width="fill_parent" android:layout_height="wrap_content">
       <net.rocrail.androc.widgets.LEDButton android:text="@string/Open" android:textStyle="bold"
-        android:id="@+id/fyOpen" android:layout_width="fill_parent" android:textSize="20sp"
+        android:id="@+id/fyOpen" android:layout_width="fill_parent" 
         android:layout_weight="50" android:layout_height="50dp"/>
     </LinearLayout>
     <LinearLayout android:id="@+id/fyLayout1"
       android:layout_width="fill_parent" android:layout_height="wrap_content">
       <net.rocrail.androc.widgets.LEDButton android:text="@string/Previous" android:textStyle="bold"
-        android:id="@+id/fyPrev" android:layout_width="0px" android:textSize="20sp"
+        android:id="@+id/fyPrev" android:layout_width="0px" 
         android:layout_weight="50" android:layout_height="60dp"/>
       <net.rocrail.androc.widgets.LEDButton android:text="@string/Next" android:textStyle="bold"
-        android:id="@+id/fyNext" android:layout_width="0px" android:textSize="20sp"
+        android:id="@+id/fyNext" android:layout_width="0px" 
         android:layout_weight="50" android:layout_height="60dp"/>
     </LinearLayout>
     <LinearLayout android:id="@+id/fyLayout3" android:orientation="vertical"
@@ -42,7 +42,7 @@
           android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
       <Button
         android:text="@string/Track" android:textStyle="bold" android:id="@+id/fyGotoTrack"
-        android:layout_width="fill_parent" android:textSize="20sp"
+        android:layout_width="fill_parent"
         android:layout_height="70dp" />
     </LinearLayout>
 </LinearLayout>

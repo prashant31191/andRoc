@@ -19,12 +19,13 @@
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent" android:orientation="vertical" android:layout_height="fill_parent">
+  android:layout_width="wrap_content" android:orientation="vertical" 
+  android:layout_height="wrap_content">
   <TextView android:text="@string/BlockID" android:id="@+id/blockID"
     android:layout_width="fill_parent" android:layout_height="wrap_content"
     android:textStyle="bold"></TextView>
     
-  <net.rocrail.androc.widgets.LocoImage android:id="@+id/blockLocoImage" android:layout_width="fill_parent"
+  <net.rocrail.androc.widgets.LocoImage android:id="@+id/blockLocoImage" android:layout_width="236px"
     android:clickable="true" android:layout_height="60px"
     android:src="@drawable/noimg" android:padding="5dp"/>
 
@@ -33,14 +34,14 @@
     android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
   <Button android:text="@string/Loco" android:textStyle="bold"
     android:id="@+id/blockLoco" android:layout_width="fill_parent"
-    android:layout_height="70dp" android:textSize="20sp"/>
+    android:layout_height="wrap_content"/>
   <net.rocrail.androc.widgets.LEDButton
     android:text="@string/Open" android:textStyle="bold" android:id="@+id/blockOpen"
-    android:layout_width="fill_parent" android:textSize="20sp"
-    android:layout_height="70dp" />
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" />
   <Button android:text="@string/AcceptIdent" android:textStyle="bold"
     android:id="@+id/blockAcceptIdent" android:layout_width="fill_parent"
-    android:layout_height="70dp" android:textSize="20sp"/>
+    android:layout_height="wrap_content"/>
     
     
 </LinearLayout>

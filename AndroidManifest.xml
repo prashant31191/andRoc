@@ -20,7 +20,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.rocrail.androc"
-      android:versionName="1.3.243" android:versionCode="243">
+      android:versionName="1.3.244" android:versionCode="244">
     <supports-screens android:anyDensity="false" android:largeScreens="true"
           android:normalScreens="true" android:smallScreens="true"/>
       
@@ -32,23 +32,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ActThrottle" />
-        <activity android:name=".activities.ActSystem" />
-        <activity android:name=".activities.ActMenu" />
+        <activity android:name=".activities.ActThrottle"/>
+        <activity android:name=".activities.ActSystem" android:theme="@style/FullHeightDialog"/>
+        <activity android:name=".activities.ActMenu" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActLayout" />
-        <activity android:name=".activities.ActLoco" />
-        <activity android:name=".activities.ActLocoSetup" />
+        <activity android:name=".activities.ActLoco" android:theme="@style/FullHeightDialog" />
+        <activity android:name=".activities.ActLocoSetup" android:theme="@style/FullHeightDialog"/>
         <activity android:name=".activities.ActLevel" />
-        <activity android:name=".activities.ActInfo" />
+        <activity android:name=".activities.ActInfo" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActRoutes" />
-        <activity android:name=".activities.ActBlock" />
-        <activity android:name=".activities.ActFiddleYard" />
-        <activity android:name=".activities.ActTurntable" />
-        <activity android:name=".activities.ActPreferences" />
-        <activity android:name=".activities.ActAccessory" />
-        <activity android:name=".activities.ActActions" />
-        <activity android:name=".activities.ActSwitches" />
-        <activity android:name=".activities.ActOutputs" />
+        <activity android:name=".activities.ActBlock" android:theme="@style/FullHeightDialog"/>
+        <activity android:name=".activities.ActFiddleYard" android:theme="@style/FullHeightDialog" />
+        <activity android:name=".activities.ActTurntable" android:theme="@style/FullHeightDialog" />
+        <activity android:name=".activities.ActPreferences" android:theme="@style/FullHeightDialog" />
+        <activity android:name=".activities.ActAccessory" android:theme="@style/FullHeightDialog" />
+        <activity android:name=".activities.ActActions" android:theme="@style/FullHeightDialog" />
+        <activity android:name=".activities.ActSwitches" android:theme="@style/FullHeightDialog" />
+        <activity android:name=".activities.ActOutputs" android:theme="@style/FullHeightDialog" />
         <service android:name=".RocrailService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
