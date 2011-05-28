@@ -56,7 +56,7 @@ public class ActLevel extends ActBase {
       ModPlan = (Z == -1 ? true:false);
     }
 
-    MenuSelection = ActBase.MENU_MENU | ActBase.MENU_SYSTEM | ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
+    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_SYSTEM | ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
     Finish = false;
     connectWithService();
   }
