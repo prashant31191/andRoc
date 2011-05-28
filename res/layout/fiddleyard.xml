@@ -20,7 +20,7 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent" android:layout_height="fill_parent"
-  android:orientation="vertical">
+  android:orientation="vertical" android:padding="5px">
     <LinearLayout android:id="@+id/fyLayout4" android:orientation="vertical"
       android:layout_width="fill_parent" android:layout_height="wrap_content">
       <net.rocrail.androc.widgets.LEDButton android:text="@string/Open" android:textStyle="bold"

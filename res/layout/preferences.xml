@@ -20,7 +20,7 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="300dp" android:layout_height="fill_parent"
-  android:orientation="vertical">
+  android:orientation="vertical" android:padding="3px">
   
 <CheckBox android:text="@string/Monitoring" android:id="@+id/prefMonitoring" 
 android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>

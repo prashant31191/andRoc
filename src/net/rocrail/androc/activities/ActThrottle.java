@@ -56,7 +56,8 @@ public class ActThrottle extends ActBase
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MenuSelection = ActBase.MENU_MENU | ActBase.MENU_LAYOUT | ActBase.MENU_SYSTEM | ActBase.MENU_LOCO | ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
+    //MenuSelection = ActBase.MENU_MENU | ActBase.MENU_LAYOUT | ActBase.MENU_SYSTEM | ActBase.MENU_LOCO | ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
+    MenuSelection = 0;
 
     connectWithService();
   }
@@ -436,7 +437,8 @@ public class ActThrottle extends ActBase
     
   }
   
-  
+
+  /*
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
       //Handle the back button
@@ -451,26 +453,6 @@ public class ActThrottle extends ActBase
             Toast.LENGTH_SHORT).show();
         quitShowed = true;
         
-          //Ask the user if they want to quit
-          /*
-          new AlertDialog.Builder(this)
-          .setIcon(android.R.drawable.ic_dialog_alert)
-          .setTitle(R.string.quit)
-          .setMessage(R.string.really_quit)
-          .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
-
-                  //Stop the activity
-                  ActThrottle.this.finish();    
-              }
-
-          })
-          .setNegativeButton(R.string.no, null)
-          .show();
-          */
-
         return true;
       }
       else {
@@ -479,7 +461,7 @@ public class ActThrottle extends ActBase
       }
 
   }
-
+  */
 
   @Override
   public void modelUpdate(int MODELLIST, String ID) {

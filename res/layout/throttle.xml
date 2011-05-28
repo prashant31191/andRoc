@@ -19,9 +19,9 @@
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
+	android:layout_width="300dp"
 	android:layout_height="fill_parent"
-   android:orientation="vertical">
+   android:orientation="vertical" android:padding="3px">
       <net.rocrail.androc.widgets.LocoImage android:id="@+id/locoImage" android:layout_width="fill_parent" android:clickable="true"
       android:layout_height="wrap_content" android:src="@drawable/noimg" android:padding="5dp"/>
 				<Spinner android:id="@+id/spinnerLoco" android:textStyle="bold" android:layout_width="fill_parent"
@@ -71,7 +71,12 @@
 						android:layout_width="0px" android:layout_weight="25"
 						android:layout_height="fill_parent" android:text="@string/FunctionGroup" android:textStyle="bold" />
 				</LinearLayout>
+				<LinearLayout android:id="@+id/fun4"
+					android:orientation="vertical" android:layout_width="fill_parent"
+          			android:layout_height="0px" android:layout_weight="25">
 				      <net.rocrail.android.widgets.Slider android:id="@+id/Speed" android:max="100"
 					android:progress="0" android:layout_width="fill_parent"
-          android:layout_height="0px" android:layout_weight="25" android:paddingLeft="20px" android:paddingRight="20px"/>
+          			android:layout_height="50dp" android:paddingLeft="20dp" 
+          			android:paddingRight="20dp"  android:paddingBottom="5dp"/>
+				</LinearLayout>
 </LinearLayout>

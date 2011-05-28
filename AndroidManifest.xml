@@ -20,7 +20,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.rocrail.androc"
-      android:versionName="1.3.246" android:versionCode="246">
+      android:versionName="1.4.248" android:versionCode="248">
     <supports-screens android:anyDensity="false" android:largeScreens="true"
           android:normalScreens="true" android:smallScreens="true"/>
       
@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ActThrottle"/>
+        <activity android:name=".activities.ActThrottle" android:theme="@style/FullHeightDialog"/>
         <activity android:name=".activities.ActSystem" android:theme="@style/FullHeightDialog"/>
         <activity android:name=".activities.ActMenu" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActLayout" />
