@@ -111,7 +111,6 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
 
-    m_adapterForSpinner.add(getText(R.string.FreeBlock).toString());
     Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
@@ -119,6 +118,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     }
     
     m_adapterForSpinner.sort(new LocoComparator());
+    m_adapterForSpinner.insert(getText(R.string.FreeBlock).toString(), 0);
     if( LocoID != null ) {
       int select = m_adapterForSpinner.getPosition(LocoID);
       s.setSelection(select);
