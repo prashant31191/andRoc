@@ -31,52 +31,52 @@
           android:layout_height="0px" android:layout_weight="25">
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF1"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F1" android:textStyle="bold" />
+						android:layout_height="60dp" android:text="F1" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF2"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F2" android:textStyle="bold" />
+						android:layout_height="60dp" android:text="F2" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF3"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F3" android:textStyle="bold" />
+						android:layout_height="60dp" android:text="F3" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleGo"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="@string/Start" android:textStyle="bold" />
+						android:layout_height="60dp" android:text="@string/Start" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun2"
 					android:orientation="horizontal" android:layout_width="fill_parent"
 					android:layout_height="0px" android:layout_weight="25">
           <net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF4"
             android:layout_width="0px" android:layout_weight="25"
-            android:layout_height="fill_parent" android:text="F4" android:textStyle="bold" />
+            android:layout_height="60dp" android:text="F4" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF5"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F5" android:textStyle="bold" />
+						android:layout_height="60dp" android:text="F5" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF6"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="F6" android:textStyle="bold" />
+						android:layout_height="60dp" android:text="F6" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleRelease"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="@string/Release" android:textStyle="bold" />
+						android:layout_height="60dp" android:text="@string/Release" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun3"
 					android:orientation="horizontal" android:layout_width="fill_parent"
           android:layout_height="0px" android:layout_weight="25">
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleDirection"
 						android:layout_width="0px" android:layout_weight="50"
-						android:layout_height="fill_parent" android:text="@string/Direction" android:textStyle="bold" />
+						android:layout_height="60dp" android:text="@string/Direction" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleLights"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="@string/Lights" android:textStyle="bold" />
+						android:layout_height="60dp" android:text="@string/Lights" android:textStyle="bold" />
 					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleFn"
 						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="fill_parent" android:text="@string/FunctionGroup" android:textStyle="bold" />
+						android:layout_height="60dp" android:text="@string/FunctionGroup" android:textStyle="bold" />
 				</LinearLayout>
 				<LinearLayout android:id="@+id/fun4"
 					android:orientation="vertical" android:layout_width="fill_parent"
           			android:layout_height="0px" android:layout_weight="25">
 				      <net.rocrail.android.widgets.Slider android:id="@+id/Speed" android:max="100"
 					android:progress="0" android:layout_width="fill_parent"
-          			android:layout_height="50dp" android:paddingLeft="20dp" 
+          			android:layout_height="60dp" android:paddingLeft="20dp" 
           			android:paddingRight="20dp"  android:paddingBottom="5dp"/>
 				</LinearLayout>
 </LinearLayout>
