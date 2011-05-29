@@ -25,11 +25,15 @@ import org.xml.sax.Attributes;
 import android.view.View;
 
 public class Text extends Item implements View.OnClickListener {
-  
+  int m_cX = 0;
+  int m_cY = 0;
+
   public Text(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
     Text = Item.getAttrValue(atts, "text", Text );
     cX = Item.getAttrValue(atts, "cx", 3 );
+    m_cX = cX;
+    m_cY = cY;
   }
   
   public void updateTextColor() {
@@ -42,9 +46,13 @@ public class Text extends Item implements View.OnClickListener {
     if (orinr % 2 == 0) {
       // vertical
       textVertical = true;
+      cX = m_cY;
+      cY = m_cX;
     }
     else {
       textVertical = false;
+      cX = m_cX;
+      cY = m_cY;
     }
     return null;
   }
