@@ -279,6 +279,8 @@ public class ActLevel extends ActBase implements OnZoomListener {
     if (levelView.zoomButtonsController == null) {
       levelView.zoomButtonsController = new ZoomButtonsController(getWindow().getDecorView());
       levelView.zoomButtonsController.setOnZoomListener(this);
+      levelView.zoomButtonsController.setZoomInEnabled(m_RocrailService.Prefs.Size < 64 );
+      levelView.zoomButtonsController.setZoomOutEnabled(m_RocrailService.Prefs.Size > 8 );
     }
     switch (event.getAction()) {
     case MotionEvent.ACTION_UP:
@@ -296,11 +298,14 @@ public class ActLevel extends ActBase implements OnZoomListener {
 
   @Override
   public void onZoom(boolean zoomin) {
-    if( zoomin )
-      m_RocrailService.Prefs.Size++;
-    else
-      m_RocrailService.Prefs.Size--;
+    if( zoomin && m_RocrailService.Prefs.Size < 64 )
+      m_RocrailService.Prefs.Size += 2;
+    else if( m_RocrailService.Prefs.Size > 8 )
+      m_RocrailService.Prefs.Size -= 2;
 
+    levelView.zoomButtonsController.setZoomInEnabled(m_RocrailService.Prefs.Size < 64 );
+    levelView.zoomButtonsController.setZoomOutEnabled(m_RocrailService.Prefs.Size > 8 );
+    
     m_RocrailService.Prefs.save();
 
     Intent intent = new Intent(this,net.rocrail.androc.activities.ActLevel.class);
