@@ -22,7 +22,10 @@ package net.rocrail.androc.widgets;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.AbsoluteLayout;
+import android.widget.RelativeLayout;
+import android.widget.ZoomButtonsController;
 
 /*
 The AbsoluteLayout is needed for drawing the Layout levels.
@@ -35,12 +38,14 @@ Android framework engineer
 */
 
 @SuppressWarnings("deprecation")
-public class LevelCanvas extends AbsoluteLayout {
+public class LevelCanvas extends AbsoluteLayout implements View.OnClickListener {
   private int currentX;
   private int currentY;
+  public ZoomButtonsController zoomButtonsController = null;
 
   public LevelCanvas(Context context, AttributeSet attrs) {
     super(context, attrs);
+    this.setOnClickListener(this);
   }
 
   @Override 
@@ -49,7 +54,7 @@ public class LevelCanvas extends AbsoluteLayout {
         case MotionEvent.ACTION_DOWN: {
             currentX = (int) event.getRawX();
             currentY = (int) event.getRawY();
-            break;
+            return false;
         }
 
         case MotionEvent.ACTION_MOVE: {
@@ -63,13 +68,19 @@ public class LevelCanvas extends AbsoluteLayout {
               scrollTo( x < 0 ? 0:x, y < 0 ? 0:y);
             currentX = x2;
             currentY = y2;
-            break;
+            return true;
         }   
         case MotionEvent.ACTION_UP: {
-            break;
+            return false;
         }
     }
-      return true; 
+    return false; 
+  }
+
+  @Override
+  public void onClick(View arg0) {
+    if( zoomButtonsController != null )
+      zoomButtonsController.setVisible(true);
   }
   
   

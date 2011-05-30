@@ -40,6 +40,7 @@ public class Preferences {
   public static final String PREFS_ACCTYPE = "acctype";
   public static final String PREFS_CVNR = "cvnr";
   public static final String PREFS_MODVIEW = "modview";
+  public static final String PREFS_SIZE = "size";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -60,6 +61,7 @@ public class Preferences {
   public String  AccType      = ACCTYPE_MADA;
   RocrailService rocrailService = null;
   boolean Initialized = false;
+  public int     Size         = 32;
   
   public List<RRConnection> conList = null; 
 
@@ -87,6 +89,7 @@ public class Preferences {
     AccNr        = settings.getInt(PREFS_ACCNR, AccNr);
     CvNr         = settings.getInt(PREFS_CVNR, CvNr);
     Modview      = settings.getBoolean(PREFS_MODVIEW, Modview);
+    Size         = settings.getInt(PREFS_SIZE, Size);
     
     conList = RRConnection.parse(Recent);
 
@@ -136,6 +139,7 @@ public class Preferences {
     editor.putString(PREFS_RRNETHOST, RRHost);
     editor.putInt(PREFS_RRNETPORT, RRPort);
     editor.putBoolean(PREFS_MODVIEW, Modview);
+    editor.putInt(PREFS_SIZE, Size);
     editor.commit();
   }
   

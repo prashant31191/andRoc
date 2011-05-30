@@ -34,21 +34,25 @@ import net.rocrail.androc.widgets.LevelItem;
 import net.rocrail.androc.R;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.widget.Toast;
+import android.widget.ZoomButtonsController;
 import android.widget.AbsoluteLayout.LayoutParams;
+import android.widget.ZoomButtonsController.OnZoomListener;
 
 @SuppressWarnings("deprecation")
-public class ActLevel extends ActBase {
+public class ActLevel extends ActBase implements OnZoomListener {
   public static final int PROGRESS_DIALOG = 0;
   boolean ModPlan = false;
   int Z = 0;
   ProgressDialog progressDialog = null;
   LevelCanvas levelView = null;
   boolean quitShowed = false;
-  
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -90,7 +94,7 @@ public class ActLevel extends ActBase {
 
     levelView = (LevelCanvas)findViewById(R.id.levelView);
     levelView.setPadding(0,0,0,0);
-
+    
     if( ModPlan ) {
       setTitle(m_RocrailService.m_Model.m_Title);
     }
@@ -106,7 +110,6 @@ public class ActLevel extends ActBase {
     plansize = CGSizeMake(ITEMSIZE*cx, ITEMSIZE*cy); 
     scrollView.contentSize = plansize;
 */
-
   }
 
   
@@ -115,6 +118,7 @@ public class ActLevel extends ActBase {
     int cy = 0;
     int xOffset = 0;
     int yOffset = 0;
+    int size = m_RocrailService.Prefs.Size;
     
     if( ModPlan ) {
       xOffset = zlevel.X;
@@ -125,7 +129,7 @@ public class ActLevel extends ActBase {
     while( itemIt.hasNext() ) {
       Item item = itemIt.next();
       
-      LevelItem image = new LevelItem(ActLevel.this, levelView, item );
+      LevelItem image = new LevelItem(ActLevel.this, levelView, item, size );
       String imgname = item.getImageName(ModPlan);
       if( imgname != null ) {
         int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
@@ -140,7 +144,8 @@ public class ActLevel extends ActBase {
       
       int x = ModPlan?item.Mod_X:item.X;
       int y = ModPlan?item.Mod_Y:item.Y;
-      LayoutParams lp = new LayoutParams(item.cX*32, item.cY*32, (x+xOffset)*32, (y+yOffset)*32);
+
+      LayoutParams lp = new LayoutParams(item.cX*size, item.cY*size, (x+xOffset)*size, (y+yOffset)*size);
       if( item.X + item.cX > cx ) cx = item.X + item.cX;
       if( item.Y + item.cY > cy ) cy = item.Y + item.cY;
 
@@ -267,7 +272,41 @@ public class ActLevel extends ActBase {
         quitShowed = false;
         return super.onKeyDown(keyCode, event);
       }
+  }
 
+  @Override
+  public boolean onTouchEvent(MotionEvent event) {
+    if (levelView.zoomButtonsController == null) {
+      levelView.zoomButtonsController = new ZoomButtonsController(getWindow().getDecorView());
+      levelView.zoomButtonsController.setOnZoomListener(this);
+    }
+    switch (event.getAction()) {
+    case MotionEvent.ACTION_MOVE:
+      if (levelView.zoomButtonsController != null) {
+        levelView.zoomButtonsController.setVisible(true);
+      }
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public void onVisibilityChanged(boolean visible) {
+  }
+
+  @Override
+  public void onZoom(boolean zoomin) {
+    if( zoomin )
+      m_RocrailService.Prefs.Size++;
+    else
+      m_RocrailService.Prefs.Size--;
+
+    m_RocrailService.Prefs.save();
+
+    Intent intent = new Intent(this,net.rocrail.androc.activities.ActLevel.class);
+    startActivity(intent);
+    levelView.zoomButtonsController.setVisible(false);
+    finish();
   }
 
 

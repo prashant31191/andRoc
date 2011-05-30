@@ -35,14 +35,16 @@ import android.widget.ImageView;
 public class LevelItem extends ImageView implements OnGestureListener {
   LevelCanvas levelCanvas = null;
   private Item item = null;
+  int size = 32;
   
   private GestureDetector gestureDetector = null;
 
   
-  public LevelItem(Context context, LevelCanvas levelCanvas, Item item) {
+  public LevelItem(Context context, LevelCanvas levelCanvas, Item item, int size) {
     super(context);
     this.levelCanvas = levelCanvas;
     this.item = item;
+    this.size = size;
     //setScaleType(ImageView.ScaleType.CENTER);
     setPadding(0,0,0,0);
     
@@ -81,7 +83,8 @@ public class LevelItem extends ImageView implements OnGestureListener {
         paint.setColor(Color.rgb(200, 255, 200));
         break;
       }
-      canvas.drawRect(8, 8, item.cX*32-8, item.cY*32-8, paint);
+      int padding = (8 * size) / 32;
+      canvas.drawRect(padding, padding, item.cX*size-padding, item.cY*size-padding, paint);
     }
     
     if( item.Text != null && item.Text.trim().length() > 0 ) {
@@ -93,8 +96,12 @@ public class LevelItem extends ImageView implements OnGestureListener {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(Color.BLACK);
-        paint.setTextSize((float)20.0);
-        canvas.drawText(item.Text, (float)6.0, (float)22.0, paint);
+        double tsize = (20.0 * size) / 32;
+        paint.setTextSize((float)tsize);
+        
+        double tx = (6.0 * size) / 32;
+        double ty = (22.0 * size) / 32;
+        canvas.drawText(item.Text, (float)tx, (float)ty, paint);
       }
     }
   }
@@ -102,7 +109,7 @@ public class LevelItem extends ImageView implements OnGestureListener {
   
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    setMeasuredDimension(item.cX*32, item.cY*32);
+    setMeasuredDimension(item.cX*size, item.cY*size);
   }
   
   
