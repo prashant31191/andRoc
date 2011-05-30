@@ -281,13 +281,13 @@ public class ActLevel extends ActBase implements OnZoomListener {
       levelView.zoomButtonsController.setOnZoomListener(this);
     }
     switch (event.getAction()) {
-    case MotionEvent.ACTION_MOVE:
+    case MotionEvent.ACTION_UP:
       if (levelView.zoomButtonsController != null) {
         levelView.zoomButtonsController.setVisible(true);
       }
       return true;
     }
-    return false;
+    return levelView.onTouchEvent(event);
   }
 
   @Override
