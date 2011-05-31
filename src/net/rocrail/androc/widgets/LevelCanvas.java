@@ -38,50 +38,54 @@ Android framework engineer
 */
 
 @SuppressWarnings("deprecation")
-public class LevelCanvas extends AbsoluteLayout implements View.OnClickListener {
+public class LevelCanvas extends AbsoluteLayout {
   private int currentX;
   private int currentY;
+  private boolean startMoveInited = false;
   public ZoomButtonsController zoomButtonsController = null;
 
   public LevelCanvas(Context context, AttributeSet attrs) {
     super(context, attrs);
-    this.setOnClickListener(this);
   }
 
   @Override 
   public boolean onTouchEvent(MotionEvent event) {
     switch (event.getAction()) {
-        case MotionEvent.ACTION_DOWN: {
-            currentX = (int) event.getRawX();
-            currentY = (int) event.getRawY();
-            return false;
-        }
+    case MotionEvent.ACTION_DOWN:
+      currentX = (int) event.getRawX();
+      currentY = (int) event.getRawY();
+      startMoveInited = true;
+      break;
 
-        case MotionEvent.ACTION_MOVE: {
-            int x2 = (int) event.getRawX();
-            int y2 = (int) event.getRawY();
-           
-            scrollBy(currentX - x2 , currentY - y2);
-            int x = getScrollX();
-            int y = getScrollY();
-            if( x < 0 || y < 0 )
-              scrollTo( x < 0 ? 0:x, y < 0 ? 0:y);
-            currentX = x2;
-            currentY = y2;
-            return true;
-        }   
-        case MotionEvent.ACTION_UP: {
-            return false;
-        }
+
+    case MotionEvent.ACTION_MOVE:
+      if (startMoveInited) {
+        int x2 = (int) event.getRawX();
+        int y2 = (int) event.getRawY();
+
+        scrollBy(currentX - x2, currentY - y2);
+        int x = getScrollX();
+        int y = getScrollY();
+        if (x < 0 || y < 0)
+          scrollTo(x < 0 ? 0 : x, y < 0 ? 0 : y);
+        currentX = x2;
+        currentY = y2;
+      }
+      else {
+        currentX = (int) event.getRawX();
+        currentY = (int) event.getRawY();
+        startMoveInited = true;
+      }
+      return true;
+
+
+    case MotionEvent.ACTION_UP:
+      startMoveInited = false;
+      break;
+
     }
-    return false; 
+    
+    return false;
   }
 
-  @Override
-  public void onClick(View arg0) {
-    if( zoomButtonsController != null )
-      zoomButtonsController.setVisible(true);
-  }
-  
-  
 }
