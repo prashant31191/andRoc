@@ -213,8 +213,12 @@ public class ActThrottle extends ActBase
         public void onClick(View v) {
           quitShowed = false;
           m_iFunctionGroup++;
-          if( m_iFunctionGroup > 3 )
+          if( m_iFunctionGroup > 4 )
             m_iFunctionGroup = 0;
+          LEDButton f5 = (LEDButton) findViewById(R.id.throttleF5);
+          f5.setEnabled(m_iFunctionGroup< 4);
+          LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
+          f6.setEnabled(m_iFunctionGroup< 4);
           updateFunctions();
         }
     });
