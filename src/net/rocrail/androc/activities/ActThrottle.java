@@ -34,6 +34,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -45,7 +46,8 @@ import net.rocrail.androc.R;
 import net.rocrail.android.widgets.Slider;
 
 public class ActThrottle extends ActBase 
-  implements ModelListener, AdapterView.OnItemSelectedListener, net.rocrail.android.widgets.SliderListener 
+  implements ModelListener, AdapterView.OnItemSelectedListener, 
+  net.rocrail.android.widgets.SliderListener, OnLongClickListener 
 {
   int         m_iFunctionGroup = 0;
   int         m_iLocoCount     = 0;
@@ -205,6 +207,8 @@ public class ActThrottle extends ActBase
     });
 
     LEDButton fn = (LEDButton) findViewById(R.id.throttleFn);
+    fn.setLongClickable(true);
+    fn.setOnLongClickListener(this);
     fn.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -486,6 +490,18 @@ public class ActThrottle extends ActBase
     quitShowed = false;
     if( m_Loco != null )
       m_Loco.setSpeed(V, false);
+  }
+
+
+  @Override
+  public boolean onLongClick(View view) {
+    if( view.getId() == R.id.throttleFn ) {
+      Toast.makeText(getApplicationContext(), R.string.EmergencyStop,
+          Toast.LENGTH_SHORT).show();
+      m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\"/>");
+      return true;
+    }
+    return false;
   }
 
 
