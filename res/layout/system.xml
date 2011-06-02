@@ -19,11 +19,11 @@
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent" android:layout_height="fill_parent"
+  android:layout_width="300dp" android:layout_height="fill_parent"
   android:orientation="vertical" android:padding="5px">
 
   <LinearLayout android:id="@+id/systemLayout3"
-    android:layout_width="300dp" android:layout_height="wrap_content"
+    android:layout_width="fill_parent" android:layout_height="fill_parent"
     android:orientation="vertical">
     <LinearLayout android:id="@+id/systemLayout1"
       android:layout_width="fill_parent" android:layout_height="0px" android:layout_weight="33">
