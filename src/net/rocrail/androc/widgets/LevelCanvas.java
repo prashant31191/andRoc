@@ -47,6 +47,19 @@ public class LevelCanvas extends AbsoluteLayout {
   public LevelCanvas(Context context, AttributeSet attrs) {
     super(context, attrs);
   }
+  
+  @Override 
+  protected void onDetachedFromWindow () {
+    if( zoomButtonsController != null )
+      zoomButtonsController.setVisible(false);
+  }
+  
+  @Override 
+  protected void onWindowVisibilityChanged (int visibility) {
+    if( visibility != View.VISIBLE && zoomButtonsController != null )
+      zoomButtonsController.setVisible(false);
+  }
+  
 
   @Override 
   public boolean onTouchEvent(MotionEvent event) {

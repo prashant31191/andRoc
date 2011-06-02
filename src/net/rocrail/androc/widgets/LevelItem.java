@@ -149,7 +149,7 @@ public class LevelItem extends ImageView implements OnGestureListener {
   }
   @Override
   public boolean onScroll(MotionEvent event1, MotionEvent event2, float distX, float distY) {
-    levelCanvas.scrollBy((int)distX , (int)distY);
+    //levelCanvas.scrollBy((int)distX , (int)distY);
     return true;
   }
   @Override
