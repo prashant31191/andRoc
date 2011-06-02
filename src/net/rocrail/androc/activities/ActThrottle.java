@@ -118,6 +118,8 @@ public class ActThrottle extends ActBase
     LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
     f6.setText(m_Loco.getFunctionText(6+m_iFunctionGroup*FNGROUPSIZE));
     
+    /* This mixes up the layout. */
+    /*
     if(f1.getText().length() > 4)
       f1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
@@ -147,7 +149,7 @@ public class ActThrottle extends ActBase
       f6.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
       f6.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
-
+    */
     
     
     LEDButton Go = (LEDButton) findViewById(R.id.throttleGo);
