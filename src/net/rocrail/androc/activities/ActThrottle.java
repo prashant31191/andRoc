@@ -118,8 +118,13 @@ public class ActThrottle extends ActBase
     LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
     f6.setText(m_Loco.getFunctionText(6+m_iFunctionGroup*FNGROUPSIZE));
     
+    f1.setLines(1);
+    f2.setLines(1);
+    f3.setLines(1);
+    f4.setLines(1);
+    f5.setLines(1);
+    f6.setLines(1);
     /* This mixes up the layout. */
-    /*
     if(f1.getText().length() > 4)
       f1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
@@ -149,7 +154,6 @@ public class ActThrottle extends ActBase
       f6.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
       f6.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
-    */
     
     
     LEDButton Go = (LEDButton) findViewById(R.id.throttleGo);
@@ -255,7 +259,7 @@ public class ActThrottle extends ActBase
           f5.setEnabled(m_iFunctionGroup< 4);
           LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
           f6.setEnabled(m_iFunctionGroup< 4);
-          updateFunctions();
+          //updateFunctions();
         }
     });
 
