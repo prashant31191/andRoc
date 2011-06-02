@@ -31,6 +31,7 @@ import net.rocrail.androc.widgets.LocoImage;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -105,17 +106,50 @@ public class ActThrottle extends ActBase
   
   void updateFunctions() {
     LEDButton f1 = (LEDButton) findViewById(R.id.throttleF1);
-    f1.setText("F"+(1+m_iFunctionGroup*FNGROUPSIZE));
+    f1.setText(m_Loco.getFunctionText(1+m_iFunctionGroup*FNGROUPSIZE));
     LEDButton f2 = (LEDButton) findViewById(R.id.throttleF2);
-    f2.setText("F"+(2+m_iFunctionGroup*FNGROUPSIZE));
+    f2.setText(m_Loco.getFunctionText(2+m_iFunctionGroup*FNGROUPSIZE));
     LEDButton f3 = (LEDButton) findViewById(R.id.throttleF3);
-    f3.setText("F"+(3+m_iFunctionGroup*FNGROUPSIZE));
+    f3.setText(m_Loco.getFunctionText(3+m_iFunctionGroup*FNGROUPSIZE));
     LEDButton f4 = (LEDButton) findViewById(R.id.throttleF4);
-    f4.setText("F"+(4+m_iFunctionGroup*FNGROUPSIZE));
+    f4.setText(m_Loco.getFunctionText(4+m_iFunctionGroup*FNGROUPSIZE));
     LEDButton f5 = (LEDButton) findViewById(R.id.throttleF5);
-    f5.setText("F"+(5+m_iFunctionGroup*FNGROUPSIZE));
+    f5.setText(m_Loco.getFunctionText(5+m_iFunctionGroup*FNGROUPSIZE));
     LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
-    f6.setText("F"+(6+m_iFunctionGroup*FNGROUPSIZE));
+    f6.setText(m_Loco.getFunctionText(6+m_iFunctionGroup*FNGROUPSIZE));
+    
+    if(f1.getText().length() > 4)
+      f1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
+    else
+      f1.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
+
+    if(f2.getText().length() > 4)
+      f2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
+    else
+      f2.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
+
+    if(f3.getText().length() > 4)
+      f3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
+    else
+      f3.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
+
+    if(f4.getText().length() > 4)
+      f4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
+    else
+      f4.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
+
+    if(f5.getText().length() > 4)
+      f5.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
+    else
+      f5.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
+
+    if(f6.getText().length() > 4)
+      f6.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
+    else
+      f6.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
+
+    
+    
     LEDButton Go = (LEDButton) findViewById(R.id.throttleGo);
     LEDButton Release = (LEDButton) findViewById(R.id.throttleRelease);
     LEDButton Direction = (LEDButton) findViewById(R.id.throttleDirection);

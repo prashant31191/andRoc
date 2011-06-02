@@ -20,7 +20,12 @@
 package net.rocrail.androc.objects;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.objects.Turntable.TTTrack;
 import net.rocrail.androc.widgets.LocoImage;
 
 import org.xml.sax.Attributes;
@@ -32,6 +37,7 @@ import android.graphics.BitmapFactory;
 public class Loco {
   RocrailService  rocrailService = null;
 
+  public List<Function> Functions = new ArrayList<Function>();
   public String  ID      = "?";
   public String  Description = "";
   public String  Roadname = "";
@@ -279,7 +285,26 @@ public class Loco {
         String.format("<lc id=\"%s\" cmd=\"dispatch\"/>", ID ) );
   }
   
+  public void addFunction(Attributes atts ) {
+    Function function = new Function();
+    function.Nr = Item.getAttrValue(atts, "fn", 0 );
+    function.Text = Item.getAttrValue(atts, "text", "F"+function.Nr );
+    Functions.add(function);
+  }
+
+  public String getFunctionText(int nr) {
+    if( Functions != null ) {
+      Iterator<Function> it = Functions.iterator();
+      while(it.hasNext()) {
+        Function function = it.next();
+        if( function.Nr == nr )
+          return function.Text;
+      }
+    }
+    return "F"+nr;
+  }
 }
+
 
 class UpdateLocoImage implements Runnable {
   Loco loco = null;
@@ -300,4 +325,10 @@ class UpdateLocoImage implements Runnable {
     }
   }
   
+}
+
+
+class Function {
+  int Nr = 0;
+  String Text = null;
 }

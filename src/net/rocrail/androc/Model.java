@@ -74,6 +74,7 @@ public class Model {
   public boolean m_bDonKey = false;
   
   Turntable m_CurrentTT = null;
+  Loco m_CurrentLC = null;
 
   
   public Model(RocrailService rocrailService) {
@@ -243,8 +244,13 @@ public class Model {
 
     if( objName.equals("lc") ) {
       Loco loco = new Loco(rocrailService, atts);
+      m_CurrentLC = loco;
       m_LocoList.add(loco);
       m_LocoMap.put(loco.ID, loco);
+      return;
+    }
+    if( objName.equals("fundef") && m_CurrentLC != null ) {
+      m_CurrentLC.addFunction(atts);
       return;
     }
     
