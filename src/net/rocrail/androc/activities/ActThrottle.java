@@ -125,32 +125,32 @@ public class ActThrottle extends ActBase
     f5.setLines(1);
     f6.setLines(1);
     /* This mixes up the layout. */
-    if(f1.getText().length() > 4)
+    if(f1.getText().length() > 3)
       f1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
       f1.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
 
-    if(f2.getText().length() > 4)
+    if(f2.getText().length() > 3)
       f2.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
       f2.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
 
-    if(f3.getText().length() > 4)
+    if(f3.getText().length() > 3)
       f3.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
       f3.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
 
-    if(f4.getText().length() > 4)
+    if(f4.getText().length() > 3)
       f4.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
       f4.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
 
-    if(f5.getText().length() > 4)
+    if(f5.getText().length() > 3)
       f5.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
       f5.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
 
-    if(f6.getText().length() > 4)
+    if(f6.getText().length() > 3)
       f6.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
       f6.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
@@ -259,7 +259,7 @@ public class ActThrottle extends ActBase
           f5.setEnabled(m_iFunctionGroup< 4);
           LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
           f6.setEnabled(m_iFunctionGroup< 4);
-          //updateFunctions();
+          updateFunctions();
         }
     });
 
