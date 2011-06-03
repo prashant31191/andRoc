@@ -1,82 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
- Rocrail - Model Railroad Software
-
- Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
-
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
--->
+	<!--
+		Rocrail - Model Railroad Software Copyright (C) 2002-2010 - Rob
+		Versluis <r.j.versluis@rocrail.net> This program is free software; you
+		can redistribute it and/or modify it under the terms of the GNU
+		General Public License as published by the Free Software Foundation;
+		either version 2 of the License, or (at your option) any later
+		version. This program is distributed in the hope that it will be
+		useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+		General Public License for more details. You should have received a
+		copy of the GNU General Public License along with this program; if
+		not, write to the Free Software Foundation, Inc., 59 Temple Place -
+		Suite 330, Boston, MA 02111-1307, USA.
+	-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-   android:orientation="vertical" android:padding="3px">
-      <net.rocrail.androc.widgets.LocoImage android:id="@+id/locoImage" android:layout_width="fill_parent" android:clickable="true"
-      android:layout_height="wrap_content" android:src="@drawable/noimg" android:padding="5dp"/>
-				<Spinner android:id="@+id/spinnerLoco" android:textStyle="bold" android:layout_width="fill_parent"
-					android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
-				<LinearLayout android:id="@+id/fun1"
-					android:orientation="horizontal" android:layout_width="fill_parent"
-          android:layout_height="0px" android:layout_weight="25">
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF1"
-						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="60dp" android:text="F1" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF2"
-						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="60dp" android:text="F2" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF3"
-						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="60dp" android:text="F3" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleGo"
-						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="60dp" android:text="@string/Start" android:textStyle="bold" />
-				</LinearLayout>
-				<LinearLayout android:id="@+id/fun2"
-					android:orientation="horizontal" android:layout_width="fill_parent"
-					android:layout_height="0px" android:layout_weight="25">
-          <net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF4"
-            android:layout_width="0px" android:layout_weight="25"
-            android:layout_height="60dp" android:text="F4" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF5"
-						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="60dp" android:text="F5" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleF6"
-						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="60dp" android:text="F6" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleRelease"
-						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="60dp" android:text="@string/Release" android:textStyle="bold" />
-				</LinearLayout>
-				<LinearLayout android:id="@+id/fun3"
-					android:orientation="horizontal" android:layout_width="fill_parent"
-          android:layout_height="0px" android:layout_weight="25">
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleDirection"
-						android:layout_width="0px" android:layout_weight="50"
-						android:layout_height="60dp" android:text="@string/Direction" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleLights"
-						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="60dp" android:text="@string/Lights" android:textStyle="bold" />
-					<net.rocrail.androc.widgets.LEDButton android:id="@+id/throttleFn"
-						android:layout_width="0px" android:layout_weight="25"
-						android:layout_height="60dp" android:text="@string/FunctionGroup" android:textStyle="bold" />
-				</LinearLayout>
-				<LinearLayout android:id="@+id/fun4"
-					android:orientation="vertical" android:layout_width="fill_parent"
-          			android:layout_height="0px" android:layout_weight="25">
-				      <net.rocrail.android.widgets.Slider android:id="@+id/Speed" android:max="100"
-					android:progress="0" android:layout_width="fill_parent"
-          			android:layout_height="60dp" android:paddingLeft="20dp" 
-          			android:paddingRight="20dp"  android:paddingBottom="5dp"/>
-				</LinearLayout>
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical" android:padding="3px">
+	<net.rocrail.androc.widgets.LocoImage
+		android:id="@+id/locoImage" android:layout_width="fill_parent"
+		android:clickable="true" android:layout_height="wrap_content"
+		android:src="@drawable/noimg" android:padding="5dp" />
+	<Spinner android:id="@+id/spinnerLoco" android:textStyle="bold"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:drawSelectorOnTop="true" />
+	<LinearLayout android:id="@+id/fun1" android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="0px"
+		android:layout_weight="25">
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleF1" android:layout_width="0px"
+			android:layout_weight="25" android:layout_height="fill_parent" android:text="F1"
+			android:textStyle="bold" />
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleF2" android:layout_width="0px"
+			android:layout_weight="25" android:layout_height="fill_parent" android:text="F2"
+			android:textStyle="bold" />
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleF3" android:layout_width="0px"
+			android:layout_weight="25" android:layout_height="fill_parent" android:text="F3"
+			android:textStyle="bold" />
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleGo" android:layout_width="0px"
+			android:layout_weight="25" android:layout_height="fill_parent" android:text="@string/Start"
+			android:textStyle="bold" />
+	</LinearLayout>
+	<LinearLayout android:id="@+id/fun2" android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="0px"
+		android:layout_weight="25">
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleF4" android:layout_width="0px"
+			android:layout_weight="25" android:layout_height="fill_parent" android:text="F4"
+			android:textStyle="bold" />
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleF5" android:layout_width="0px"
+			android:layout_weight="25" android:layout_height="fill_parent" android:text="F5"
+			android:textStyle="bold" />
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleF6" android:layout_width="0px"
+			android:layout_weight="25" android:layout_height="fill_parent" android:text="F6"
+			android:textStyle="bold" />
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleRelease" android:layout_width="0px"
+			android:layout_weight="25" android:layout_height="fill_parent" android:text="@string/Release"
+			android:textStyle="bold" />
+	</LinearLayout>
+	<LinearLayout android:id="@+id/fun3" android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="0px"
+		android:layout_weight="25">
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleDirection" android:layout_width="0px"
+			android:layout_weight="50" android:layout_height="fill_parent" android:text="@string/Direction"
+			android:textStyle="bold" />
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleLights" android:layout_width="0px"
+			android:layout_weight="25" android:layout_height="fill_parent" android:text="@string/Lights"
+			android:textStyle="bold" />
+		<net.rocrail.androc.widgets.LEDButton
+			android:id="@+id/throttleFn" android:layout_width="0px"
+			android:layout_weight="25" android:layout_height="fill_parent"
+			android:text="@string/FunctionGroup" android:textStyle="bold" />
+	</LinearLayout>
+	<LinearLayout android:id="@+id/fun4" android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="0px"
+		android:layout_weight="25">
+		<net.rocrail.android.widgets.Slider
+			android:id="@+id/Speed" android:max="100" android:progress="0"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:paddingLeft="20dp" android:paddingRight="20dp"
+			android:paddingBottom="5dp" />
+	</LinearLayout>
 </LinearLayout>

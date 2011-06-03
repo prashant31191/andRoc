@@ -203,7 +203,7 @@ public class ActThrottle extends ActBase
     LocoID = m_RocrailService.Prefs.LocoID;
     setContentView(R.layout.throttle);
     
-    getWindow().setLayout((m_RocrailService.Prefs.SmallThrottle ? 300:LayoutParams.FILL_PARENT), LayoutParams.FILL_PARENT);
+    getWindow().setLayout((m_RocrailService.Prefs.SmallThrottle ? 300:LayoutParams.WRAP_CONTENT), LayoutParams.FILL_PARENT);
 
     Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
     s.setPrompt(getText(R.string.SelectLoco));
