@@ -115,4 +115,5 @@
   <string name="Dispatch">Dispatch</string>
   <string name="AcceptIdent">Accept BiDi Ident</string>
   <string name="EmergencyStop">Emergency stop</string>
+  <string name="SmallThrottle">Small throttle</string>
 </resources>

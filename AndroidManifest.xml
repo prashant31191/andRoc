@@ -20,7 +20,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.rocrail.androc"
-      android:versionName="1.4.264" android:versionCode="264">
+      android:versionName="1.4.265" android:versionCode="265">
     <supports-screens android:anyDensity="false" android:largeScreens="true"
           android:normalScreens="true" android:smallScreens="true"/>
       
@@ -35,7 +35,7 @@
         <activity android:name=".activities.ActThrottle" android:theme="@style/FullHeightDialog"/>
         <activity android:name=".activities.ActSystem" android:theme="@style/FullHeightDialog"/>
         <activity android:name=".activities.ActMenu" android:theme="@style/FullHeightDialog" />
-        <activity android:name=".activities.ActLayout" />
+        <activity android:name=".activities.ActLayout" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActLoco" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActLocoSetup" android:theme="@style/FullHeightDialog"/>
         <activity android:name=".activities.ActLevel" />
