@@ -101,7 +101,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     
     if( progressValue >= 100 ) {
       //ActConnect.this.throttleView();
-      ActConnect.this.layoutView();
+      ActConnect.this.layoutView(true);
       ActConnect.this.finish();
     }
 

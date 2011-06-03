@@ -83,19 +83,31 @@ public class ActLayout extends ListActivity implements ServiceListener {
             Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ActLayout.this,net.rocrail.androc.activities.ActLevel.class);
         intent.putExtra("level", position - (m_Base.m_RocrailService.m_Model.ModPlan?1:0));
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
       }
     });
+    
+    Bundle extras = getIntent().getExtras();
+    if (extras != null) {
+      String init = extras.getString("init");
+      if(init != null && init.equals("true"))
+        idx = 1;
+    }
+
     
     if( idx == 1 ) {
       // show it
       Intent intent = new Intent(ActLayout.this,net.rocrail.androc.activities.ActLevel.class);
+      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       intent.putExtra("level", 0);
       startActivity(intent);
       finish();
     }
     else if( m_Base.m_RocrailService.m_Model.ModPlan && m_Base.m_RocrailService.Prefs.Modview ) {
       Intent intent = new Intent(ActLayout.this,net.rocrail.androc.activities.ActLevel.class);
+      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       intent.putExtra("level", -1);
       startActivity(intent);
       finish();

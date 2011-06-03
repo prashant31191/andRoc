@@ -214,7 +214,16 @@ public class ActBase extends Activity implements ServiceListener {
     Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLayout.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     m_Activity.startActivityIfNeeded(intent,0);
-    if(Finish) 
+    //if(Finish) 
+      m_Activity.finish();
+  }
+  
+  public void layoutView(boolean init) {
+    Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLayout.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.putExtra("init", "true");
+    m_Activity.startActivityIfNeeded(intent,0);
+//    if(Finish) 
       m_Activity.finish();
   }
   

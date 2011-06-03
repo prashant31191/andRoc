@@ -63,7 +63,8 @@ public class ActLevel extends ActBase implements OnZoomListener {
       ModPlan = (Z == -1 ? true:false);
     }
 
-    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_SYSTEM | ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
+    MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_SYSTEM | 
+                    ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY | ActBase.MENU_LAYOUT;
     Finish = false;
     connectWithService();
   }
