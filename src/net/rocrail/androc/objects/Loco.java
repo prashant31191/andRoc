@@ -53,6 +53,7 @@ public class Loco {
   public int     Vmin    = 0;
   public String  Vmode   = "";
   public int     Vprev   = 0;
+  public int     Vfact   = 100;
   
   public static final int VDelta = 5;
   
@@ -95,6 +96,10 @@ public class Loco {
     Vmin  = Item.getAttrValue(atts, "V_min", 10);
     Vmode = Item.getAttrValue(atts, "V_mode", "");
 
+    if( Vmode.equals("kmh") )
+      Vfact = Vmax;
+    
+    
     fx = Item.getAttrValue(atts, "fx", fx );
     
     for(int i = 1; i < 32; i++) {
@@ -116,7 +121,10 @@ public class Loco {
     Dir    = Item.getAttrValue(atts, "dir", Dir);
     Speed  = Item.getAttrValue(atts, "V", Speed);
     Lights = Item.getAttrValue(atts, "fn", Lights );
-    Mode  = Item.getAttrValue(atts, "mode","");
+    Mode   = Item.getAttrValue(atts, "mode", "");
+    Vmax   = Item.getAttrValue(atts, "V_max", Vmax);
+    Vmid   = Item.getAttrValue(atts, "V_mid", Vmid);
+    Vmin   = Item.getAttrValue(atts, "V_min", Vmin);
 
     RunTime = Item.getAttrValue(atts, "runtime", 0);
     Placing = Item.getAttrValue(atts, "placing", Placing);
@@ -126,8 +134,12 @@ public class Loco {
       HalfAuto  = Mode.equals("halfauto");
     }
     
-    Speed = (int)((Speed * 100.0) / Vmax); 
-
+    if( Vmode.equals("kmh") )
+      Vfact = Vmax;
+    else
+      Vfact = 100;
+    
+    Speed = (int)((Speed * 100.0) / Vfact); 
   }
   
   public boolean isPercentMode() {
@@ -227,10 +239,11 @@ public class Loco {
   }
   
   public void setSpeed(int V, boolean force) {
-    int vVal = (int)(V * (Vmax/100.00));
+    int vVal = (int)(V * (Vfact/100.00));
     
     if( force || StrictMath.abs( Vprev - vVal) >= VDelta ) {
       Speed = vVal;
+      System.out.println("set Speed="+Speed);
       setSpeed();
     }
   }
