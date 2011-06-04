@@ -117,16 +117,16 @@ public class FiddleYard extends Item  {
       paint.setStyle(Paint.Style.STROKE);
     }
 
-    paint.setStrokeWidth(2);
+    paint.setStrokeWidth(1);
     
     //if( Ori.equals("west") || Ori.equals("east") ) {
     if( !textVertical ) {
-      RectF rect = new RectF(1,3, (32 * NrTracks) - 1, 28);
-      canvas.drawRoundRect(rect, 10, 10, paint);
+      RectF rect = new RectF(1,3, (m_RocrailService.Prefs.Size * NrTracks) - 1, (int)((m_RocrailService.Prefs.Size/8.0)*7.0));
+      canvas.drawRoundRect(rect, m_RocrailService.Prefs.Size/4, m_RocrailService.Prefs.Size/4, paint);
     }
     else {
-      RectF rect = new RectF(3,1, 28, (32 * NrTracks) - 1);
-      canvas.drawRoundRect(rect, 10, 10, paint);
+      RectF rect = new RectF(3,1, (int)((m_RocrailService.Prefs.Size/8.0)*7.0), (m_RocrailService.Prefs.Size * NrTracks) - 1);
+      canvas.drawRoundRect(rect, m_RocrailService.Prefs.Size/4, m_RocrailService.Prefs.Size/4, paint);
     }
 
     

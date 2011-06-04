@@ -42,13 +42,16 @@ public class Track extends Item {
     if (Type.equals("curve")) {
       ImageName = String.format("curve_%d", orinr);
     } 
-    else if (Type.equals("buffer") || Type.equals("connector") || Type.equals("dir") || Type.equals("dirall") ) {
+    else if (Type.equals("buffer") || Type.equals("connector") || Type.equals("dir") ) {
       // symbol naming fix (see rocrail/impl/pclient.c line 250)
       if (orinr == 1)
         orinr = 3;
       else if (orinr == 3)
         orinr = 1;
       ImageName = String.format("%s_%d", Type, orinr);
+    } 
+    else if( Type.equals("dirall") ) {
+      ImageName = String.format("%s_%d", Type, (orinr % 2 == 0 ? 2 : 1));
     } 
     else {
       ImageName = String.format("track_%d", (orinr % 2 == 0 ? 2 : 1));

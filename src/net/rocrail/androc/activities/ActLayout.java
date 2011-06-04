@@ -93,7 +93,8 @@ public class ActLayout extends ListActivity implements ServiceListener {
     if (extras != null) {
       String init = extras.getString("init");
       if(init != null && init.equals("true"))
-        idx = 1;
+        if( !(m_Base.m_RocrailService.m_Model.ModPlan && m_Base.m_RocrailService.Prefs.Modview) )
+          idx = 1;
     }
 
     
@@ -105,7 +106,8 @@ public class ActLayout extends ListActivity implements ServiceListener {
       startActivity(intent);
       finish();
     }
-    else if( m_Base.m_RocrailService.m_Model.ModPlan && m_Base.m_RocrailService.Prefs.Modview ) {
+    
+    if( m_Base.m_RocrailService.m_Model.ModPlan && m_Base.m_RocrailService.Prefs.Modview ) {
       Intent intent = new Intent(ActLayout.this,net.rocrail.androc.activities.ActLevel.class);
       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       intent.putExtra("level", -1);

@@ -313,6 +313,12 @@ public class ActLevel extends ActBase implements OnZoomListener {
     m_RocrailService.Prefs.save();
 
     Intent intent = new Intent(this,net.rocrail.androc.activities.ActLevel.class);
+    if( m_RocrailService.m_Model.ModPlan && m_RocrailService.Prefs.Modview ) {
+      intent.putExtra("level", -1);
+    }
+    else
+      intent.putExtra("level", Z);
+
     startActivity(intent);
     levelView.zoomButtonsController.setVisible(false);
     finish();
