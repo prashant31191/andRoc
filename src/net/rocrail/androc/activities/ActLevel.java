@@ -64,7 +64,8 @@ public class ActLevel extends ActBase implements OnZoomListener {
     }
 
     MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_SYSTEM | 
-                    ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY | ActBase.MENU_LAYOUT;
+                    ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
+    
     Finish = false;
     connectWithService();
   }
@@ -72,6 +73,9 @@ public class ActLevel extends ActBase implements OnZoomListener {
   public void connectedWithService() {
     super.connectedWithService();
     initView();
+    if( !(m_RocrailService.m_Model.ModPlan && m_RocrailService.Prefs.Modview) ) {
+      MenuSelection |= ActBase.MENU_LAYOUT;
+    }
   }
   
   
