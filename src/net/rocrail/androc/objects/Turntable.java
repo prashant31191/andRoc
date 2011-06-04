@@ -93,14 +93,18 @@ public class Turntable extends Item {
   @Override
   public void Draw( Canvas canvas ) {
     double dBridgepos = 0;
-
+    int size = m_RocrailService.Prefs.Size;
+    double c79 = (79*size)/32;
+    double c36 = (36*size)/32;
+    double c32 = (32*size)/32;
+    
     Paint paint = new Paint();
     paint.setAntiAlias(true);
     paint.setStyle(Paint.Style.STROKE);
    
     paint.setColor(Color.LTGRAY);
     paint.setStrokeWidth(1);
-	  canvas.drawCircle(79, 79, 79, paint);
+	  canvas.drawCircle((int)c79, (int)c79, (int)c79, paint);
 
     
     Iterator<TTTrack> it = Tracks.iterator();
@@ -109,36 +113,36 @@ public class Turntable extends Item {
       
       double degr = 7.5 * track.Nr;
       double a = (degr*2*StrictMath.PI)/360;
-      double xa = StrictMath.cos(a) * 79.0;
-      double ya = StrictMath.sin(a) * 79.0;
-      int x = 79 + (int)xa;
-      int y = 79 - (int)ya;
+      double xa = StrictMath.cos(a) * c79;
+      double ya = StrictMath.sin(a) * c79;
+      int x = (int)c79 + (int)xa;
+      int y = (int)c79 - (int)ya;
 
       if( track.State || (Bridgepos == track.Nr) ) {
         paint.setColor(Color.RED);
-        paint.setStrokeWidth(6);
+        paint.setStrokeWidth(Math.max(1,(6*size)/32));
         dBridgepos = degr;
       }
       else {
         paint.setColor(Color.GRAY);
-        paint.setStrokeWidth(6);
+        paint.setStrokeWidth(Math.max(1,(6*size)/32));
       }
 
       if( track.Show )
-        canvas.drawLine( 79, 79, x, y, paint );
+        canvas.drawLine( (int)c79, (int)c79, x, y, paint );
 
     }
 
 
-    paint.setStrokeWidth(2);
+    paint.setStrokeWidth(Math.max(1,(2*size/32)));
     paint.setStyle(Paint.Style.FILL);
     paint.setColor(Color.WHITE);
-	  canvas.drawCircle(79, 79, 36, paint);
+	  canvas.drawCircle((int)c79, (int)c79, (int)c36, paint);
 
     paint.setStyle(Paint.Style.STROKE);
     paint.setColor(Color.BLACK);
-    canvas.drawCircle(79, 79, 36, paint);
-	  canvas.drawCircle(79, 79, 32, paint);
+    canvas.drawCircle((int)c79, (int)c79, (int)c36, paint);
+	  canvas.drawCircle((int)c79, (int)c79, (int)c32, paint);
 
 
     canvas.drawPath( rotateBridge( dBridgepos ), paint);
@@ -159,6 +163,10 @@ public class Turntable extends Item {
   
   Path rotateBridge( double ori ) {
     Path p = new Path();
+    int size = m_RocrailService.Prefs.Size;
+    double c79 = (79*size)/32;
+    double c36 = (36*size)/32;
+    double c32 = (32*size)/32;
     float originX = 0;
     float originY = 0;
     double[] bp = { 10.0, 170.0, 190.0, 350.0 };
@@ -168,16 +176,16 @@ public class Turntable extends Item {
       if( angle > 360.0 )
         angle = angle -360.0;
       double a = (angle*2*StrictMath.PI)/360;
-      double xa = StrictMath.cos(a) * 32.0;
-      double ya = StrictMath.sin(a) * 32.0;
+      double xa = StrictMath.cos(a) * c32;
+      double ya = StrictMath.sin(a) * c32;
       
       if( i == 0 ) {
-        originX = 79 + (int)xa;
-        originY = 79 - (int)ya;
-        p.moveTo(79 + (int)xa, 79 - (int)ya);
+        originX = (int)c79 + (int)xa;
+        originY = (int)c79 - (int)ya;
+        p.moveTo((int)c79 + (int)xa, (int)c79 - (int)ya);
       }
       else {
-        p.lineTo(79 + (int)xa, 79 - (int)ya);
+        p.lineTo((int)c79 + (int)xa, (int)c79 - (int)ya);
       }
     }
     
@@ -190,6 +198,11 @@ public class Turntable extends Item {
 
   Path rotateBridgeSensors( double ori ) {
     Path p = new Path();
+    int size = m_RocrailService.Prefs.Size;
+    double c79 = (79*size)/32;
+    double c36 = (36*size)/32;
+    double c32 = (32*size)/32;
+    double c20 = (20*size)/32;
     float originX = 0;
     float originY = 0;
     double[] bp = { 10.0, 170.0, 190.0, 350.0 };
@@ -199,15 +212,15 @@ public class Turntable extends Item {
       if( angle > 360.0 )
         angle = angle -360.0;
       double a = (angle*2*StrictMath.PI)/360;
-      double xa = StrictMath.cos(a) * 20.0;
-      double ya = StrictMath.sin(a) * 20.0;
+      double xa = StrictMath.cos(a) * c20;
+      double ya = StrictMath.sin(a) * c20;
       if( i == 0 ) {
-        originX = 79 + (int)xa;
-        originY = 79 - (int)ya;
-        p.moveTo(79 + (int)xa, 79 - (int)ya);
+        originX = (int)c79 + (int)xa;
+        originY = (int)c79 - (int)ya;
+        p.moveTo((int)c79 + (int)xa, (int)c79 - (int)ya);
       }
       else {
-        p.lineTo(79 + (int)xa, 79 - (int)ya);
+        p.lineTo((int)c79 + (int)xa, (int)c79 - (int)ya);
       }
     }
     // end point to close the polygon
