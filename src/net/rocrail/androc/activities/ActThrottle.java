@@ -85,6 +85,7 @@ public class ActThrottle extends ActBase
            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
                  dialog.cancel();
+                 ActThrottle.this.finish();
                }
            });
     AlertDialog alert = builder.create();  

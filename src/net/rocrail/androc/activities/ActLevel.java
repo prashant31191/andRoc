@@ -32,8 +32,10 @@ import net.rocrail.androc.widgets.LevelItem;
 
 
 import net.rocrail.androc.R;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -77,6 +79,21 @@ public class ActLevel extends ActBase implements OnZoomListener {
       MenuSelection |= ActBase.MENU_LAYOUT;
     }
   }
+  
+  public void showDonate() {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setMessage("Rocrail runs entirely on volunteer labor. However, Rocrail also needs contributions of money. Your continued support is vital for keeping Rocrail available. If you already did donate you can ask a key to disable this on startup dialog: donate@rocrail.net")
+           .setCancelable(false)
+           .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int id) {
+                 dialog.cancel();
+                 ActLevel.this.finish();
+               }
+           });
+    AlertDialog alert = builder.create();  
+    alert.show();
+  }
+
   
   
   
@@ -233,6 +250,10 @@ public class ActLevel extends ActBase implements OnZoomListener {
     protected void onPostExecute(Void v) {
       if( level.progressDialog != null ) {
         level.dismissDialog(ActLevel.PROGRESS_DIALOG);
+        if( !m_RocrailService.m_Model.m_bDonKey && !m_RocrailService.m_bDidShowDonate ) {
+          showDonate();
+          m_RocrailService.m_bDidShowDonate = true;
+        }
       }
     }
   }
