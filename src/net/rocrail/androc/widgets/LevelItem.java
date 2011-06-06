@@ -45,7 +45,7 @@ public class LevelItem extends ImageView implements OnGestureListener {
     this.levelCanvas = levelCanvas;
     this.item = item;
     this.size = size;
-    setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+    setScaleType(ImageView.ScaleType.FIT_CENTER);
     setPadding(0,0,0,0);
     
     gestureDetector = new GestureDetector(this);
