@@ -76,13 +76,18 @@ public class LevelCanvas extends AbsoluteLayout {
         int x2 = (int) event.getRawX();
         int y2 = (int) event.getRawY();
 
-        scrollBy(currentX - x2, currentY - y2);
-        int x = getScrollX();
-        int y = getScrollY();
-        if (x < 0 || y < 0)
-          scrollTo(x < 0 ? 0 : x, y < 0 ? 0 : y);
-        currentX = x2;
-        currentY = y2;
+        int xDelta = currentX - x2;
+        int yDelta = currentY - y2;
+        
+        if( xDelta >= 8 || xDelta <= -8 || yDelta >= 8 || yDelta <= -8 ) {
+          scrollBy(currentX - x2, currentY - y2);
+          int x = getScrollX();
+          int y = getScrollY();
+          if (x < 0 || y < 0)
+            scrollTo(x < 0 ? 0 : x, y < 0 ? 0 : y);
+          currentX = x2;
+          currentY = y2;
+        }
       }
       else {
         currentX = (int) event.getRawX();
