@@ -24,7 +24,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsoluteLayout;
-import android.widget.RelativeLayout;
 import android.widget.ZoomButtonsController;
 
 /*
@@ -42,6 +41,7 @@ public class LevelCanvas extends AbsoluteLayout {
   private int currentX;
   private int currentY;
   private boolean startMoveInited = false;
+  private boolean firstMove = false;
   public ZoomButtonsController zoomButtonsController = null;
 
   public LevelCanvas(Context context, AttributeSet attrs) {
@@ -68,6 +68,7 @@ public class LevelCanvas extends AbsoluteLayout {
       currentX = (int) event.getRawX();
       currentY = (int) event.getRawY();
       startMoveInited = true;
+      firstMove = true;
       break;
 
 
@@ -79,7 +80,7 @@ public class LevelCanvas extends AbsoluteLayout {
         int xDelta = currentX - x2;
         int yDelta = currentY - y2;
         
-        if( xDelta >= 8 || xDelta <= -8 || yDelta >= 8 || yDelta <= -8 ) {
+        if( !firstMove || (xDelta >= 16 || xDelta <= -16 || yDelta >= 16 || yDelta <= -16) ) {
           scrollBy(currentX - x2, currentY - y2);
           int x = getScrollX();
           int y = getScrollY();
@@ -87,18 +88,21 @@ public class LevelCanvas extends AbsoluteLayout {
             scrollTo(x < 0 ? 0 : x, y < 0 ? 0 : y);
           currentX = x2;
           currentY = y2;
+          firstMove = false;
         }
       }
       else {
         currentX = (int) event.getRawX();
         currentY = (int) event.getRawY();
         startMoveInited = true;
+        firstMove = true;
       }
       return true;
 
 
     case MotionEvent.ACTION_UP:
       startMoveInited = false;
+      firstMove = true;
       break;
 
     }
