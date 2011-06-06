@@ -35,7 +35,7 @@ import android.widget.ImageView;
 public class LevelItem extends ImageView implements OnGestureListener {
   LevelCanvas levelCanvas = null;
   private Item item = null;
-  int size = 32;
+  public int size = 32;
   
   private GestureDetector gestureDetector = null;
 
@@ -45,7 +45,7 @@ public class LevelItem extends ImageView implements OnGestureListener {
     this.levelCanvas = levelCanvas;
     this.item = item;
     this.size = size;
-    //setScaleType(ImageView.ScaleType.CENTER);
+    setScaleType(ImageView.ScaleType.CENTER_INSIDE);
     setPadding(0,0,0,0);
     
     gestureDetector = new GestureDetector(this);

@@ -37,24 +37,29 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ZoomButtonsController;
 import android.widget.AbsoluteLayout.LayoutParams;
 import android.widget.ZoomButtonsController.OnZoomListener;
 
 @SuppressWarnings("deprecation")
-public class ActLevel extends ActBase implements OnZoomListener {
+public class ActLevel extends ActBase implements OnZoomListener, OnLongClickListener {
   public static final int PROGRESS_DIALOG = 0;
   boolean ModPlan = false;
   int Z = 0;
   ProgressDialog progressDialog = null;
   LevelCanvas levelView = null;
   boolean quitShowed = false;
-
+  List<ZLevel> zlevelList = new ArrayList<ZLevel>();
+  
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -126,7 +131,6 @@ public class ActLevel extends ActBase implements OnZoomListener {
     }
     
     new LevelTask().execute(this);
-
     
 /*    
     plansize = CGSizeMake(ITEMSIZE*cx, ITEMSIZE*cy); 
@@ -135,6 +139,30 @@ public class ActLevel extends ActBase implements OnZoomListener {
   }
 
   
+  void Zoom() {
+    int size = m_RocrailService.Prefs.Size;
+    Iterator<ZLevel> itZ = zlevelList.iterator();
+    while( itZ.hasNext() ) {
+      ZLevel zlevel = itZ.next();
+      Iterator<Item> it = zlevel.itemList.iterator();
+      int xOffset = 0;
+      int yOffset = 0;
+      if( ModPlan ) {
+        xOffset = zlevel.X;
+        yOffset = zlevel.Y;
+      }
+      while( it.hasNext() ) {
+        Item item = it.next();
+        int x = ModPlan?item.Mod_X:item.X;
+        int y = ModPlan?item.Mod_Y:item.Y;
+        LayoutParams lp = new LayoutParams(item.cX*size, item.cY*size, (x+xOffset)*size, (y+yOffset)*size);
+        item.imageView.size = size;
+        levelView.updateViewLayout(item.imageView, lp);
+      }
+    }
+  }
+  
+
   void doLevel(LevelCanvas levelView, ZLevel zlevel) {
     int cx = 0;
     int cy = 0;
@@ -172,7 +200,6 @@ public class ActLevel extends ActBase implements OnZoomListener {
       if( item.Y + item.cY > cy ) cy = item.Y + item.cY;
 
       levelView.addView(item.imageView, lp);
-
       
     }
     
@@ -225,6 +252,7 @@ public class ActLevel extends ActBase implements OnZoomListener {
           levelIdx++;
           zlevel.progressIdx = levelIdx;
           publishProgress(zlevel);
+          zlevelList.add(zlevel);
           Thread.yield();
         }
         
@@ -233,6 +261,7 @@ public class ActLevel extends ActBase implements OnZoomListener {
         ZLevel zlevel = level.m_RocrailService.m_Model.m_ZLevelList.get(level.Z);
         zlevel.itemList = level.createLevelList(level.levelView, zlevel);
         publishProgress(zlevel);
+        zlevelList.add(zlevel);
       }
       return null;
     }
@@ -254,6 +283,8 @@ public class ActLevel extends ActBase implements OnZoomListener {
           showDonate();
           m_RocrailService.m_bDidShowDonate = true;
         }
+        levelView.setLongClickable(true);
+        levelView.setOnLongClickListener(ActLevel.this);
       }
     }
   }
@@ -333,6 +364,8 @@ public class ActLevel extends ActBase implements OnZoomListener {
     
     m_RocrailService.Prefs.save();
 
+    Zoom();
+    /*
     Intent intent = new Intent(this,net.rocrail.androc.activities.ActLevel.class);
     if( m_RocrailService.m_Model.ModPlan && m_RocrailService.Prefs.Modview ) {
       intent.putExtra("level", -1);
@@ -343,6 +376,13 @@ public class ActLevel extends ActBase implements OnZoomListener {
     startActivity(intent);
     levelView.zoomButtonsController.setVisible(false);
     finish();
+    */
+  }
+
+  @Override
+  public boolean onLongClick(View view) {
+    layoutView();
+    return true;
   }
 
 

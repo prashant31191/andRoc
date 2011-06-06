@@ -21,6 +21,7 @@ package net.rocrail.androc.objects;
 
 
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.widgets.LevelItem;
 
 import org.xml.sax.Attributes;
 
@@ -53,7 +54,7 @@ public class Item implements View.OnClickListener {
   public String Text = "";
   public boolean textVertical = false;
   public String ImageName = "";
-  public ImageView imageView = null;
+  public LevelItem imageView = null;
   public int colorName = 0;
   
   boolean Reserved = false;
