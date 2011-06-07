@@ -116,6 +116,10 @@ public class LevelItem extends ImageView implements OnGestureListener {
   
   @Override 
   public boolean onTouchEvent(MotionEvent event) {
+    System.out.println("LevelItem::onTouchEvent action=" + event.getAction());
+    if( event.getAction() == MotionEvent.ACTION_MOVE ) {
+      return true;
+    }
     return gestureDetector.onTouchEvent(event);
   }
   
@@ -143,26 +147,32 @@ public class LevelItem extends ImageView implements OnGestureListener {
   }
   @Override
   public boolean onDown(MotionEvent event) {
+    System.out.println("LevelItem::onDown");
     return super.onTouchEvent(event);
   }
   @Override
   public boolean onFling(MotionEvent arg0, MotionEvent arg1, float arg2, float arg3) {
+    System.out.println("LevelItem::onFling");
     return false;
   }
   @Override
   public void onLongPress(MotionEvent arg0) {
+    System.out.println("LevelItem::onLongPress");
     item.propertiesView();
   }
   @Override
   public boolean onScroll(MotionEvent event1, MotionEvent event2, float distX, float distY) {
     //levelCanvas.scrollBy((int)distX , (int)distY);
+    System.out.println("LevelItem::onScroll");
     return false;
   }
   @Override
   public void onShowPress(MotionEvent arg0) {
+    System.out.println("LevelItem::onShowPress");
   }
   @Override
   public boolean onSingleTapUp(MotionEvent event) {
+    System.out.println("LevelItem::onSingleTapUp");
     return super.onTouchEvent(event);
   }
 

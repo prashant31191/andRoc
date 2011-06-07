@@ -63,8 +63,10 @@ public class LevelCanvas extends AbsoluteLayout {
 
   @Override 
   public boolean onTouchEvent(MotionEvent event) {
+    System.out.println("LevelCanvas::onTouchEvent action=" + event.getAction());
     switch (event.getAction()) {
     case MotionEvent.ACTION_DOWN:
+      System.out.println("LevelCanvas::DOWN");
       currentX = (int) event.getRawX();
       currentY = (int) event.getRawY();
       startMoveInited = true;
@@ -73,6 +75,7 @@ public class LevelCanvas extends AbsoluteLayout {
 
 
     case MotionEvent.ACTION_MOVE:
+      System.out.println("LevelCanvas::MOVE");
       if (startMoveInited) {
         int x2 = (int) event.getRawX();
         int y2 = (int) event.getRawY();
@@ -101,6 +104,7 @@ public class LevelCanvas extends AbsoluteLayout {
 
 
     case MotionEvent.ACTION_UP:
+      System.out.println("LevelCanvas::UP");
       startMoveInited = false;
       firstMove = true;
       break;
