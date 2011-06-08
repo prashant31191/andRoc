@@ -22,30 +22,25 @@ package net.rocrail.androc.activities;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
 import net.rocrail.androc.widgets.LocoImage;
-
-
+import net.rocrail.android.widgets.Slider;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.Toast;
-import net.rocrail.androc.R;
-import net.rocrail.android.widgets.Slider;
 
 public class ActThrottle extends ActBase 
   implements ModelListener, AdapterView.OnItemSelectedListener, 
@@ -61,7 +56,7 @@ public class ActThrottle extends ActBase
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     //MenuSelection = ActBase.MENU_MENU | ActBase.MENU_LAYOUT | ActBase.MENU_SYSTEM | ActBase.MENU_LOCO | ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
-    MenuSelection = 0;
+    MenuSelection = ActBase.MENU_SYSTEM | ActBase.MENU_LOCO | ActBase.MENU_PREFERENCES;
 
     connectWithService();
   }
