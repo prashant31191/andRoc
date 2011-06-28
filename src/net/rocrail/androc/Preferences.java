@@ -31,6 +31,7 @@ public class Preferences {
   public static final String PREFS_RECENT = "connections";
   public static final String PREFS_HOST = "host";
   public static final String PREFS_PORT = "port";
+  public static final String PREFS_CTRLCODE = "ctrlcode";
   public static final String PREFS_LOCOID = "locoid";
   public static final String PREFS_MONITORING = "monitoring";
   public static final String PREFS_KEEPSCREENON = "keepscreenon";
@@ -49,6 +50,7 @@ public class Preferences {
   
   public String  Recent       = "Demo:rocrail.dyndns.org:8051;";
   public String  Host         = "rocrail.dyndns.org";
+  public String  CtrlCode     = "";
   public int     Port         = 8051;
   public String  RRHost       = "224.0.0.1";
   public int     RRPort       = 1234;
@@ -81,6 +83,7 @@ public class Preferences {
     SharedPreferences settings = rocrailService.getSharedPreferences(PREFS_NAME, 0);
     Host         = settings.getString(PREFS_HOST, Host);
     Port         = settings.getInt(PREFS_PORT, Port);
+    CtrlCode     = settings.getString(PREFS_CTRLCODE, CtrlCode);
     RRHost       = settings.getString(PREFS_RRNETHOST, RRHost);
     RRPort       = settings.getInt(PREFS_RRNETPORT, RRPort);
     Recent       = settings.getString(PREFS_RECENT, Recent);
@@ -148,13 +151,14 @@ public class Preferences {
   }
   
   public void saveConnection() {
-    saveConnection(Host, Port, true);
+    saveConnection(Host, Port, CtrlCode, true);
   }
-  public void saveConnection(String host, int port, boolean recent) {
+  public void saveConnection(String host, int port, String ctrlcode, boolean recent) {
     SharedPreferences settings = rocrailService.getSharedPreferences(PREFS_NAME, 0);
     SharedPreferences.Editor editor = settings.edit();
     editor.putString(PREFS_HOST, host);
     editor.putInt(PREFS_PORT, port);
+    editor.putString(PREFS_CTRLCODE, ctrlcode);
     if( recent) {
       Recent = RRConnection.serialize(conList);
       editor.putString(PREFS_RECENT, Recent);

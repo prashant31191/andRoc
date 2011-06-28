@@ -142,7 +142,8 @@ public class RocrailService extends Service {
     m_Socket = new Socket(Prefs.Host, Prefs.Port);
     
     if( !reconnect ) {
-      sendMessage("model",String.format("<model cmd=\"plan\" disablemonitor=\"%s\"/>", Prefs.Monitoring?"false":"true"));
+      sendMessage("model",String.format("<model cmd=\"plan\" controlcode=\"%s\" disablemonitor=\"%s\"/>", 
+          Prefs.CtrlCode, Prefs.Monitoring?"false":"true"));
     }
     
     if( m_Connection == null ) {

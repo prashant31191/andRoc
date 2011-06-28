@@ -138,9 +138,10 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
   };
 
   
-  void doConnect(String host, int port) {
-    m_RocrailService.Prefs.Host  = host;
-    m_RocrailService.Prefs.Port = port;
+  void doConnect(String host, int port, String ctrlcode) {
+    m_RocrailService.Prefs.Host     = host;
+    m_RocrailService.Prefs.Port     = port;
+    m_RocrailService.Prefs.CtrlCode = ctrlcode;
     
     try {
       m_RocrailService.connect(Reconnect);
@@ -203,12 +204,15 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
           
           EditText s = (EditText) findViewById(R.id.connectHost);
           m_RocrailService.Prefs.Host = s.getText().toString();
+          s = (EditText) findViewById(R.id.controlCode);
+          m_RocrailService.Prefs.CtrlCode = s.getText().toString();
           s = (EditText) findViewById(R.id.connectPort);
           try {
             m_RocrailService.Prefs.Port = Integer.parseInt(s.getText().toString());
-            RRConnection.addToList(m_RocrailService.Prefs.Title, m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port, m_RocrailService.Prefs.conList);
+            RRConnection.addToList(m_RocrailService.Prefs.Title, m_RocrailService.Prefs.Host, 
+                m_RocrailService.Prefs.Port, m_RocrailService.Prefs.CtrlCode, m_RocrailService.Prefs.conList);
             
-            doConnect(m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port);
+            doConnect(m_RocrailService.Prefs.Host, m_RocrailService.Prefs.Port, m_RocrailService.Prefs.CtrlCode);
           }
           catch(Exception e) {
             // port not a number
@@ -261,7 +265,7 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
       TextView tv = (TextView) findViewById(R.id.connectTitle);
       tv.setText(""+con.Title);
 
-      doConnect(con.HostName, con.Port);
+      doConnect(con.HostName, con.Port, con.ControlCode);
     }
   }
 
