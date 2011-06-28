@@ -1,17 +1,13 @@
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: andRoc 0.9\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-21 07:34+0200\n"
-"PO-Revision-Date: 2010-05-28 07:34+0200\n"
-"Last-Translator: Rob Versluis <team@rocrail.net>\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-06-28 22:34+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-17 06:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
 
 #: res/values/strings.xml:22(string)
 msgid "Title"
@@ -380,3 +376,24 @@ msgstr ""
 #: res/values/strings.xml:114(string)
 msgid "Select loco"
 msgstr ""
+
+#: res/values/strings.xml:115(string)
+msgid "Dispatch"
+msgstr ""
+
+#: res/values/strings.xml:116(string)
+msgid "Accept BiDi Ident"
+msgstr ""
+
+#: res/values/strings.xml:117(string)
+msgid "Emergency stop"
+msgstr ""
+
+#: res/values/strings.xml:118(string)
+msgid "Small throttle"
+msgstr ""
+
+#: res/values/strings.xml:119(string)
+msgid "Ctrl code"
+msgstr ""
+
