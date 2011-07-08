@@ -72,11 +72,13 @@ public class ActTurntable  extends ActBase implements OnItemSelectedListener {
 
     final LEDButton fyOpen = (LEDButton) findViewById(R.id.fyOpen);
     fyOpen.ON = m_Turntable.Closed;
+    fyOpen.setMinWidth(200);
     fyOpen.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           m_Turntable.OpenClose();
           ((LEDButton)v).ON = !m_Turntable.Closed;
           v.invalidate();
+          
         }
     });
 
@@ -94,7 +96,11 @@ public class ActTurntable  extends ActBase implements OnItemSelectedListener {
     Iterator<Turntable.TTTrack> it = m_Turntable.Tracks.iterator();
     while( it.hasNext() ) {
       Turntable.TTTrack track = it.next();
-      m_adapterForSpinner.add(""+track.Nr);
+      
+     if ( !track.Description.equals(""))
+       m_adapterForSpinner.add(""+track.Description);
+     else
+       m_adapterForSpinner.add(""+track.Nr);
     }
     
     s.setOnItemSelectedListener(this);

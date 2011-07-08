@@ -40,6 +40,7 @@ import android.view.View;
 public class Turntable extends Item {
   public List<TTTrack> Tracks = new ArrayList<TTTrack>();
   int Bridgepos = 0;
+  int Symbolsize = 6;
   boolean Sensor1 = false;
   boolean Sensor2 = false;
   public boolean Closed = false;
@@ -50,6 +51,8 @@ public class Turntable extends Item {
     Bridgepos = Item.getAttrValue(atts, "bridgepos", Bridgepos );
     Sensor1 = Item.getAttrValue(atts, "state1", Sensor1 );
     Sensor2 = Item.getAttrValue(atts, "state2", Sensor2 );
+    
+    Symbolsize = Item.getAttrValue(atts, "symbolsize", Symbolsize );
   }
   
   public String getImageName(boolean ModPlan) {
@@ -66,6 +69,7 @@ public class Turntable extends Item {
     Bridgepos = Item.getAttrValue(atts, "bridgepos", Bridgepos );
     Sensor1 = Item.getAttrValue(atts, "state1", Sensor1 );
     Sensor2 = Item.getAttrValue(atts, "state2", Sensor2 );
+    Symbolsize = Item.getAttrValue(atts, "symbolsize", Symbolsize );
     Closed   = State.equals("closed");
 
     if( Tracks != null ) {
@@ -83,6 +87,7 @@ public class Turntable extends Item {
   public void addTrack(Attributes atts ) {
     TTTrack track = new TTTrack();
     track.Nr = Item.getAttrValue(atts, "nr", 0 );
+    track.Description = Item.getAttrValue(atts, "desc", "" );
     track.State = Item.getAttrValue(atts, "state", false );
     track.Show  = Item.getAttrValue(atts, "show", true );
     Tracks.add(track);
@@ -94,9 +99,11 @@ public class Turntable extends Item {
   public void Draw( Canvas canvas ) {
     double dBridgepos = 0;
     int size = m_RocrailService.Prefs.Size;
-    double c79 = (79*size)/32;
-    double c36 = (36*size)/32;
-    double c32 = (32*size)/32;
+    
+    double ssize = this.Symbolsize/5.0;
+    double c79 = (79*size)/32*ssize;
+    double c36 = (36*size)/32*ssize;
+    double c32 = (32*size)/32*ssize;
     
     Paint paint = new Paint();
     paint.setAntiAlias(true);
@@ -164,9 +171,12 @@ public class Turntable extends Item {
   Path rotateBridge( double ori ) {
     Path p = new Path();
     int size = m_RocrailService.Prefs.Size;
-    double c79 = (79*size)/32;
-    double c36 = (36*size)/32;
-    double c32 = (32*size)/32;
+    
+    double ssize = this.Symbolsize/5.0;
+    
+    double c79 = (79*size)/32*ssize;
+    double c36 = (36*size)/32*ssize;
+    double c32 = (32*size)/32*ssize;
     float originX = 0;
     float originY = 0;
     double[] bp = { 10.0, 170.0, 190.0, 350.0 };
@@ -199,10 +209,14 @@ public class Turntable extends Item {
   Path rotateBridgeSensors( double ori ) {
     Path p = new Path();
     int size = m_RocrailService.Prefs.Size;
-    double c79 = (79*size)/32;
-    double c36 = (36*size)/32;
-    double c32 = (32*size)/32;
-    double c20 = (20*size)/32;
+    
+    double ssize = this.Symbolsize/5.0;
+    
+    double c79 = (79*size)/32*ssize;
+    double c36 = (36*size)/32*ssize;
+    double c32 = (32*size)/32*ssize;
+    double c20 = (20*size)/32*ssize;
+    
     float originX = 0;
     float originY = 0;
     double[] bp = { 10.0, 170.0, 190.0, 350.0 };
@@ -253,6 +267,7 @@ public class Turntable extends Item {
 
   public class TTTrack {
     public int Nr = 0;
+    public String Description = "";
     public boolean State = false;
     public boolean Show = true;
   }
