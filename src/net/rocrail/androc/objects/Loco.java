@@ -241,7 +241,7 @@ public class Loco {
   public void setSpeed(int V, boolean force) {
     int vVal = (int)(V * (Vfact/100.00));
     
-    if( force || V == 100 || V == 0 || StrictMath.abs( Vprev - vVal) >= VDelta ) {
+    if( force || V == 100 || V == 0 || StrictMath.abs( Vprev - vVal) >= VDelta || Steps < 50 ) {
       Speed = vVal;
       System.out.println("set Speed="+Speed);
       setSpeed();
