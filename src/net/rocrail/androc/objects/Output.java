@@ -25,16 +25,24 @@ import net.rocrail.androc.RocrailService;
 import org.xml.sax.Attributes;
 
 
+import android.view.MotionEvent;
 import android.view.View;
 
 public class Output extends Item implements View.OnClickListener {
+  public boolean toggle = false;
 
   public Output(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
+    toggle = Item.getAttrValue(atts, "toggleswitch", false );
   }
 
   public void onClick(View v) {
     flip();
+  }
+
+  public void onClickUp(View v) {
+    if( toggle )
+      flip();
   }
 
   public void flip() {
@@ -54,7 +62,6 @@ public class Output extends Item implements View.OnClickListener {
     
     return ImageName;
   }
-
 
   
 }

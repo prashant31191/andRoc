@@ -173,6 +173,7 @@ public class LevelItem extends ImageView implements OnGestureListener {
   @Override
   public boolean onSingleTapUp(MotionEvent event) {
     System.out.println("LevelItem::onSingleTapUp");
+    item.onClickUp(this);
     return super.onTouchEvent(event);
   }
 
