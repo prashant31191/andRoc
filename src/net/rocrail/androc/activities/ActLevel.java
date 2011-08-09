@@ -71,7 +71,7 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
     }
 
     MenuSelection = ActBase.MENU_THROTTLE | ActBase.MENU_MENU | ActBase.MENU_SYSTEM | 
-                    ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
+                    ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY | ActBase.MENU_ZOOM;
     
     Finish = false;
     connectWithService();

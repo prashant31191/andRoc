@@ -34,6 +34,7 @@ import android.os.IBinder;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.WindowManager;
 
 public class ActBase extends Activity implements ServiceListener {
@@ -48,11 +49,12 @@ public class ActBase extends Activity implements ServiceListener {
   final static int MENU_PREFERENCES = 0x0100;
   final static int MENU_ACCESSORY   = 0x0200;
   final static int MENU_LOCOSETUP   = 0x0400;
+  final static int MENU_ZOOM        = 0x0800;
   
   Activity        m_Activity = null;
   ServiceListener m_Listener = null;
   
-  public int MenuSelection = MENU_THROTTLE | MENU_SYSTEM | MENU_LAYOUT | MENU_MENU;
+  public int MenuSelection = 0;
   public boolean Finish = false;
   
   public RocrailService             m_RocrailService       = null;
@@ -117,12 +119,16 @@ public class ActBase extends Activity implements ServiceListener {
       menu.add(0, MENU_MENU    , 0, R.string.Menu).setIcon(R.drawable.menu);
     if( (MenuSelection & MENU_LOCO)  == MENU_LOCO )
       menu.add(0, MENU_LOCO    , 0, R.string.Loco).setIcon(R.drawable.loco);
+    if( (MenuSelection & MENU_ZOOM)  == MENU_ZOOM )
+      menu.add(0, MENU_ZOOM    , 0, R.string.Zoom).setIcon(R.drawable.zoom);
     if( (MenuSelection & MENU_PREFERENCES)  == MENU_PREFERENCES )
       menu.add(0, MENU_PREFERENCES    , 0, R.string.Preferences).setIcon(R.drawable.preferences);
     if( (MenuSelection & MENU_ACCESSORY)  == MENU_ACCESSORY )
       menu.add(0, MENU_ACCESSORY    , 0, R.string.Accessory).setIcon(R.drawable.accessory);
     if( (MenuSelection & MENU_LOCOSETUP)  == MENU_LOCOSETUP )
       menu.add(0, MENU_LOCOSETUP    , 0, R.string.LocoSetup).setIcon(R.drawable.locosetup);
+    if( (MenuSelection & MENU_ZOOM)  == MENU_ZOOM )
+      menu.add(0, MENU_ZOOM    , 0, R.string.Zoom).setIcon(R.drawable.zoom);
     return true;
   }
 
@@ -155,6 +161,9 @@ public class ActBase extends Activity implements ServiceListener {
       return true;
     case MENU_LOCOSETUP:
       locosetupView();
+      return true;
+    case MENU_ZOOM:
+      zoomLevel();
       return true;
     }
     return false;
@@ -232,6 +241,12 @@ public class ActBase extends Activity implements ServiceListener {
     m_Activity.startActivityIfNeeded(intent,0);
     if(Finish) 
       m_Activity.finish();
+  }
+
+  public void zoomLevel() {
+    MotionEvent event = MotionEvent.obtain(0, 0, MotionEvent.ACTION_UP, 
+        (float)0.0, (float)0.0, (float)0.0, (float)0.0, 0, (float)0.0, (float)0.0, 0, 0);
+    onTouchEvent(event);
   }
 
   public boolean onKeyDown(int keyCode, KeyEvent event) {
