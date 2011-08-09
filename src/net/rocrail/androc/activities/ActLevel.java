@@ -343,6 +343,11 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
     case MotionEvent.ACTION_UP:
       if (levelView.zoomButtonsController != null) {
         levelView.zoomButtonsController.setVisible(true);
+        levelView.zoomButtonsController.setFocusable(true);
+        levelView.zoomButtonsController.getZoomControls().setFocusable(true);
+        levelView.zoomButtonsController.getZoomControls().setFocusableInTouchMode(true);
+        levelView.zoomButtonsController.getZoomControls().requestFocus();
+        return true;
       }
     }
     return levelView.onTouchEvent(event);

@@ -120,6 +120,10 @@ public class LevelItem extends ImageView implements OnGestureListener {
     if( event.getAction() == MotionEvent.ACTION_MOVE ) {
       return true;
     }
+    
+    if( levelCanvas.zoomButtonsController != null && levelCanvas.zoomButtonsController.isVisible() )
+      return false;
+
     return gestureDetector.onTouchEvent(event);
   }
   
