@@ -371,6 +371,10 @@ public class ActThrottle extends ActBase
             Slider mSeekBar = (Slider)findViewById(R.id.Speed);
             //mSeekBar.setProgress(m_Loco.Speed);
             mSeekBar.setV(m_Loco.Speed);
+            if( m_Loco.Dir)
+              ((LEDButton)v).setText(""+m_Loco.Speed+" >");
+            else
+              ((LEDButton)v).setText("< "+m_Loco.Speed);
           }
         }
     });
@@ -472,7 +476,14 @@ public class ActThrottle extends ActBase
 
       Slider mSeekBar = (Slider)findViewById(R.id.Speed);
       //mSeekBar.setProgress(m_Loco.Speed);
+      mSeekBar.setRange(m_Loco.Vmax);
       mSeekBar.setV(m_Loco.Speed);
+
+      LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
+      if( m_Loco.Dir)
+        mDir.setText(""+m_Loco.Speed+" >");
+      else
+        mDir.setText("< "+m_Loco.Speed);
 
     }
   }
@@ -521,6 +532,11 @@ public class ActThrottle extends ActBase
             Slider mSeekBar = (Slider)findViewById(R.id.Speed);
             if( !mSeekBar.isPressed() )
               mSeekBar.setV(m_Loco.Speed);
+            LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
+            if( m_Loco.Dir)
+              mDir.setText(""+m_Loco.Speed+" >");
+            else
+              mDir.setText("< "+m_Loco.Speed);
           }
         });
       }
@@ -531,8 +547,14 @@ public class ActThrottle extends ActBase
   @Override
   public void onSliderChange(Slider slider, int V) {
     quitShowed = false;
-    if( m_Loco != null )
+    if( m_Loco != null ) {
       m_Loco.setSpeed(V, false);
+      LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
+      if( m_Loco.Dir)
+        mDir.setText(""+m_Loco.Speed+" >");
+      else
+        mDir.setText("< "+m_Loco.Speed);
+    }
   }
 
 

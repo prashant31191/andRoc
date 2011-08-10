@@ -34,7 +34,9 @@ import android.view.View;
 public class Slider extends View {
 
   boolean Vertical = false;
-  double V = 0;
+  double V = 0.0;
+  double Range = 100.0;
+  
   List<SliderListener> m_Listeners = new ArrayList<SliderListener>();
 
   public void addListener(SliderListener listener) {
@@ -42,8 +44,9 @@ public class Slider extends View {
   }
   
   void informListeners() {
+    double realV = (V * Range) / 100.0;
     for( SliderListener listener : m_Listeners ) {
-      listener.onSliderChange(this, (int)V);
+      listener.onSliderChange(this, (int)realV);
     }
   }
   
@@ -56,8 +59,12 @@ public class Slider extends View {
     Vertical = attrs.getAttributeBooleanValue(null, "vertical", false);
   }
 
+  public void setRange(float range) {
+    Range = range;
+  }
+
   public void setV(int v) {
-    V = v;
+    V = (v * 100.0) / Range;
     invalidate();
   }
 
