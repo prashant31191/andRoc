@@ -69,7 +69,7 @@
 		<net.rocrail.androc.widgets.LEDButton
 			android:id="@+id/throttleDirection" android:layout_width="0px"
 			android:layout_weight="50" android:layout_height="fill_parent" android:text="@string/Direction"
-			android:textStyle="bold" />
+			android:textSize="30sp" />
 		<net.rocrail.androc.widgets.LEDButton
 			android:id="@+id/throttleLights" android:layout_width="0px"
 			android:layout_weight="25" android:layout_height="fill_parent" android:text="@string/Lights"
