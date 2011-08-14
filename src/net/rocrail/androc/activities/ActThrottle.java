@@ -234,6 +234,8 @@ public class ActThrottle extends ActBase
     mSeekBar.addListener(this);
     
     LEDButton Lights = (LEDButton) findViewById(R.id.throttleLights);
+    Lights.setLongClickable(true);
+    Lights.setOnLongClickListener(this);
     Lights.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -361,13 +363,6 @@ public class ActThrottle extends ActBase
     });
     Release.setLongClickable(true);
     Release.setOnLongClickListener(this);
-    Release.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-          quitShowed = false;
-          m_RocrailService.Power = false;
-          m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
-        }
-    });
 
 
     
@@ -564,6 +559,21 @@ public class ActThrottle extends ActBase
       Toast.makeText(getApplicationContext(), R.string.EmergencyStop,
           Toast.LENGTH_SHORT).show();
       m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\"/>");
+      return true;
+    }
+    if( view.getId() == R.id.throttleLights ) {
+      Toast.makeText(getApplicationContext(), R.string.Dispatch,
+          Toast.LENGTH_SHORT).show();
+      if( m_Loco != null ) {
+        m_Loco.Dispatch();
+      }
+      return true;
+    }
+    if( view.getId() == R.id.throttleRelease ) {
+      Toast.makeText(getApplicationContext(), R.string.Power_OFF,
+          Toast.LENGTH_SHORT).show();
+      m_RocrailService.Power = false;
+      m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
       return true;
     }
     return false;
