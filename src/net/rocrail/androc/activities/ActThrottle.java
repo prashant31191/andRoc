@@ -359,6 +359,18 @@ public class ActThrottle extends ActBase
           }
         }
     });
+    Release.setLongClickable(true);
+    Release.setOnLongClickListener(this);
+    Release.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          quitShowed = false;
+          m_RocrailService.Power = false;
+          m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
+        }
+    });
+
+
+    
 
     LEDButton Dir = (LEDButton) findViewById(R.id.throttleDirection);
     Dir.setOnClickListener(new View.OnClickListener() {
