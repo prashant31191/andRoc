@@ -41,7 +41,7 @@ public class Output extends Item implements View.OnClickListener {
   }
 
   public void onClickUp(View v) {
-    if( toggle )
+    if( !toggle )
       flip();
   }
 
