@@ -155,6 +155,18 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     });
 
     
+    final Button Dispatch = (Button) findViewById(R.id.blockDispatch);
+    Dispatch.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          if( m_Block.LocoID!=null ) {
+            Loco lc = m_RocrailService.m_Model.getLoco(m_Block.LocoID);
+            if( lc != null )
+              lc.Dispatch();
+          }
+        }
+    });
+
+    
     final LEDButton openBlock = (LEDButton) findViewById(R.id.blockOpen);
     openBlock.ON = !m_Block.Closed;
     openBlock.setText(m_Block.Closed?getText(R.string.OpenBlock):getText(R.string.CloseBlock));

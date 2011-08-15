@@ -32,9 +32,14 @@
 
   <Spinner android:id="@+id/blockLocos" android:textStyle="bold" android:layout_width="fill_parent"
     android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
+  <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">  
   <Button android:text="@string/Loco" android:textStyle="bold"
-    android:id="@+id/blockLoco" android:layout_width="fill_parent"
-    android:layout_height="wrap_content"/>
+    android:id="@+id/blockLoco" android:layout_width="0px"
+    android:layout_height="wrap_content" android:layout_weight="50"/>
+  <Button android:text="@string/Dispatch" android:textStyle="bold"
+    android:id="@+id/blockDispatch" android:layout_width="0px"
+    android:layout_height="wrap_content" android:layout_weight="50"/>
+  </LinearLayout>
   <net.rocrail.androc.widgets.LEDButton
     android:text="@string/Open" android:textStyle="bold" android:id="@+id/blockOpen"
     android:layout_width="fill_parent"
