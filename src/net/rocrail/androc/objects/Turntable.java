@@ -127,13 +127,37 @@ public class Turntable extends Item {
     paint.setAntiAlias(true);
     paint.setStyle(Paint.Style.STROKE);
     paint.setColor(Color.BLACK);
+    paint.setStrokeWidth(Math.max(1,(4*size/32)));
     Path p = new Path();
-    p.moveTo(0, (float)(yoff + ((10*size)/32)) );
-    p.lineTo((float)((127*size)/32), (float)(yoff + ((10*size)/32)) );
-    p.lineTo((float)((127*size)/32), (float)(yoff + ((21*size)/32)) );
-    p.lineTo(0, (float)(yoff + ((21*size)/32)) );
-    p.lineTo(0, (float)(yoff + ((10*size)/32)) );
-    //0,10 L 127,10 L 127,21 L 0,21
+    
+    if (orinr % 2 == 0) {
+      //M 10,0 L 10,127 L 21,127 L 21,0
+      p.moveTo((float)(yoff + ((10*size)/32)), 0 );
+      p.lineTo((float)((10*size)/32), (float)(yoff + ((127*size)/32)) );
+      p.lineTo((float)((21*size)/32), (float)(yoff + ((127*size)/32)) );
+      p.lineTo((float)(yoff + ((21*size)/32)), 0 );
+      p.lineTo((float)(yoff + ((10*size)/32)), 0 );
+    }
+    else {
+      //M 0,10 L 127,10 L 127,21 L 0,21
+      p.moveTo(0, (float)(yoff + ((10*size)/32)) );
+      p.lineTo((float)((127*size)/32), (float)(yoff + ((10*size)/32)) );
+      p.lineTo((float)((127*size)/32), (float)(yoff + ((21*size)/32)) );
+      p.lineTo(0, (float)(yoff + ((21*size)/32)) );
+      p.lineTo(0, (float)(yoff + ((10*size)/32)) );
+    }
+
+    canvas.drawPath( p, paint);
+
+    if( Sensor1 && Sensor2 )
+      paint.setColor(Color.RED);
+    else if( Sensor1 || Sensor2 ) {
+      paint.setColor(Color.YELLOW);
+    }
+    else
+      paint.setColor(Color.GREEN);
+
+    paint.setStyle(Paint.Style.FILL);
     canvas.drawPath( p, paint);
     
   }
