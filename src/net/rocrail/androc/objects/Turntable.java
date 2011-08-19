@@ -44,6 +44,7 @@ public class Turntable extends Item {
   boolean Sensor1 = false;
   boolean Sensor2 = false;
   public boolean Closed = false;
+  public boolean Traverser = false;
 
 
   public Turntable(RocrailService rocrailService, Attributes atts) {
@@ -51,14 +52,33 @@ public class Turntable extends Item {
     Bridgepos = Item.getAttrValue(atts, "bridgepos", Bridgepos );
     Sensor1 = Item.getAttrValue(atts, "state1", Sensor1 );
     Sensor2 = Item.getAttrValue(atts, "state2", Sensor2 );
+    Traverser = Item.getAttrValue(atts, "traverser", Traverser );
     
     Symbolsize = Item.getAttrValue(atts, "symbolsize", Symbolsize );
   }
   
   public String getImageName(boolean ModPlan) {
     this.ModPlan = ModPlan;
+    
+    if( Traverser ) {
+      int orinr = getOriNr(ModPlan);
+      if (orinr % 2 == 0) {
+        textVertical = true;
+        cX = 8;
+        cY = 4;
+      }
+      else {
+        textVertical = false;
+        cX = 4;
+        cY = 8;
+      }
+      ImageName = String.format("traverser_%d", (orinr % 2 == 0 ? 2 : 1));
+      return ImageName;
+    }
+
     cX = 6;
     cY = 6;
+    
     return null;
   }
   
@@ -71,6 +91,7 @@ public class Turntable extends Item {
     Sensor2 = Item.getAttrValue(atts, "state2", Sensor2 );
     Symbolsize = Item.getAttrValue(atts, "symbolsize", Symbolsize );
     Closed   = State.equals("closed");
+    Traverser = Item.getAttrValue(atts, "traverser", Traverser );
 
     if( Tracks != null ) {
       Iterator<TTTrack> it = Tracks.iterator();
@@ -94,9 +115,31 @@ public class Turntable extends Item {
   }
 
 
+  void drawTraverser(Canvas canvas) {
+    int size = m_RocrailService.Prefs.Size;
+    int orinr = getOriNr(ModPlan);
+    int yoff = Bridgepos % 24;
+    String imageName = "";
+    
+    if( Sensor1 && Sensor2 )
+      imageName = String.format("traverser_bridge_occ_%d", (orinr % 2 == 0 ? 2 : 1));
+    else if( Sensor1 || Sensor2 )
+      imageName = String.format("traverser_bridge_ent_%d", (orinr % 2 == 0 ? 2 : 1));
+    else
+      imageName = String.format("traverser_bridge_%d", (orinr % 2 == 0 ? 2 : 1));
+    
+    
+    // ToDo: Render the bridge on the table.
+  }
+  
   
   @Override
   public void Draw( Canvas canvas ) {
+    if( Traverser ) {
+      drawTraverser(canvas);
+      return;
+    }
+    
     double dBridgepos = 0;
     int size = m_RocrailService.Prefs.Size;
     
