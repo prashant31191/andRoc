@@ -102,7 +102,8 @@ public class Turntable extends Item {
     }
 
     super.updateWithAttributes(atts);
-    
+    imageView.post(new UpdateTT(this));
+
   }
 
   public void addTrack(Attributes atts ) {
@@ -118,18 +119,23 @@ public class Turntable extends Item {
   void drawTraverser(Canvas canvas) {
     int size = m_RocrailService.Prefs.Size;
     int orinr = getOriNr(ModPlan);
-    int yoff = Bridgepos % 24;
-    String imageName = "";
+    double yoff = (Bridgepos % 24) * size;
+    System.out.println("yoff=" + yoff + " (" + Bridgepos + ")");
+    // Render the bridge on the table.
     
-    if( Sensor1 && Sensor2 )
-      imageName = String.format("traverser_bridge_occ_%d", (orinr % 2 == 0 ? 2 : 1));
-    else if( Sensor1 || Sensor2 )
-      imageName = String.format("traverser_bridge_ent_%d", (orinr % 2 == 0 ? 2 : 1));
-    else
-      imageName = String.format("traverser_bridge_%d", (orinr % 2 == 0 ? 2 : 1));
+    Paint paint = new Paint();
+    paint.setAntiAlias(true);
+    paint.setStyle(Paint.Style.STROKE);
+    paint.setColor(Color.BLACK);
+    Path p = new Path();
+    p.moveTo(0, (float)(yoff + ((10*size)/32)) );
+    p.lineTo((float)((127*size)/32), (float)(yoff + ((10*size)/32)) );
+    p.lineTo((float)((127*size)/32), (float)(yoff + ((21*size)/32)) );
+    p.lineTo(0, (float)(yoff + ((21*size)/32)) );
+    p.lineTo(0, (float)(yoff + ((10*size)/32)) );
+    //0,10 L 127,10 L 127,21 L 0,21
+    canvas.drawPath( p, paint);
     
-    
-    // ToDo: Render the bridge on the table.
   }
   
   
@@ -317,5 +323,19 @@ public class Turntable extends Item {
 
 }
 
+
+class UpdateTT implements Runnable {
+  Item item = null;
+  
+  public UpdateTT( Item item ) {
+    this.item = item;
+  }
+
+  @Override
+  public void run() {
+    item.imageView.invalidate();
+  }
+  
+}
 
 

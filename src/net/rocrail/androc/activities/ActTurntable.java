@@ -114,8 +114,12 @@ public class ActTurntable  extends ActBase implements OnItemSelectedListener {
   public void onItemSelected(AdapterView<?> arg0, View view, int position, long longid ) {
     Spinner s = (Spinner) findViewById(R.id.fyTracks);
     String trackNr = (String)s.getSelectedItem();
-    GotoTrack = Integer.parseInt(trackNr);
-    
+    try {
+      GotoTrack = Integer.parseInt(trackNr);
+    }
+    catch(Exception e) {
+      
+    }
   }
 
   @Override
