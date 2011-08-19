@@ -20,6 +20,7 @@
 package net.rocrail.androc.objects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,6 +40,7 @@ import android.view.View;
 
 public class Turntable extends Item {
   public List<TTTrack> Tracks = new ArrayList<TTTrack>();
+  public HashMap<String,TTTrack> TrackMap = new HashMap<String,TTTrack>();
   int Bridgepos = 0;
   int Symbolsize = 6;
   boolean Sensor1 = false;
@@ -82,6 +84,12 @@ public class Turntable extends Item {
     return null;
   }
   
+  public int getTrackNr(String desc) {
+    TTTrack track = TrackMap.get(desc);
+    if( track != null )
+      return track.Nr;
+    return 0;
+  }
   
 
   public void updateWithAttributes(Attributes atts ) {    
@@ -113,6 +121,8 @@ public class Turntable extends Item {
     track.State = Item.getAttrValue(atts, "state", false );
     track.Show  = Item.getAttrValue(atts, "show", true );
     Tracks.add(track);
+    if( track.Description != null && track.Description.length() > 0 )
+      TrackMap.put(track.Description, track);
   }
 
 

@@ -118,7 +118,8 @@ public class ActTurntable  extends ActBase implements OnItemSelectedListener {
       GotoTrack = Integer.parseInt(trackNr);
     }
     catch(Exception e) {
-      
+      // Description
+      GotoTrack = m_Turntable.getTrackNr(trackNr);
     }
   }
 
