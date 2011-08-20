@@ -99,10 +99,15 @@ public class ActThrottle extends ActBase
   }
 
   
-  void findLoco() {
+  void findLoco(int selected) {
     Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
     if( s != null ) {
-      int pos = s.getSelectedItemPosition();
+      int pos = 0;
+      if( selected != -1 )
+        pos = selected;
+      else
+        pos = s.getSelectedItemPosition();
+      
       if( pos >= 0 && pos < m_LocoList.size() ) 
         m_Loco = m_LocoList.get(pos);
     
@@ -251,7 +256,7 @@ public class ActThrottle extends ActBase
     if( m_iLocoCount > 0 && iSelectedLoco < m_iLocoCount)
       s.setSelection(iSelectedLoco);    
     
-    findLoco();
+    findLoco(-1);
     
     Slider mSeekBar = (Slider)findViewById(R.id.Speed);
     //mSeekBar.setOnSeekBarChangeListener(this);
@@ -408,23 +413,39 @@ public class ActThrottle extends ActBase
     });
     
     ImageView image = (ImageView)findViewById(R.id.locoImage);
+    image.setLongClickable(true);
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
+        quitShowed = false;
+        if( m_Loco != null ) {
+          Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
+          intent.putExtra("id", m_Loco.ID);
+          startActivityForResult(intent, 1);
+        }
+      }
+  });
+
+    image.setOnLongClickListener(new View.OnLongClickListener() {
+      public boolean onLongClick(View v) {
         quitShowed = false;
         if( m_Loco != null ) {
           Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
           intent.putExtra("id", m_Loco.ID);
           startActivity(intent);
         }
+        return true;
       }
   });
-
 
 
     
   }
 
   
+  protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    if( requestCode == 1 )
+      locoSelected(resultCode);
+  }
   
   
   @Override
@@ -482,8 +503,13 @@ public class ActThrottle extends ActBase
 
   @Override
   public void onItemSelected(AdapterView<?> arg0, View view, int position, long longID) {
+    locoSelected(-1);
+  }
+
+
+  public void locoSelected( int position) {
     quitShowed = false;
-    findLoco();
+    findLoco(position);
     if( m_Loco != null ) {
       m_RocrailService.SelectedLoco = m_Loco;
       

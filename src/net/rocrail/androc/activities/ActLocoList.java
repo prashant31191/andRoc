@@ -34,7 +34,6 @@ public class ActLocoList extends ListActivity implements ServiceListener {
   public void connectedWithService() {
     m_Base.connectedWithService();
     initView();
-    m_Base.updateTitle(getText(R.string.Switches).toString());
   }
 
   public void initView() {
@@ -45,14 +44,23 @@ public class ActLocoList extends ListActivity implements ServiceListener {
     }
     
     Collections.sort(m_LocoList, new LocoSort());
-    setListAdapter(new LocoAdapter(this, R.layout.locorow, m_LocoList));
+    LocoAdapter adapter = new LocoAdapter(this, R.layout.locorow, m_LocoList);
+    setListAdapter(adapter);
+
+    Iterator<Loco> itList = m_LocoList.iterator();
+    while( itList.hasNext() ) {
+      Loco loco = itList.next();
+      adapter.add(loco.toString());
+    }
 
     ListView lv = getListView();
-    lv.setTextFilterEnabled(true);
+    lv.setTextFilterEnabled(false);
 
     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // Set selected loco.
+        ActLocoList.this.setResult(position);
+        finish();
       }
     });
   }
