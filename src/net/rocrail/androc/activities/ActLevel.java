@@ -92,6 +92,7 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
                  dialog.cancel();
+                 System.out.println("***EXIT***");
                  ActLevel.this.finish();
                }
            });
@@ -279,13 +280,14 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
     protected void onPostExecute(Void v) {
       if( level.progressDialog != null ) {
         level.dismissDialog(ActLevel.PROGRESS_DIALOG);
-        if( !m_RocrailService.m_Model.m_bDonKey && !m_RocrailService.m_bDidShowDonate ) {
-          showDonate();
-          m_RocrailService.m_bDidShowDonate = true;
-        }
-        levelView.setLongClickable(true);
-        levelView.setOnLongClickListener(ActLevel.this);
       }
+      System.out.println(""+(!m_RocrailService.m_Model.m_bDonKey?"NO ":"")+"DonKey Set.");
+      if( !m_RocrailService.m_Model.m_bDonKey && !m_RocrailService.m_bDidShowDonate ) {
+        showDonate();
+        m_RocrailService.m_bDidShowDonate = true;
+      }
+      levelView.setLongClickable(true);
+      levelView.setOnLongClickListener(ActLevel.this);
     }
   }
 
