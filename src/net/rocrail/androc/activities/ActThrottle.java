@@ -52,7 +52,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActThrottle extends ActBase 
-  implements ModelListener, AdapterView.OnItemSelectedListener, 
+  implements ModelListener, 
   net.rocrail.android.widgets.SliderListener, OnLongClickListener 
 {
   int         m_iFunctionGroup = 0;
@@ -107,7 +107,16 @@ public class ActThrottle extends ActBase
     }
   
     if( m_Loco != null ) {
-      m_RocrailService.Prefs.LocoID = m_Loco.toString();
+      m_RocrailService.Prefs.LocoID = m_Loco.ID;
+    }
+
+  }
+  
+  void findLoco(Loco loco) {
+    if( loco != null ) {
+      m_Loco = loco;
+      m_RocrailService.Prefs.LocoID = m_Loco.ID;
+      locoSelected();
     }
 
   }
@@ -220,8 +229,7 @@ public class ActThrottle extends ActBase
     
     Collections.sort(m_LocoList, new LocoSort());
     
-    
-    findLoco(-1);
+    findLoco(m_RocrailService.m_Model.m_LocoMap.get(LocoID));
     
     Slider mSeekBar = (Slider)findViewById(R.id.Speed);
     //mSeekBar.setOnSeekBarChangeListener(this);
@@ -462,20 +470,24 @@ public class ActThrottle extends ActBase
       updateFunctions();
     }
   }
-
+/*
   @Override
   public void onItemSelected(AdapterView<?> arg0, View view, int position, long longID) {
     locoSelected(-1);
   }
-
+*/
 
   public void locoSelected( int position) {
     quitShowed = false;
     findLoco(position);
+    locoSelected();
+  }
+  
+  public void locoSelected() {
     if( m_Loco != null ) {
       m_RocrailService.SelectedLoco = m_Loco;
       
-      m_RocrailService.Prefs.saveLoco(m_Loco.toString());
+      m_RocrailService.Prefs.saveLoco(m_Loco.ID);
 
       LEDButton f0 = (LEDButton) findViewById(R.id.throttleLights);
       f0.ON = m_Loco.Lights;
@@ -505,13 +517,13 @@ public class ActThrottle extends ActBase
     }
   }
 
-
+/*
   @Override
   public void onNothingSelected(AdapterView<?> arg0) {
     // TODO Auto-generated method stub
     
   }
-  
+*/  
 
   /*
   @Override
