@@ -52,11 +52,11 @@
           android:layout_width="fill_parent" android:layout_height="wrap_content">
           <net.rocrail.androc.widgets.LEDButton
             android:text="@string/START" android:textStyle="bold"
-            android:id="@+id/locoStart" android:layout_width="0px"
+            android:id="@+id/locoStart" android:layout_width="wrap_content"
             android:layout_weight="50" android:layout_height="wrap_content" />
           <net.rocrail.androc.widgets.LEDButton
             android:text="@string/HalfAuto" android:textStyle="bold"
-            android:id="@+id/locoHalfAuto" android:layout_width="0px"
+            android:id="@+id/locoHalfAuto" android:layout_width="wrap_content"
             android:layout_weight="50" android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout android:id="@+id/locoLayout3"
@@ -74,10 +74,10 @@
             android:layout_width="fill_parent" android:layout_height="wrap_content">
             <Button android:text="@string/SetInBlock"
               android:textStyle="bold" android:id="@+id/locoSetInBlock"
-              android:layout_width="0px" android:layout_height="wrap_content" android:layout_weight="50"/>
+              android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="50"/>
             <net.rocrail.androc.widgets.LEDButton android:text="@string/Swap"
               android:textStyle="bold" android:id="@+id/locoSwap"
-              android:layout_width="0px" android:layout_height="wrap_content" android:layout_weight="50"/>
+              android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="50"/>
           </LinearLayout>
         </LinearLayout>
       </LinearLayout>
