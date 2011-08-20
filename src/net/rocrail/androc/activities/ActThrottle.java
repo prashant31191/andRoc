@@ -20,6 +20,7 @@
 package net.rocrail.androc.activities;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -202,6 +203,15 @@ public class ActThrottle extends ActBase
     }
   }
   
+  class LocoSort implements Comparator<Loco>{
+
+    @Override
+    public int compare(Loco loco1, Loco loco2) {
+      return loco1.ID.toLowerCase().compareTo(loco2.ID.toLowerCase());
+    }
+   }
+
+  
   public void initView() {
     m_iLocoCount = 0;
     String LocoID = "";
@@ -226,6 +236,9 @@ public class ActThrottle extends ActBase
       Loco loco = it.next();
       m_LocoList.add(loco);
     }
+    
+    Collections.sort(m_LocoList, new LocoSort());
+    
     
     LocoAdapter m_adapterForSpinner = new LocoAdapter(this, R.layout.locorow, m_LocoList);
     
@@ -598,68 +611,7 @@ public class ActThrottle extends ActBase
     }
     return false;
   }
-
-
-  class LocoAdapter extends ArrayAdapter<String> {
-    List<Loco> m_LocoList = null;
-    
-    public LocoAdapter(Context context, int textViewResourceId, List<Loco> locoList) {
-      super(context, textViewResourceId);
-      m_LocoList = locoList;
-    }
-    
-    @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-      return getCustomView(position, convertView, parent);
-    }
-    
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-      return getCustomView(position, convertView, parent);
-    }
-    
-    public void add(Loco loco) {
-      super.add(loco.ID);
-      m_LocoList.add(loco);
-    }
-    
-    @Override
-    public int getPosition (String LocoID) {
-      int idx = 0;
-      Iterator<Loco> it = m_LocoList.iterator();
-      while( it.hasNext() ) {
-        Loco loco = it.next();
-        if( LocoID.equals(loco.toString()))
-          return idx;
-        idx++;
-      }
-      return 0;
-    }
-    
-    public View getCustomView(int position, View convertView, ViewGroup parent) {
-      LayoutInflater inflater = getLayoutInflater();
-      View row = inflater.inflate(R.layout.locorow, parent, false);
-      TextView label = (TextView) row.findViewById(R.id.locoRowText);
-      ImageView icon = (ImageView) row.findViewById(R.id.locoRowImage);
-
-      if( m_LocoList != null && position < m_LocoList.size() ) {
-        Loco loco = m_LocoList.get(position);
-        label.setText(loco.toString());
-    
-        Bitmap img = loco.getLocoBmp(loco.imageView);
-        if( img != null )
-          icon.setImageBitmap(img);
-        else
-          icon.setImageResource(R.drawable.noimg);
-      }
-      else {
-        label.setText("?");
-        icon.setImageResource(R.drawable.noimg);
-      }
-    
-      return row;
-    }
-  }
+  
 
 }
 

@@ -34,7 +34,7 @@ import org.xml.sax.Attributes;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-public class Loco {
+public class Loco implements Runnable {
   RocrailService  rocrailService = null;
 
   public List<Function> Functions = new ArrayList<Function>();
@@ -102,6 +102,9 @@ public class Loco {
       Function[i] = ( (fx & mask) == mask ) ? true:false; 
     }
     updateWithAttributes(atts);
+    
+    new Thread(this).start();
+
   }
   
 
@@ -302,6 +305,18 @@ public class Loco {
       }
     }
     return "F"+nr;
+  }
+
+
+  @Override
+  public void run() {
+    try {
+      Thread.sleep(100);
+      Loco.this.getLocoBmp(null);
+    }
+    catch(Exception e) {
+      
+    }
   }
 }
 
