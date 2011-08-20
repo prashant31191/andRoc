@@ -19,8 +19,10 @@
 */
 package net.rocrail.androc.activities;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
 import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.ModelListener;
@@ -28,18 +30,24 @@ import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
 import net.rocrail.androc.widgets.LocoImage;
 import net.rocrail.android.widgets.Slider;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActThrottle extends ActBase 
@@ -51,6 +59,8 @@ public class ActThrottle extends ActBase
   final static int FNGROUPSIZE = 6;
   private Loco m_Loco = null;
   boolean quitShowed = false;
+  List<Loco> m_LocoList = new ArrayList<Loco>();
+
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -91,12 +101,12 @@ public class ActThrottle extends ActBase
   void findLoco() {
     Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
     if( s != null ) {
-      String id = (String)s.getSelectedItem();
-      if( id != null ) {
-        m_Loco = m_RocrailService.m_Model.getLoco(id);
-        if( m_Loco != null ) {
-          m_RocrailService.Prefs.LocoID = m_Loco.toString();
-        }
+      int pos = s.getSelectedItemPosition();
+      if( pos >= 0 && pos < m_LocoList.size() ) 
+        m_Loco = m_LocoList.get(pos);
+    
+      if( m_Loco != null ) {
+        m_RocrailService.Prefs.LocoID = m_Loco.toString();
       }
     }
   }
@@ -204,24 +214,34 @@ public class ActThrottle extends ActBase
     Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
     s.setPrompt(getText(R.string.SelectLoco));
 
+    /*
     ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(this,
         android.R.layout.simple_spinner_item);
     m_adapterForSpinner
         .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
-
-    int iSelectedLoco = 0;
+*/
     Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
+    while( it.hasNext() ) {
+      Loco loco = it.next();
+      m_LocoList.add(loco);
+    }
+    
+    LocoAdapter m_adapterForSpinner = new LocoAdapter(this, R.layout.locorow, m_LocoList);
+    
+    int iSelectedLoco = 0;
+    it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
       m_adapterForSpinner.add(loco.toString());
       m_iLocoCount++;
     }
     
-    m_adapterForSpinner.sort(new LocoComparator());
+    //m_adapterForSpinner.sort(new LocoComparator());
     if( LocoID != null && LocoID.length() > 0 ) {
       iSelectedLoco = m_adapterForSpinner.getPosition(LocoID);
     }
+    s.setAdapter(m_adapterForSpinner);
 
     s.setOnItemSelectedListener(this);
     if( m_iLocoCount > 0 && iSelectedLoco < m_iLocoCount)
@@ -580,4 +600,70 @@ public class ActThrottle extends ActBase
   }
 
 
+  class LocoAdapter extends ArrayAdapter<String> {
+    List<Loco> m_LocoList = null;
+    
+    public LocoAdapter(Context context, int textViewResourceId, List<Loco> locoList) {
+      super(context, textViewResourceId);
+      m_LocoList = locoList;
+    }
+    
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+      return getCustomView(position, convertView, parent);
+    }
+    
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+      return getCustomView(position, convertView, parent);
+    }
+    
+    public void add(Loco loco) {
+      super.add(loco.ID);
+      m_LocoList.add(loco);
+    }
+    
+    @Override
+    public int getPosition (String LocoID) {
+      int idx = 0;
+      Iterator<Loco> it = m_LocoList.iterator();
+      while( it.hasNext() ) {
+        Loco loco = it.next();
+        if( LocoID.equals(loco.toString()))
+          return idx;
+        idx++;
+      }
+      return 0;
+    }
+    
+    public View getCustomView(int position, View convertView, ViewGroup parent) {
+      LayoutInflater inflater = getLayoutInflater();
+      View row = inflater.inflate(R.layout.locorow, parent, false);
+      TextView label = (TextView) row.findViewById(R.id.locoRowText);
+      ImageView icon = (ImageView) row.findViewById(R.id.locoRowImage);
+
+      if( m_LocoList != null && position < m_LocoList.size() ) {
+        Loco loco = m_LocoList.get(position);
+        label.setText(loco.toString());
+    
+        Bitmap img = loco.getLocoBmp(loco.imageView);
+        if( img != null )
+          icon.setImageBitmap(img);
+        else
+          icon.setImageResource(R.drawable.noimg);
+      }
+      else {
+        label.setText("?");
+        icon.setImageResource(R.drawable.noimg);
+      }
+    
+      return row;
+    }
+  }
+
 }
+
+
+
+
+
