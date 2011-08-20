@@ -203,15 +203,6 @@ public class ActThrottle extends ActBase
     }
   }
   
-  class LocoSort implements Comparator<Loco>{
-
-    @Override
-    public int compare(Loco loco1, Loco loco2) {
-      return loco1.ID.toLowerCase().compareTo(loco2.ID.toLowerCase());
-    }
-   }
-
-  
   public void initView() {
     m_iLocoCount = 0;
     String LocoID = "";
