@@ -20,9 +20,10 @@
 		android:id="@+id/locoImage" android:layout_width="fill_parent"
 		android:clickable="true" android:layout_height="wrap_content"
 		android:src="@drawable/noimg" android:padding="5dp" />
-	<Spinner android:id="@+id/spinnerLoco" android:textStyle="bold"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:drawSelectorOnTop="true" />
+	<TextView android:id="@+id/LocoThrottleID" android:textStyle="bold"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+	<TextView android:id="@+id/LocoThrottleDesc" android:textStyle="bold"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"/>
 	<LinearLayout android:id="@+id/fun1" android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="0px"
 		android:layout_weight="25">

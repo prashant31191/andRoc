@@ -99,22 +99,17 @@ public class ActThrottle extends ActBase
   }
 
   
-  void findLoco(int selected) {
-    Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
-    if( s != null ) {
-      int pos = 0;
-      if( selected != -1 )
-        pos = selected;
-      else
-        pos = s.getSelectedItemPosition();
-      
-      if( pos >= 0 && pos < m_LocoList.size() ) 
-        m_Loco = m_LocoList.get(pos);
-    
-      if( m_Loco != null ) {
-        m_RocrailService.Prefs.LocoID = m_Loco.toString();
-      }
+  void findLoco(int pos) {
+    if( pos >= 0 && pos < m_LocoList.size() ) 
+      m_Loco = m_LocoList.get(pos);
+    else {
+      // ToDo: Look up last used...
     }
+  
+    if( m_Loco != null ) {
+      m_RocrailService.Prefs.LocoID = m_Loco.toString();
+    }
+
   }
   
   void updateFunctions() {
@@ -217,16 +212,6 @@ public class ActThrottle extends ActBase
     
     getWindow().setLayout((m_RocrailService.Prefs.SmallThrottle ? 300:LayoutParams.WRAP_CONTENT), LayoutParams.FILL_PARENT);
 
-    Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
-    s.setPrompt(getText(R.string.SelectLoco));
-
-    /*
-    ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(this,
-        android.R.layout.simple_spinner_item);
-    m_adapterForSpinner
-        .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    s.setAdapter(m_adapterForSpinner);
-*/
     Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
@@ -235,26 +220,6 @@ public class ActThrottle extends ActBase
     
     Collections.sort(m_LocoList, new LocoSort());
     
-    
-    LocoAdapter m_adapterForSpinner = new LocoAdapter(this, R.layout.locorow, m_LocoList);
-    
-    int iSelectedLoco = 0;
-    it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
-    while( it.hasNext() ) {
-      Loco loco = it.next();
-      m_adapterForSpinner.add(loco.toString());
-      m_iLocoCount++;
-    }
-    
-    //m_adapterForSpinner.sort(new LocoComparator());
-    if( LocoID != null && LocoID.length() > 0 ) {
-      iSelectedLoco = m_adapterForSpinner.getPosition(LocoID);
-    }
-    s.setAdapter(m_adapterForSpinner);
-
-    s.setOnItemSelectedListener(this);
-    if( m_iLocoCount > 0 && iSelectedLoco < m_iLocoCount)
-      s.setSelection(iSelectedLoco);    
     
     findLoco(-1);
     
@@ -417,11 +382,8 @@ public class ActThrottle extends ActBase
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         quitShowed = false;
-        if( m_Loco != null ) {
-          Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
-          intent.putExtra("id", m_Loco.ID);
-          startActivityForResult(intent, 1);
-        }
+        Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
+        startActivityForResult(intent, 1);
       }
   });
 
@@ -451,12 +413,12 @@ public class ActThrottle extends ActBase
   @Override
   public void modelListLoaded(int MODELLIST) {
     if (MODELLIST == ModelListener.MODELLIST_LC) {
-      Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
+      Spinner s = null; //(Spinner) findViewById(R.id.spinnerLoco);
 
       if (s != null) {
         s.post(new Runnable() {
           public void run() {
-            Spinner s = (Spinner) findViewById(R.id.spinnerLoco);
+            Spinner s = null; //(Spinner) findViewById(R.id.spinnerLoco);
             ArrayAdapter m_adapterForSpinner = (ArrayAdapter) s.getAdapter();
             // get the loco ids from the model
             Iterator it = m_RocrailService.m_Model.m_LocoMap.values()
@@ -527,7 +489,11 @@ public class ActThrottle extends ActBase
       else {
         image.setImageResource(R.drawable.noimg);
       }
-
+      TextView ID = (TextView)findViewById(R.id.LocoThrottleID);
+      ID.setText(m_Loco.ID);
+      TextView Desc = (TextView)findViewById(R.id.LocoThrottleDesc);
+      Desc.setText(m_Loco.Description);
+      
       Slider mSeekBar = (Slider)findViewById(R.id.Speed);
       //mSeekBar.setProgress(m_Loco.Speed);
       mSeekBar.setRange(m_Loco.Vmax);
