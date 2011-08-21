@@ -53,27 +53,46 @@ public class LocoAdapter extends ArrayAdapter<String> {
     return 0;
   }
   
-  public View getCustomView(int position, View convertView, ViewGroup parent) {
-    LayoutInflater inflater = m_Activity.getWindow().getLayoutInflater();
-    View row = inflater.inflate(R.layout.locorow, parent, false);
-    TextView label = (TextView) row.findViewById(R.id.locoRowText);
-    ImageView icon = (ImageView) row.findViewById(R.id.locoRowImage);
-    icon.setClickable(true);
-    //icon.setOnClickListener(this);
+  public static class ViewHolder {
+    public TextView text;
+    public ImageView icon;
+}
 
+  
+  public View getCustomView(int position, View convertView, ViewGroup parent) {
+    View row = convertView;
+    ViewHolder holder;
+
+    if (row == null) {
+      LayoutInflater inflater = m_Activity.getWindow().getLayoutInflater();
+      row = inflater.inflate(R.layout.locorow, parent, false);
+
+      holder = new ViewHolder();
+
+      holder.text = (TextView) row.findViewById(R.id.locoRowText);
+      holder.icon = (ImageView) row.findViewById(R.id.locoRowImage);
+      holder.icon.setClickable(true);
+
+      row.setTag(holder);
+    } 
+    else {
+      holder = (ViewHolder) row.getTag();
+    }
+
+    
     if( m_LocoList != null && position < m_LocoList.size() ) {
       Loco loco = m_LocoList.get(position);
-      label.setText(loco.ID);
+      holder.text.setText(loco.ID);
   
       Bitmap img = loco.getLocoBmp(loco.imageView);
       if( img != null )
-        icon.setImageBitmap(img);
+        holder.icon.setImageBitmap(img);
       else
-        icon.setImageResource(R.drawable.noimg);
+        holder.icon.setImageResource(R.drawable.noimg);
     }
     else {
-      label.setText("?");
-      icon.setImageResource(R.drawable.noimg);
+      holder.text.setText("?");
+      holder.icon.setImageResource(R.drawable.noimg);
     }
   
     return row;

@@ -24,7 +24,7 @@
 
   <net.rocrail.androc.widgets.LocoImage
     android:id="@+id/locoRowImage" android:layout_width="160px"
-    android:clickable="true" android:layout_height="30px"
+    android:clickable="true" android:layout_height="30px" android:layout_gravity="left"
     android:src="@drawable/noimg" android:onClick="onLocoRowClick"/>
 	<TextView android:id="@+id/locoRowText"
 	    android:layout_width="fill_parent" android:textSize="16sp"
