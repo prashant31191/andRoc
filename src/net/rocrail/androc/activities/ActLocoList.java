@@ -1,3 +1,23 @@
+/*
+ Rocrail - Model Railroad Software
+
+ Copyright (C) 2002-2011 - Rob Versluis <r.j.versluis@rocrail.net>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*/
+
 package net.rocrail.androc.activities;
 
 import java.util.ArrayList;
@@ -9,16 +29,11 @@ import net.rocrail.androc.R;
 import net.rocrail.androc.activities.LocoSort;
 import net.rocrail.androc.interfaces.ServiceListener;
 import net.rocrail.androc.objects.Loco;
-import net.rocrail.androc.objects.Switch;
 import android.app.ListActivity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class ActLocoList extends ListActivity implements ServiceListener {
   ActBase m_Base = null;
@@ -72,14 +87,4 @@ public class ActLocoList extends ListActivity implements ServiceListener {
     });
   }
 
-  public void onLocoRowClick(View v) { 
-    LinearLayout vwParentRow = (LinearLayout)v.getParent();
-    vwParentRow.setBackgroundColor(Color.CYAN); 
-    vwParentRow.refreshDrawableState();
-    
-    TextView textView = (TextView)vwParentRow.getChildAt(1);
-
-    vwParentRow.performClick();
-  }
-  
 }

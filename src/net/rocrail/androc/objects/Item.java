@@ -29,7 +29,6 @@ import org.xml.sax.Attributes;
 import android.app.Activity;
 import android.graphics.Canvas;
 import android.view.View;
-import android.widget.ImageView;
 
 public class Item implements View.OnClickListener {
   RocrailService m_RocrailService = null;

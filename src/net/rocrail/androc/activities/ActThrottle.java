@@ -31,20 +31,14 @@ import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
 import net.rocrail.androc.widgets.LocoImage;
 import net.rocrail.android.widgets.Slider;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -420,25 +414,6 @@ public class ActThrottle extends ActBase
   @Override
   public void modelListLoaded(int MODELLIST) {
     if (MODELLIST == ModelListener.MODELLIST_LC) {
-      Spinner s = null; //(Spinner) findViewById(R.id.spinnerLoco);
-
-      if (s != null) {
-        s.post(new Runnable() {
-          public void run() {
-            Spinner s = null; //(Spinner) findViewById(R.id.spinnerLoco);
-            ArrayAdapter m_adapterForSpinner = (ArrayAdapter) s.getAdapter();
-            // get the loco ids from the model
-            Iterator it = m_RocrailService.m_Model.m_LocoMap.values()
-                .iterator();
-            while (it.hasNext()) {
-              Loco loco = (Loco) it.next();
-              // TODO: invoke later?
-              m_adapterForSpinner.add(loco.toString());
-
-            }
-          }
-        });
-      }
     }
   }
 

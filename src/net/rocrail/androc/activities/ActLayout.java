@@ -37,7 +37,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ZoomButtonsController;
 
 public class ActLayout extends ListActivity implements ServiceListener {
   ActBase m_Base = null;

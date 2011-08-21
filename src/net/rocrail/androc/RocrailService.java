@@ -47,7 +47,6 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 
 public class RocrailService extends Service {
   public Preferences Prefs = null;

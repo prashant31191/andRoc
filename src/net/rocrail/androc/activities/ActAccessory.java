@@ -21,7 +21,6 @@
 package net.rocrail.androc.activities;
 
 import net.rocrail.androc.Preferences;
-import net.rocrail.androc.widgets.LEDButton;
 
 import net.rocrail.androc.R;
 import android.os.Bundle;

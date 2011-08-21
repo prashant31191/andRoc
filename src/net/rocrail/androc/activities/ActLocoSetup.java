@@ -20,23 +20,16 @@
 
 package net.rocrail.androc.activities;
 
-import java.util.Iterator;
-
+import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.PoMListener;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LocoImage;
-
-
-import net.rocrail.androc.R;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 

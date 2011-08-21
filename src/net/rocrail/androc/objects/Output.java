@@ -24,8 +24,6 @@ import net.rocrail.androc.RocrailService;
 
 import org.xml.sax.Attributes;
 
-
-import android.view.MotionEvent;
 import android.view.View;
 
 public class Output extends Item implements View.OnClickListener {

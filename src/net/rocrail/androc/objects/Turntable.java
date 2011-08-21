@@ -258,7 +258,6 @@ public class Turntable extends Item {
     double ssize = this.Symbolsize/5.0;
     
     double c79 = (79*size)/32*ssize;
-    double c36 = (36*size)/32*ssize;
     double c32 = (32*size)/32*ssize;
     float originX = 0;
     float originY = 0;
@@ -296,8 +295,6 @@ public class Turntable extends Item {
     double ssize = this.Symbolsize/5.0;
     
     double c79 = (79*size)/32*ssize;
-    double c36 = (36*size)/32*ssize;
-    double c32 = (32*size)/32*ssize;
     double c20 = (20*size)/32*ssize;
     
     float originX = 0;
