@@ -30,8 +30,10 @@
     android:src="@drawable/noimg" android:padding="5dp"/>
 
 
-  <Spinner android:id="@+id/blockLocos" android:textStyle="bold" android:layout_width="fill_parent"
-    android:layout_height="wrap_content" android:drawSelectorOnTop="true" />
+	<TextView android:id="@+id/LocoBlockID" android:textStyle="bold"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+	<TextView android:id="@+id/LocoBlockDesc" android:textStyle="bold"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"/>
   <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content">  
   <Button android:text="@string/Loco" android:textStyle="bold"
     android:id="@+id/blockLoco" android:layout_width="0px"
@@ -40,10 +42,16 @@
     android:id="@+id/blockDispatch" android:layout_width="0px"
     android:layout_height="wrap_content" android:layout_weight="50"/>
   </LinearLayout>
-  <net.rocrail.androc.widgets.LEDButton
-    android:text="@string/Open" android:textStyle="bold" android:id="@+id/blockOpen"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" />
+  <LinearLayout android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" android:orientation="horizontal">  
+	  <Button android:text="@string/FreeBlock" android:textStyle="bold"
+	    android:id="@+id/blockFree" android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" android:layout_weight="50"/>
+	  <net.rocrail.androc.widgets.LEDButton
+	    android:text="@string/Open" android:textStyle="bold" android:id="@+id/blockOpen"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" android:layout_weight="50"/>
+  </LinearLayout>
   <Button android:text="@string/AcceptIdent" android:textStyle="bold"
     android:id="@+id/blockAcceptIdent" android:layout_width="fill_parent"
     android:layout_height="wrap_content"/>

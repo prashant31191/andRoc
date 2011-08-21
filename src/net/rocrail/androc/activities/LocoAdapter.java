@@ -58,6 +58,8 @@ public class LocoAdapter extends ArrayAdapter<String> {
     View row = inflater.inflate(R.layout.locorow, parent, false);
     TextView label = (TextView) row.findViewById(R.id.locoRowText);
     ImageView icon = (ImageView) row.findViewById(R.id.locoRowImage);
+    icon.setClickable(true);
+    //icon.setOnClickListener(this);
 
     if( m_LocoList != null && position < m_LocoList.size() ) {
       Loco loco = m_LocoList.get(position);

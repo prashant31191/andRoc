@@ -19,13 +19,13 @@
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-  android:orientation="horizontal"
+  android:orientation="horizontal" 
   android:layout_width="fill_parent" android:layout_height="wrap_content">
 
   <net.rocrail.androc.widgets.LocoImage
     android:id="@+id/locoRowImage" android:layout_width="160px"
     android:clickable="true" android:layout_height="30px"
-    android:src="@drawable/noimg" />
+    android:src="@drawable/noimg" android:onClick="onLocoRowClick"/>
 	<TextView android:id="@+id/locoRowText"
 	    android:layout_width="fill_parent" android:textSize="16sp"
 	    android:layout_height="fill_parent">

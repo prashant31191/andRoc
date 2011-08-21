@@ -20,8 +20,11 @@
 
 package net.rocrail.androc.activities;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
 import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.Loco;
@@ -36,6 +39,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -43,7 +47,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class ActBlock extends ActBase implements OnItemSelectedListener {
   Block m_Block = null;
   String LocoID = null;
-  
+  List<Loco> m_LocoList = new ArrayList<Loco>();
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -55,7 +60,6 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     super.connectedWithService();
     initView();
   }
-  
   
   void updateLoco() {
     TextView text = (TextView)findViewById(R.id.blockID);
@@ -71,6 +75,19 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     
     Loco lc = m_RocrailService.m_Model.getLoco(LocoID);
     image.ID = LocoID;
+
+    if( lc != null ) {
+      TextView ID = (TextView)findViewById(R.id.LocoBlockID);
+      ID.setText(lc.ID);
+      TextView Desc = (TextView)findViewById(R.id.LocoBlockDesc);
+      Desc.setText(lc.Description);
+    }
+    else {
+      TextView ID = (TextView)findViewById(R.id.LocoBlockID);
+      ID.setText("");
+      TextView Desc = (TextView)findViewById(R.id.LocoBlockDesc);
+      Desc.setText("");
+    }
     
     if (lc != null && lc.getLocoBmp(image) != null) {
       image.setImageBitmap(lc.getLocoBmp(null));
@@ -91,6 +108,15 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
   public void initView() {
     setContentView(R.layout.block);
     
+    Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
+    while( it.hasNext() ) {
+      Loco loco = it.next();
+      m_LocoList.add(loco);
+    }
+    
+    Collections.sort(m_LocoList, new LocoSort());
+
+    
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
       String id = extras.getString("id");
@@ -103,33 +129,19 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     LocoID = m_Block.LocoID;
     updateTitle("Block \'"+m_Block.ID+"\'");
     
-    // Loco spinner
-    Spinner s = (Spinner) findViewById(R.id.blockLocos);
-    s.setPrompt(getText(R.string.SelectLoco));
-
-    ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-    m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    s.setAdapter(m_adapterForSpinner);
-
-    Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
-    while( it.hasNext() ) {
-      Loco loco = it.next();
-      m_adapterForSpinner.add(loco.ID);
-    }
     
-    m_adapterForSpinner.sort(new LocoComparator());
-    m_adapterForSpinner.insert(getText(R.string.FreeBlock).toString(), 0);
-    if( LocoID != null ) {
-      int select = m_adapterForSpinner.getPosition(LocoID);
-      s.setSelection(select);
-    }
-    s.setOnItemSelectedListener(this);
-
     updateLoco();
     LocoImage image = (LocoImage)findViewById(R.id.blockLocoImage);
-    
+    image.setLongClickable(true);
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
+        Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
+        startActivityForResult(intent, 1);
+      }
+  });
+    
+    image.setOnLongClickListener(new View.OnLongClickListener() {
+      public boolean onLongClick(View v) {
         if( m_Block.LocoID!=null ) {
           Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
           intent.putExtra("id", m_Block.LocoID);
@@ -137,8 +149,11 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
           startActivity(intent);
           finish();
         }
+        return true;
       }
     });
+    
+
     
     
     final Button Loco = (Button) findViewById(R.id.blockLoco);
@@ -163,6 +178,16 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
             if( lc != null )
               lc.Dispatch();
           }
+        }
+    });
+
+    
+    final Button Free = (Button) findViewById(R.id.blockFree);
+    Free.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+          m_RocrailService.sendMessage("bk", 
+              String.format("<bk id=\"%s\" cmd=\"loc\" locid=\"\"/>", m_Block.ID ) );
+          finish();
         }
     });
 
@@ -211,6 +236,28 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
   public void onNothingSelected(AdapterView<?> arg0) {
     // TODO Auto-generated method stub
     
+  }
+
+  protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    if( requestCode == 1 ) {
+      Loco loco = m_LocoList.get(resultCode);
+      if( loco != null ) {
+        //LocoID = (id.equals(getText(R.string.FreeBlock).toString())?null:id);
+        LocoID = loco.ID;
+        if( LocoID != null ) {
+          m_RocrailService.sendMessage("lc", 
+              String.format("<lc id=\"%s\" cmd=\"block\" blockid=\"%s\"/>", LocoID, m_Block.ID ) );
+        }
+        else {
+          m_RocrailService.sendMessage("bk", 
+              String.format("<bk id=\"%s\" cmd=\"loc\" locid=\"\"/>", m_Block.ID ) );
+        }
+      }
+      else {
+        LocoID = null;
+      }
+      updateLoco();
+    }
   }
   
 }

@@ -232,7 +232,6 @@ public class ActThrottle extends ActBase
     findLoco(m_RocrailService.m_Model.m_LocoMap.get(LocoID));
     
     Slider mSeekBar = (Slider)findViewById(R.id.Speed);
-    //mSeekBar.setOnSeekBarChangeListener(this);
     mSeekBar.addListener(this);
     
     LEDButton Lights = (LEDButton) findViewById(R.id.throttleLights);
@@ -442,27 +441,7 @@ public class ActThrottle extends ActBase
       }
     }
   }
-/*
-  @Override
-  public void onProgressChanged(SeekBar seekbar, int progress, boolean fromTouch) {
-    quitShowed = false;
-    if( m_Loco != null && fromTouch )
-      m_Loco.setSpeed(progress, false);
-  }
 
-  @Override
-  public void onStartTrackingTouch(SeekBar arg0) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void onStopTrackingTouch(SeekBar seekbar) {
-    quitShowed = false;
-    if( m_Loco != null )
-      m_Loco.setSpeed(seekbar.getProgress(), true);
-  }
-*/
   protected void  onResume() {
     super.onResume();
     quitShowed = false;
@@ -470,12 +449,6 @@ public class ActThrottle extends ActBase
       updateFunctions();
     }
   }
-/*
-  @Override
-  public void onItemSelected(AdapterView<?> arg0, View view, int position, long longID) {
-    locoSelected(-1);
-  }
-*/
 
   public void locoSelected( int position) {
     quitShowed = false;
@@ -517,38 +490,6 @@ public class ActThrottle extends ActBase
     }
   }
 
-/*
-  @Override
-  public void onNothingSelected(AdapterView<?> arg0) {
-    // TODO Auto-generated method stub
-    
-  }
-*/  
-
-  /*
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-      //Handle the back button
-      if(keyCode == KeyEvent.KEYCODE_BACK) {
-        
-        if(quitShowed) {
-          ActThrottle.this.finish();
-          return true;
-        }
-        
-        Toast.makeText(getApplicationContext(), R.string.BackAgainQuit,
-            Toast.LENGTH_SHORT).show();
-        quitShowed = true;
-        
-        return true;
-      }
-      else {
-        quitShowed = false;
-        return super.onKeyDown(keyCode, event);
-      }
-
-  }
-  */
 
   @Override
   public void modelUpdate(int MODELLIST, String ID) {
