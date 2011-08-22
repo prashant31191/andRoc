@@ -30,7 +30,7 @@ import android.app.Activity;
 import android.graphics.Canvas;
 import android.view.View;
 
-public class Item implements View.OnClickListener {
+public class Item implements View.OnClickListener, View.OnLongClickListener {
   RocrailService m_RocrailService = null;
 
   public Attributes Properties = null;
@@ -178,6 +178,12 @@ public class Item implements View.OnClickListener {
   
   public void propertiesView() {
     
+  }
+
+  @Override
+  public boolean onLongClick(View arg0) {
+    // TODO Auto-generated method stub
+    return false;
   }
 
 }

@@ -187,6 +187,7 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
       }
       
       image.setOnClickListener(item);
+      image.setOnLongClickListener(item);
       item.imageView = image;
       item.activity = this;
       

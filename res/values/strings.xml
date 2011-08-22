@@ -118,4 +118,5 @@
   <string name="SmallThrottle">Small throttle</string>
   <string name="ControlCode">Ctrl code</string>
   <string name="Zoom">Zoom</string>
+  <string name="Unlock">Unlock</string>
 </resources>

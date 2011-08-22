@@ -19,12 +19,14 @@
 */
 package net.rocrail.androc.objects;
 
+import net.rocrail.androc.R;
 import net.rocrail.androc.RocrailService;
 
 import org.xml.sax.Attributes;
 
 
 import android.view.View;
+import android.widget.Toast;
 
 
 public class Switch extends Item implements View.OnClickListener {
@@ -62,7 +64,7 @@ public class Switch extends Item implements View.OnClickListener {
       orinr = 3;
     else if (orinr == 3)
       orinr = 1;
-
+    
     if (Type.equals("accessory")) {
       if (getOriNr(ModPlan) % 2 == 0)
         orinr = 2;
@@ -158,8 +160,18 @@ public class Switch extends Item implements View.OnClickListener {
       ImageName = String.format("decoupler_%s_%d", st, (orinr % 2 == 0 ? 2 : 1));
     }
 
+    System.out.println("switch type=" + Type + " img="+ImageName);
+
+
     return ImageName;
 
+  }
+
+  @Override
+  public void propertiesView() {
+    Toast.makeText(super.m_RocrailService.getApplicationContext(), R.string.Unlock,
+        Toast.LENGTH_SHORT).show();
+    m_RocrailService.sendMessage("sw", String.format( "<sw id=\"%s\" cmd=\"unlock\"/>", ID ) );
   }
 
 }

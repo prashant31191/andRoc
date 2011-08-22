@@ -74,6 +74,7 @@ public class LocoAdapter extends ArrayAdapter<String> {
   
   public static class ViewHolder {
     public TextView text;
+    public TextView addr;
     public ImageView icon;
 }
 
@@ -89,6 +90,7 @@ public class LocoAdapter extends ArrayAdapter<String> {
       holder = new ViewHolder();
 
       holder.text = (TextView) row.findViewById(R.id.locoRowText);
+      holder.addr = (TextView) row.findViewById(R.id.locoRowAddr);
       holder.icon = (ImageView) row.findViewById(R.id.locoRowImage);
       //holder.icon.setClickable(true);
       holder.icon.setFocusable(false);
@@ -102,6 +104,7 @@ public class LocoAdapter extends ArrayAdapter<String> {
     if( m_LocoList != null && position < m_LocoList.size() ) {
       Loco loco = m_LocoList.get(position);
       holder.text.setText(loco.ID);
+      holder.addr.setText(" ("+loco.Addr+")");
   
       Bitmap img = loco.getLocoBmp(loco.imageView);
       if( img != null )
