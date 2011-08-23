@@ -38,6 +38,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -341,7 +342,8 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
     }
     switch (event.getAction()) {
     case MotionEvent.ACTION_UP:
-      if (levelView.zoomButtonsController != null) {
+      System.out.println("uptime="+SystemClock.uptimeMillis()+" downtime="+event.getDownTime());
+      if ((SystemClock.uptimeMillis() - event.getDownTime()) > 1000 && levelView.zoomButtonsController != null) {
         levelView.zoomButtonsController.setVisible(true);
         levelView.zoomButtonsController.setFocusable(true);
         levelView.zoomButtonsController.getZoomControls().setFocusable(true);

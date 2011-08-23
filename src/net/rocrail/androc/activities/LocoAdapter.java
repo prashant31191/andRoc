@@ -104,7 +104,7 @@ public class LocoAdapter extends ArrayAdapter<String> {
     if( m_LocoList != null && position < m_LocoList.size() ) {
       Loco loco = m_LocoList.get(position);
       holder.text.setText(loco.ID);
-      holder.addr.setText(" ("+loco.Addr+")");
+      holder.addr.setText("("+loco.Addr+")");
   
       Bitmap img = loco.getLocoBmp(loco.imageView);
       if( img != null )

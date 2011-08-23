@@ -22,16 +22,16 @@
   android:orientation="horizontal"  android:focusable="false"
   android:layout_width="fill_parent" android:layout_height="wrap_content">
 
-  <net.rocrail.androc.widgets.LocoImage
-    android:id="@+id/locoRowImage" android:layout_width="160sp" android:focusable="false"
-    android:clickable="false" android:layout_height="40sp" android:layout_gravity="left"
-    android:src="@drawable/noimg"/>
+	<net.rocrail.androc.widgets.LocoImage
+	  android:id="@+id/locoRowImage" android:layout_width="160sp" android:focusable="false"
+	  android:clickable="false" android:layout_height="40sp" android:layout_gravity="left"
+	  android:src="@drawable/noimg" android:scaleType="fitStart"/>
 	<TextView android:id="@+id/locoRowText" android:focusable="false"
 	    android:layout_width="wrap_content" android:textSize="16sp"
-	    android:layout_height="fill_parent">
+	    android:layout_height="fill_parent" android:text="ID" android:padding="5sp">
 	</TextView>
 	<TextView android:id="@+id/locoRowAddr" android:focusable="false"
 	    android:layout_width="wrap_content" android:textSize="16sp"
-	    android:layout_height="fill_parent">
+	    android:layout_height="fill_parent" android:text="Addr" android:padding="5sp">
 	</TextView>
 </LinearLayout>
