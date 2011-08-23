@@ -33,6 +33,8 @@ android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckB
 android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
 <CheckBox android:text="@string/SmallThrottle" android:id="@+id/prefSmallThrottle" 
 android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
+<CheckBox android:text="@string/ImagesOnDemand" android:id="@+id/prefImagesOnDemand" 
+android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
       <Button android:text="@string/ClearRecent"
         android:id="@+id/prefClearRecent" android:layout_width="fill_parent"
         android:layout_height="wrap_content"></Button>

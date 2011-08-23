@@ -51,6 +51,8 @@ public class ActPreferences extends ActBase {
     cb.setChecked(m_RocrailService.Prefs.Modview);
     cb = (CheckBox)findViewById(R.id.prefSmallThrottle);
     cb.setChecked(m_RocrailService.Prefs.SmallThrottle);
+    cb = (CheckBox)findViewById(R.id.prefImagesOnDemand);
+    cb.setChecked(m_RocrailService.Prefs.ImagesOnDemand);
     Button b = (Button)findViewById(R.id.prefClearRecent);
     b.setEnabled(m_RocrailService.Prefs.Recent.length() > 0);
     b.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +78,8 @@ public class ActPreferences extends ActBase {
     m_RocrailService.Prefs.Modview = cb.isChecked();
     cb = (CheckBox)findViewById(R.id.prefSmallThrottle);
     m_RocrailService.Prefs.SmallThrottle = cb.isChecked();
+    cb = (CheckBox)findViewById(R.id.prefImagesOnDemand);
+    m_RocrailService.Prefs.ImagesOnDemand = cb.isChecked();
   
     EditText et = (EditText)findViewById(R.id.prefR2RHost);
     m_RocrailService.Prefs.RRHost = et.getText().toString();

@@ -101,7 +101,8 @@ public class Loco implements Runnable {
     }
     updateWithAttributes(atts);
     
-    new Thread(this).start();
+    if( !this.rocrailService.Prefs.ImagesOnDemand )
+      new Thread(this).start();
 
   }
   
