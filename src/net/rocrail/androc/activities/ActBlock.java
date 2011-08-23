@@ -236,7 +236,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
   }
 
   protected void onActivityResult (int requestCode, int resultCode, Intent data) {
-    if( requestCode == 1 ) {
+    if( requestCode == 1 && resultCode != -1 ) {
       Loco loco = m_LocoList.get(resultCode);
       if( loco != null ) {
         //LocoID = (id.equals(getText(R.string.FreeBlock).toString())?null:id);

@@ -427,8 +427,10 @@ public class ActThrottle extends ActBase
 
   public void locoSelected( int position) {
     quitShowed = false;
-    findLoco(position);
-    locoSelected();
+    if( position != -1 ) {
+      findLoco(position);
+      locoSelected();
+    }
   }
   
   public void locoSelected() {

@@ -85,6 +85,8 @@ public class ActLocoList extends ListActivity implements ServiceListener {
         finish();
       }
     });
+    
+    setResult(-1);
   }
 
 }
