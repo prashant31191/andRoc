@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-06-28 22:34+0200\n"
+"POT-Creation-Date: 2011-08-24 17:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -395,5 +395,21 @@ msgstr ""
 
 #: res/values/strings.xml:119(string)
 msgid "Ctrl code"
+msgstr ""
+
+#: res/values/strings.xml:120(string)
+msgid "Zoom"
+msgstr ""
+
+#: res/values/strings.xml:121(string)
+msgid "Unlock"
+msgstr ""
+
+#: res/values/strings.xml:122(string)
+msgid "Images on demand"
+msgstr ""
+
+#: res/values/strings.xml:123(string)
+msgid "Sort by address"
 msgstr ""
 
