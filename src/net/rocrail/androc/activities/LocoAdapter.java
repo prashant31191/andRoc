@@ -37,11 +37,13 @@ import android.widget.TextView;
 public class LocoAdapter extends ArrayAdapter<String> {
   List<Loco> m_LocoList = null;
   Activity m_Activity = null;
+  boolean sortbyaddr = false;
   
-  public LocoAdapter(Activity activity, int textViewResourceId, List<Loco> locoList) {
+  public LocoAdapter(Activity activity, int textViewResourceId, List<Loco> locoList, boolean sortbyaddr) {
     super(activity, textViewResourceId);
     m_Activity = activity;
     m_LocoList = locoList;
+    this.sortbyaddr = sortbyaddr; 
   }
   
   @Override
@@ -103,8 +105,14 @@ public class LocoAdapter extends ArrayAdapter<String> {
     
     if( m_LocoList != null && position < m_LocoList.size() ) {
       Loco loco = m_LocoList.get(position);
-      holder.text.setText(loco.ID);
-      holder.addr.setText("("+loco.Addr+")");
+      if( sortbyaddr ) {
+        holder.text.setText(""+loco.Addr);
+        holder.addr.setText("("+loco.ID+")");
+      }
+      else {
+        holder.text.setText(loco.ID);
+        holder.addr.setText("("+loco.Addr+")");
+      }
   
       Bitmap img = loco.getLocoBmp(loco.imageView);
       if( img != null )

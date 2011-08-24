@@ -45,6 +45,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
   Block m_Block = null;
   String LocoID = null;
   List<Loco> m_LocoList = new ArrayList<Loco>();
+  int m_iLocoSelected = 0;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -111,9 +112,8 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
       m_LocoList.add(loco);
     }
     
-    Collections.sort(m_LocoList, new LocoSort());
+    Collections.sort(m_LocoList, new LocoSort(m_RocrailService.Prefs.SortByAddr));
 
-    
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
       String id = extras.getString("id");
@@ -122,6 +122,18 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
 
     if( m_Block == null )
       return;
+    
+    if( m_Block.LocoID != null ) {
+      it = m_LocoList.iterator();
+      int idx = 0;
+      while( it.hasNext() ) {
+        Loco loco = it.next();
+        if( m_Block.LocoID.equals(loco.ID) ) {
+          m_iLocoSelected = idx;
+        }
+        idx++;
+      }
+    }    
     
     LocoID = m_Block.LocoID;
     updateTitle("Block \'"+m_Block.ID+"\'");
@@ -133,6 +145,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
+        intent.putExtra("selected", m_iLocoSelected );
         startActivityForResult(intent, 1);
       }
   });
@@ -237,6 +250,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
 
   protected void onActivityResult (int requestCode, int resultCode, Intent data) {
     if( requestCode == 1 && resultCode != -1 ) {
+      m_iLocoSelected = resultCode;
       Loco loco = m_LocoList.get(resultCode);
       if( loco != null ) {
         //LocoID = (id.equals(getText(R.string.FreeBlock).toString())?null:id);

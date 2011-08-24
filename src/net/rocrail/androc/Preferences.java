@@ -44,6 +44,7 @@ public class Preferences {
   public static final String PREFS_SIZE = "size";
   public static final String PREFS_SMALLTHROTTLE = "smallthrottle";
   public static final String PREFS_IMAGESONDEMAND = "imagesondemand";
+  public static final String PREFS_SORTBYADDR = "sortbyaddr";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -59,6 +60,7 @@ public class Preferences {
   public boolean KeepScreenOn = false;
   public boolean SmallThrottle  = true;
   public boolean ImagesOnDemand = false;
+  public boolean SortByAddr   = false;
   public boolean Modview      = true;
   public String  LocoID       = "";
   public String  Title        = "";
@@ -99,6 +101,7 @@ public class Preferences {
     Size         = settings.getInt(PREFS_SIZE, Size);
     SmallThrottle  = settings.getBoolean(PREFS_SMALLTHROTTLE, SmallThrottle);
     ImagesOnDemand = settings.getBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
+    SortByAddr   = settings.getBoolean(PREFS_SORTBYADDR, SortByAddr);
     
     conList = RRConnection.parse(Recent);
 
@@ -151,6 +154,7 @@ public class Preferences {
     editor.putInt(PREFS_SIZE, Size);
     editor.putBoolean(PREFS_SMALLTHROTTLE, SmallThrottle);
     editor.putBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
+    editor.putBoolean(PREFS_SORTBYADDR, SortByAddr);
     editor.commit();
   }
   

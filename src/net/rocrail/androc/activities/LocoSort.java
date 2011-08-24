@@ -25,9 +25,21 @@ import java.util.Comparator;
 import net.rocrail.androc.objects.Loco;
 
 public class LocoSort implements Comparator<Loco>{
-
+  boolean sortbyaddr = false;
+  
+  public LocoSort(boolean sortbyaddr) {
+    this.sortbyaddr = sortbyaddr;
+  }
   @Override
   public int compare(Loco loco1, Loco loco2) {
-    return loco1.ID.toLowerCase().compareTo(loco2.ID.toLowerCase());
+    if( sortbyaddr ) {
+      if( loco1.Addr == loco2.Addr )
+        return 0;
+      if( loco1.Addr > loco2.Addr )
+        return 1;
+      return -1;
+    }
+    else
+      return loco1.ID.toLowerCase().compareTo(loco2.ID.toLowerCase());
   }
  }

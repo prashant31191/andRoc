@@ -51,6 +51,7 @@ public class ActThrottle extends ActBase
 {
   int         m_iFunctionGroup = 0;
   int         m_iLocoCount     = 0;
+  int         m_iLocoSelected  = 0;
   final static int FNGROUPSIZE = 6;
   private Loco m_Loco = null;
   boolean quitShowed = false;
@@ -221,7 +222,19 @@ public class ActThrottle extends ActBase
       m_LocoList.add(loco);
     }
     
-    Collections.sort(m_LocoList, new LocoSort());
+    Collections.sort(m_LocoList, new LocoSort(m_RocrailService.Prefs.SortByAddr));
+
+    if( LocoID != null ) {
+      it = m_LocoList.iterator();
+      int idx = 0;
+      while( it.hasNext() ) {
+        Loco loco = it.next();
+        if( LocoID.equals(loco.ID) ) {
+          m_iLocoSelected = idx;
+        }
+        idx++;
+      }
+    }    
     
     findLoco(m_RocrailService.m_Model.m_LocoMap.get(LocoID));
     
@@ -384,6 +397,7 @@ public class ActThrottle extends ActBase
       public void onClick(View v) {
         quitShowed = false;
         Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
+        intent.putExtra("selected", m_iLocoSelected );
         startActivityForResult(intent, 1);
       }
   });
@@ -406,8 +420,9 @@ public class ActThrottle extends ActBase
 
   
   protected void onActivityResult (int requestCode, int resultCode, Intent data) {
-    if( requestCode == 1 )
+    if( requestCode == 1 ) {
       locoSelected(resultCode);
+    }
   }
   
   
@@ -428,6 +443,7 @@ public class ActThrottle extends ActBase
   public void locoSelected( int position) {
     quitShowed = false;
     if( position != -1 ) {
+      m_iLocoSelected = position;
       findLoco(position);
       locoSelected();
     }

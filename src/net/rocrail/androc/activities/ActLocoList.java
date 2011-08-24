@@ -65,8 +65,8 @@ public class ActLocoList extends ListActivity implements ServiceListener {
       m_LocoList.add(loco);
     }
     
-    Collections.sort(m_LocoList, new LocoSort());
-    m_Adapter = new LocoAdapter(this, R.layout.locorow, m_LocoList);
+    Collections.sort(m_LocoList, new LocoSort(m_Base.m_RocrailService.Prefs.SortByAddr));
+    m_Adapter = new LocoAdapter(this, R.layout.locorow, m_LocoList, m_Base.m_RocrailService.Prefs.SortByAddr);
     setListAdapter(m_Adapter);
 
     Iterator<Loco> itList = m_LocoList.iterator();
@@ -85,6 +85,13 @@ public class ActLocoList extends ListActivity implements ServiceListener {
         finish();
       }
     });
+    
+    Bundle extras = getIntent().getExtras();
+    if (extras != null) {
+      int sel = extras.getInt("selected");
+      setSelection(sel);
+    }
+
     
     setResult(-1);
   }
