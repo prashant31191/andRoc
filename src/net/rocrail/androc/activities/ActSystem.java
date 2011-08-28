@@ -120,7 +120,10 @@ public class ActSystem extends ActBase implements MessageListener {
     final Button eBreak = (Button) findViewById(R.id.systemEmergencyStop);
     eBreak.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\"/>");
+          if( m_RocrailService.Prefs.PowerOff4EBreak )
+            m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
+          else
+            m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\"/>");
         }
     });
     

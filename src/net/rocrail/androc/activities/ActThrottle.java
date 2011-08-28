@@ -102,16 +102,7 @@ public class ActThrottle extends ActBase
     }
   
     if( m_Loco != null ) {
-      m_RocrailService.Prefs.LocoID = m_Loco.ID;
-    }
-
-  }
-  
-  void findLoco(Loco loco) {
-    if( loco != null ) {
-      m_Loco = loco;
-      m_RocrailService.Prefs.LocoID = m_Loco.ID;
-      locoSelected();
+      m_RocrailService.Prefs.saveLoco(m_Loco.ID, m_RocrailService.ThrottleNr);
     }
 
   }
@@ -211,7 +202,7 @@ public class ActThrottle extends ActBase
     m_iLocoCount = 0;
     String LocoID = "";
     
-    LocoID = m_RocrailService.Prefs.LocoID;
+    LocoID = m_RocrailService.Prefs.getLocoID(m_RocrailService.ThrottleNr);
     setContentView(R.layout.throttle);
     
     getWindow().setLayout((m_RocrailService.Prefs.SmallThrottle ? 300:LayoutParams.WRAP_CONTENT), LayoutParams.FILL_PARENT);
@@ -236,8 +227,9 @@ public class ActThrottle extends ActBase
       }
     }    
     
-    findLoco(m_RocrailService.m_Model.m_LocoMap.get(LocoID));
-    
+    m_Loco = m_RocrailService.m_Model.m_LocoMap.get(LocoID);
+    locoSelected();
+
     Slider mSeekBar = (Slider)findViewById(R.id.Speed);
     mSeekBar.addListener(this);
     
@@ -273,6 +265,8 @@ public class ActThrottle extends ActBase
     });
 
     LEDButton f1 = (LEDButton) findViewById(R.id.throttleF1);
+    f1.setLongClickable(true);
+    f1.setOnLongClickListener(this);
     f1.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -285,6 +279,8 @@ public class ActThrottle extends ActBase
     });
 
     LEDButton f2 = (LEDButton) findViewById(R.id.throttleF2);
+    f2.setLongClickable(true);
+    f2.setOnLongClickListener(this);
     f2.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -297,6 +293,8 @@ public class ActThrottle extends ActBase
     });
 
     LEDButton f3 = (LEDButton) findViewById(R.id.throttleF3);
+    f3.setLongClickable(true);
+    f3.setOnLongClickListener(this);
     f3.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -309,6 +307,8 @@ public class ActThrottle extends ActBase
     });
 
     LEDButton f4 = (LEDButton) findViewById(R.id.throttleF4);
+    f4.setLongClickable(true);
+    f4.setOnLongClickListener(this);
     f4.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -321,6 +321,8 @@ public class ActThrottle extends ActBase
     });
 
     LEDButton f5 = (LEDButton) findViewById(R.id.throttleF5);
+    f5.setLongClickable(true);
+    f5.setOnLongClickListener(this);
     f5.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -333,6 +335,8 @@ public class ActThrottle extends ActBase
     });
 
     LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
+    f6.setLongClickable(true);
+    f6.setOnLongClickListener(this);
     f6.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -453,7 +457,9 @@ public class ActThrottle extends ActBase
     if( m_Loco != null ) {
       m_RocrailService.SelectedLoco = m_Loco;
       
-      m_RocrailService.Prefs.saveLoco(m_Loco.ID);
+      m_RocrailService.Prefs.saveLoco(m_Loco.ID, m_RocrailService.ThrottleNr);
+      
+      System.out.println("locoSelected: "+m_Loco.ID+"["+m_RocrailService.ThrottleNr+"]");
 
       LEDButton f0 = (LEDButton) findViewById(R.id.throttleLights);
       f0.ON = m_Loco.Lights;
@@ -480,6 +486,21 @@ public class ActThrottle extends ActBase
       LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
       mDir.setText(""+m_Loco.Speed);
 
+    }
+    else {
+      LEDButton f0 = (LEDButton) findViewById(R.id.throttleLights);
+      f0.ON = false;
+      LocoImage image = (LocoImage)findViewById(R.id.locoImage);
+      image.setImageResource(R.drawable.noimg);
+      Slider mSeekBar = (Slider)findViewById(R.id.Speed);
+      mSeekBar.setRange(100);
+      mSeekBar.setV(0);
+      LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
+      mDir.setText(""+0);
+      TextView ID = (TextView)findViewById(R.id.LocoThrottleID);
+      ID.setText("");
+      TextView Desc = (TextView)findViewById(R.id.LocoThrottleDesc);
+      Desc.setText("");
     }
   }
 
@@ -520,7 +541,10 @@ public class ActThrottle extends ActBase
     if( view.getId() == R.id.throttleFn ) {
       Toast.makeText(getApplicationContext(), R.string.EmergencyStop,
           Toast.LENGTH_SHORT).show();
-      m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\"/>");
+      if( m_RocrailService.Prefs.PowerOff4EBreak )
+        m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
+      else
+        m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\"/>");
       return true;
     }
     if( view.getId() == R.id.throttleLights ) {
@@ -536,6 +560,54 @@ public class ActThrottle extends ActBase
           Toast.LENGTH_SHORT).show();
       m_RocrailService.Power = false;
       m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
+      return true;
+    }
+    if( view.getId() == R.id.throttleF1 ) {
+      Toast.makeText(getApplicationContext(), getString(R.string.Throttle) + " 1",
+          Toast.LENGTH_SHORT).show();
+      m_RocrailService.ThrottleNr = 1;
+      m_Loco = m_RocrailService.m_Model.m_LocoMap.get(m_RocrailService.Prefs.getLocoID(m_RocrailService.ThrottleNr));
+      locoSelected();
+      return true;
+    }
+    if( view.getId() == R.id.throttleF2 ) {
+      Toast.makeText(getApplicationContext(), getString(R.string.Throttle) + " 2",
+          Toast.LENGTH_SHORT).show();
+      m_RocrailService.ThrottleNr = 2;
+      m_Loco = m_RocrailService.m_Model.m_LocoMap.get(m_RocrailService.Prefs.getLocoID(m_RocrailService.ThrottleNr));
+      locoSelected();
+      return true;
+    }
+    if( view.getId() == R.id.throttleF3 ) {
+      Toast.makeText(getApplicationContext(), getString(R.string.Throttle) + " 3",
+          Toast.LENGTH_SHORT).show();
+      m_RocrailService.ThrottleNr = 3;
+      m_Loco = m_RocrailService.m_Model.m_LocoMap.get(m_RocrailService.Prefs.getLocoID(m_RocrailService.ThrottleNr));
+      locoSelected();
+      return true;
+    }
+    if( view.getId() == R.id.throttleF4 ) {
+      Toast.makeText(getApplicationContext(), getString(R.string.Throttle) + " 4",
+          Toast.LENGTH_SHORT).show();
+      m_RocrailService.ThrottleNr = 4;
+      m_Loco = m_RocrailService.m_Model.m_LocoMap.get(m_RocrailService.Prefs.getLocoID(m_RocrailService.ThrottleNr));
+      locoSelected();
+      return true;
+    }
+    if( view.getId() == R.id.throttleF5 ) {
+      Toast.makeText(getApplicationContext(), getString(R.string.Throttle) + " 5",
+          Toast.LENGTH_SHORT).show();
+      m_RocrailService.ThrottleNr = 5;
+      m_Loco = m_RocrailService.m_Model.m_LocoMap.get(m_RocrailService.Prefs.getLocoID(m_RocrailService.ThrottleNr));
+      locoSelected();
+      return true;
+    }
+    if( view.getId() == R.id.throttleF6 ) {
+      Toast.makeText(getApplicationContext(), getString(R.string.Throttle) + " 6",
+          Toast.LENGTH_SHORT).show();
+      m_RocrailService.ThrottleNr = 6;
+      m_Loco = m_RocrailService.m_Model.m_LocoMap.get(m_RocrailService.Prefs.getLocoID(m_RocrailService.ThrottleNr));
+      locoSelected();
       return true;
     }
     return false;

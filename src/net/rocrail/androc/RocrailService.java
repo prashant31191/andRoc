@@ -60,6 +60,7 @@ public class RocrailService extends Service {
   public boolean AutoStart = false;
   public boolean Connected = false;
   public boolean m_bDidShowDonate = false;
+  public int ThrottleNr = 1;
   
   Socket        m_Socket     = null;
   Connection    m_Connection = null;

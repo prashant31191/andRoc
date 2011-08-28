@@ -121,4 +121,5 @@
   <string name="Unlock">Unlock</string>
   <string name="ImagesOnDemand">Images on demand</string>
   <string name="SortByAddr">Sort by address</string>
+  <string name="PowerOff4EBreak">Power off for EStop</string>
 </resources>

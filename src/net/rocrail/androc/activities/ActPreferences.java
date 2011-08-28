@@ -55,6 +55,8 @@ public class ActPreferences extends ActBase {
     cb.setChecked(m_RocrailService.Prefs.ImagesOnDemand);
     cb = (CheckBox)findViewById(R.id.prefSortByAddr);
     cb.setChecked(m_RocrailService.Prefs.SortByAddr);
+    cb = (CheckBox)findViewById(R.id.prefPowerOff4EBreak);
+    cb.setChecked(m_RocrailService.Prefs.PowerOff4EBreak);
     Button b = (Button)findViewById(R.id.prefClearRecent);
     b.setEnabled(m_RocrailService.Prefs.Recent.length() > 0);
     b.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +86,8 @@ public class ActPreferences extends ActBase {
     m_RocrailService.Prefs.ImagesOnDemand = cb.isChecked();
     cb = (CheckBox)findViewById(R.id.prefSortByAddr);
     m_RocrailService.Prefs.SortByAddr = cb.isChecked();
+    cb = (CheckBox)findViewById(R.id.prefPowerOff4EBreak);
+    m_RocrailService.Prefs.PowerOff4EBreak = cb.isChecked();
   
     EditText et = (EditText)findViewById(R.id.prefR2RHost);
     m_RocrailService.Prefs.RRHost = et.getText().toString();

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocrail\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-06-28 22:34+0200\n"
+"POT-Creation-Date: 2011-08-24 17:20+0200\n"
 "PO-Revision-Date: 2010-12-02 10:07+0000\n"
 "Last-Translator: Rocrail <r.j.versluis@rocrail.net>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -405,6 +405,23 @@ msgstr "Halvautomatik"
 
 #: res/values/strings.xml:119(string)
 msgid "Ctrl code"
+msgstr ""
+
+#: res/values/strings.xml:120(string)
+msgid "Zoom"
+msgstr ""
+
+#: res/values/strings.xml:121(string)
+#, fuzzy
+msgid "Unlock"
+msgstr "Block"
+
+#: res/values/strings.xml:122(string)
+msgid "Images on demand"
+msgstr ""
+
+#: res/values/strings.xml:123(string)
+msgid "Sort by address"
 msgstr ""
 
 #~ msgid "Tidtabells lista"

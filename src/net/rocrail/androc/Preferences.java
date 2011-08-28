@@ -33,6 +33,11 @@ public class Preferences {
   public static final String PREFS_PORT = "port";
   public static final String PREFS_CTRLCODE = "ctrlcode";
   public static final String PREFS_LOCOID = "locoid";
+  public static final String PREFS_LOCOID2 = "locoid2";
+  public static final String PREFS_LOCOID3 = "locoid3";
+  public static final String PREFS_LOCOID4 = "locoid4";
+  public static final String PREFS_LOCOID5 = "locoid5";
+  public static final String PREFS_LOCOID6 = "locoid6";
   public static final String PREFS_MONITORING = "monitoring";
   public static final String PREFS_KEEPSCREENON = "keepscreenon";
   public static final String PREFS_RRNETHOST = "rrnethost";
@@ -45,6 +50,7 @@ public class Preferences {
   public static final String PREFS_SMALLTHROTTLE = "smallthrottle";
   public static final String PREFS_IMAGESONDEMAND = "imagesondemand";
   public static final String PREFS_SORTBYADDR = "sortbyaddr";
+  public static final String PREFS_POWEROFF4EBREAK = "poweroff4ebreak";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -62,7 +68,13 @@ public class Preferences {
   public boolean ImagesOnDemand = false;
   public boolean SortByAddr   = false;
   public boolean Modview      = true;
+  public boolean PowerOff4EBreak = false;
   public String  LocoID       = "";
+  public String  LocoID2      = "";
+  public String  LocoID3      = "";
+  public String  LocoID4      = "";
+  public String  LocoID5      = "";
+  public String  LocoID6      = "";
   public String  Title        = "";
   public int     AccNr        = 1;
   public int     CvNr         = 1;
@@ -94,10 +106,16 @@ public class Preferences {
     Monitoring   = settings.getBoolean(PREFS_MONITORING, Monitoring);
     KeepScreenOn = settings.getBoolean(PREFS_KEEPSCREENON, KeepScreenOn);
     LocoID       = settings.getString(PREFS_LOCOID, LocoID);
+    LocoID2      = settings.getString(PREFS_LOCOID2, LocoID2);
+    LocoID3      = settings.getString(PREFS_LOCOID3, LocoID3);
+    LocoID4      = settings.getString(PREFS_LOCOID4, LocoID4);
+    LocoID5      = settings.getString(PREFS_LOCOID5, LocoID5);
+    LocoID6      = settings.getString(PREFS_LOCOID6, LocoID6);
     AccType      = settings.getString(PREFS_ACCTYPE, AccType);
     AccNr        = settings.getInt(PREFS_ACCNR, AccNr);
     CvNr         = settings.getInt(PREFS_CVNR, CvNr);
     Modview      = settings.getBoolean(PREFS_MODVIEW, Modview);
+    PowerOff4EBreak = settings.getBoolean(PREFS_POWEROFF4EBREAK, PowerOff4EBreak);
     Size         = settings.getInt(PREFS_SIZE, Size);
     SmallThrottle  = settings.getBoolean(PREFS_SMALLTHROTTLE, SmallThrottle);
     ImagesOnDemand = settings.getBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
@@ -118,10 +136,30 @@ public class Preferences {
     
   }
   
-  public void saveLoco(String ID) {
+  public String getLocoID(int nr) {
+    System.out.println("getLocoID: "+"["+nr+"]");
+    switch( nr ) {
+    case 2: return LocoID2;
+    case 3: return LocoID3;
+    case 4: return LocoID4;
+    case 5: return LocoID5;
+    case 6: return LocoID6;
+    default: return LocoID;
+    }
+  }
+  
+  public void saveLoco(String ID, int nr) {
     SharedPreferences settings = rocrailService.getSharedPreferences(PREFS_NAME, 0);
     SharedPreferences.Editor editor = settings.edit();
-    editor.putString(PREFS_LOCOID, ID);
+    System.out.println("saveLoco: "+ID+"["+nr+"]");
+    switch( nr ) {
+    case 2: LocoID2 = ID; editor.putString(PREFS_LOCOID2, ID); break;
+    case 3: LocoID3 = ID; editor.putString(PREFS_LOCOID3, ID); break;
+    case 4: LocoID4 = ID; editor.putString(PREFS_LOCOID4, ID); break;
+    case 5: LocoID5 = ID; editor.putString(PREFS_LOCOID5, ID); break;
+    case 6: LocoID6 = ID; editor.putString(PREFS_LOCOID6, ID); break;
+    default: LocoID = ID; editor.putString(PREFS_LOCOID, ID); break;
+    }
     editor.commit();
   }
   
@@ -155,6 +193,7 @@ public class Preferences {
     editor.putBoolean(PREFS_SMALLTHROTTLE, SmallThrottle);
     editor.putBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
     editor.putBoolean(PREFS_SORTBYADDR, SortByAddr);
+    editor.putBoolean(PREFS_POWEROFF4EBREAK, PowerOff4EBreak);
     editor.commit();
   }
   
