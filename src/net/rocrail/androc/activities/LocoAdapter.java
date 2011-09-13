@@ -107,11 +107,11 @@ public class LocoAdapter extends ArrayAdapter<String> {
       Loco loco = m_LocoList.get(position);
       if( sortbyaddr ) {
         holder.text.setText(""+loco.Addr);
-        holder.addr.setText("("+loco.ID+")");
+        holder.addr.setText(loco.ID);
       }
       else {
         holder.text.setText(loco.ID);
-        holder.addr.setText("("+loco.Addr+")");
+        holder.addr.setText(""+loco.Addr);
       }
   
       Bitmap img = loco.getLocoBmp(loco.imageView);
