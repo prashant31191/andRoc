@@ -108,6 +108,9 @@ public class ActThrottle extends ActBase
   }
   
   void updateFunctions() {
+    if( m_Loco == null )
+      return;
+    
     LEDButton f1 = (LEDButton) findViewById(R.id.throttleF1);
     f1.setText(m_Loco.getFunctionText(1+m_iFunctionGroup*FNGROUPSIZE));
     LEDButton f2 = (LEDButton) findViewById(R.id.throttleF2);

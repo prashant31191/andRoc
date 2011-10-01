@@ -344,5 +344,5 @@ class UpdateLocoImage implements Runnable {
 
 class Function {
   int Nr = 0;
-  String Text = null;
+  String Text = "";
 }
