@@ -20,6 +20,9 @@
 package net.rocrail.androc.objects;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -164,7 +167,29 @@ public class Loco implements Runnable {
     if( image != null )
       imageView = image;
     
-    if(!ImageRequested) {
+    
+    File dir = new File("/sdcard/androc/");
+    if( !dir.exists() )
+      dir.mkdirs();
+    File file = new File("/sdcard/androc/" + PicName );
+    if( file.exists()) {
+      try {
+        byte rawdata[] = new byte[(int)file.length()]; 
+        FileInputStream fis = new FileInputStream(file);
+        fis.read(rawdata);
+        fis.close();
+        Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
+        LocoBmp = bmp;
+        if( imageView != null ) {
+          imageView.post(new UpdateLocoImage(this));
+        }
+      }
+      catch(Exception e) {
+        e.printStackTrace();
+      }
+    }
+    
+    if(LocoBmp == null && !ImageRequested) {
       ImageRequested = true;
       if( PicName != null && PicName.length() > 0 ) {
         // type 1 is for small images
@@ -190,6 +215,20 @@ public class Loco implements Runnable {
     if( data != null && data.length() > 0 ) {
       // convert from HEXA to Bitmap
       byte[] rawdata = strToByte(data);
+      
+      File dir = new File("/sdcard/androc/");
+      if( !dir.exists() )
+        dir.mkdirs();
+      File file = new File("/sdcard/androc/" + PicName );
+      try {
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(rawdata);
+        fos.close();
+      }
+      catch(Exception e) {
+        e.printStackTrace();
+      }
+
       Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
       LocoBmp = bmp;
       if( imageView != null ) {
