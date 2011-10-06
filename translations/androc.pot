@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-08-24 17:20+0200\n"
+"POT-Creation-Date: 2011-10-06 11:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -411,5 +411,29 @@ msgstr ""
 
 #: res/values/strings.xml:123(string)
 msgid "Sort by address"
+msgstr ""
+
+#: res/values/strings.xml:124(string)
+msgid "Power off for EStop"
+msgstr ""
+
+#: res/values/strings.xml:125(string)
+msgid "Color"
+msgstr ""
+
+#: res/values/strings.xml:126(string)
+msgid "Select backgrounf color"
+msgstr ""
+
+#: res/values/strings.xml:127(string)
+msgid "Green"
+msgstr ""
+
+#: res/values/strings.xml:128(string)
+msgid "Grey"
+msgstr ""
+
+#: res/values/strings.xml:129(string)
+msgid "Blue"
 msgstr ""
 
