@@ -20,14 +20,21 @@
 
 package net.rocrail.androc.activities;
 
+import java.util.Iterator;
+
 import net.rocrail.androc.R;
+import net.rocrail.androc.objects.RRConnection;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.AdapterView.OnItemSelectedListener;
 
-public class ActPreferences extends ActBase {
+public class ActPreferences extends ActBase implements OnItemSelectedListener {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -70,6 +77,26 @@ public class ActPreferences extends ActBase {
     et.setText(m_RocrailService.Prefs.RRHost);
     et = (EditText)findViewById(R.id.prefR2RPort);
     et.setText(""+m_RocrailService.Prefs.RRPort);
+    
+    
+    
+    Spinner color = (Spinner) findViewById(R.id.BackgroundColor);
+    
+    color.setPrompt(getString(R.string.SelectColor));
+
+    ArrayAdapter<String> m_adapterForSpinner = new ArrayAdapter<String>(this,
+        android.R.layout.simple_spinner_item);
+    m_adapterForSpinner
+        .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    color.setAdapter(m_adapterForSpinner);
+
+    
+    m_adapterForSpinner.add(getString(R.string.Green));
+    m_adapterForSpinner.add(getString(R.string.Grey));
+    m_adapterForSpinner.add(getString(R.string.Blue));
+    color.setOnItemSelectedListener(this);
+    color.setSelection(m_RocrailService.Prefs.Color);
+
 
   }
   
@@ -94,6 +121,9 @@ public class ActPreferences extends ActBase {
     et = (EditText)findViewById(R.id.prefR2RPort);
     m_RocrailService.Prefs.RRPort = Integer.parseInt(et.getText().toString());
     
+    Spinner color = (Spinner) findViewById(R.id.BackgroundColor);
+    m_RocrailService.Prefs.Color = color.getSelectedItemPosition();
+    
     m_RocrailService.Prefs.save();
   }
   
@@ -101,6 +131,18 @@ public class ActPreferences extends ActBase {
   protected void onPause() {
     super.onPause();
     savePrefs();
+  }
+
+  @Override
+  public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void onNothingSelected(AdapterView<?> arg0) {
+    // TODO Auto-generated method stub
+    
   }
   
   

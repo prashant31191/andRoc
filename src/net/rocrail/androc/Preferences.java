@@ -51,6 +51,7 @@ public class Preferences {
   public static final String PREFS_IMAGESONDEMAND = "imagesondemand";
   public static final String PREFS_SORTBYADDR = "sortbyaddr";
   public static final String PREFS_POWEROFF4EBREAK = "poweroff4ebreak";
+  public static final String PREFS_COLOR = "color";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -82,6 +83,7 @@ public class Preferences {
   RocrailService rocrailService = null;
   boolean Initialized = false;
   public int     Size         = 32;
+  public int     Color        = 0;
   
   public List<RRConnection> conList = null; 
 
@@ -120,6 +122,7 @@ public class Preferences {
     SmallThrottle  = settings.getBoolean(PREFS_SMALLTHROTTLE, SmallThrottle);
     ImagesOnDemand = settings.getBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
     SortByAddr   = settings.getBoolean(PREFS_SORTBYADDR, SortByAddr);
+    Color         = settings.getInt(PREFS_COLOR, Color);
     
     conList = RRConnection.parse(Recent);
 
@@ -194,6 +197,7 @@ public class Preferences {
     editor.putBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
     editor.putBoolean(PREFS_SORTBYADDR, SortByAddr);
     editor.putBoolean(PREFS_POWEROFF4EBREAK, PowerOff4EBreak);
+    editor.putInt(PREFS_COLOR, Color);
     editor.commit();
   }
   

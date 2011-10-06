@@ -122,4 +122,9 @@
   <string name="ImagesOnDemand">Images on demand</string>
   <string name="SortByAddr">Sort by address</string>
   <string name="PowerOff4EBreak">Power off for EStop</string>
+  <string name="Color">Color</string>
+  <string name="SelectColor">Select backgrounf color</string>
+  <string name="Green">Green</string>
+  <string name="Grey">Grey</string>
+  <string name="Blue">Blue</string>
 </resources>

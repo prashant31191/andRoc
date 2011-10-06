@@ -120,6 +120,17 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
 
     levelView = (LevelCanvas)findViewById(R.id.levelView);
     levelView.setPadding(0,0,0,0);
+    switch( m_RocrailService.Prefs.Color ) {
+    case 1:
+      levelView.setBackgroundColor(0xFFCCCCCC);
+      break;
+    case 2:
+      levelView.setBackgroundColor(0xFFCCCCEE);
+      break;
+    default:
+      levelView.setBackgroundColor(0xFFCCEECC);
+      break;
+    }
     
     if( ModPlan ) {
       setTitle(m_RocrailService.m_Model.m_Title);
