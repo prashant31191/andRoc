@@ -77,6 +77,7 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
   
   public void connectedWithService() {
     super.connectedWithService();
+    m_RocrailService.LevelView = this;
     initView();
     if( !(m_RocrailService.m_Model.ModPlan && m_RocrailService.Prefs.Modview) ) {
       MenuSelection |= ActBase.MENU_LAYOUT;
@@ -114,12 +115,8 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
   }
   
 
-
-  public void initView() {
-    setContentView(R.layout.level);
-
+  public void setBackgroundColor() {
     levelView = (LevelCanvas)findViewById(R.id.levelView);
-    levelView.setPadding(0,0,0,0);
     switch( m_RocrailService.Prefs.Color ) {
     case 1:
       levelView.setBackgroundColor(0xFFCCCCCC);
@@ -131,6 +128,15 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
       levelView.setBackgroundColor(0xFFCCEECC);
       break;
     }
+  }
+  
+  public void initView() {
+    setContentView(R.layout.level);
+
+    levelView = (LevelCanvas)findViewById(R.id.levelView);
+    levelView.setPadding(0,0,0,0);
+    
+    setBackgroundColor();
     
     if( ModPlan ) {
       setTitle(m_RocrailService.m_Model.m_Title);

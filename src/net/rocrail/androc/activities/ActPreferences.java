@@ -122,7 +122,13 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     m_RocrailService.Prefs.RRPort = Integer.parseInt(et.getText().toString());
     
     Spinner color = (Spinner) findViewById(R.id.BackgroundColor);
-    m_RocrailService.Prefs.Color = color.getSelectedItemPosition();
+    if(m_RocrailService.Prefs.Color != color.getSelectedItemPosition()) {
+      m_RocrailService.Prefs.Color = color.getSelectedItemPosition();
+      // Inform level view.
+      if( m_RocrailService.LevelView != null ) {
+        m_RocrailService.LevelView.setBackgroundColor();
+      }
+    }
     
     m_RocrailService.Prefs.save();
   }
