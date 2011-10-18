@@ -43,8 +43,9 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBarChangeListener {
   Loco m_Loco = null;
-  String ScheduleID = null;
-  String BlockID    = null;
+  String ScheduleID  = null;
+  String BlockID     = null;
+  String ThisBlockID = null;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     if (extras != null) {
       String id = extras.getString("id");
       BlockID = extras.getString("blockid");
+      ThisBlockID = extras.getString("blockid");
       m_Loco = m_RocrailService.m_Model.getLoco(id);
     }
     else {
@@ -127,6 +129,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     
     final LEDButton autoStart = (LEDButton) findViewById(R.id.locoStart);
     autoStart.setEnabled(m_RocrailService.AutoMode);
+    autoStart.setLongClickable(true);
     autoStart.ON = m_Loco.AutoStart;
     autoStart.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
@@ -144,6 +147,19 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
 
         }
     });
+    
+    autoStart.setOnLongClickListener(new View.OnLongClickListener() {
+      public boolean onLongClick(View v) {
+        if( m_Loco.AutoStart && BlockID != null && !BlockID.equals(ThisBlockID)) {
+          m_RocrailService.sendMessage("lc", 
+              String.format("<lc id=\"%s\" cmd=\"gotoblock\" blockid=\"%s\"/>", 
+                  m_Loco.ID, BlockID ) );
+          finish();
+        }
+        return true;
+      }
+    });
+
 
    
     final LEDButton halfAuto = (LEDButton) findViewById(R.id.locoHalfAuto);
