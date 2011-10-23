@@ -17,9 +17,11 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ 
+ android:scaleType="fitStart" 
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-  android:orientation="horizontal"  android:focusable="false"
+  android:orientation="horizontal"
   android:layout_width="fill_parent" android:layout_height="wrap_content">
 
 	<net.rocrail.androc.widgets.LocoImage
@@ -27,7 +29,7 @@
 	  android:clickable="false" android:layout_height="40sp" android:layout_gravity="left"
 	  android:src="@drawable/noimg" android:scaleType="fitStart" android:padding="1sp"/>
     <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" android:layout_weight="1">
+      android:layout_height="wrap_content">
 		<TextView android:id="@+id/locoRowText" android:focusable="false"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:lines="1" android:padding="1sp" android:text="ID"

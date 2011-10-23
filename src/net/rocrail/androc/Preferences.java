@@ -52,6 +52,7 @@ public class Preferences {
   public static final String PREFS_SORTBYADDR = "sortbyaddr";
   public static final String PREFS_POWEROFF4EBREAK = "poweroff4ebreak";
   public static final String PREFS_COLOR = "color";
+  public static final String PREFS_LOCOCATLIST = "lococatlist";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -68,6 +69,7 @@ public class Preferences {
   public boolean SmallThrottle  = true;
   public boolean ImagesOnDemand = false;
   public boolean SortByAddr   = false;
+  public boolean LocoCatList  = false;
   public boolean Modview      = true;
   public boolean PowerOff4EBreak = false;
   public String  LocoID       = "";
@@ -121,7 +123,8 @@ public class Preferences {
     Size         = settings.getInt(PREFS_SIZE, Size);
     SmallThrottle  = settings.getBoolean(PREFS_SMALLTHROTTLE, SmallThrottle);
     ImagesOnDemand = settings.getBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
-    SortByAddr   = settings.getBoolean(PREFS_SORTBYADDR, SortByAddr);
+    SortByAddr    = settings.getBoolean(PREFS_SORTBYADDR, SortByAddr);
+    LocoCatList   = settings.getBoolean(PREFS_LOCOCATLIST, LocoCatList);
     Color         = settings.getInt(PREFS_COLOR, Color);
     
     conList = RRConnection.parse(Recent);
@@ -196,6 +199,7 @@ public class Preferences {
     editor.putBoolean(PREFS_SMALLTHROTTLE, SmallThrottle);
     editor.putBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
     editor.putBoolean(PREFS_SORTBYADDR, SortByAddr);
+    editor.putBoolean(PREFS_LOCOCATLIST, LocoCatList);
     editor.putBoolean(PREFS_POWEROFF4EBREAK, PowerOff4EBreak);
     editor.putInt(PREFS_COLOR, Color);
     editor.commit();

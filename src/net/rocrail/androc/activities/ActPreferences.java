@@ -62,6 +62,8 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     cb.setChecked(m_RocrailService.Prefs.ImagesOnDemand);
     cb = (CheckBox)findViewById(R.id.prefSortByAddr);
     cb.setChecked(m_RocrailService.Prefs.SortByAddr);
+    cb = (CheckBox)findViewById(R.id.prefLocoCatList);
+    cb.setChecked(m_RocrailService.Prefs.LocoCatList);
     cb = (CheckBox)findViewById(R.id.prefPowerOff4EBreak);
     cb.setChecked(m_RocrailService.Prefs.PowerOff4EBreak);
     Button b = (Button)findViewById(R.id.prefClearRecent);
@@ -113,6 +115,8 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     m_RocrailService.Prefs.ImagesOnDemand = cb.isChecked();
     cb = (CheckBox)findViewById(R.id.prefSortByAddr);
     m_RocrailService.Prefs.SortByAddr = cb.isChecked();
+    cb = (CheckBox)findViewById(R.id.prefLocoCatList);
+    m_RocrailService.Prefs.LocoCatList = cb.isChecked();
     cb = (CheckBox)findViewById(R.id.prefPowerOff4EBreak);
     m_RocrailService.Prefs.PowerOff4EBreak = cb.isChecked();
   

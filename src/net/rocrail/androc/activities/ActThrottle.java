@@ -406,7 +406,11 @@ public class ActThrottle extends ActBase
     image.setOnClickListener(new View.OnClickListener() {
       public void onClick(View v) {
         quitShowed = false;
-        Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
+        Intent intent = null;
+        if( m_RocrailService.Prefs.LocoCatList )
+          intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoExpList.class);
+        else
+          intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
         intent.putExtra("selected", m_iLocoSelected );
         startActivityForResult(intent, 1);
       }

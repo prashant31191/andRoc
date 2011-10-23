@@ -50,6 +50,7 @@
         <activity android:name=".activities.ActSwitches" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActOutputs" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActLocoList" android:theme="@style/FullHeightDialog" />
+        <activity android:name=".activities.ActLocoExpList" android:theme="@style/FullHeightDialog" />
         <service android:name=".RocrailService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

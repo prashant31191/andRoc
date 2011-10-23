@@ -44,6 +44,8 @@ public class Loco implements Runnable {
   public String  Roadname = "";
   public String  Mode    = "";
   public String  PicName = null;
+  public String  Engine  = "";
+  public String  Cargo   = "";
   private Bitmap LocoBmp = null;
   public int     Addr    = 0;
   public int     Steps   = 0;
@@ -90,6 +92,8 @@ public class Loco implements Runnable {
     Dir         = Item.getAttrValue(atts, "dir", Dir);
     Speed       = Item.getAttrValue(atts, "V", Speed);
     Lights      = Item.getAttrValue(atts, "fn", Lights );
+    Engine      = Item.getAttrValue(atts, "engine", "");
+    Cargo       = Item.getAttrValue(atts, "cargo", "");
     
     Vmax  = Item.getAttrValue(atts, "V_max", 100);
     Vmid  = Item.getAttrValue(atts, "V_mid", 50);

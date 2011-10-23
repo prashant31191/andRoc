@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocrail\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-08-24 17:20+0200\n"
+"POT-Creation-Date: 2011-10-06 11:27+0200\n"
 "PO-Revision-Date: 2010-12-02 10:07+0000\n"
 "Last-Translator: Rocrail <r.j.versluis@rocrail.net>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -422,6 +422,30 @@ msgstr ""
 
 #: res/values/strings.xml:123(string)
 msgid "Sort by address"
+msgstr ""
+
+#: res/values/strings.xml:124(string)
+msgid "Power off for EStop"
+msgstr ""
+
+#: res/values/strings.xml:125(string)
+msgid "Color"
+msgstr ""
+
+#: res/values/strings.xml:126(string)
+msgid "Select background color"
+msgstr ""
+
+#: res/values/strings.xml:127(string)
+msgid "Green"
+msgstr ""
+
+#: res/values/strings.xml:128(string)
+msgid "Grey"
+msgstr ""
+
+#: res/values/strings.xml:129(string)
+msgid "Blue"
 msgstr ""
 
 #~ msgid "Tidtabells lista"

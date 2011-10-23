@@ -127,4 +127,5 @@
   <string name="Green">Green</string>
   <string name="Grey">Grey</string>
   <string name="Blue">Blue</string>
+  <string name="LocoCatList">Sort by category</string>
 </resources>

@@ -37,6 +37,8 @@ android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckB
 android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
 <CheckBox android:text="@string/SortByAddr" android:id="@+id/prefSortByAddr" 
 android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
+<CheckBox android:text="@string/LocoCatList" android:id="@+id/prefLocoCatList" 
+android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
 <CheckBox android:text="@string/PowerOff4EBreak" android:id="@+id/prefPowerOff4EBreak" 
 android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
 
