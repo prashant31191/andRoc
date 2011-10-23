@@ -119,8 +119,7 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
 
   @Override
   public boolean isChildSelectable(int arg0, int arg1) {
-    // TODO Auto-generated method stub
-    return false;
+    return true;
   }
   
   
