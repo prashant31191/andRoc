@@ -128,4 +128,9 @@
   <string name="Grey">Grey</string>
   <string name="Blue">Blue</string>
   <string name="LocoCatList">Sort by category</string>
+  <string name="Steam">Steam</string>
+  <string name="Diesel">Diesel</string>
+  <string name="Electric">Electric</string>
+  <string name="Trainset">Trainset</string>
+  <string name="Special">Special</string>
 </resources>

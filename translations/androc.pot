@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-10-06 11:27+0200\n"
+"POT-Creation-Date: 2011-10-24 16:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -435,5 +435,29 @@ msgstr ""
 
 #: res/values/strings.xml:129(string)
 msgid "Blue"
+msgstr ""
+
+#: res/values/strings.xml:130(string)
+msgid "Sort by category"
+msgstr ""
+
+#: res/values/strings.xml:131(string)
+msgid "Steam"
+msgstr ""
+
+#: res/values/strings.xml:132(string)
+msgid "Diesel"
+msgstr ""
+
+#: res/values/strings.xml:133(string)
+msgid "Electric"
+msgstr ""
+
+#: res/values/strings.xml:134(string)
+msgid "Trainset"
+msgstr ""
+
+#: res/values/strings.xml:135(string)
+msgid "Special"
 msgstr ""
 

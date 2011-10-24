@@ -87,11 +87,11 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
   @Override
   public Object getGroup(int group) {
     switch(group) {
-    case 0: return "Steam";
-    case 1: return "Diesel";
-    case 2: return "Electric";
-    case 3: return "Trainset";
-    case 4: return "Special";
+    case 0: return m_Context.getText(R.string.Steam).toString();
+    case 1: return m_Context.getText(R.string.Diesel).toString();
+    case 2: return m_Context.getText(R.string.Electric).toString();
+    case 3: return m_Context.getText(R.string.Trainset).toString();
+    case 4: return m_Context.getText(R.string.Special).toString();
     }
     return null;
   }
