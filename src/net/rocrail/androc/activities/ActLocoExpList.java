@@ -65,6 +65,8 @@ public class ActLocoExpList extends ActBase {
     m_Adapter = new LocoExpListAdapter(this, m_LocoList);
     m_ListView.setAdapter(m_Adapter);
 
+    setResult(-1);
+
   }
   
 }
