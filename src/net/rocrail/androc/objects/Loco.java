@@ -61,6 +61,7 @@ public class Loco implements Runnable {
   
   public boolean   AutoStart = false;
   public boolean   HalfAuto  = false;
+  public boolean   Commuter  = false;
   public boolean   Lights    = false;
   public boolean   Dir       = true;
   public boolean   Placing   = true;
@@ -94,6 +95,7 @@ public class Loco implements Runnable {
     Lights      = Item.getAttrValue(atts, "fn", Lights );
     Engine      = Item.getAttrValue(atts, "engine", "");
     Cargo       = Item.getAttrValue(atts, "cargo", "");
+    Commuter    = Item.getAttrValue(atts, "commuter", false);
     
     Vmax  = Item.getAttrValue(atts, "V_max", 100);
     Vmid  = Item.getAttrValue(atts, "V_mid", 50);
