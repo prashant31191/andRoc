@@ -62,7 +62,8 @@ public class ActLocoList extends ListActivity implements ServiceListener {
     Iterator<Loco> it = m_Base.m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
-      m_LocoList.add(loco);
+      if( loco.Show )
+        m_LocoList.add(loco);
     }
     
     Collections.sort(m_LocoList, new LocoSort(m_Base.m_RocrailService.Prefs.SortByAddr));
@@ -72,7 +73,8 @@ public class ActLocoList extends ListActivity implements ServiceListener {
     Iterator<Loco> itList = m_LocoList.iterator();
     while( itList.hasNext() ) {
       Loco loco = itList.next();
-      m_Adapter.add(loco.toString());
+      if( loco.Show )
+        m_Adapter.add(loco.toString());
     }
 
     ListView lv = getListView();

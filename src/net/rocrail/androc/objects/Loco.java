@@ -66,6 +66,7 @@ public class Loco implements Runnable {
   public boolean   Dir       = true;
   public boolean   Placing   = true;
   public boolean[] Function  = new boolean[32];
+  public boolean   Show      = true;
   
   private boolean   ImageRequested = false;
   public  LocoImage imageView      = null;
@@ -96,6 +97,7 @@ public class Loco implements Runnable {
     Engine      = Item.getAttrValue(atts, "engine", "");
     Cargo       = Item.getAttrValue(atts, "cargo", "");
     Commuter    = Item.getAttrValue(atts, "commuter", false);
+    Show        = Item.getAttrValue(atts, "show", false);
     
     Vmax  = Item.getAttrValue(atts, "V_max", 100);
     Vmid  = Item.getAttrValue(atts, "V_mid", 50);
