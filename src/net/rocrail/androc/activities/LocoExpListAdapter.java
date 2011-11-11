@@ -39,16 +39,18 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
     Iterator<Loco> it = m_LocoList.iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
-      if( loco.Show && loco.Cargo.equals("commuter") || loco.Commuter )
-        m_TrainsetList.add(loco);
-      else if( loco.Show && loco.Cargo.equals("post") || loco.Cargo.equals("cleaning") )
-        m_SpecialList.add(loco);
-      else if( loco.Show && loco.Engine.equals("steam"))
-        m_SteamList.add(loco);
-      else if( loco.Show && loco.Engine.equals("diesel"))
-        m_DieselList.add(loco);
-      else if( loco.Show && loco.Engine.equals("electric"))
-        m_ElectricList.add(loco);
+      if( loco.Show ) {
+        if( loco.Cargo.equals("commuter") || loco.Commuter )
+          m_TrainsetList.add(loco);
+        else if( loco.Cargo.equals("post") || loco.Cargo.equals("cleaning") )
+          m_SpecialList.add(loco);
+        else if( loco.Engine.equals("steam"))
+          m_SteamList.add(loco);
+        else if( loco.Engine.equals("diesel"))
+          m_DieselList.add(loco);
+        else if( loco.Engine.equals("electric"))
+          m_ElectricList.add(loco);
+      }
       
     }
 
