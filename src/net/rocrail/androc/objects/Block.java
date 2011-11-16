@@ -40,6 +40,7 @@ public class Block extends Item implements View.OnClickListener {
     LocoID   = Item.getAttrValue(atts, "locid", ID); 
     Reserved = Item.getAttrValue(atts, "reserved", false); 
     Entering = Item.getAttrValue(atts, "entering", false); 
+    Accept   = Item.getAttrValue(atts, "acceptident", false); 
     Text = LocoID;
     Background = true;
   }
@@ -55,14 +56,15 @@ public class Block extends Item implements View.OnClickListener {
         colorName = Item.COLOR_RESERVED;
       else if( Entering ) 
         colorName = Item.COLOR_ENTER;
-      else if( Accept ) 
-        colorName = Item.COLOR_ACCEPTIDENT;
       else 
         colorName = Item.COLOR_OCCUPIED;
     }
     else {
       Text = ID;
-      colorName = Item.COLOR_FREE;
+      if( Accept ) 
+        colorName = Item.COLOR_ACCEPTIDENT;
+      else
+        colorName = Item.COLOR_FREE;
     }
   }
  

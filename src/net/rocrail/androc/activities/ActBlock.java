@@ -191,6 +191,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
             Loco lc = m_RocrailService.m_Model.getLoco(m_Block.LocoID);
             if( lc != null )
               lc.Dispatch();
+            finish();
           }
         }
     });
@@ -214,6 +215,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
           m_Block.OpenClose();
           ((LEDButton)v).ON = !m_Block.Closed;
           ((LEDButton)v).setText(m_Block.Closed?getText(R.string.OpenBlock):getText(R.string.CloseBlock));
+          finish();
         }
     });
 
@@ -222,6 +224,7 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
     acceptIdentBlock.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           m_Block.AcceptIdent();
+          finish();
         }
     });
 
