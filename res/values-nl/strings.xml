@@ -21,7 +21,7 @@
 <resources>
   <string name="Title">Naam</string>
   <string name="Throttle">Handbediening</string>
-  <string name="Locomotives">Loc's</string>
+  <string name="Locomotives">Loc\'s</string>
   <string name="Outputs">Uitgangen</string>
   <string name="Routes">Rijwegen</string>
   <string name="Switches">Wissels</string>
@@ -64,7 +64,7 @@
   <string name="Next">Volgende</string>
   <string name="Track">Spoor</string>
   <string name="SetLoco">Plaats loc</string>
-  <string name="ResetLoco">Reset Loc</string>
+  <string name="ResetLoco">Reset loc</string>
   <string name="quit">Afsluiten</string>
   <string name="ReallyQuit">Afsluiten</string>
   <string name="yes">Ja</string>
@@ -105,13 +105,13 @@
   <string name="Version">Versie</string>
   <string name="ThrottleID">Regelaar ID</string>
   <string name="CreatingModview">Module aanzicht samenstellen...</string>
-  <string name="LocoProps">Lok eigenschappen</string>
+  <string name="LocoProps">Loc eigenschappen</string>
   <string name="Info">Info</string>
   <string name="Actions">Acties</string>
   <string name="Turntable">Draaischijf</string>
   <string name="FiddleYard">Fiddle Yard</string>
   <string name="Swap">Omkeren</string>
-  <string name="SelectLoco">Kies Lok</string>
+  <string name="SelectLoco">Kies loc</string>
   <string name="Dispatch">Dispatch</string>
   <string name="AcceptIdent">Accepteer BiDi</string>
   <string name="EmergencyStop">Nood stop</string>
