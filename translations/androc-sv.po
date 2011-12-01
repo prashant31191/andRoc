@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocrail\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-06 11:27+0200\n"
-"PO-Revision-Date: 2010-12-02 10:07+0000\n"
+"POT-Creation-Date: 2011-10-24 16:54+0200\n"
+"PO-Revision-Date: 2011-10-23 15:42+0000\n"
 "Last-Translator: Rocrail <r.j.versluis@rocrail.net>\n"
 "Language-Team: Swedish <sv@li.org>\n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-17 06:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-12-01 06:36+0000\n"
+"X-Generator: Launchpad (build 14414)\n"
+"Language: sv\n"
 
 #: res/values/strings.xml:22(string)
 msgid "Title"
@@ -399,9 +399,8 @@ msgid "Emergency stop"
 msgstr ""
 
 #: res/values/strings.xml:118(string)
-#, fuzzy
 msgid "Small throttle"
-msgstr "Halvautomatik"
+msgstr ""
 
 #: res/values/strings.xml:119(string)
 msgid "Ctrl code"
@@ -412,9 +411,8 @@ msgid "Zoom"
 msgstr ""
 
 #: res/values/strings.xml:121(string)
-#, fuzzy
 msgid "Unlock"
-msgstr "Block"
+msgstr ""
 
 #: res/values/strings.xml:122(string)
 msgid "Images on demand"
@@ -448,5 +446,26 @@ msgstr ""
 msgid "Blue"
 msgstr ""
 
-#~ msgid "Tidtabells lista"
-#~ msgstr "Tidtabellslista"
+#: res/values/strings.xml:130(string)
+msgid "Sort by category"
+msgstr ""
+
+#: res/values/strings.xml:131(string)
+msgid "Steam"
+msgstr ""
+
+#: res/values/strings.xml:132(string)
+msgid "Diesel"
+msgstr ""
+
+#: res/values/strings.xml:133(string)
+msgid "Electric"
+msgstr ""
+
+#: res/values/strings.xml:134(string)
+msgid "Trainset"
+msgstr ""
+
+#: res/values/strings.xml:135(string)
+msgid "Special"
+msgstr ""

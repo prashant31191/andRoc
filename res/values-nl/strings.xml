@@ -21,7 +21,7 @@
 <resources>
   <string name="Title">Naam</string>
   <string name="Throttle">Handbediening</string>
-  <string name="Locomotives">Loc\'s</string>
+  <string name="Locomotives">Loc's</string>
   <string name="Outputs">Uitgangen</string>
   <string name="Routes">Rijwegen</string>
   <string name="Switches">Wissels</string>
@@ -50,7 +50,7 @@
   <string name="Open">Open</string>
   <string name="Connect">Verbindt</string>
   <string name="Menu">Menu</string>
-  <string name="Layout">Lay-out</string>
+  <string name="Layout">Baanplan</string>
   <string name="Level">Nivo</string>
   <string name="Quit">Afsluiten</string>
   <string name="Direction">Richting</string>
@@ -113,6 +113,24 @@
   <string name="Swap">Omkeren</string>
   <string name="SelectLoco">Kies Lok</string>
   <string name="Dispatch">Dispatch</string>
-  <string name="AcceptIdent">Accept BiDi Ident</string>
+  <string name="AcceptIdent">Accepteer BiDi</string>
   <string name="EmergencyStop">Nood stop</string>
+  <string name="SmallThrottle">Kleine handbediening</string>
+  <string name="ControlCode">Ctrl code</string>
+  <string name="Zoom">Zoomen</string>
+  <string name="Unlock">Vrijgeven</string>
+  <string name="ImagesOnDemand">Plaatjes op afroep</string>
+  <string name="SortByAddr">Sorteer naar adres</string>
+  <string name="PowerOff4EBreak">Spanning bij EBreak uit</string>
+  <string name="Color">Kleur</string>
+  <string name="SelectColor">Selecteer achtergrondkleur</string>
+  <string name="Green">Groen</string>
+  <string name="Grey">Grijs</string>
+  <string name="Blue">Blauw</string>
+  <string name="LocoCatList">Trein categorie lijst</string>
+  <string name="Steam">Stoom</string>
+  <string name="Diesel">Diesel</string>
+  <string name="Electric">Elektrisch</string>
+  <string name="Trainset">Treinstel</string>
+  <string name="Special">Speciaal</string>
 </resources>

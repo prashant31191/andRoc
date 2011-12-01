@@ -114,4 +114,23 @@
   <string name="SelectLoco">Välj lok</string>
   <string name="Dispatch">Dispatch</string>
   <string name="AcceptIdent">Accept BiDi Ident</string>
+  <string name="EmergencyStop">Emergency stop</string>
+  <string name="SmallThrottle">Small throttle</string>
+  <string name="ControlCode">Ctrl code</string>
+  <string name="Zoom">Zoom</string>
+  <string name="Unlock">Unlock</string>
+  <string name="ImagesOnDemand">Images on demand</string>
+  <string name="SortByAddr">Sort by address</string>
+  <string name="PowerOff4EBreak">Power off for EStop</string>
+  <string name="Color">Color</string>
+  <string name="SelectColor">Select background color</string>
+  <string name="Green">Green</string>
+  <string name="Grey">Grey</string>
+  <string name="Blue">Blue</string>
+  <string name="LocoCatList">Sort by category</string>
+  <string name="Steam">Steam</string>
+  <string name="Diesel">Diesel</string>
+  <string name="Electric">Electric</string>
+  <string name="Trainset">Trainset</string>
+  <string name="Special">Special</string>
 </resources>
