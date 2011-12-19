@@ -177,7 +177,7 @@ public class ActThrottle extends ActBase
       f4.ON = m_Loco.Function[4+m_iFunctionGroup*FNGROUPSIZE];
       f5.ON = m_Loco.Function[5+m_iFunctionGroup*FNGROUPSIZE];
       f6.ON = m_Loco.Function[6+m_iFunctionGroup*FNGROUPSIZE];
-      Direction.ON = m_Loco.Dir;
+      //Direction.ON = m_Loco.Dir;
       Go.setEnabled(m_RocrailService.AutoMode);
       Go.ON = m_Loco.AutoStart;
       Lights.ON = m_Loco.Lights;
@@ -391,12 +391,11 @@ public class ActThrottle extends ActBase
           if( m_Loco != null ) {
             quitShowed = false;
             m_Loco.flipDir();
-            ((LEDButton)v).ON = m_Loco.Dir;
+            //((LEDButton)v).ON = m_Loco.Dir;
             v.invalidate();
             Slider mSeekBar = (Slider)findViewById(R.id.Speed);
-            //mSeekBar.setProgress(m_Loco.Speed);
             mSeekBar.setV(m_Loco.Speed);
-            ((LEDButton)v).setText(""+m_Loco.Speed);
+            setDirSpeed((LEDButton)v);
           }
         }
     });
@@ -430,6 +429,14 @@ public class ActThrottle extends ActBase
 
 
     
+  }
+  
+  void setDirSpeed(LEDButton v) {
+    //v.ON = m_Loco.Dir;
+    if( m_Loco.Dir )
+      v.setText(""+m_Loco.Speed+" >");
+    else
+      v.setText("< "+m_Loco.Speed);
   }
 
   
@@ -489,12 +496,12 @@ public class ActThrottle extends ActBase
       Desc.setText(m_Loco.Description);
       
       Slider mSeekBar = (Slider)findViewById(R.id.Speed);
-      //mSeekBar.setProgress(m_Loco.Speed);
       mSeekBar.setRange(m_Loco.Vmax);
       mSeekBar.setV(m_Loco.Speed);
 
       LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
-      mDir.setText(""+m_Loco.Speed);
+      setDirSpeed(mDir);
+
 
     }
     else {
@@ -527,7 +534,7 @@ public class ActThrottle extends ActBase
             if( !mSeekBar.isPressed() )
               mSeekBar.setV(m_Loco.Speed);
             LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
-            mDir.setText(""+m_Loco.Speed);
+            setDirSpeed(mDir);
           }
         });
       }
@@ -541,7 +548,7 @@ public class ActThrottle extends ActBase
     if( m_Loco != null ) {
       m_Loco.setSpeed(V, false);
       LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
-      mDir.setText(""+m_Loco.Speed);
+      setDirSpeed(mDir);
     }
   }
 
