@@ -216,7 +216,8 @@ public class ActThrottle extends ActBase
     Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
-      m_LocoList.add(loco);
+      if( loco.Show )
+        m_LocoList.add(loco);
     }
     
     Collections.sort(m_LocoList, new LocoSort(m_RocrailService.Prefs.SortByAddr));

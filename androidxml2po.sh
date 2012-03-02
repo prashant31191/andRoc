@@ -38,9 +38,11 @@ function import_po2xml
 {
 for (( i=0 ; i<${#short_lang[*]} ; i=i+1 )) ;
 do
-    echo "Importing .xml from .po for "${short_lang[i]}""
-    mkdir -p "${android_xml_files_res_dir}"-"${long_lang[i]}"
-    ${xml2po} -a -l "${short_lang[i]}" -p "${launchpad_po_files_dir}"/"${launchpad_po_filename}"-"${short_lang[i]}".po "${android_xml_files_res_dir}"/"${android_xml_filename}".xml > "${android_xml_files_res_dir}"-"${long_lang[i]}"/"${android_xml_filename}".xml
+    if [ -e "${launchpad_po_files_dir}"/"${launchpad_po_filename}"-"${short_lang[i]}".po ] ; then
+	    echo "Importing .xml from .po for "${short_lang[i]}""
+    	mkdir -p "${android_xml_files_res_dir}"-"${long_lang[i]}"
+    	${xml2po} -a -l "${short_lang[i]}" -p "${launchpad_po_files_dir}"/"${launchpad_po_filename}"-"${short_lang[i]}".po "${android_xml_files_res_dir}"/"${android_xml_filename}".xml > "${android_xml_files_res_dir}"-"${long_lang[i]}"/"${android_xml_filename}".xml
+    fi
 done
 }
 
