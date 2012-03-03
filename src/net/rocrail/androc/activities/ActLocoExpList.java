@@ -43,7 +43,8 @@ public class ActLocoExpList extends ActBase {
     Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
-      m_LocoList.add(loco);
+      if(loco.Show)
+        m_LocoList.add(loco);
     }
     
     Collections.sort(m_LocoList, new LocoSort(m_RocrailService.Prefs.SortByAddr));
@@ -53,7 +54,9 @@ public class ActLocoExpList extends ActBase {
       @Override
       public boolean onChildClick(ExpandableListView list, View view, int group, int position, long id) {
         // Set selected loco.
+        System.out.println("group/position="+group+"/"+position);
         position = m_Adapter.getRealPosition(group, position);
+        System.out.println("real position="+position);
         ActLocoExpList.this.setResult(position);
         finish();
         return false;
