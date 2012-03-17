@@ -110,6 +110,13 @@ public class Switch extends Item implements View.OnClickListener {
         ImageName = String.format("threeway_r_%d", orinr);
 
     }
+    else if (Type.equals("twoway")) {
+      if (State.equals("straight"))
+        ImageName = String.format("twoway_tr_%d", orinr);
+      else
+        ImageName = String.format("twoway_tl_%d", orinr);
+
+    }
     else if (Type.equals("dcrossing")) {
       char st = 's';
 
