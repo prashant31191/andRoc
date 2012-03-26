@@ -64,7 +64,7 @@ public class ActInfo extends ListActivity implements ServiceListener {
     } 
 
     m_Items = new String[5];
-    m_Items[0] = "TM and Copyright 2010-2011 Rob Versluis\nhttp://www.rocrail.net";
+    m_Items[0] = "TM and Copyright 2010-2012 Rob Versluis\nhttp://www.rocrail.net";
     m_Items[1] = getText(R.string.License) + ": GNU GENERAL PUBLIC LICENSE";
     m_Items[2] = "andRoc " + getText(R.string.Version) + ": "+versionName;
     m_Items[3] = getText(R.string.ThrottleID) + ": "+m_Base.m_RocrailService.getDeviceName();

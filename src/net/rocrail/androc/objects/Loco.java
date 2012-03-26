@@ -295,8 +295,8 @@ public class Loco implements Runnable {
   public void CVWrite(int cv, int val) {
     boolean longAddr = Addr > 127;
     rocrailService.sendMessage("program", 
-        String.format("<program cmd=\"1\" addr=\"%d\" cv=\"%d\" value=\"%d\" longaddr=\"%s\" pom=\"true\"/>", 
-            Addr, cv, val, longAddr?"true":"false" ) 
+        String.format("<program cmd=\"1\" addr=\"%d\" decaddr=\"%d\" cv=\"%d\" value=\"%d\" longaddr=\"%s\" pom=\"true\"/>", 
+            Addr, Addr, cv, val, longAddr?"true":"false" ) 
             );
   }
 
