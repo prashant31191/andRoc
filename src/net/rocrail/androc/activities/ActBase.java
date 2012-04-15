@@ -49,6 +49,7 @@ public class ActBase extends Activity implements ServiceListener {
   final static int MENU_ACCESSORY   = 0x0200;
   final static int MENU_LOCOSETUP   = 0x0400;
   final static int MENU_ZOOM        = 0x0800;
+  final static int MENU_POM         = 0x1000;
   
   Activity        m_Activity = null;
   ServiceListener m_Listener = null;
@@ -128,6 +129,8 @@ public class ActBase extends Activity implements ServiceListener {
       menu.add(0, MENU_LOCOSETUP    , 0, R.string.LocoSetup).setIcon(R.drawable.locosetup);
     if( (MenuSelection & MENU_ZOOM)  == MENU_ZOOM )
       menu.add(0, MENU_ZOOM    , 0, R.string.Zoom).setIcon(R.drawable.zoom);
+    if( (MenuSelection & MENU_POM)  == MENU_POM )
+      menu.add(0, MENU_POM    , 0, R.string.CV).setIcon(R.drawable.locosetup);
     return true;
   }
 
@@ -163,6 +166,9 @@ public class ActBase extends Activity implements ServiceListener {
       return true;
     case MENU_ZOOM:
       zoomLevel();
+      return true;
+    case MENU_POM:
+      locosetupView();
       return true;
     }
     return false;

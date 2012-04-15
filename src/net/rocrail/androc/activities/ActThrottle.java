@@ -62,7 +62,7 @@ public class ActThrottle extends ActBase
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     //MenuSelection = ActBase.MENU_MENU | ActBase.MENU_LAYOUT | ActBase.MENU_SYSTEM | ActBase.MENU_LOCO | ActBase.MENU_PREFERENCES | ActBase.MENU_ACCESSORY;
-    MenuSelection = ActBase.MENU_SYSTEM | ActBase.MENU_LOCO | ActBase.MENU_PREFERENCES;
+    MenuSelection = ActBase.MENU_SYSTEM | ActBase.MENU_LOCO | ActBase.MENU_PREFERENCES | ActBase.MENU_POM;
 
     connectWithService();
   }
