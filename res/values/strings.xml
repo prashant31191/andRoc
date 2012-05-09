@@ -133,4 +133,5 @@
   <string name="Electric">Electric</string>
   <string name="Trainset">Trainset</string>
   <string name="Special">Special</string>
+  <string name="UseAllSpeedSteps">Use all speed steps</string>
 </resources>

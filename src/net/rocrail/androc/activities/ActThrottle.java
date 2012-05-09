@@ -547,7 +547,7 @@ public class ActThrottle extends ActBase
   public void onSliderChange(Slider slider, int V) {
     quitShowed = false;
     if( m_Loco != null ) {
-      m_Loco.setSpeed(V, false);
+      m_Loco.setSpeed(V, m_RocrailService.Prefs.UseAllSpeedSteps);
       LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
       setDirSpeed(mDir);
     }

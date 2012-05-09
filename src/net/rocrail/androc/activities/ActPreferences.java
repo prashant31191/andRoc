@@ -66,6 +66,8 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     cb.setChecked(m_RocrailService.Prefs.LocoCatList);
     cb = (CheckBox)findViewById(R.id.prefPowerOff4EBreak);
     cb.setChecked(m_RocrailService.Prefs.PowerOff4EBreak);
+    cb = (CheckBox)findViewById(R.id.prefUseAllSpeedSteps);
+    cb.setChecked(m_RocrailService.Prefs.UseAllSpeedSteps);
     Button b = (Button)findViewById(R.id.prefClearRecent);
     b.setEnabled(m_RocrailService.Prefs.Recent.length() > 0);
     b.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +121,8 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     m_RocrailService.Prefs.LocoCatList = cb.isChecked();
     cb = (CheckBox)findViewById(R.id.prefPowerOff4EBreak);
     m_RocrailService.Prefs.PowerOff4EBreak = cb.isChecked();
+    cb = (CheckBox)findViewById(R.id.prefUseAllSpeedSteps);
+    m_RocrailService.Prefs.UseAllSpeedSteps = cb.isChecked();
   
     EditText et = (EditText)findViewById(R.id.prefR2RHost);
     m_RocrailService.Prefs.RRHost = et.getText().toString();
