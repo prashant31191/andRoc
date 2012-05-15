@@ -285,11 +285,12 @@ public class Loco implements Runnable {
   }
 
   public void setSpeed() {
-    Vprev = Speed;
-    rocrailService.sendMessage("lc", 
-        String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
-            rocrailService.getDeviceName(), ID, Speed, (Dir?"true":"false"), (Lights?"true":"false") ) );
-    
+    if(Vprev != Speed) {
+      Vprev = Speed;
+      rocrailService.sendMessage("lc", 
+          String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
+              rocrailService.getDeviceName(), ID, Speed, (Dir?"true":"false"), (Lights?"true":"false") ) );
+    }
   }
   
   public void CVWrite(int cv, int val) {
