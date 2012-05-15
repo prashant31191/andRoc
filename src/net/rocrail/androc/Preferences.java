@@ -54,6 +54,7 @@ public class Preferences {
   public static final String PREFS_COLOR = "color";
   public static final String PREFS_LOCOCATLIST = "lococatlist";
   public static final String PREFS_USEALLSPEEDSTEPS = "useallspeedsteps";
+  public static final String PREFS_SYNCSPEED = "syncspeed";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -74,6 +75,7 @@ public class Preferences {
   public boolean Modview      = true;
   public boolean PowerOff4EBreak = false;
   public boolean UseAllSpeedSteps = false;
+  public boolean SyncSpeed = true;
   public String  LocoID       = "";
   public String  LocoID2      = "";
   public String  LocoID3      = "";
@@ -123,6 +125,7 @@ public class Preferences {
     Modview      = settings.getBoolean(PREFS_MODVIEW, Modview);
     PowerOff4EBreak = settings.getBoolean(PREFS_POWEROFF4EBREAK, PowerOff4EBreak);
     UseAllSpeedSteps = settings.getBoolean(PREFS_USEALLSPEEDSTEPS, UseAllSpeedSteps);
+    SyncSpeed = settings.getBoolean(PREFS_SYNCSPEED, SyncSpeed);
     Size         = settings.getInt(PREFS_SIZE, Size);
     SmallThrottle  = settings.getBoolean(PREFS_SMALLTHROTTLE, SmallThrottle);
     ImagesOnDemand = settings.getBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
@@ -205,6 +208,7 @@ public class Preferences {
     editor.putBoolean(PREFS_LOCOCATLIST, LocoCatList);
     editor.putBoolean(PREFS_POWEROFF4EBREAK, PowerOff4EBreak);
     editor.putBoolean(PREFS_USEALLSPEEDSTEPS, UseAllSpeedSteps);
+    editor.putBoolean(PREFS_SYNCSPEED, SyncSpeed);
     editor.putInt(PREFS_COLOR, Color);
     editor.commit();
   }

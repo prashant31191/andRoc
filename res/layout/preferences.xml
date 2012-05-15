@@ -43,6 +43,8 @@ android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckB
 android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
 <CheckBox android:text="@string/UseAllSpeedSteps" android:id="@+id/prefUseAllSpeedSteps" 
 android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
+<CheckBox android:text="@string/SyncSpeed" android:id="@+id/prefSyncSpeed" 
+android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckBox>
 
 
  <LinearLayout android:orientation="horizontal" 

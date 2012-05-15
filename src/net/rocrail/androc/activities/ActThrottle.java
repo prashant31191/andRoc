@@ -531,11 +531,13 @@ public class ActThrottle extends ActBase
         bar.post(new Runnable() {
           public void run() {
             ActThrottle.this.updateFunctions();
-            Slider mSeekBar = (Slider)findViewById(R.id.Speed);
-            if( !mSeekBar.isPressed() )
-              mSeekBar.setV(m_Loco.Speed);
-            LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
-            setDirSpeed(mDir);
+            if( m_RocrailService.Prefs.SyncSpeed ) {
+              Slider mSeekBar = (Slider)findViewById(R.id.Speed);
+              if( !mSeekBar.isPressed() )
+                mSeekBar.setV(m_Loco.Speed);
+              LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
+              setDirSpeed(mDir);
+            }
           }
         });
       }
