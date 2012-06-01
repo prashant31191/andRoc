@@ -248,12 +248,12 @@ public class Loco implements Runnable {
   public void flipDir() {
     Dir = !Dir;
     Speed = 0;
-    setSpeed();
+    setSpeed(true);
   }
   
   public void flipLights() {
     Lights = !Lights;
-    setSpeed();
+    setSpeed(true);
     rocrailService.sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>",
         ID, 0, 1, 0, (Lights?"true":"false")) );
   }
@@ -280,12 +280,12 @@ public class Loco implements Runnable {
     if( force || V == Vmax || V == 0 || StrictMath.abs( Vprev - V) >= VDelta || Steps < 50 ) {
       Speed = V;
       System.out.println("set Speed="+Speed);
-      setSpeed();
+      setSpeed(false);
     }
   }
 
-  public void setSpeed() {
-    if(Vprev != Speed) {
+  public void setSpeed(boolean force) {
+    if(force || Vprev != Speed) {
       Vprev = Speed;
       rocrailService.sendMessage("lc", 
           String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
