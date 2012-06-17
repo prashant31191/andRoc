@@ -29,12 +29,19 @@ import android.view.View;
 
 public class Sensor extends Item implements View.OnClickListener {
   Boolean Curve = false;
+  Boolean Shortcut = false;
 
   public Sensor(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
     Curve = Item.getAttrValue(atts, "curve", false );
+    Shortcut = Item.getAttrValue(atts, "shortcut", false );
   }
   
+  public void updateWithAttributes(Attributes atts ) {
+    Curve = Item.getAttrValue(atts, "curve", false );
+    Shortcut = Item.getAttrValue(atts, "shortcut", false );
+    super.updateWithAttributes(atts);
+  }
   
   public String getImageName(boolean ModPlan) {
     this.ModPlan = ModPlan;
@@ -47,9 +54,9 @@ public class Sensor extends Item implements View.OnClickListener {
       orinr = (orinr % 2 == 0) ? 2 : 1;
 
     if (State.equals("true")) {
-      ImageName = String.format("%ssensor_on_%d", prefix, orinr);
+      ImageName = String.format("%ssensor_on_%d%s", prefix, orinr, Shortcut?"sc":"");
     } else {
-      ImageName = String.format("%ssensor_off_%d", prefix, orinr);
+      ImageName = String.format("%ssensor_off_%d%s", prefix, orinr, Shortcut?"sc":"");
     }
 
     return ImageName;

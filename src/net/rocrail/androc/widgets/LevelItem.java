@@ -82,6 +82,9 @@ public class LevelItem extends ImageView implements OnGestureListener {
       case Item.COLOR_ACCEPTIDENT:
         paint.setColor(Color.rgb(200, 255, 200));
         break;
+      case Item.COLOR_RED:
+        paint.setColor(Color.rgb(255, 0, 0));
+        break;
       }
       int padding = (6 * size) / 32;
       canvas.drawRect(padding, padding, item.cX*size-padding, item.cY*size-padding, paint);
