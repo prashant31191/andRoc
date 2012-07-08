@@ -23,6 +23,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.xml.parsers.SAXParser;
 
@@ -74,6 +76,10 @@ public class RocrailService extends Service {
 
   MessageListener messageListener = null;
   private static final int NOTIFICATION_POWER = 1;
+  
+  TimerTask timerTask = null;
+  Timer timer = new Timer();
+  
 
   @Override
   public void onCreate() {
@@ -95,8 +101,23 @@ public class RocrailService extends Service {
       m_DeviceId = "unknown";
     }
     
+    
+    
   }
 
+  
+  public void startTimer() {
+    timerTask = new TimerTask() {
+      public void run() {
+        if( LevelView != null && !m_Model.m_bDonKey ) {
+          System.out.println("shutdown andRoc...");
+          LevelView.finish();
+        }
+      }};
+    
+    System.out.println("scheduling timer for shutdown in 5 minutes...");
+    timer.schedule(timerTask, 5 * 60 * 1000 );
+  }
   
   private final IBinder rocrailBinder = new RocrailLocalBinder();
   public class RocrailLocalBinder extends Binder {

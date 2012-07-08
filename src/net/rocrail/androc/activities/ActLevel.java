@@ -86,13 +86,17 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
   
   public void showDonate() {
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setMessage("Rocrail runs entirely on volunteer labor. However, Rocrail also needs contributions of money. Your continued support is vital for keeping Rocrail available. If you already did donate you can ask a key to disable this on startup dialog: donate@rocrail.net")
+    builder.setMessage("Rocrail runs entirely on volunteer labor. " +
+    		"However, Rocrail also needs contributions of money. " +
+    		"Your continued support is vital for keeping Rocrail available. " +
+    		"If you already did donate you can ask a key to disable this on startup dialog: donate@rocrail.net\n" +
+    		"andRoc will shutdown in 5 minutes!")
            .setCancelable(false)
            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
                  dialog.cancel();
-                 System.out.println("***EXIT***");
-                 ActLevel.this.finish();
+                 //System.out.println("***EXIT***");
+                 //ActLevel.this.finish();
                }
            });
     AlertDialog alert = builder.create();  
@@ -299,6 +303,7 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
       }
       System.out.println(""+(!m_RocrailService.m_Model.m_bDonKey?"NO ":"")+"DonKey Set.");
       if( !m_RocrailService.m_Model.m_bDonKey && !m_RocrailService.m_bDidShowDonate ) {
+        m_RocrailService.startTimer();
         showDonate();
         m_RocrailService.m_bDidShowDonate = true;
       }
