@@ -70,6 +70,8 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     cb.setChecked(m_RocrailService.Prefs.UseAllSpeedSteps);
     cb = (CheckBox)findViewById(R.id.prefSyncSpeed);
     cb.setChecked(m_RocrailService.Prefs.SyncSpeed);
+    cb = (CheckBox)findViewById(R.id.prefZoom);
+    cb.setChecked(m_RocrailService.Prefs.Zoom);
     Button b = (Button)findViewById(R.id.prefClearRecent);
     b.setEnabled(m_RocrailService.Prefs.Recent.length() > 0);
     b.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +129,8 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     m_RocrailService.Prefs.UseAllSpeedSteps = cb.isChecked();
     cb = (CheckBox)findViewById(R.id.prefSyncSpeed);
     m_RocrailService.Prefs.SyncSpeed = cb.isChecked();
+    cb = (CheckBox)findViewById(R.id.prefZoom);
+    m_RocrailService.Prefs.Zoom = cb.isChecked();
   
     EditText et = (EditText)findViewById(R.id.prefR2RHost);
     m_RocrailService.Prefs.RRHost = et.getText().toString();

@@ -347,7 +347,7 @@ public class Loco implements Runnable {
       Iterator<Function> it = Functions.iterator();
       while(it.hasNext()) {
         Function function = it.next();
-        if( function.Nr == nr )
+        if( function.Nr == nr && function.Text.length() > 0 )
           return function.Text;
       }
     }
