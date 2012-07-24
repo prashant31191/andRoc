@@ -145,9 +145,12 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
     if( ModPlan ) {
       setTitle(m_RocrailService.m_Model.m_Title);
     }
-    else {
+    else if(m_RocrailService.m_Model.m_ZLevelList.size() > 0 ) {
       ZLevel zlevel = m_RocrailService.m_Model.m_ZLevelList.get(Z);
       setTitle(zlevel.Title);
+    }
+    else {
+      setTitle("Empty Plan");
     }
     
     new LevelTask().execute(this);
@@ -278,7 +281,7 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
         }
         
       }
-      else {
+      else if(level.m_RocrailService.m_Model.m_ZLevelList.size() > 0) {
         ZLevel zlevel = level.m_RocrailService.m_Model.m_ZLevelList.get(level.Z);
         zlevel.itemList = level.createLevelList(level.levelView, zlevel);
         publishProgress(zlevel);
