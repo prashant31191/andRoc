@@ -38,7 +38,7 @@ public class Sensor extends Item implements View.OnClickListener {
   }
   
   public void updateWithAttributes(Attributes atts ) {
-    Curve = Item.getAttrValue(atts, "curve", false );
+    Curve = Item.getAttrValue(atts, "curve", Curve );
     Shortcut = Item.getAttrValue(atts, "shortcut", false );
     super.updateWithAttributes(atts);
   }

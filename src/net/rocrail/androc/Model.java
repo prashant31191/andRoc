@@ -60,6 +60,7 @@ public class Model {
   public HashMap<String,FiddleYard> m_FiddleYardMap = new HashMap<String,FiddleYard>();
   public HashMap<String,Turntable> m_TurntableMap = new HashMap<String,Turntable>();
   public HashMap<String,Route> m_RouteMap = new HashMap<String,Route>();
+  public HashMap<String,Track> m_TrackMap = new HashMap<String,Track>();
   public List<Item>   m_ItemList = new ArrayList<Item>();
   public List<String> m_ScheduleList = new ArrayList<String>();
   public List<String> m_RouteList = new ArrayList<String>();
@@ -95,6 +96,7 @@ public class Model {
     m_FiddleYardMap.clear();
     m_TurntableMap.clear();
     m_RouteMap.clear();
+    m_TrackMap.clear();
     m_ItemList.clear();
     m_ScheduleList.clear();
     m_RouteList.clear();
@@ -229,6 +231,13 @@ public class Model {
       }
       return;
     }
+    if( objName.equals("tk") ) {
+      Track tk = m_TrackMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( tk != null ) {
+        tk.updateWithAttributes(atts);
+      }
+      return;
+    }
   }
   
   
@@ -272,6 +281,7 @@ public class Model {
     
     if( objName.equals("tk") ) {
       Track track = new Track(rocrailService, atts);
+      m_TrackMap.put(track.ID, track);
       m_ItemList.add(track);
       return;
     }

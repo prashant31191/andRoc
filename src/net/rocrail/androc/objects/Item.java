@@ -130,6 +130,11 @@ public class Item implements View.OnClickListener, View.OnLongClickListener {
   void __updateWithAttributes(Attributes atts ) {
     Type  = getAttrValue(atts, "type", Type); 
     State = getAttrValue(atts, "state", State); 
+    Mod_Ori = getAttrValue(atts, "ori", Ori); 
+    Ori     = getAttrValue(atts, "prev_ori", Mod_Ori); 
+    Z       = getAttrValue(atts, "z", Z); 
+    cX      = getAttrValue(atts, "cx", cX); 
+    cY      = getAttrValue(atts, "cy", cY); 
     
     try {
       if( imageView != null && imageView.isShown() ) {

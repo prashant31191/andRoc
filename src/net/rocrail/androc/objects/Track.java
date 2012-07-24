@@ -34,6 +34,10 @@ public class Track extends Item {
     // TODO Auto-generated constructor stub
   }
   
+  public void updateWithAttributes(Attributes atts ) {
+    super.updateWithAttributes(atts);
+  }
+  
   
   public String getImageName(boolean ModPlan) {
     this.ModPlan = ModPlan;
