@@ -43,6 +43,7 @@ public class Loco implements Runnable {
   public String  Description = "";
   public String  Roadname = "";
   public String  Mode    = "";
+  public String  Consist = "";
   public String  PicName = null;
   public String  Engine  = "";
   public String  Cargo   = "";
@@ -89,6 +90,7 @@ public class Loco implements Runnable {
     */
     Description = Item.getAttrValue(atts, "desc","");
     Roadname    = Item.getAttrValue(atts, "roadname", "");
+    Consist     = Item.getAttrValue(atts, "consist", "");
     Addr        = Item.getAttrValue(atts, "addr", 0);
     Steps       = Item.getAttrValue(atts, "spcnt", 0);
     Dir         = Item.getAttrValue(atts, "dir", Dir);
@@ -136,6 +138,8 @@ public class Loco implements Runnable {
 
     RunTime = Item.getAttrValue(atts, "runtime", 0);
     Placing = Item.getAttrValue(atts, "placing", Placing);
+
+    Consist = Item.getAttrValue(atts, "consist", Consist);
     
     if( Mode.length() > 0 ) {
       AutoStart = Mode.equals("auto");
@@ -143,6 +147,23 @@ public class Loco implements Runnable {
     }
     
   }
+
+  public void addConsistMember( String memberID ) {
+    if( !Consist.contains(memberID) ) {
+      Consist = Consist + "," + memberID;
+      rocrailService.sendMessage("model", 
+          String.format("<model cmd=\"modify\"><lc id=\"%s\" consist=\"%s\"/></model>", ID, Consist) );
+    }
+  }
+
+  public void removeConsistMember( String memberID ) {
+    if( Consist.contains(memberID) ) {
+      Consist = Consist.replace( ","+memberID, "");
+      rocrailService.sendMessage("model", 
+          String.format("<model cmd=\"modify\"><lc id=\"%s\" consist=\"%s\"/></model>", ID, Consist) );
+    }
+  }
+  
   
   public boolean isPercentMode() {
     return Vmode.equals("percent");

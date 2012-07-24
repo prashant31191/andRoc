@@ -22,5 +22,8 @@
   <style name="FullHeightDialog" parent="android:style/Theme.Dialog">
     <item name="android:windowNoTitle">true</item>
   </style>
+  <style name="FullHeightDialogText" parent="android:style/Theme.Dialog">
+    <item name="android:windowNoTitle">false</item>
+  </style>
 </resources>
  

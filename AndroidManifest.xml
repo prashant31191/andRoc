@@ -20,7 +20,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.rocrail.androc"
-      android:versionName="354" android:versionCode="354">
+      android:versionName="355" android:versionCode="355">
     <supports-screens android:anyDensity="false" android:largeScreens="true"
           android:normalScreens="true" android:smallScreens="true"/>
       
@@ -51,6 +51,7 @@
         <activity android:name=".activities.ActOutputs" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActLocoList" android:theme="@style/FullHeightDialog" />
         <activity android:name=".activities.ActLocoExpList" android:theme="@style/FullHeightDialog" />
+        <activity android:name=".activities.ActLocoConsist" android:theme="@style/FullHeightDialogText" />
         <service android:name=".RocrailService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

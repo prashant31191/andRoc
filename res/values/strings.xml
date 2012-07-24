@@ -135,4 +135,7 @@
   <string name="Special">Special</string>
   <string name="UseAllSpeedSteps">Use all speed steps</string>
   <string name="SyncSpeed">Synchronise speed</string>
+  <string name="View">View</string>
+  <string name="Add">Add</string>
+  <string name="Delete">Delete</string>
 </resources>

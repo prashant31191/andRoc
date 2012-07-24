@@ -387,6 +387,8 @@ public class ActThrottle extends ActBase
     
 
     LEDButton Dir = (LEDButton) findViewById(R.id.throttleDirection);
+    Dir.setLongClickable(true);
+    Dir.setOnLongClickListener(this);
     Dir.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           if( m_Loco != null ) {
@@ -628,6 +630,14 @@ public class ActThrottle extends ActBase
       m_RocrailService.ThrottleNr = 6;
       m_Loco = m_RocrailService.m_Model.m_LocoMap.get(m_RocrailService.Prefs.getLocoID(m_RocrailService.ThrottleNr));
       locoSelected();
+      return true;
+    }
+    if( view.getId() == R.id.throttleDirection ) {
+      if( m_Loco != null ) {
+        Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoConsist.class);
+        intent.putExtra("id", m_Loco.ID);
+        startActivity(intent);
+      }
       return true;
     }
     return false;

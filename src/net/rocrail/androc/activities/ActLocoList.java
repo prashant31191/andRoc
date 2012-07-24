@@ -59,11 +59,22 @@ public class ActLocoList extends ListActivity implements ServiceListener {
   }
 
   public void initView() {
+    String Consist = null;
+    Bundle extras = getIntent().getExtras();
+    if (extras != null) {
+      Consist = extras.getString("consist");
+    }
+
+    
     Iterator<Loco> it = m_Base.m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
       Loco loco = it.next();
-      if( loco.Show )
-        m_LocoList.add(loco);
+      if( loco.Show ) {
+        if( Consist == null )
+          m_LocoList.add(loco);
+        else if( Consist.contains(loco.ID) )
+          m_LocoList.add(loco);
+      }
     }
     
     Collections.sort(m_LocoList, new LocoSort(m_Base.m_RocrailService.Prefs.SortByAddr));
@@ -83,12 +94,13 @@ public class ActLocoList extends ListActivity implements ServiceListener {
     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // Set selected loco.
-        ActLocoList.this.setResult(position);
+        //ActLocoList.this.setResult(position);
+        getIntent().putExtra("selectedID", m_LocoList.get(position).ID);
+        ActLocoList.this.setResult(position, getIntent());
         finish();
       }
     });
     
-    Bundle extras = getIntent().getExtras();
     if (extras != null) {
       int sel = extras.getInt("selected");
       setSelection(sel);
