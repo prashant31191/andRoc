@@ -159,6 +159,8 @@ public class Loco implements Runnable {
   public void removeConsistMember( String memberID ) {
     if( Consist.contains(memberID) ) {
       Consist = Consist.replace( ","+memberID, "");
+      if( Consist.contains(memberID) )
+        Consist = Consist.replace( memberID, "");
       rocrailService.sendMessage("model", 
           String.format("<model cmd=\"modify\"><lc id=\"%s\" consist=\"%s\"/></model>", ID, Consist) );
     }
