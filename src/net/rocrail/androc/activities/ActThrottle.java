@@ -447,6 +447,10 @@ public class ActThrottle extends ActBase
     if( requestCode == 1 ) {
       locoSelected(resultCode);
     }
+    else if( requestCode == 2 ) {
+      TextView Consist = (TextView)findViewById(R.id.LocoThrottleConsist);
+      Consist.setText(m_Loco.Consist);
+    }
   }
   
   
@@ -497,6 +501,8 @@ public class ActThrottle extends ActBase
       ID.setText(m_Loco.ID);
       TextView Desc = (TextView)findViewById(R.id.LocoThrottleDesc);
       Desc.setText(m_Loco.Description);
+      TextView Consist = (TextView)findViewById(R.id.LocoThrottleConsist);
+      Consist.setText(m_Loco.Consist);
       
       Slider mSeekBar = (Slider)findViewById(R.id.Speed);
       mSeekBar.setRange(m_Loco.Vmax);
@@ -521,6 +527,8 @@ public class ActThrottle extends ActBase
       ID.setText("");
       TextView Desc = (TextView)findViewById(R.id.LocoThrottleDesc);
       Desc.setText("");
+      TextView Consist = (TextView)findViewById(R.id.LocoThrottleConsist);
+      Consist.setText("");
     }
   }
 
@@ -636,7 +644,7 @@ public class ActThrottle extends ActBase
       if( m_Loco != null ) {
         Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoConsist.class);
         intent.putExtra("id", m_Loco.ID);
-        startActivity(intent);
+        startActivityForResult(intent, 2);
       }
       return true;
     }

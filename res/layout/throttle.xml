@@ -24,7 +24,9 @@
 		android:layout_width="fill_parent" android:layout_height="wrap_content"/>
 	<TextView android:id="@+id/LocoThrottleDesc" android:textStyle="bold"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-	<LinearLayout android:id="@+id/fun1" android:orientation="horizontal"
+  <TextView android:id="@+id/LocoThrottleConsist"
+    android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+		<LinearLayout android:id="@+id/fun1" android:orientation="horizontal"
 		android:layout_width="fill_parent" android:layout_height="0px"
 		android:layout_weight="25">
 		<net.rocrail.androc.widgets.LEDButton
