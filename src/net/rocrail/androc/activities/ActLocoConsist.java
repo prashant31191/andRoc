@@ -56,7 +56,7 @@ public class ActLocoConsist extends ActBase {
           if( m_Loco != null ) {
             Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
             intent.putExtra("consist", m_Loco.Consist );
-            startActivity(intent);
+            startActivityForResult(intent, 3);
           }
         }
     });
@@ -95,6 +95,17 @@ public class ActLocoConsist extends ActBase {
     else if( requestCode == 2 ) {
       String ID = data.getCharSequenceExtra("selectedID").toString();
       m_Loco.removeConsistMember(ID);
+    }
+    else if( requestCode == 3 ) {
+      String ID = data.getCharSequenceExtra("selectedID").toString();
+      m_Loco = m_RocrailService.m_Model.getLoco(ID);
+
+      if( m_Loco != null ) {
+        Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
+        intent.putExtra("id", m_Loco.ID);
+        startActivity(intent);
+      }
+        
     }
   }
   
