@@ -60,9 +60,11 @@ public class ActLocoList extends ListActivity implements ServiceListener {
 
   public void initView() {
     String Consist = null;
+    String Exclude = null;
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
       Consist = extras.getString("consist");
+      Exclude = extras.getString("exclude");
     }
 
     
@@ -70,8 +72,12 @@ public class ActLocoList extends ListActivity implements ServiceListener {
     while( it.hasNext() ) {
       Loco loco = it.next();
       if( loco.Show ) {
-        if( Consist == null )
-          m_LocoList.add(loco);
+        if( Consist == null ) {
+          if( Exclude == null )
+            m_LocoList.add(loco);
+          else if( !Exclude.contains(loco.ID) )
+            m_LocoList.add(loco);
+        }
         else if( Consist.contains(loco.ID) )
           m_LocoList.add(loco);
       }

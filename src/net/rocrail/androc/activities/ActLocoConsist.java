@@ -66,7 +66,7 @@ public class ActLocoConsist extends ActBase {
         public void onClick(View v) {
           if( m_Loco != null ) {
             Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
-            //intent.putExtra("consistmembers", m_Loco.Consist );
+            intent.putExtra("exclude", m_Loco.ID + "," + m_Loco.Consist );
             startActivityForResult(intent, 1);
           }
         }
