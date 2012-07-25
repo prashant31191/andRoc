@@ -88,6 +88,9 @@ public class ActLocoConsist extends ActBase {
   }
 
   protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    if( resultCode == -1  || data == null) {
+      return;
+    }
     if( requestCode == 1 ) {
       String ID = data.getCharSequenceExtra("selectedID").toString();
       m_Loco.addConsistMember(ID);
@@ -96,13 +99,13 @@ public class ActLocoConsist extends ActBase {
       String ID = data.getCharSequenceExtra("selectedID").toString();
       m_Loco.removeConsistMember(ID);
     }
-    else if( requestCode == 3 ) {
+    else if( requestCode == 3) {
       String ID = data.getCharSequenceExtra("selectedID").toString();
-      m_Loco = m_RocrailService.m_Model.getLoco(ID);
+      Loco l_Loco = m_RocrailService.m_Model.getLoco(ID);
 
-      if( m_Loco != null ) {
+      if( l_Loco != null ) {
         Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
-        intent.putExtra("id", m_Loco.ID);
+        intent.putExtra("id", l_Loco.ID);
         startActivity(intent);
       }
         
