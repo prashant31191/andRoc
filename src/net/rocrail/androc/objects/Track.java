@@ -38,13 +38,18 @@ public class Track extends Item {
     super.updateWithAttributes(atts);
   }
   
+  public void update4Route(String routeID, boolean locked) {
+    if( hasRouteID(routeID, locked) ) {
+      
+    }
+  }
   
   public String getImageName(boolean ModPlan) {
     this.ModPlan = ModPlan;
     int orinr = getOriNr(ModPlan);
 
     if (Type.equals("curve")) {
-      ImageName = String.format("curve_%d", orinr);
+      ImageName = String.format("curve%s_%d", (RouteLocked?"_route":""), orinr);
     } 
     else if (Type.equals("buffer") || Type.equals("connector") || Type.equals("dir") ) {
       // symbol naming fix (see rocrail/impl/pclient.c line 250)
@@ -58,7 +63,7 @@ public class Track extends Item {
       ImageName = String.format("%s_%d", Type, (orinr % 2 == 0 ? 2 : 1));
     } 
     else {
-      ImageName = String.format("track_%d", (orinr % 2 == 0 ? 2 : 1));
+      ImageName = String.format("track%s_%d", (RouteLocked?"_route":""), (orinr % 2 == 0 ? 2 : 1));
     }
 
     return ImageName;

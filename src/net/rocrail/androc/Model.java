@@ -146,7 +146,8 @@ public class Model {
     if( objName.equals("lc") ) {
       Loco lc = m_LocoMap.get(Item.getAttrValue(atts, "id", "?"));
       if( lc != null ) {
-        if( !rocrailService.getDeviceName().equals(Item.getAttrValue(atts, "throttleid", "?"))) {
+        // A consist command could have the same throttle ID as this device...
+        if( Item.getAttrValue(atts, "consistcmd", false) || !rocrailService.getDeviceName().equals(Item.getAttrValue(atts, "throttleid", "?"))) {
           lc.updateWithAttributes(atts);
           informListeners(ModelListener.MODELLIST_LC, lc.ID);
         }
@@ -228,6 +229,14 @@ public class Model {
       Route st = m_RouteMap.get(Item.getAttrValue(atts, "id", "?"));
       if( st != null ) {
         st.updateWithAttributes(atts);
+        boolean locked = Item.getAttrValue(atts, "status", 0) == 1;
+        //m_TrackMap.
+        Iterator<Track> it = m_TrackMap.values().iterator();
+        while( it.hasNext() ) {
+          Track tk = it.next();
+          tk.update4Route(st.ID, locked);
+        }
+
       }
       return;
     }

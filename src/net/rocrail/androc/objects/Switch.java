@@ -83,9 +83,9 @@ public class Switch extends Item implements View.OnClickListener {
       }
 
       if (State.equals("turnout"))
-        ImageName = String.format("accessory_%d_on_%d", AccNr, orinr);
-      else
         ImageName = String.format("accessory_%d_off_%d", AccNr, orinr);
+      else
+        ImageName = String.format("accessory_%d_on_%d", AccNr, orinr);
     }
     else if (Type.equals("right")) {
       if (State.equals("straight"))

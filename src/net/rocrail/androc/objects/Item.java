@@ -20,6 +20,8 @@
 package net.rocrail.androc.objects;
 
 
+import java.util.StringTokenizer;
+
 import net.rocrail.androc.RocrailService;
 import net.rocrail.androc.widgets.LevelItem;
 
@@ -57,6 +59,8 @@ public class Item implements View.OnClickListener, View.OnLongClickListener {
   public String ImageName = "";
   public LevelItem imageView = null;
   public int colorName = 0;
+  public String RouteIDs = "";
+  public boolean RouteLocked = false;
   
   boolean Reserved = false;
   boolean Entering = false;
@@ -90,6 +94,7 @@ public class Item implements View.OnClickListener, View.OnLongClickListener {
     cX      = getAttrValue(atts, "cx", 1); 
     cY      = getAttrValue(atts, "cy", 1); 
     Show    = getAttrValue(atts, "show", true);
+    RouteIDs= getAttrValue(atts, "routeids", ""); 
     
     if( cX < 1 ) cX = 1;
     if( cY < 1 ) cY = 1;
@@ -135,6 +140,7 @@ public class Item implements View.OnClickListener, View.OnLongClickListener {
     Z       = getAttrValue(atts, "z", Z); 
     cX      = getAttrValue(atts, "cx", cX); 
     cY      = getAttrValue(atts, "cy", cY); 
+    RouteIDs= getAttrValue(atts, "routeids", RouteIDs); 
     
     try {
       if( imageView != null && imageView.isShown() ) {
@@ -152,7 +158,21 @@ public class Item implements View.OnClickListener, View.OnLongClickListener {
   }
 
 
-
+public boolean hasRouteID(String routeid, boolean locked ) {
+  if( RouteIDs.contains(routeid) ) {
+    RouteLocked = locked;
+    try {
+      if( imageView != null && imageView.isShown() ) {
+        imageView.post(new UpdateImage(this));
+      }
+    }
+    catch( Exception e ) {
+      // Probably not a valid ImageView...
+    }
+    return true;
+  }
+  return false;
+}
   
   public int getOriNr(boolean ModPlan) {
     if( ModPlan ) {
