@@ -37,6 +37,12 @@ public class Sensor extends Item implements View.OnClickListener {
     Shortcut = Item.getAttrValue(atts, "shortcut", false );
   }
   
+  public void update4Route(String routeID, boolean locked) {
+    if( hasRouteID(routeID, locked) ) {
+      
+    }
+  }
+  
   public void updateWithAttributes(Attributes atts ) {
     Curve = Item.getAttrValue(atts, "curve", Curve );
     Shortcut = Item.getAttrValue(atts, "shortcut", false );
@@ -54,9 +60,9 @@ public class Sensor extends Item implements View.OnClickListener {
       orinr = (orinr % 2 == 0) ? 2 : 1;
 
     if (State.equals("true")) {
-      ImageName = String.format("%ssensor_on_%d%s", prefix, orinr, Shortcut?"sc":"");
+      ImageName = String.format("%ssensor%s_on_%d%s", prefix, (RouteLocked?"_route":""), orinr, Shortcut?"sc":"");
     } else {
-      ImageName = String.format("%ssensor_off_%d%s", prefix, orinr, Shortcut?"sc":"");
+      ImageName = String.format("%ssensor%s_off_%d%s", prefix, (RouteLocked?"_route":""), orinr, Shortcut?"sc":"");
     }
 
     return ImageName;

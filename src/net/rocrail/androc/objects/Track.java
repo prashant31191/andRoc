@@ -51,7 +51,7 @@ public class Track extends Item {
     if (Type.equals("curve")) {
       ImageName = String.format("curve%s_%d", (RouteLocked?"_route":""), orinr);
     } 
-    else if (Type.equals("buffer") || Type.equals("connector") || Type.equals("dir") ) {
+    else if (Type.equals("buffer") || Type.equals("connector") ) {
       // symbol naming fix (see rocrail/impl/pclient.c line 250)
       if (orinr == 1)
         orinr = 3;
@@ -59,8 +59,16 @@ public class Track extends Item {
         orinr = 1;
       ImageName = String.format("%s_%d", Type, orinr);
     } 
+    else if( Type.equals("dir") ) {
+      // symbol naming fix (see rocrail/impl/pclient.c line 250)
+      if (orinr == 1)
+        orinr = 3;
+      else if (orinr == 3)
+        orinr = 1;
+      ImageName = String.format("%s%s_%d", Type, (RouteLocked?"_route":""), orinr);
+    } 
     else if( Type.equals("dirall") ) {
-      ImageName = String.format("%s_%d", Type, (orinr % 2 == 0 ? 2 : 1));
+      ImageName = String.format("%s%s_%d", Type, (RouteLocked?"_route":""), (orinr % 2 == 0 ? 2 : 1));
     } 
     else {
       ImageName = String.format("track%s_%d", (RouteLocked?"_route":""), (orinr % 2 == 0 ? 2 : 1));

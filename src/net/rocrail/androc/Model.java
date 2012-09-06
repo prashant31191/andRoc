@@ -230,11 +230,16 @@ public class Model {
       if( st != null ) {
         st.updateWithAttributes(atts);
         boolean locked = Item.getAttrValue(atts, "status", 0) == 1;
-        //m_TrackMap.
-        Iterator<Track> it = m_TrackMap.values().iterator();
-        while( it.hasNext() ) {
-          Track tk = it.next();
+
+        Iterator<Track> itTK = m_TrackMap.values().iterator();
+        while( itTK.hasNext() ) {
+          Track tk = itTK.next();
           tk.update4Route(st.ID, locked);
+        }
+        Iterator<Sensor> itFB = m_SensorMap.values().iterator();
+        while( itFB.hasNext() ) {
+          Sensor fb = itFB.next();
+          fb.update4Route(st.ID, locked);
         }
 
       }
