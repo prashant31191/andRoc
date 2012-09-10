@@ -84,6 +84,11 @@
   <string name="FreeBlock">Free Block</string>
   <string name="OpenBlock">Open Block</string>
   <string name="CloseBlock">Close Block</string>
+  <string name="OpenEnter">Open enter</string>
+  <string name="CloseEnter">Close enter</string>
+  <string name="OpenExit">Open exit</string>
+  <string name="CloseExit">Close exit</string>
+  <string name="Compress">Compress</string>
   <string name="SelectBlock">Select Block</string>
   <string name="BlockList">Block list</string>
   <string name="SelectSchedule">Select Schedule</string>
@@ -95,6 +100,7 @@
   <string name="Value">Value</string>
   <string name="DeviceID">DeviceID</string>
   <string name="BlockID">BlockID</string>
+  <string name="StageID">StageID</string>
   <string name="Description">Description</string>
   <string name="Roadname">Roadname</string>
   <string name="Vmax">Vmax</string>

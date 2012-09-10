@@ -75,6 +75,7 @@ public class Model {
   public boolean m_bDonKey = false;
   
   Turntable m_CurrentTT = null;
+  StageBlock m_CurrentSB = null;
   Loco m_CurrentLC = null;
 
   
@@ -200,10 +201,16 @@ public class Model {
     if( objName.equals("sb") ) {
       StageBlock sb = m_StageBlockMap.get(Item.getAttrValue(atts, "id", "?"));
       if( sb != null ) {
+        m_CurrentSB = sb;
         sb.updateWithAttributes(atts);
       }
       return;
     }
+    if( objName.equals("section") && m_CurrentSB != null ) {
+      m_CurrentSB.updateSection(atts);
+      return;
+    }
+    
     if( objName.equals("tx") ) {
       Text tx = m_TextMap.get(Item.getAttrValue(atts, "id", "?"));
       if( tx != null ) {
@@ -323,8 +330,13 @@ public class Model {
 
     if( objName.equals("sb") ) {
       StageBlock stageblock = new StageBlock(rocrailService, atts);
+      m_CurrentSB = stageblock;
       m_StageBlockMap.put(stageblock.ID, stageblock);
       m_ItemList.add(stageblock);
+      return;
+    }
+    if( objName.equals("section") && m_CurrentSB != null ) {
+      m_CurrentSB.addSection(atts);
       return;
     }
 

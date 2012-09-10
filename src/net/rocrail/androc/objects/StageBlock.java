@@ -20,16 +20,76 @@
 
 package net.rocrail.androc.objects;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
 import net.rocrail.androc.RocrailService;
 
 import org.xml.sax.Attributes;
 
+import android.content.Intent;
+import android.view.View;
+
 public class StageBlock extends Block {
+  String ExitState = "";
+  String LocoID    = ""; 
+  boolean Reserved = false; 
+  boolean Entering = false;
+  public boolean ExitClosed = false;
+  
+  public List<SBSection> Sections = new ArrayList<SBSection>();
+  public HashMap<String,SBSection> SectionMap = new HashMap<String,SBSection>();
 
   public StageBlock(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
-    // TODO Auto-generated constructor stub
+    ExitState = Item.getAttrValue(atts, "exitstate", "open"); 
+    LocoID   = Item.getAttrValue(atts, "locid", ""); 
+    Reserved = Item.getAttrValue(atts, "reserved", false); 
+    Entering = Item.getAttrValue(atts, "entering", false); 
+    Text = ID;
+    Background = true;
   }
+
+  public void updateWithAttributes(Attributes atts ) {
+    ExitState = Item.getAttrValue(atts, "exitstate", ExitState); 
+    LocoID    = Item.getAttrValue(atts, "locid", ""); 
+    Reserved  = Item.getAttrValue(atts, "reserved", false); 
+    Entering  = Item.getAttrValue(atts, "entering", false);
+    Closed     = State.equals("closed");
+    ExitClosed = ExitState.equals("closed");
+    updateTextColor();
+    super.updateWithAttributes(atts);
+  }
+
+  public void updateTextColor() {
+    if( State.equals("closed") ) {
+      Text = "Closed";
+      colorName = Item.COLOR_CLOSED;
+    }
+    else if( LocoID != null && LocoID.trim().length() > 0 ) {
+      Text = LocoID;
+      if( Reserved ) 
+        colorName = Item.COLOR_RESERVED;
+      else if( Entering ) 
+        colorName = Item.COLOR_ENTER;
+      else 
+        colorName = Item.COLOR_OCCUPIED;
+    }
+    else {
+      int cnt = 0;
+      Iterator<SBSection> it = Sections.iterator();
+      while( it.hasNext() ) {
+        SBSection section = it.next();
+        if( section.LcID.length() > 0 )
+          cnt++;
+      }
+      Text = ID + "[" + cnt + "] " + (ExitState.equals("closed")?"<":"");
+      colorName = Item.COLOR_FREE;
+    }
+  }
+ 
 
   public String getImageName(boolean ModPlan) {
     this.ModPlan = ModPlan;
@@ -53,7 +113,40 @@ public class StageBlock extends Block {
     return ImageName;
   }
 
+  public void addSection(Attributes atts ) {
+    SBSection section = new SBSection();
+    section.ID = Item.getAttrValue(atts, "id", "" );
+    section.LcID = Item.getAttrValue(atts, "lcid", "" );
+    Sections.add(section);
+    if( section.ID != null && section.ID.length() > 0 )
+      SectionMap.put(section.ID, section);
+  }
+
+  public void updateSection(Attributes atts ) {
+    SBSection section = SectionMap.get(Item.getAttrValue(atts, "id", "" ));
+    if( section != null ) {
+      section.LcID = Item.getAttrValue(atts, "lcid", "" );
+      updateTextColor();
+    }
+  }
+
+  public void onClick(View v) {
+    try {
+      Intent intent = new Intent(activity,net.rocrail.androc.activities.ActStage.class);
+      intent.putExtra("id", StageBlock.this.ID);
+      activity.startActivity(intent);
+    }
+    catch(Exception e) {
+      // invalid activity
+    }
+  }
   
+
+  
+  public class SBSection {
+    public String ID = "";
+    public String LcID = "";
+  }
   
   
 }
