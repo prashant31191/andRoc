@@ -20,7 +20,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.rocrail.androc"
-      android:versionName="365" android:versionCode="365">
+      android:versionName="366" android:versionCode="366">
     <supports-screens android:anyDensity="false" android:largeScreens="true"
           android:normalScreens="true" android:smallScreens="true"/>
       

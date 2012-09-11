@@ -20,8 +20,6 @@
 package net.rocrail.androc.objects;
 
 
-import java.util.StringTokenizer;
-
 import net.rocrail.androc.RocrailService;
 import net.rocrail.androc.widgets.LevelItem;
 

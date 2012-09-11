@@ -20,11 +20,13 @@
 package net.rocrail.androc.widgets;
 
 import net.rocrail.androc.objects.Item;
+import net.rocrail.androc.objects.StageBlock;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
@@ -87,7 +89,14 @@ public class LevelItem extends ImageView implements OnGestureListener {
         break;
       }
       int padding = (6 * size) / 32;
-      canvas.drawRect(padding, padding, item.cX*size-padding, item.cY*size-padding, paint);
+      
+      if( item instanceof StageBlock ) {
+        RectF rect = new RectF(padding, padding, item.cX*size-padding, item.cY*size-padding );
+        canvas.drawRoundRect(rect, size/3, size/3, paint);
+      }
+      else {
+        canvas.drawRect(padding, padding, item.cX*size-padding, item.cY*size-padding, paint);
+      }
     }
     
     if( item.Text != null && item.Text.trim().length() > 0 ) {

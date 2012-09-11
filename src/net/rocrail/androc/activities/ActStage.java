@@ -36,7 +36,7 @@ public class ActStage extends ActBase  {
     updateTitle("Stage \'"+m_Stage.ID+"\'");
 
     final Button OpenEnter = (Button) findViewById(R.id.stageEnter);
-    OpenEnter.setText(m_Stage.ExitClosed?getText(R.string.OpenExit):getText(R.string.CloseExit));
+    OpenEnter.setText(m_Stage.Closed?getText(R.string.OpenEnter):getText(R.string.CloseEnter));
     OpenEnter.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           m_RocrailService.sendMessage("sb", 
