@@ -672,9 +672,22 @@ public class ActThrottle extends ActBase
     }
     if( view.getId() == R.id.throttleDirection ) {
       if( m_Loco != null ) {
-        Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoConsist.class);
-        intent.putExtra("id", m_Loco.ID);
-        startActivityForResult(intent, 2);
+        String masterConsist = m_RocrailService.m_Model.findMaster(m_Loco.ID);
+        if( masterConsist.length() == 0 ) {
+          Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoConsist.class);
+          intent.putExtra("id", m_Loco.ID);
+          startActivityForResult(intent, 2);
+        }
+        else {
+          StringTokenizer tok = new StringTokenizer(masterConsist, "=");
+          String masterID = tok.nextToken();
+          Loco master = m_RocrailService.m_Model.getLoco(masterID);
+          if( master != null ) {
+            m_Loco = master;
+            locoSelected();
+          }
+          
+        }
       }
       return true;
     }
