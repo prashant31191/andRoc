@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import net.rocrail.androc.R;
 import net.rocrail.androc.interfaces.ModelListener;
@@ -455,6 +456,20 @@ public class ActThrottle extends ActBase
       if( master.length() > 0 ) {
         Consist.setBackgroundColor(Color.rgb(180, 0, 0));
         Consist.setText(m_RocrailService.m_Model.findMaster(m_Loco.ID));
+        Consist.setOnClickListener(new View.OnClickListener() {
+          public void onClick(View v) {
+            quitShowed = false;
+            if( m_Loco != null ) {
+              StringTokenizer tok = new StringTokenizer(((TextView)v).getText().toString(), "=");
+              String masterID = tok.nextToken();
+              Loco master = m_RocrailService.m_Model.getLoco(masterID);
+              if( master != null ) {
+                m_Loco = master;
+                locoSelected();
+              }
+            }
+          }
+      });
       }
     }
     
