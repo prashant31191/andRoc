@@ -125,6 +125,16 @@ public class Model {
     
     return null;
   }
+  
+  public String findMaster( String ID ) {
+    Iterator<Loco> it = m_LocoList.iterator();
+    while(it.hasNext()) {
+      Loco lc = it.next();
+      if( lc.Consist.contains(ID))
+        return lc.ID + "=" + lc.Consist;
+    }
+    return "";
+  }
  
   public Loco getLoco(String ID) {
     /* Rob:

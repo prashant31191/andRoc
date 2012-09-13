@@ -150,7 +150,10 @@ public class Loco implements Runnable {
 
   public void addConsistMember( String memberID ) {
     if( !Consist.contains(memberID) ) {
-      Consist = Consist + "," + memberID;
+      if( Consist.length() > 0 )
+        Consist = Consist + "," + memberID;
+      else
+        Consist = memberID;
       rocrailService.sendMessage("model", 
           String.format("<model cmd=\"modify\"><lc id=\"%s\" consist=\"%s\"/></model>", ID, Consist) );
     }

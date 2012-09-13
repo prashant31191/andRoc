@@ -34,6 +34,7 @@ import net.rocrail.android.widgets.Slider;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -442,14 +443,29 @@ public class ActThrottle extends ActBase
       v.setText("< "+m_Loco.Speed);
   }
 
+  void setConsist() {
+    TextView Consist = (TextView)findViewById(R.id.LocoThrottleConsist);
+    Consist.setBackgroundColor(Color.TRANSPARENT);
+    Consist.setText("");
+    if( m_Loco.Consist.length() > 0 ) {
+      Consist.setText(m_Loco.Consist);
+    }
+    else {
+      String master = m_RocrailService.m_Model.findMaster(m_Loco.ID);
+      if( master.length() > 0 ) {
+        Consist.setBackgroundColor(Color.rgb(180, 0, 0));
+        Consist.setText(m_RocrailService.m_Model.findMaster(m_Loco.ID));
+      }
+    }
+    
+  }
   
   protected void onActivityResult (int requestCode, int resultCode, Intent data) {
     if( requestCode == 1 ) {
       locoSelected(resultCode);
     }
     else if( requestCode == 2 ) {
-      TextView Consist = (TextView)findViewById(R.id.LocoThrottleConsist);
-      Consist.setText(m_Loco.Consist);
+      setConsist();
     }
   }
   
@@ -501,8 +517,7 @@ public class ActThrottle extends ActBase
       ID.setText(m_Loco.ID);
       TextView Desc = (TextView)findViewById(R.id.LocoThrottleDesc);
       Desc.setText(m_Loco.Description);
-      TextView Consist = (TextView)findViewById(R.id.LocoThrottleConsist);
-      Consist.setText(m_Loco.Consist);
+      setConsist();
       
       Slider mSeekBar = (Slider)findViewById(R.id.Speed);
       mSeekBar.setRange(m_Loco.Vmax);
