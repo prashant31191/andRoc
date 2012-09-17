@@ -71,7 +71,8 @@ class XmlHandler extends DefaultHandler {
       Loco loco = m_Model.getLoco(id);
       if( loco != null ) {
         String data = atts.getValue("data");
-        loco.setPicData(data);
+        String function = atts.getValue("function");
+        loco.setPicData(data, Integer.parseInt(function));
       }
       return;
     }

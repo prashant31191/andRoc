@@ -24,8 +24,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import net.rocrail.androc.RocrailService;
 import net.rocrail.androc.widgets.LocoImage;
@@ -48,6 +50,7 @@ public class Loco implements Runnable {
   public String  Engine  = "";
   public String  Cargo   = "";
   private Bitmap LocoBmp = null;
+  private HashMap<String,Bitmap> FunBmp = new HashMap<String,Bitmap>();
   public int     Addr    = 0;
   public int     Steps   = 0;
   public long    RunTime = 0;
@@ -236,6 +239,52 @@ public class Loco implements Runnable {
   }
 
   
+  public Bitmap requestFunctionIcon(int nr) {
+    String IconName = "";
+    if( Functions != null ) {
+      Iterator<Function> it = Functions.iterator();
+      while(it.hasNext()) {
+        Function function = it.next();
+        if( function.Nr == nr ) {
+          if( function.Icon.length() > 0 ) {
+            IconName = function.Icon;
+            break;
+          }
+          return null;
+        }
+      }
+    }
+    
+    Bitmap bmp = null;
+    
+    File dir = new File("/sdcard/androc/");
+    if( !dir.exists() )
+      dir.mkdirs();
+    File file = new File("/sdcard/androc/" + IconName );
+    if( file.exists()) {
+      try {
+        byte rawdata[] = new byte[(int)file.length()]; 
+        FileInputStream fis = new FileInputStream(file);
+        fis.read(rawdata);
+        fis.close();
+        bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
+        FunBmp.put(""+nr, bmp);
+      }
+      catch(Exception e) {
+        e.printStackTrace();
+      }
+    }
+    
+    if(bmp == null && !FunBmp.containsKey(""+nr)) {
+      FunBmp.put(""+nr, null);
+
+      rocrailService.sendMessage("datareq", 
+          String.format("<datareq id=\"%s\" function=\"%d\" filename=\"%s\"/>", ID, nr, IconName) );
+    }
+    return bmp;
+  }
+
+  
   static byte[] strToByte( String s ) {
     int i = 0;
     int len = s.length();
@@ -247,7 +296,7 @@ public class Loco implements Runnable {
     return b;
   }
 
-  public void setPicData(String data) {
+  public void setPicData(String data, int nr) {
     if( data != null && data.length() > 0 ) {
       // convert from HEXA to Bitmap
       byte[] rawdata = strToByte(data);
@@ -255,20 +304,41 @@ public class Loco implements Runnable {
       File dir = new File("/sdcard/androc/");
       if( !dir.exists() )
         dir.mkdirs();
-      File file = new File("/sdcard/androc/" + PicName );
-      try {
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(rawdata);
-        fos.close();
+      
+      File file = null;
+      if( nr == 0 )
+        file = new File("/sdcard/androc/" + PicName );
+      else {
+        if( Functions != null ) {
+          Iterator<Function> it = Functions.iterator();
+          while(it.hasNext()) {
+            Function function = it.next();
+            if( function.Nr == nr && function.Icon.length() > 0 )
+              file = new File("/sdcard/androc/" + function.Icon );
+          }
+        }
       }
-      catch(Exception e) {
-        e.printStackTrace();
-      }
-
-      Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
-      LocoBmp = bmp;
-      if( imageView != null ) {
-        imageView.post(new UpdateLocoImage(this));
+      
+      if( file != null ) {
+        try {
+          FileOutputStream fos = new FileOutputStream(file);
+          fos.write(rawdata);
+          fos.close();
+        }
+        catch(Exception e) {
+          e.printStackTrace();
+        }
+  
+        Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
+        if( nr == 0 ) {
+          LocoBmp = bmp;
+          if( imageView != null ) {
+            imageView.post(new UpdateLocoImage(this));
+          }
+        }
+        else {
+          FunBmp.put(""+nr, bmp);
+        }
       }
     }
   }
@@ -367,6 +437,7 @@ public class Loco implements Runnable {
     Function function = new Function();
     function.Nr = Item.getAttrValue(atts, "fn", 0 );
     function.Text = Item.getAttrValue(atts, "text", "F"+function.Nr );
+    function.Icon = Item.getAttrValue(atts, "icon", "" );
     Functions.add(function);
   }
 
@@ -381,7 +452,10 @@ public class Loco implements Runnable {
     }
     return "F"+nr;
   }
-
+  
+  public Bitmap getFunctionIcon(int nr) {
+    return requestFunctionIcon(nr);
+  }
 
   @Override
   public void run() {
@@ -421,4 +495,5 @@ class UpdateLocoImage implements Runnable {
 class Function {
   int Nr = 0;
   String Text = "";
+  String Icon = "";
 }
