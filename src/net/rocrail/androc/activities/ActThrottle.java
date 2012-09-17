@@ -119,41 +119,60 @@ public class ActThrottle extends ActBase
     f0.setText(m_Loco.getFunctionText(0));
     
     LEDButton f1 = (LEDButton) findViewById(R.id.throttleF1);
-    f1.setText(m_Loco.getFunctionText(1+m_iFunctionGroup*FNGROUPSIZE));
     Bitmap icon1 = m_Loco.getFunctionIcon(1+m_iFunctionGroup*FNGROUPSIZE);
-    if( icon1 != null )
+    if( icon1 != null ) {
       f1.setBackgroundDrawable(new BitmapDrawable(icon1));
+      f1.setText("");
+    }
+    else
+      f1.setText(m_Loco.getFunctionText(1+m_iFunctionGroup*FNGROUPSIZE));
     
     LEDButton f2 = (LEDButton) findViewById(R.id.throttleF2);
-    f2.setText(m_Loco.getFunctionText(2+m_iFunctionGroup*FNGROUPSIZE));
     Bitmap icon2 = m_Loco.getFunctionIcon(2+m_iFunctionGroup*FNGROUPSIZE);
-    if( icon2 != null )
+    if( icon2 != null ) {
       f2.setBackgroundDrawable(new BitmapDrawable(icon2));
+      f2.setText("");
+    }
+    else
+      f2.setText(m_Loco.getFunctionText(2+m_iFunctionGroup*FNGROUPSIZE));
 
     LEDButton f3 = (LEDButton) findViewById(R.id.throttleF3);
-    f3.setText(m_Loco.getFunctionText(3+m_iFunctionGroup*FNGROUPSIZE));
     Bitmap icon3 = m_Loco.getFunctionIcon(3+m_iFunctionGroup*FNGROUPSIZE);
-    if( icon3 != null )
+    if( icon3 != null ) {
       f3.setBackgroundDrawable(new BitmapDrawable(icon3));
+      f3.setText("");
+    }
+    else
+      f3.setText(m_Loco.getFunctionText(3+m_iFunctionGroup*FNGROUPSIZE));
     
     LEDButton f4 = (LEDButton) findViewById(R.id.throttleF4);
-    f4.setText(m_Loco.getFunctionText(4+m_iFunctionGroup*FNGROUPSIZE));
     Bitmap icon4 = m_Loco.getFunctionIcon(4+m_iFunctionGroup*FNGROUPSIZE);
-    if( icon4 != null )
+    if( icon4 != null ) {
       f4.setBackgroundDrawable(new BitmapDrawable(icon4));
+      f4.setText("");
+    }
+    else
+      f4.setText(m_Loco.getFunctionText(4+m_iFunctionGroup*FNGROUPSIZE));
     
     LEDButton f5 = (LEDButton) findViewById(R.id.throttleF5);
-    f5.setText(m_Loco.getFunctionText(5+m_iFunctionGroup*FNGROUPSIZE));
     Bitmap icon5 = m_Loco.getFunctionIcon(5+m_iFunctionGroup*FNGROUPSIZE);
-    if( icon5 != null )
+    if( icon5 != null ) {
       f5.setBackgroundDrawable(new BitmapDrawable(icon5));
+      f5.setText("");
+    }
+    else
+      f5.setText(m_Loco.getFunctionText(5+m_iFunctionGroup*FNGROUPSIZE));
     
     LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
-    f6.setText(m_Loco.getFunctionText(6+m_iFunctionGroup*FNGROUPSIZE));
     Bitmap icon6 = m_Loco.getFunctionIcon(6+m_iFunctionGroup*FNGROUPSIZE);
-    if( icon6 != null )
+    if( icon6 != null ) {
       f6.setBackgroundDrawable(new BitmapDrawable(icon6));
+      f6.setText("");
+    }
+    else
+      f6.setText(m_Loco.getFunctionText(6+m_iFunctionGroup*FNGROUPSIZE));
     
+    f0.setLines(1);
     f1.setLines(1);
     f2.setLines(1);
     f3.setLines(1);
@@ -161,6 +180,11 @@ public class ActThrottle extends ActBase
     f5.setLines(1);
     f6.setLines(1);
     /* This mixes up the layout. */
+    if(f0.getText().length() > 3)
+      f0.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
+    else
+      f0.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD), Typeface.BOLD);
+
     if(f1.getText().length() > 3)
       f1.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
     else
