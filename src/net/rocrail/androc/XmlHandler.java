@@ -72,7 +72,12 @@ class XmlHandler extends DefaultHandler {
       if( loco != null ) {
         String data = atts.getValue("data");
         String function = atts.getValue("function");
-        loco.setPicData(data, Integer.parseInt(function));
+        String filename = atts.getValue("filename");
+        int nr = 0;
+        try {
+          nr = Integer.parseInt(function);
+        } catch(Exception e) {}
+        loco.setPicData(filename, data, nr);
       }
       return;
     }

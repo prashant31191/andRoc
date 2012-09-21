@@ -296,7 +296,7 @@ public class Loco implements Runnable {
     return b;
   }
 
-  public void setPicData(String data, int nr) {
+  public void setPicData(String filename, String data, int nr) {
     if( data != null && data.length() > 0 ) {
       // convert from HEXA to Bitmap
       byte[] rawdata = strToByte(data);
@@ -306,7 +306,7 @@ public class Loco implements Runnable {
         dir.mkdirs();
       
       File file = null;
-      if( nr == 0 )
+      if( filename.equals(PicName) )
         file = new File("/sdcard/androc/" + PicName );
       else {
         if( Functions != null ) {

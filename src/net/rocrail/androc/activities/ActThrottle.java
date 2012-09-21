@@ -116,6 +116,7 @@ public class ActThrottle extends ActBase
       return;
 
     LEDButton f0 = (LEDButton) findViewById(R.id.throttleLights);
+    f0.setBackgroundResource(android.R.drawable.btn_default);
     Bitmap icon0 = m_Loco.getFunctionIcon(0);
     if( icon0 != null ) {
       f0.setBackgroundDrawable(new BitmapDrawable(icon0));
@@ -125,6 +126,7 @@ public class ActThrottle extends ActBase
       f0.setText(m_Loco.getFunctionText(0));
     
     LEDButton f1 = (LEDButton) findViewById(R.id.throttleF1);
+    f1.setBackgroundResource(android.R.drawable.btn_default);
     Bitmap icon1 = m_Loco.getFunctionIcon(1+m_iFunctionGroup*FNGROUPSIZE);
     if( icon1 != null ) {
       f1.setBackgroundDrawable(new BitmapDrawable(icon1));
@@ -134,6 +136,7 @@ public class ActThrottle extends ActBase
       f1.setText(m_Loco.getFunctionText(1+m_iFunctionGroup*FNGROUPSIZE));
     
     LEDButton f2 = (LEDButton) findViewById(R.id.throttleF2);
+    f2.setBackgroundResource(android.R.drawable.btn_default);
     Bitmap icon2 = m_Loco.getFunctionIcon(2+m_iFunctionGroup*FNGROUPSIZE);
     if( icon2 != null ) {
       f2.setBackgroundDrawable(new BitmapDrawable(icon2));
@@ -143,6 +146,7 @@ public class ActThrottle extends ActBase
       f2.setText(m_Loco.getFunctionText(2+m_iFunctionGroup*FNGROUPSIZE));
 
     LEDButton f3 = (LEDButton) findViewById(R.id.throttleF3);
+    f3.setBackgroundResource(android.R.drawable.btn_default);
     Bitmap icon3 = m_Loco.getFunctionIcon(3+m_iFunctionGroup*FNGROUPSIZE);
     if( icon3 != null ) {
       f3.setBackgroundDrawable(new BitmapDrawable(icon3));
@@ -152,6 +156,7 @@ public class ActThrottle extends ActBase
       f3.setText(m_Loco.getFunctionText(3+m_iFunctionGroup*FNGROUPSIZE));
     
     LEDButton f4 = (LEDButton) findViewById(R.id.throttleF4);
+    f4.setBackgroundResource(android.R.drawable.btn_default);
     Bitmap icon4 = m_Loco.getFunctionIcon(4+m_iFunctionGroup*FNGROUPSIZE);
     if( icon4 != null ) {
       f4.setBackgroundDrawable(new BitmapDrawable(icon4));
@@ -161,6 +166,7 @@ public class ActThrottle extends ActBase
       f4.setText(m_Loco.getFunctionText(4+m_iFunctionGroup*FNGROUPSIZE));
     
     LEDButton f5 = (LEDButton) findViewById(R.id.throttleF5);
+    f5.setBackgroundResource(android.R.drawable.btn_default);
     Bitmap icon5 = m_Loco.getFunctionIcon(5+m_iFunctionGroup*FNGROUPSIZE);
     if( icon5 != null ) {
       f5.setBackgroundDrawable(new BitmapDrawable(icon5));
@@ -170,6 +176,7 @@ public class ActThrottle extends ActBase
       f5.setText(m_Loco.getFunctionText(5+m_iFunctionGroup*FNGROUPSIZE));
     
     LEDButton f6 = (LEDButton) findViewById(R.id.throttleF6);
+    f6.setBackgroundResource(android.R.drawable.btn_default);
     Bitmap icon6 = m_Loco.getFunctionIcon(6+m_iFunctionGroup*FNGROUPSIZE);
     if( icon6 != null ) {
       f6.setBackgroundDrawable(new BitmapDrawable(icon6));
