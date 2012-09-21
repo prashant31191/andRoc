@@ -116,7 +116,13 @@ public class ActThrottle extends ActBase
       return;
 
     LEDButton f0 = (LEDButton) findViewById(R.id.throttleLights);
-    f0.setText(m_Loco.getFunctionText(0));
+    Bitmap icon0 = m_Loco.getFunctionIcon(0);
+    if( icon0 != null ) {
+      f0.setBackgroundDrawable(new BitmapDrawable(icon0));
+      f0.setText("");
+    }
+    else
+      f0.setText(m_Loco.getFunctionText(0));
     
     LEDButton f1 = (LEDButton) findViewById(R.id.throttleF1);
     Bitmap icon1 = m_Loco.getFunctionIcon(1+m_iFunctionGroup*FNGROUPSIZE);
