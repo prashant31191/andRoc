@@ -518,6 +518,7 @@ public class ActThrottle extends ActBase
       if( master.length() > 0 ) {
         Consist.setBackgroundColor(Color.rgb(180, 0, 0));
         Consist.setText(m_RocrailService.m_Model.findMaster(m_Loco.ID));
+        /*
         Consist.setOnClickListener(new View.OnClickListener() {
           public void onClick(View v) {
             quitShowed = false;
@@ -532,6 +533,7 @@ public class ActThrottle extends ActBase
             }
           }
       });
+      */
       }
     }
     
