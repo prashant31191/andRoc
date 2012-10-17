@@ -130,11 +130,20 @@ public class Item implements View.OnClickListener, View.OnLongClickListener {
       return defval;
   }
   
+  public static boolean hasAttribute(Attributes atts, String key) {
+    String val = atts.getValue(key);
+    if( val != null && val.length() > 0 )
+      return true;
+    return false;
+  }
+  
   void __updateWithAttributes(Attributes atts ) {
     Type  = getAttrValue(atts, "type", Type); 
     State = getAttrValue(atts, "state", State); 
-    Mod_Ori = getAttrValue(atts, "ori", Ori); 
-    Ori     = getAttrValue(atts, "prev_ori", Mod_Ori); 
+    if( hasAttribute(atts, "ori") ) {
+      Mod_Ori = getAttrValue(atts, "ori", Ori); 
+      Ori     = getAttrValue(atts, "prev_ori", Mod_Ori);
+    }
     Z       = getAttrValue(atts, "z", Z); 
     cX      = getAttrValue(atts, "cx", cX); 
     cY      = getAttrValue(atts, "cy", cY); 

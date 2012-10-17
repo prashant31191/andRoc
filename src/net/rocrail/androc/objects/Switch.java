@@ -57,6 +57,9 @@ public class Switch extends Item implements View.OnClickListener {
   
   public String getImageName(boolean ModPlan) {
     this.ModPlan = ModPlan;
+    
+    System.out.println("sw "+this.ID+" ModPlan="+ModPlan+ " ori="+this.Ori + " modori="+this.Mod_Ori);
+    
     int orinr = getOriNr(ModPlan);
     String rasterStr = (Raster?"_r":"");
     
