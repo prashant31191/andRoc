@@ -36,6 +36,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -205,9 +207,15 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
       LevelItem image = new LevelItem(ActLevel.this, levelView, item, size );
       String imgname = item.getImageName(ModPlan);
       if( imgname != null ) {
-        int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
-        if( resId != 0 ) {
-          image.setImageResource(resId);
+        Bitmap bMap = BitmapFactory.decodeFile("/sdcard/androc/symbols/"+imgname+".png");
+        if( bMap != null ) {
+          image.setImageBitmap(bMap);
+        }
+        else {
+          int resId = getResources().getIdentifier(imgname, "raw", "net.rocrail.androc");
+          if( resId != 0 ) {
+            image.setImageResource(resId);
+          }
         }
       }
       
