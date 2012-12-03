@@ -43,9 +43,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -319,6 +318,7 @@ public class ActThrottle extends ActBase
     });
 
     LEDButton fn = (LEDButton) findViewById(R.id.throttleFn);
+    fn.noLED();
     fn.setLongClickable(true);
     fn.setOnLongClickListener(this);
     fn.setOnClickListener(new View.OnClickListener() {
@@ -420,6 +420,7 @@ public class ActThrottle extends ActBase
     });
 
     LEDButton Go = (LEDButton) findViewById(R.id.throttleGo);
+    Go.noLED();
     if( m_Loco != null )
       Go.ON = m_Loco.AutoStart;
     Go.setEnabled(m_RocrailService.AutoMode);
@@ -435,6 +436,7 @@ public class ActThrottle extends ActBase
     });
 
     LEDButton Release = (LEDButton) findViewById(R.id.throttleRelease);
+    Release.noLED();
     Release.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
@@ -451,6 +453,7 @@ public class ActThrottle extends ActBase
     
 
     LEDButton Dir = (LEDButton) findViewById(R.id.throttleDirection);
+    Dir.noLED();
     Dir.setLongClickable(true);
     Dir.setOnLongClickListener(this);
     Dir.setOnClickListener(new View.OnClickListener() {

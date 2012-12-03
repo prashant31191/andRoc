@@ -28,6 +28,7 @@ import android.widget.Button;
 
 public class LEDButton extends Button {
   public boolean ON = false;
+  public boolean LED = true;
 
   public LEDButton(Context context) {
     super(context);
@@ -36,15 +37,37 @@ public class LEDButton extends Button {
     super(context, attrs);
   }
   
+  public void noLED()
+  {
+    LED = false;
+  }
+  
   protected void  onDraw  (Canvas canvas) {
     super.onDraw(canvas);
-    if( ON ) {
+    
+    if(LED)
+    {
+  
       Paint paint = new Paint();
       paint.setAntiAlias(true);
-      paint.setColor(Color.GRAY);
+      paint.setColor(Color.rgb(50, 50, 50));
       canvas.drawCircle(15, 12, 6, paint);
-      paint.setColor(Color.YELLOW);
-      canvas.drawCircle(15, 12, 4, paint);
+          
+      if( ON ) {
+        paint.setColor(Color.rgb(240, 210, 100));
+        canvas.drawCircle(15, 12, 4, paint);
+        
+        paint.setColor(Color.rgb(255, 245, 0));
+        canvas.drawCircle(14, 11, 1, paint);
+      }
+      else
+      {
+        paint.setColor(Color.rgb(100, 100, 80));
+        canvas.drawCircle(15, 12, 4, paint);
+        
+        paint.setColor(Color.rgb(130, 130, 110));
+        canvas.drawCircle(14, 11, 1, paint);
+      }
     }
   }
 
