@@ -60,9 +60,17 @@ public class Track extends Item {
       ImageName = String.format("%s_%d", Type, orinr);
     } 
     else if( Type.equals("concurveright") ) {
+      if (orinr == 2)
+        orinr = 4;
+      else if (orinr == 4)
+        orinr = 2;
       ImageName = String.format("connector_curve_right_%d", orinr);
     } 
     else if( Type.equals("concurveleft") ) {
+      if (orinr == 2)
+        orinr = 4;
+      else if (orinr == 4)
+        orinr = 2;
       ImageName = String.format("connector_curve_left_%d", orinr);
     } 
     else if( Type.equals("dir") ) {
