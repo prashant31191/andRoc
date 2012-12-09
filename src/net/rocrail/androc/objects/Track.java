@@ -59,6 +59,12 @@ public class Track extends Item {
         orinr = 1;
       ImageName = String.format("%s_%d", Type, orinr);
     } 
+    else if( Type.equals("concurveright") ) {
+      ImageName = String.format("connector_curve_right_%d", orinr);
+    } 
+    else if( Type.equals("concurveleft") ) {
+      ImageName = String.format("connector_curve_left_%d", orinr);
+    } 
     else if( Type.equals("dir") ) {
       // symbol naming fix (see rocrail/impl/pclient.c line 250)
       if (orinr == 1)
