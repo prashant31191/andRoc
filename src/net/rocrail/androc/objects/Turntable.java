@@ -110,7 +110,8 @@ public class Turntable extends Item {
     }
 
     super.updateWithAttributes(atts);
-    imageView.post(new UpdateTT(this));
+    if( imageView != null )
+      imageView.post(new UpdateTT(this));
 
   }
 
@@ -364,7 +365,8 @@ class UpdateTT implements Runnable {
 
   @Override
   public void run() {
-    item.imageView.invalidate();
+    if( item.imageView != null )
+      item.imageView.invalidate();
   }
   
 }
