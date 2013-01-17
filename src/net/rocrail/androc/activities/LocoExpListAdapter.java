@@ -50,6 +50,8 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
           m_DieselList.add(loco);
         else if( loco.Engine.equals("electric"))
           m_ElectricList.add(loco);
+        else
+          m_SpecialList.add(loco);
       }
       
     }

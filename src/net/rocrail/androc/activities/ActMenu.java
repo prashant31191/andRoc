@@ -53,12 +53,13 @@ public class ActMenu extends  ListActivity implements ServiceListener {
 
 
   public void initView() {
-    m_Items = new String[5];
+    m_Items = new String[6];
     m_Items[0] = getText(R.string.Info).toString();
     m_Items[1] = getText(R.string.Routes).toString();
     m_Items[2] = getText(R.string.Actions).toString();
     m_Items[3] = getText(R.string.Switches).toString();
     m_Items[4] = getText(R.string.Outputs).toString();
+    m_Items[5] = getText(R.string.GuestLoco).toString();
       
     setListAdapter(new ArrayAdapter<String>(this, R.layout.menuitem, m_Items));
 
@@ -94,6 +95,12 @@ public class ActMenu extends  ListActivity implements ServiceListener {
           case 4: {
             Intent intent = new Intent(ActMenu.this,net.rocrail.androc.activities.ActOutputs.class);
             startActivity(intent);
+          }
+          break;
+          case 5: {
+            Intent intent = new Intent(ActMenu.this,net.rocrail.androc.activities.ActGuestLoco.class);
+            startActivity(intent);
+            finish();
           }
           break;
         }

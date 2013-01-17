@@ -163,6 +163,12 @@ public class Model {
           informListeners(ModelListener.MODELLIST_LC, lc.ID);
         }
       }
+      else {
+        Loco loco = new Loco(rocrailService, atts);
+        m_CurrentLC = loco;
+        m_LocoList.add(loco);
+        m_LocoMap.put(loco.ID, loco);
+      }
       return;
     }
     if( objName.equals("fn") ) {
