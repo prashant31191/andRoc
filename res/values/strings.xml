@@ -145,4 +145,7 @@
   <string name="Add">Add</string>
   <string name="Delete">Delete</string>
   <string name="GuestLoco">Guest Loco</string>
+  <string name="ShortID">Short ID</string>
+  <string name="Speedsteps">Speedsteps</string>
+  <string name="Protocol">Protocol</string>
 </resources>
