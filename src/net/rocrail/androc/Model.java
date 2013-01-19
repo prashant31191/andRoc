@@ -217,6 +217,11 @@ public class Model {
         Track tk = itTK.next();
         tk.update4Block(bk.ID, (bk.colorName == Block.COLOR_OCCUPIED));
       }
+      Iterator<Sensor> itFB = m_SensorMap.values().iterator();
+      while( itFB.hasNext() ) {
+        Sensor fb = itFB.next();
+        fb.update4Block(bk.ID, (bk.colorName == Block.COLOR_OCCUPIED));
+      }
       return;
     }
     if( objName.equals("sb") ) {

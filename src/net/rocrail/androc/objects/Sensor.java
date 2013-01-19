@@ -43,6 +43,12 @@ public class Sensor extends Item implements View.OnClickListener {
     }
   }
   
+  public void update4Block(String blockID, boolean occ) {
+    if( hasBlockID(blockID, occ) ) {
+      
+    }
+  }
+  
   public void updateWithAttributes(Attributes atts ) {
     Curve = Item.getAttrValue(atts, "curve", Curve );
     Shortcut = Item.getAttrValue(atts, "shortcut", false );
@@ -54,15 +60,28 @@ public class Sensor extends Item implements View.OnClickListener {
     int orinr = getOriNr(ModPlan);
     String prefix = "";
 
+    if( BlockID.length() > 0 ) {
+      Block bk = m_RocrailService.m_Model.m_BlockMap.get(BlockID);
+      if( bk != null)
+        Occupied = (bk.colorName == Block.COLOR_OCCUPIED);
+    }
+
+    String suffix = "";
+    if( Occupied )
+      suffix = "_occ";
+    if( RouteLocked )
+      suffix = "_route";
+    
+
     if (Curve)
       prefix = "c";
     else
       orinr = (orinr % 2 == 0) ? 2 : 1;
 
     if (State.equals("true")) {
-      ImageName = String.format("%ssensor%s_on_%d%s", prefix, (RouteLocked?"_route":""), orinr, Shortcut?"sc":"");
+      ImageName = String.format("%ssensor%s_on_%d%s", prefix, suffix, orinr, Shortcut?"sc":"");
     } else {
-      ImageName = String.format("%ssensor%s_off_%d%s", prefix, (RouteLocked?"_route":""), orinr, Shortcut?"sc":"");
+      ImageName = String.format("%ssensor%s_off_%d%s", prefix, suffix, orinr, Shortcut?"sc":"");
     }
 
     return ImageName;

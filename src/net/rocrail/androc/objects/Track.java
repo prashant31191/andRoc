@@ -97,10 +97,10 @@ public class Track extends Item {
         orinr = 3;
       else if (orinr == 3)
         orinr = 1;
-      ImageName = String.format("%s%s_%d", Type, (RouteLocked?"_route":""), orinr);
+      ImageName = String.format("%s%s_%d", Type, suffix, orinr);
     } 
     else if( Type.equals("dirall") ) {
-      ImageName = String.format("%s%s_%d", Type, (RouteLocked?"_route":""), (orinr % 2 == 0 ? 2 : 1));
+      ImageName = String.format("%s%s_%d", Type, suffix, (orinr % 2 == 0 ? 2 : 1));
     } 
     else {
       ImageName = String.format("track%s_%d", suffix, (orinr % 2 == 0 ? 2 : 1));
