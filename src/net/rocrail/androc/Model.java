@@ -212,6 +212,11 @@ public class Model {
       if( bk != null ) {
         bk.updateWithAttributes(atts);
       }
+      Iterator<Track> itTK = m_TrackMap.values().iterator();
+      while( itTK.hasNext() ) {
+        Track tk = itTK.next();
+        tk.update4Block(bk.ID, (bk.colorName == Block.COLOR_OCCUPIED));
+      }
       return;
     }
     if( objName.equals("sb") ) {

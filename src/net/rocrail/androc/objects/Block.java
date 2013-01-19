@@ -43,6 +43,7 @@ public class Block extends Item implements View.OnClickListener {
     Accept   = Item.getAttrValue(atts, "acceptident", false); 
     Text = LocoID;
     Background = true;
+    updateTextColor();
   }
   
   public void updateTextColor() {

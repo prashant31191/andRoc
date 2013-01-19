@@ -44,12 +44,30 @@ public class Track extends Item {
     }
   }
   
+  public void update4Block(String blockID, boolean occ) {
+    if( hasBlockID(blockID, occ) ) {
+      
+    }
+  }
+  
   public String getImageName(boolean ModPlan) {
     this.ModPlan = ModPlan;
     int orinr = getOriNr(ModPlan);
 
+    if( BlockID.length() > 0 ) {
+      Block bk = m_RocrailService.m_Model.m_BlockMap.get(BlockID);
+      if( bk != null)
+        Occupied = (bk.colorName == Block.COLOR_OCCUPIED);
+    }
+
+    String suffix = "";
+    if( Occupied )
+      suffix = "_occ";
+    if( RouteLocked )
+      suffix = "_route";
+    
     if (Type.equals("curve")) {
-      ImageName = String.format("curve%s_%d", (RouteLocked?"_route":""), orinr);
+      ImageName = String.format("curve%s_%d", suffix, orinr);
     } 
     else if (Type.equals("buffer") || Type.equals("connector") ) {
       // symbol naming fix (see rocrail/impl/pclient.c line 250)
@@ -85,7 +103,7 @@ public class Track extends Item {
       ImageName = String.format("%s%s_%d", Type, (RouteLocked?"_route":""), (orinr % 2 == 0 ? 2 : 1));
     } 
     else {
-      ImageName = String.format("track%s_%d", (RouteLocked?"_route":""), (orinr % 2 == 0 ? 2 : 1));
+      ImageName = String.format("track%s_%d", suffix, (orinr % 2 == 0 ? 2 : 1));
     }
 
     return ImageName;

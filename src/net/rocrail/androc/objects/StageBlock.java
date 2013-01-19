@@ -79,14 +79,16 @@ public class StageBlock extends Block {
     }
     else {
       int cnt = 0;
-      Iterator<SBSection> it = Sections.iterator();
-      while( it.hasNext() ) {
-        SBSection section = it.next();
-        if( section.LcID.length() > 0 )
-          cnt++;
+      if( Sections != null ) {
+        Iterator<SBSection> it = Sections.iterator();
+        while( it.hasNext() ) {
+          SBSection section = it.next();
+          if( section.LcID.length() > 0 )
+            cnt++;
+        }
+        Text = ID + "[" + cnt + "] " + (ExitState.equals("closed")?"<":"");
+        colorName = Item.COLOR_FREE;
       }
-      Text = ID + "[" + cnt + "] " + (ExitState.equals("closed")?"<":"");
-      colorName = Item.COLOR_FREE;
     }
   }
  

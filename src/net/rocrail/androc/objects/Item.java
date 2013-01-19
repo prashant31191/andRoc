@@ -59,6 +59,8 @@ public class Item implements View.OnClickListener, View.OnLongClickListener {
   public int colorName = 0;
   public String RouteIDs = "";
   public boolean RouteLocked = false;
+  public String BlockID = "";
+  public boolean Occupied = false;
   
   boolean Reserved = false;
   boolean Entering = false;
@@ -93,6 +95,7 @@ public class Item implements View.OnClickListener, View.OnLongClickListener {
     cY      = getAttrValue(atts, "cy", 1); 
     Show    = getAttrValue(atts, "show", true);
     RouteIDs= getAttrValue(atts, "routeids", ""); 
+    BlockID = getAttrValue(atts, "blockid", ""); 
     
     if( cX < 1 ) cX = 1;
     if( cY < 1 ) cY = 1;
@@ -181,7 +184,23 @@ public boolean hasRouteID(String routeid, boolean locked ) {
   return false;
 }
   
-  public int getOriNr(boolean ModPlan) {
+public boolean hasBlockID(String blockid, boolean occ ) {
+  if( BlockID.equals(blockid) ) {
+    Occupied = occ;
+    try {
+      if( imageView != null && imageView.isShown() ) {
+        imageView.post(new UpdateImage(this));
+      }
+    }
+    catch( Exception e ) {
+      // Probably not a valid ImageView...
+    }
+    return true;
+  }
+  return false;
+}
+  
+public int getOriNr(boolean ModPlan) {
     if( ModPlan ) {
       if(Mod_Ori.equals("north"))
         return 2;
