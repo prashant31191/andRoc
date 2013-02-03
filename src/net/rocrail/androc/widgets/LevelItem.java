@@ -108,11 +108,12 @@ public class LevelItem extends ImageView implements OnGestureListener {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(Color.BLACK);
-        double tsize = (20.0 * size) / 32;
+        double tsize = (14.0 * size) / 32;
         paint.setTextSize((float)tsize);
+        System.out.println("Text size = "+tsize);
         
         double tx = (6.0 * size) / 32;
-        double ty = (22.0 * size) / 32;
+        double ty = (20.0 * size) / 32;
         canvas.drawText(item.Text, (float)tx, (float)ty, paint);
       }
     }
@@ -145,7 +146,7 @@ public class LevelItem extends ImageView implements OnGestureListener {
     paint.setColor(Color.BLACK);
     paint.setAntiAlias(true);
     
-    double tsize = (20.0 * size) / 32;
+    double tsize = (14.0 * size) / 32;
     paint.setTextSize((float)tsize);
     
     canvas.rotate(90, (15*size)/32, (15*size)/32);
@@ -154,7 +155,7 @@ public class LevelItem extends ImageView implements OnGestureListener {
     
     //canvas.drawText(item.Text, 6, 22, paint);
     double tx = (6.0 * size) / 32;
-    double ty = (22.0 * size) / 32;
+    double ty = (20.0 * size) / 32;
     canvas.drawText(item.Text, (float)tx, (float)ty, paint);
 
     //undo the rotate
