@@ -46,6 +46,10 @@ public class Block extends Item implements View.OnClickListener {
     updateTextColor();
   }
   
+  public boolean isOccupied() {
+    return ((colorName == Block.COLOR_OCCUPIED) || (colorName == Block.COLOR_ENTER));
+  }
+  
   public void updateTextColor() {
     if( State.equals("closed") ) {
       Text = "Closed";

@@ -63,14 +63,14 @@ public class Sensor extends Item implements View.OnClickListener {
     if( BlockID.length() > 0 ) {
       Block bk = m_RocrailService.m_Model.m_BlockMap.get(BlockID);
       if( bk != null)
-        Occupied = (bk.colorName == Block.COLOR_OCCUPIED);
+        Occupied = bk.isOccupied();
     }
 
     String suffix = "";
-    if( Occupied )
-      suffix = "_occ";
     if( RouteLocked )
       suffix = "_route";
+    if( Occupied )
+      suffix = "_occ";
     
 
     if (Curve)

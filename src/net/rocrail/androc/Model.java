@@ -211,16 +211,18 @@ public class Model {
       Block bk = m_BlockMap.get(Item.getAttrValue(atts, "id", "?"));
       if( bk != null ) {
         bk.updateWithAttributes(atts);
-      }
-      Iterator<Track> itTK = m_TrackMap.values().iterator();
-      while( itTK.hasNext() ) {
-        Track tk = itTK.next();
-        tk.update4Block(bk.ID, (bk.colorName == Block.COLOR_OCCUPIED));
-      }
-      Iterator<Sensor> itFB = m_SensorMap.values().iterator();
-      while( itFB.hasNext() ) {
-        Sensor fb = itFB.next();
-        fb.update4Block(bk.ID, (bk.colorName == Block.COLOR_OCCUPIED));
+        boolean occ = bk.isOccupied();
+        System.out.println("block " + bk.ID + " color="+bk.colorName +", occ="+occ);
+        Iterator<Track> itTK = m_TrackMap.values().iterator();
+        while( itTK.hasNext() ) {
+          Track tk = itTK.next();
+          tk.update4Block(bk.ID, occ);
+        }
+        Iterator<Sensor> itFB = m_SensorMap.values().iterator();
+        while( itFB.hasNext() ) {
+          Sensor fb = itFB.next();
+          fb.update4Block(bk.ID, occ);
+        }
       }
       return;
     }
@@ -263,6 +265,7 @@ public class Model {
       if( st != null ) {
         st.updateWithAttributes(atts);
         boolean locked = Item.getAttrValue(atts, "status", 0) == 1;
+        System.out.println("route " + st.ID + " locked="+locked);
 
         Iterator<Track> itTK = m_TrackMap.values().iterator();
         while( itTK.hasNext() ) {

@@ -57,14 +57,14 @@ public class Track extends Item {
     if( BlockID.length() > 0 ) {
       Block bk = m_RocrailService.m_Model.m_BlockMap.get(BlockID);
       if( bk != null)
-        Occupied = (bk.colorName == Block.COLOR_OCCUPIED);
+        Occupied = bk.isOccupied();
     }
 
     String suffix = "";
-    if( Occupied )
-      suffix = "_occ";
     if( RouteLocked )
       suffix = "_route";
+    if( Occupied )
+      suffix = "_occ";
     
     if (Type.equals("curve")) {
       ImageName = String.format("curve%s_%d", suffix, orinr);
@@ -106,6 +106,7 @@ public class Track extends Item {
       ImageName = String.format("track%s_%d", suffix, (orinr % 2 == 0 ? 2 : 1));
     }
 
+    //System.out.println("ID="+ID+", ImageName="+ImageName);
     return ImageName;
   }
 

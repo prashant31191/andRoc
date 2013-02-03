@@ -171,6 +171,7 @@ public class Item implements View.OnClickListener, View.OnLongClickListener {
 public boolean hasRouteID(String routeid, boolean locked ) {
   if( RouteIDs.contains(routeid) ) {
     RouteLocked = locked;
+    System.out.println("item " + ID + " locked=" + locked + " for route " + routeid);
     try {
       if( imageView != null && imageView.isShown() ) {
         imageView.post(new UpdateImage(this));
@@ -187,9 +188,14 @@ public boolean hasRouteID(String routeid, boolean locked ) {
 public boolean hasBlockID(String blockid, boolean occ ) {
   if( BlockID.equals(blockid) ) {
     Occupied = occ;
+    System.out.println("item " + ID + " occ=" + occ + " for block " + blockid);
+    
     try {
       if( imageView != null && imageView.isShown() ) {
         imageView.post(new UpdateImage(this));
+      }
+      else {
+        System.out.println("item " + ID + " does not show");
       }
     }
     catch( Exception e ) {
