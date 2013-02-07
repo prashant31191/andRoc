@@ -58,6 +58,11 @@ public class Track extends Item {
       Block bk = m_RocrailService.m_Model.m_BlockMap.get(BlockID);
       if( bk != null)
         Occupied = bk.isOccupied();
+      else {
+        Sensor fb = m_RocrailService.m_Model.m_SensorMap.get(BlockID);
+        if( fb != null)
+          Occupied = fb.State.equals("true");
+      }
     }
 
     String suffix = "";

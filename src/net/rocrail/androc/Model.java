@@ -204,6 +204,11 @@ public class Model {
       Sensor fb = m_SensorMap.get(Item.getAttrValue(atts, "id", "?"));
       if( fb != null ) {
         fb.updateWithAttributes(atts);
+        Iterator<Track> itTK = m_TrackMap.values().iterator();
+        while( itTK.hasNext() ) {
+          Track tk = itTK.next();
+          tk.update4Block(fb.ID, fb.State.equals("true"));
+        }
       }
       return;
     }
