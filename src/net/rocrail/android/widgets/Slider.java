@@ -32,12 +32,18 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class Slider extends View {
+public class Slider extends View implements Runnable {
 
   boolean asButton = false;
   boolean Vertical = false;
   double V = 0.0;
   double Range = 100.0;
+  boolean isDown = false;
+  boolean isDownTrig = false;
+  boolean isMin = false;
+  boolean downHandled = false;
+  int sleep = 10;
+
   
   List<SliderListener> m_Listeners = new ArrayList<SliderListener>();
 
@@ -59,6 +65,7 @@ public class Slider extends View {
   public Slider(Context context, AttributeSet attrs) {
     super(context, attrs);
     Vertical = attrs.getAttributeBooleanValue(null, "vertical", false);
+    new Thread(this).start();
   }
 
   public void setButtonView(boolean asButton) {
@@ -105,7 +112,7 @@ public class Slider extends View {
       p.lineTo((float)xu*4, (float)yu);
       p.lineTo((float)(xu*2.5), (float)yu*9);
       p.lineTo((float)xu, (float)yu);
-      paint.setColor(Color.rgb(170,200,170));
+      paint.setColor(Color.rgb(170,(int)(180+((100-V)/3.3)),170));
       paint.setStyle(Paint.Style.FILL);
       canvas.drawPath( p, paint);
 
@@ -123,7 +130,7 @@ public class Slider extends View {
       p.lineTo((float)xu*9, (float)yu*9);
       p.lineTo((float)(xu*7.5), (float)yu);
       p.lineTo((float)xu*6, (float)yu*9);
-      paint.setColor(Color.rgb(200,170,170));
+      paint.setColor(Color.rgb((int)(180+V/3.3),170,170));
       paint.setStyle(Paint.Style.FILL);
       canvas.drawPath( p, paint);
 
@@ -214,22 +221,39 @@ public class Slider extends View {
     
   }
   
+  void adjustV() {
+    if( isMin ) {
+      if( V > 0 )
+        V--;
+    }
+    else {
+      if( V < 100 )
+        V++;
+    }
+  }
+  
   public boolean onTouchEvent (MotionEvent event) {
     if( asButton ) {
+      double cx = getWidth();
+      double xu = cx / 10.0;
+      double x = event.getX();
+
+      isDown = (event.getAction() == MotionEvent.ACTION_DOWN);
+      isMin = (x < xu*5);
+      
+      if( isDown && !isDownTrig ) {
+        isDownTrig = true;
+        sleep = 10;
+      }
+      
       if( event.getAction() == MotionEvent.ACTION_UP ) {
-        double cx = getWidth();
-        double xu = cx / 10.0;
-  
-        double x = event.getX();
+        if( downHandled )
+          downHandled = false;
+        else
+          adjustV();
         
-        if( x < xu*5 ) {
-          if( V > 0 )
-            V--;
-        }
-        else {
-          if( V < 100 )
-            V++;
-        }
+        isDownTrig = false;
+        sleep = 10;
       }
     }
     else if( Vertical ) {
@@ -254,6 +278,30 @@ public class Slider extends View {
     invalidate();
     informListeners();
     return true;
+  }
+
+  @Override
+  public void run() {
+    do {
+      try {Thread.sleep(sleep);} catch (InterruptedException e){}
+      if( sleep == 10 && isDown ) {
+        sleep = 1000;
+        continue;
+      }
+      if( isDown ) {
+        if( sleep > 500 ) {
+          sleep -= 100;
+        }
+        adjustV();
+        downHandled = true;
+        Slider.this.post(new Runnable() {
+          public void run() {
+            informListeners();
+            invalidate();
+          }
+        });
+      }
+    } while(true);
   }
 
 }
