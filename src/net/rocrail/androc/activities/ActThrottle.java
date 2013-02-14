@@ -604,6 +604,7 @@ public class ActThrottle extends ActBase
       Slider mSeekBar = (Slider)findViewById(R.id.Speed);
       mSeekBar.setRange(m_Loco.Vmax);
       mSeekBar.setV(m_Loco.Speed);
+      mSeekBar.setButtonView(m_RocrailService.Prefs.ButtonView);
 
       LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
       setDirSpeed(mDir);
@@ -617,6 +618,7 @@ public class ActThrottle extends ActBase
       image.setImageResource(R.drawable.noimg);
       Slider mSeekBar = (Slider)findViewById(R.id.Speed);
       mSeekBar.setRange(100);
+      mSeekBar.setButtonView(m_RocrailService.Prefs.ButtonView);
       mSeekBar.setV(0);
       LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
       mDir.setText(""+0);

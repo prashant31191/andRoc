@@ -148,4 +148,5 @@
   <string name="ShortID">Short ID</string>
   <string name="Speedsteps">Speedsteps</string>
   <string name="Protocol">Protocol</string>
+  <string name="ButtonView">Buttons for speed</string>
 </resources>

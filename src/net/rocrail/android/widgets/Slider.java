@@ -26,6 +26,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -33,6 +34,7 @@ import android.view.View;
 
 public class Slider extends View {
 
+  boolean asButton = false;
   boolean Vertical = false;
   double V = 0.0;
   double Range = 100.0;
@@ -59,6 +61,10 @@ public class Slider extends View {
     Vertical = attrs.getAttributeBooleanValue(null, "vertical", false);
   }
 
+  public void setButtonView(boolean asButton) {
+    this.asButton = asButton;
+  }
+
   public void setRange(float range) {
     Range = range;
   }
@@ -83,7 +89,47 @@ public class Slider extends View {
     paint.setAntiAlias(true);
     paint.setColor(Color.rgb(170,170,170));
     
-    if( Vertical ) {
+    if( asButton ) {
+      paint.setStrokeWidth(2);
+      Path p = new Path();
+      p.moveTo((float)xu, (float)yu);
+      p.lineTo((float)xu*4, (float)yu);
+      p.lineTo((float)(xu*2.5), (float)yu*9);
+      p.lineTo((float)xu, (float)yu);
+      paint.setColor(Color.rgb(200,200,200));
+      paint.setStyle(Paint.Style.STROKE);
+      canvas.drawPath( p, paint);
+      
+      p = new Path();
+      p.moveTo((float)xu, (float)yu);
+      p.lineTo((float)xu*4, (float)yu);
+      p.lineTo((float)(xu*2.5), (float)yu*9);
+      p.lineTo((float)xu, (float)yu);
+      paint.setColor(Color.rgb(170,200,170));
+      paint.setStyle(Paint.Style.FILL);
+      canvas.drawPath( p, paint);
+
+      p = new Path();
+      p.moveTo((float)xu*6, (float)yu*9);
+      p.lineTo((float)xu*9, (float)yu*9);
+      p.lineTo((float)(xu*7.5), (float)yu);
+      p.lineTo((float)xu*6, (float)yu*9);
+      paint.setColor(Color.rgb(200,200,200));
+      paint.setStyle(Paint.Style.STROKE);
+      canvas.drawPath( p, paint);
+
+      p = new Path();
+      p.moveTo((float)xu*6, (float)yu*9);
+      p.lineTo((float)xu*9, (float)yu*9);
+      p.lineTo((float)(xu*7.5), (float)yu);
+      p.lineTo((float)xu*6, (float)yu*9);
+      paint.setColor(Color.rgb(200,170,170));
+      paint.setStyle(Paint.Style.FILL);
+      canvas.drawPath( p, paint);
+
+
+    }
+    else if( Vertical ) {
       RectF rect = new RectF();
       double x1 = 4.5 * xu;
       double y1 = .75 * yu;
@@ -169,7 +215,24 @@ public class Slider extends View {
   }
   
   public boolean onTouchEvent (MotionEvent event) {
-    if( Vertical ) {
+    if( asButton ) {
+      if( event.getAction() == MotionEvent.ACTION_UP ) {
+        double cx = getWidth();
+        double xu = cx / 10.0;
+  
+        double x = event.getX();
+        
+        if( x < xu*5 ) {
+          if( V > 0 )
+            V--;
+        }
+        else {
+          if( V < 100 )
+            V++;
+        }
+      }
+    }
+    else if( Vertical ) {
       double cy = getHeight();
       double yu = cy / 10.0;
       

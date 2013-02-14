@@ -56,6 +56,7 @@ public class Preferences {
   public static final String PREFS_USEALLSPEEDSTEPS = "useallspeedsteps";
   public static final String PREFS_SYNCSPEED = "syncspeed";
   public static final String PREFS_ZOOM = "zoom";
+  public static final String PREFS_BUTTONVIEW = "buttonview";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -78,6 +79,7 @@ public class Preferences {
   public boolean UseAllSpeedSteps = false;
   public boolean SyncSpeed = true;
   public boolean Zoom        = true;
+  public boolean ButtonView  = false;
   public String  LocoID       = "";
   public String  LocoID2      = "";
   public String  LocoID3      = "";
@@ -135,6 +137,7 @@ public class Preferences {
     SortByAddr    = settings.getBoolean(PREFS_SORTBYADDR, SortByAddr);
     LocoCatList   = settings.getBoolean(PREFS_LOCOCATLIST, LocoCatList);
     Color         = settings.getInt(PREFS_COLOR, Color);
+    ButtonView    = settings.getBoolean(PREFS_BUTTONVIEW, ButtonView);
     
     conList = RRConnection.parse(Recent);
 
@@ -214,6 +217,7 @@ public class Preferences {
     editor.putBoolean(PREFS_SYNCSPEED, SyncSpeed);
     editor.putBoolean(PREFS_ZOOM, Zoom);
     editor.putInt(PREFS_COLOR, Color);
+    editor.putBoolean(PREFS_BUTTONVIEW, ButtonView);
     editor.commit();
   }
   
