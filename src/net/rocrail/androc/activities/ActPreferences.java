@@ -88,6 +88,8 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     et = (EditText)findViewById(R.id.prefR2RPort);
     et.setText(""+m_RocrailService.Prefs.RRPort);
     
+    et = (EditText)findViewById(R.id.prefVDelta);
+    et.setText(""+m_RocrailService.Prefs.VDelta);
     
     
     Spinner color = (Spinner) findViewById(R.id.BackgroundColor);
@@ -140,6 +142,9 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     m_RocrailService.Prefs.RRHost = et.getText().toString();
     et = (EditText)findViewById(R.id.prefR2RPort);
     m_RocrailService.Prefs.RRPort = Integer.parseInt(et.getText().toString());
+    
+    et = (EditText)findViewById(R.id.prefVDelta);
+    m_RocrailService.Prefs.VDelta = Integer.parseInt(et.getText().toString());
     
     Spinner color = (Spinner) findViewById(R.id.BackgroundColor);
     if(m_RocrailService.Prefs.Color != color.getSelectedItemPosition()) {

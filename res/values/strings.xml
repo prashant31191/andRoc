@@ -149,4 +149,5 @@
   <string name="Speedsteps">Speedsteps</string>
   <string name="Protocol">Protocol</string>
   <string name="ButtonView">Buttons for speed</string>
+  <string name="VDelta">Step increment</string>
 </resources>

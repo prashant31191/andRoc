@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-18 07:10+0100\n"
+"POT-Creation-Date: 2013-02-15 07:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -519,6 +519,14 @@ msgstr ""
 
 #: res/values/strings.xml:150(string) 
 msgid "Protocol"
+msgstr ""
+
+#: res/values/strings.xml:151(string) 
+msgid "Buttons for speed"
+msgstr ""
+
+#: res/values/strings.xml:152(string) 
+msgid "Step increment"
 msgstr ""
 
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.

@@ -57,6 +57,7 @@ public class Preferences {
   public static final String PREFS_SYNCSPEED = "syncspeed";
   public static final String PREFS_ZOOM = "zoom";
   public static final String PREFS_BUTTONVIEW = "buttonview";
+  public static final String PREFS_VDELTA = "vdelta";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -94,6 +95,7 @@ public class Preferences {
   boolean Initialized = false;
   public int     Size         = 32;
   public int     Color        = 0;
+  public int     VDelta       = 5;
   
   public List<RRConnection> conList = null; 
 
@@ -138,6 +140,7 @@ public class Preferences {
     LocoCatList   = settings.getBoolean(PREFS_LOCOCATLIST, LocoCatList);
     Color         = settings.getInt(PREFS_COLOR, Color);
     ButtonView    = settings.getBoolean(PREFS_BUTTONVIEW, ButtonView);
+    VDelta        = settings.getInt(PREFS_VDELTA, VDelta);
     
     conList = RRConnection.parse(Recent);
 
@@ -218,6 +221,7 @@ public class Preferences {
     editor.putBoolean(PREFS_ZOOM, Zoom);
     editor.putInt(PREFS_COLOR, Color);
     editor.putBoolean(PREFS_BUTTONVIEW, ButtonView);
+    editor.putInt(PREFS_VDELTA, VDelta);
     editor.commit();
   }
   

@@ -22,6 +22,8 @@ package net.rocrail.android.widgets;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.rocrail.androc.objects.Loco;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -42,7 +44,8 @@ public class Slider extends View implements Runnable {
   boolean isDownTrig = false;
   boolean isMin = false;
   boolean downHandled = false;
-  int sleep = 10;
+  int sleep = 1000;
+  int VDelta = 1;
 
   
   List<SliderListener> m_Listeners = new ArrayList<SliderListener>();
@@ -74,6 +77,10 @@ public class Slider extends View implements Runnable {
 
   public void setRange(float range) {
     Range = range;
+  }
+
+  public void setDelta(int delta) {
+    VDelta = delta;
   }
 
   public void setV(int v) {
@@ -224,11 +231,15 @@ public class Slider extends View implements Runnable {
   void adjustV() {
     if( isMin ) {
       if( V > 0 )
-        V--;
+        V -= VDelta;
+      if( V < 0 )
+        V = 0;
     }
     else {
       if( V < 100 )
-        V++;
+        V += VDelta;
+      if( V > 100 )
+        V = 100;
     }
   }
   
@@ -243,7 +254,7 @@ public class Slider extends View implements Runnable {
       
       if( isDown && !isDownTrig ) {
         isDownTrig = true;
-        sleep = 10;
+        sleep = 100;
       }
       
       if( event.getAction() == MotionEvent.ACTION_UP ) {
@@ -253,7 +264,7 @@ public class Slider extends View implements Runnable {
           adjustV();
         
         isDownTrig = false;
-        sleep = 10;
+        sleep = 100;
       }
     }
     else if( Vertical ) {
@@ -284,7 +295,7 @@ public class Slider extends View implements Runnable {
   public void run() {
     do {
       try {Thread.sleep(sleep);} catch (InterruptedException e){}
-      if( sleep == 10 && isDown ) {
+      if( sleep == 100 && isDown ) {
         sleep = 1000;
         continue;
       }
