@@ -22,8 +22,6 @@ package net.rocrail.android.widgets;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.rocrail.androc.objects.Loco;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -249,7 +247,8 @@ public class Slider extends View implements Runnable {
       double xu = cx / 10.0;
       double x = event.getX();
 
-      isDown = (event.getAction() == MotionEvent.ACTION_DOWN);
+      if( event.getAction() == MotionEvent.ACTION_DOWN)
+        isDown = true;
       isMin = (x < xu*5);
       
       if( isDown && !isDownTrig ) {
@@ -258,6 +257,7 @@ public class Slider extends View implements Runnable {
       }
       
       if( event.getAction() == MotionEvent.ACTION_UP ) {
+        isDown = false;
         if( downHandled )
           downHandled = false;
         else
