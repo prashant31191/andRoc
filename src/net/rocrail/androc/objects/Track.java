@@ -21,6 +21,7 @@ package net.rocrail.androc.objects;
 
 
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.interfaces.UpdateListener;
 
 import org.xml.sax.Attributes;
 
@@ -36,18 +37,6 @@ public class Track extends Item {
   
   public void updateWithAttributes(Attributes atts ) {
     super.updateWithAttributes(atts);
-  }
-  
-  public void update4Route(String routeID, boolean locked) {
-    if( hasRouteID(routeID, locked) ) {
-      
-    }
-  }
-  
-  public void update4Block(String blockID, boolean occ) {
-    if( hasBlockID(blockID, occ) ) {
-      
-    }
   }
   
   public String getImageName(boolean ModPlan) {
@@ -80,21 +69,21 @@ public class Track extends Item {
         orinr = 3;
       else if (orinr == 3)
         orinr = 1;
-      ImageName = String.format("%s_%d", Type, orinr);
+      ImageName = String.format("%s%s_%d", Type, suffix, orinr);
     } 
     else if( Type.equals("concurveright") ) {
       if (orinr == 2)
         orinr = 4;
       else if (orinr == 4)
         orinr = 2;
-      ImageName = String.format("connector_curve_right_%d", orinr);
+      ImageName = String.format("connector_curve_right%s_%d", suffix, orinr);
     } 
     else if( Type.equals("concurveleft") ) {
       if (orinr == 2)
         orinr = 4;
       else if (orinr == 4)
         orinr = 2;
-      ImageName = String.format("connector_curve_left_%d", orinr);
+      ImageName = String.format("connector_curve_left%s_%d", suffix, orinr);
     } 
     else if( Type.equals("dir") ) {
       // symbol naming fix (see rocrail/impl/pclient.c line 250)

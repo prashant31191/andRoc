@@ -21,6 +21,7 @@ package net.rocrail.androc.objects;
 
 
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.interfaces.UpdateListener;
 
 import org.xml.sax.Attributes;
 
@@ -60,34 +61,51 @@ public class Signal extends Item implements View.OnClickListener {
     if(Aspects > 3)
       Aspects = 3;
 
+    if( BlockID.length() > 0 ) {
+      Block bk = m_RocrailService.m_Model.m_BlockMap.get(BlockID);
+      if( bk != null)
+        Occupied = bk.isOccupied();
+      else {
+        Sensor fb = m_RocrailService.m_Model.m_SensorMap.get(BlockID);
+        if( fb != null)
+          Occupied = fb.State.equals("true");
+      }
+    }
+
+    String suffix = "";
+    if( RouteLocked )
+      suffix = "_route";
+    if( Occupied )
+      suffix = "_occ";
+    
     Distant  = Signal.equals("distant");
     Shunting = Signal.equals("shunting");
 
     if(Distant) {
       if (State.equals("red"))
-        ImageName = String.format("signaldistant_r_%d", orinr);
+        ImageName = String.format("signaldistant_r%s_%d", suffix, orinr);
       else if (State.equals("green"))
-        ImageName = String.format("signaldistant_g_%d", orinr);
+        ImageName = String.format("signaldistant_g%s_%d", suffix, orinr);
       else if (State.equals("yellow"))
-        ImageName = String.format("signaldistant_y_%d", orinr);
+        ImageName = String.format("signaldistant_y%s_%d", suffix, orinr);
       else
-        ImageName = String.format("signaldistant_w_%d", orinr);
+        ImageName = String.format("signaldistant_w%s_%d", suffix, orinr);
     }
     else if(Shunting) {
       if (State.equals("red"))
-        ImageName = String.format("signalshunting_r_%d", orinr);
+        ImageName = String.format("signalshunting_r%s_%d", suffix, orinr);
       else
-        ImageName = String.format("signalshunting_w_%d", orinr);
+        ImageName = String.format("signalshunting_w%s_%d", suffix, orinr);
     }
     else {
       if (State.equals("red"))
-        ImageName = String.format("signal%d_r_%d", Aspects, orinr);
+        ImageName = String.format("signal%d_r%s_%d", Aspects, suffix, orinr);
       else if (State.equals("green"))
-        ImageName = String.format("signal%d_g_%d", Aspects, orinr);
+        ImageName = String.format("signal%d_g%s_%d", Aspects, suffix, orinr);
       else if (State.equals("yellow"))
-        ImageName = String.format("signal%d_y_%d", Aspects, orinr);
+        ImageName = String.format("signal%d_y%s_%d", Aspects, suffix, orinr);
       else
-        ImageName = String.format("signal%d_w_%d", Aspects, orinr);
+        ImageName = String.format("signal%d_w%s_%d", Aspects, suffix, orinr);
     }
     
     return ImageName;
@@ -96,4 +114,5 @@ public class Signal extends Item implements View.OnClickListener {
   public void onClick(View v) {
     m_RocrailService.sendMessage("sg", String.format( "<sg id=\"%s\" cmd=\"flip\"/>", ID ) );
   }
+
 }

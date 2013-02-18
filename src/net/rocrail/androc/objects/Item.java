@@ -21,6 +21,7 @@ package net.rocrail.androc.objects;
 
 
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.interfaces.UpdateListener;
 import net.rocrail.androc.widgets.LevelItem;
 
 import org.xml.sax.Attributes;
@@ -32,7 +33,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.View;
 
-public class Item implements View.OnClickListener, View.OnLongClickListener {
+public class Item implements View.OnClickListener, View.OnLongClickListener, UpdateListener {
   RocrailService m_RocrailService = null;
 
   public Attributes Properties = null;
@@ -168,43 +169,45 @@ public class Item implements View.OnClickListener, View.OnLongClickListener {
   }
 
 
-public boolean hasRouteID(String routeid, boolean locked ) {
-  if( RouteIDs.contains(routeid) ) {
-    RouteLocked = locked;
-    System.out.println("item " + ID + " locked=" + locked + " for route " + routeid);
-    try {
-      if( imageView != null && imageView.isShown() ) {
-        imageView.post(new UpdateImage(this));
+  @Override
+  public boolean update4Route(String routeid, boolean locked ) {
+    if( RouteIDs.contains(routeid) ) {
+      RouteLocked = locked;
+      System.out.println("item " + ID + " locked=" + locked + " for route " + routeid);
+      try {
+        if( imageView != null && imageView.isShown() ) {
+          imageView.post(new UpdateImage(this));
+        }
       }
+      catch( Exception e ) {
+        // Probably not a valid ImageView...
+      }
+      return true;
     }
-    catch( Exception e ) {
-      // Probably not a valid ImageView...
-    }
-    return true;
+    return false;
   }
-  return false;
-}
   
-public boolean hasBlockID(String blockid, boolean occ ) {
-  if( BlockID.equals(blockid) ) {
-    Occupied = occ;
-    System.out.println("item " + ID + " occ=" + occ + " for block " + blockid);
-    
-    try {
-      if( imageView != null && imageView.isShown() ) {
-        imageView.post(new UpdateImage(this));
+  @Override
+  public boolean update4Block(String blockid, boolean occ ) {
+    if( BlockID.equals(blockid) ) {
+      Occupied = occ;
+      System.out.println("item " + ID + " occ=" + occ + " for block " + blockid);
+      
+      try {
+        if( imageView != null && imageView.isShown() ) {
+          imageView.post(new UpdateImage(this));
+        }
+        else {
+          System.out.println("item " + ID + " does not show");
+        }
       }
-      else {
-        System.out.println("item " + ID + " does not show");
+      catch( Exception e ) {
+        // Probably not a valid ImageView...
       }
+      return true;
     }
-    catch( Exception e ) {
-      // Probably not a valid ImageView...
-    }
-    return true;
+    return false;
   }
-  return false;
-}
   
 public int getOriNr(boolean ModPlan) {
     if( ModPlan ) {

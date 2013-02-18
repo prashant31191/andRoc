@@ -21,6 +21,7 @@ package net.rocrail.androc.objects;
 
 import net.rocrail.androc.R;
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.interfaces.UpdateListener;
 
 import org.xml.sax.Attributes;
 
@@ -68,6 +69,21 @@ public class Switch extends Item implements View.OnClickListener {
     else if (orinr == 3)
       orinr = 1;
     
+    if( BlockID.length() > 0 ) {
+      Block bk = m_RocrailService.m_Model.m_BlockMap.get(BlockID);
+      if( bk != null)
+        Occupied = bk.isOccupied();
+      else {
+        Sensor fb = m_RocrailService.m_Model.m_SensorMap.get(BlockID);
+        if( fb != null)
+          Occupied = fb.State.equals("true");
+      }
+    }
+
+    String suffix = "";
+    if( Occupied )
+      suffix = "_occ";
+    
     if (Type.equals("accessory")) {
       if (getOriNr(ModPlan) % 2 == 0)
         orinr = 2;
@@ -92,32 +108,32 @@ public class Switch extends Item implements View.OnClickListener {
     }
     else if (Type.equals("right")) {
       if (State.equals("straight"))
-        ImageName = String.format("turnout%s_rs_%d", rasterStr, orinr);
+        ImageName = String.format("turnout%s_rs%s_%d", rasterStr, suffix, orinr);
       else
-        ImageName = String.format("turnout%s_rt_%d", rasterStr, orinr);
+        ImageName = String.format("turnout%s_rt%s_%d", rasterStr, suffix, orinr);
 
     }
     else if (Type.equals("left")) {
       if (State.equals("straight"))
-        ImageName = String.format("turnout%s_ls_%d", rasterStr, orinr);
+        ImageName = String.format("turnout%s_ls%s_%d", rasterStr, suffix, orinr);
       else
-        ImageName = String.format("turnout%s_lt_%d", rasterStr, orinr);
+        ImageName = String.format("turnout%s_lt%s_%d", rasterStr, suffix, orinr);
 
     }
     else if (Type.equals("threeway")) {
       if (State.equals("straight"))
-        ImageName = String.format("threeway_s_%d", orinr);
+        ImageName = String.format("threeway_s%s_%d", suffix, orinr);
       else if (State.equals("left"))
-        ImageName = String.format("threeway_l_%d", orinr);
+        ImageName = String.format("threeway_l%s_%d", suffix, orinr);
       else
-        ImageName = String.format("threeway_r_%d", orinr);
+        ImageName = String.format("threeway_r%s_%d", suffix, orinr);
 
     }
     else if (Type.equals("twoway")) {
       if (State.equals("straight"))
-        ImageName = String.format("twoway_tr_%d", orinr);
+        ImageName = String.format("twoway_tr%s_%d", suffix, orinr);
       else
-        ImageName = String.format("twoway_tl_%d", orinr);
+        ImageName = String.format("twoway_tl%s_%d", suffix, orinr);
 
     }
     else if (Type.equals("dcrossing")) {
@@ -132,8 +148,7 @@ public class Switch extends Item implements View.OnClickListener {
       else if (State.equals("right"))
         st = 'r';
 
-      ImageName = String.format("dcrossing%s_%c_%d", (Dir ? "left" : "right"),
-          st, orinr);
+      ImageName = String.format("dcrossing%s_%c%s_%d", (Dir ? "left" : "right"), st, suffix, orinr);
 
       cX = orinr % 2 == 0 ? 1 : 2;
       cY = orinr % 2 == 0 ? 2 : 1;
@@ -150,24 +165,25 @@ public class Switch extends Item implements View.OnClickListener {
 		    else if (State.equals("turnout"))
 		      st = 't';
 
-		    ImageName = String.format("crossing%s_%c_%d", (Dir ? "left" : "right"),
-		        st, orinr);
+		    ImageName = String.format("crossing%s_%c%s_%d", (Dir ? "left" : "right"), st, suffix, orinr);
 
 		    cX = orinr % 2 == 0 ? 1 : 2;
 		    cY = orinr % 2 == 0 ? 2 : 1;
       }
     }
     else if (Type.equals("ccrossing")) {
-      ImageName = String.format("ccrossing_%d", (orinr % 2 == 0 ? 2 : 1));
+      ImageName = String.format("ccrossing%s_%d", suffix, (orinr % 2 == 0 ? 2 : 1));
       cX = orinr % 2 == 0 ? 1 : 2;
       cY = orinr % 2 == 0 ? 2 : 1;
     }
     else if (Type.equals("decoupler")) {
       String st = "off";
+      if( suffix.length() == 0 && RouteLocked )
+        suffix = "_route";
 
       if (State.equals("straight"))
         st = "on";
-      ImageName = String.format("decoupler_%s_%d", st, (orinr % 2 == 0 ? 2 : 1));
+      ImageName = String.format("decoupler_%s%s_%d", st, suffix, (orinr % 2 == 0 ? 2 : 1));
     }
 
     System.out.println("switch type=" + Type + " img="+ImageName);

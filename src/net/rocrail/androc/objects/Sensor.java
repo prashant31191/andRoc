@@ -21,6 +21,7 @@ package net.rocrail.androc.objects;
 
 
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.interfaces.UpdateListener;
 
 import org.xml.sax.Attributes;
 
@@ -35,18 +36,6 @@ public class Sensor extends Item implements View.OnClickListener {
     super(rocrailService, atts);
     Curve = Item.getAttrValue(atts, "curve", false );
     Shortcut = Item.getAttrValue(atts, "shortcut", false );
-  }
-  
-  public void update4Route(String routeID, boolean locked) {
-    if( hasRouteID(routeID, locked) ) {
-      
-    }
-  }
-  
-  public void update4Block(String blockID, boolean occ) {
-    if( hasBlockID(blockID, occ) ) {
-      
-    }
   }
   
   public void updateWithAttributes(Attributes atts ) {

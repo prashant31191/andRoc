@@ -204,10 +204,10 @@ public class Model {
       Sensor fb = m_SensorMap.get(Item.getAttrValue(atts, "id", "?"));
       if( fb != null ) {
         fb.updateWithAttributes(atts);
-        Iterator<Track> itTK = m_TrackMap.values().iterator();
-        while( itTK.hasNext() ) {
-          Track tk = itTK.next();
-          tk.update4Block(fb.ID, fb.State.equals("true"));
+        Iterator<Item> itItem = m_ItemList.iterator();
+        while( itItem.hasNext() ) {
+          Item item = itItem.next();
+          item.update4Block(fb.ID, fb.State.equals("true"));
         }
       }
       return;
@@ -218,15 +218,10 @@ public class Model {
         bk.updateWithAttributes(atts);
         boolean occ = bk.isOccupied();
         System.out.println("block " + bk.ID + " color="+bk.colorName +", occ="+occ);
-        Iterator<Track> itTK = m_TrackMap.values().iterator();
-        while( itTK.hasNext() ) {
-          Track tk = itTK.next();
-          tk.update4Block(bk.ID, occ);
-        }
-        Iterator<Sensor> itFB = m_SensorMap.values().iterator();
-        while( itFB.hasNext() ) {
-          Sensor fb = itFB.next();
-          fb.update4Block(bk.ID, occ);
+        Iterator<Item> itItem = m_ItemList.iterator();
+        while( itItem.hasNext() ) {
+          Item item = itItem.next();
+          item.update4Block(bk.ID, occ);
         }
       }
       return;
@@ -272,15 +267,10 @@ public class Model {
         boolean locked = Item.getAttrValue(atts, "status", 0) == 1;
         System.out.println("route " + st.ID + " locked="+locked);
 
-        Iterator<Track> itTK = m_TrackMap.values().iterator();
-        while( itTK.hasNext() ) {
-          Track tk = itTK.next();
-          tk.update4Route(st.ID, locked);
-        }
-        Iterator<Sensor> itFB = m_SensorMap.values().iterator();
-        while( itFB.hasNext() ) {
-          Sensor fb = itFB.next();
-          fb.update4Route(st.ID, locked);
+        Iterator<Item> itItem = m_ItemList.iterator();
+        while( itItem.hasNext() ) {
+          Item item = itItem.next();
+          item.update4Route(st.ID, locked);
         }
 
       }
