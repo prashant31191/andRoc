@@ -40,10 +40,8 @@ import android.graphics.BitmapFactory;
 
 public class Loco extends MobileImpl implements Runnable {
   public String  Mode    = "";
-  public String  Consist = "";
   public String  Engine  = "";
   public String  Cargo   = "";
-  private Bitmap LocoBmp = null;
   public int     Steps   = 0;
   public long    RunTime = 0;
   public int     Vmax    = 0;
@@ -254,18 +252,6 @@ public class Loco extends MobileImpl implements Runnable {
   @Override
   public boolean isAutoStart() {
     return AutoStart;
-  }
-
-
-  @Override
-  public String getConsist() {
-    return Consist;
-  }
-
-
-  @Override
-  public String getDescription() {
-    return Description;
   }
 
 

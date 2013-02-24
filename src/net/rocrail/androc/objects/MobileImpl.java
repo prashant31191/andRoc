@@ -24,6 +24,7 @@ public abstract class MobileImpl implements Mobile {
   protected String  ID      = "?";
   protected String  Description = "";
   protected String  Roadname = "";
+  public String  Consist = "";
   protected String  PicName = null;
   protected int     Addr    = 0;
   protected int     Speed   = 0;
@@ -37,6 +38,17 @@ public abstract class MobileImpl implements Mobile {
   protected boolean   Placing   = true;
   protected boolean   Show      = true;
   protected boolean   Lights    = false;
+
+  @Override
+  public String getDescription() {
+    return Description;
+  }
+
+
+  @Override
+  public String getConsist() {
+    return Consist;
+  }
 
   @Override
   public boolean isFunction(int fn) {

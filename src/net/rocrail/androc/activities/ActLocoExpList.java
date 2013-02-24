@@ -16,8 +16,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 
 
 public class ActLocoExpList extends ActBase {
-  List<Mobile> m_LocoList = new ArrayList<Mobile>();
-  List<Mobile> m_CarList = new ArrayList<Mobile>();
+  List<Mobile> m_MobileList = new ArrayList<Mobile>();
   LocoExpListAdapter m_Adapter = null;
   ExpandableListView m_ListView = null;
 
@@ -46,17 +45,18 @@ public class ActLocoExpList extends ActBase {
     while( it.hasNext() ) {
       Mobile loco = it.next();
       if(loco.isShow())
-        m_LocoList.add(loco);
+        m_MobileList.add(loco);
     }
     
-    Collections.sort(m_LocoList, new LocoSort(m_RocrailService.Prefs.SortByAddr));
-
     it = m_RocrailService.m_Model.m_CarMap.values().iterator();
     while( it.hasNext() ) {
       Mobile car = it.next();
       if(car.isShow())
-        m_CarList.add(car);
+        m_MobileList.add(car);
     }
+
+    Collections.sort(m_MobileList, new LocoSort(m_RocrailService.Prefs.SortByAddr));
+
 
     m_ListView.setOnChildClickListener(new OnChildClickListener() 
     {
@@ -73,10 +73,7 @@ public class ActLocoExpList extends ActBase {
       
     });
 
-    List<Mobile> list = new ArrayList<Mobile>();
-    list.addAll(m_LocoList);
-    list.addAll(m_CarList);
-    m_Adapter = new LocoExpListAdapter(this, list);
+    m_Adapter = new LocoExpListAdapter(this, m_MobileList);
     m_ListView.setAdapter(m_Adapter);
 
     setResult(-1);

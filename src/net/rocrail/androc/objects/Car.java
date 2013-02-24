@@ -80,19 +80,6 @@ public class Car extends MobileImpl implements Runnable {
   }
 
   @Override
-  public String getConsist() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-
-  @Override
-  public String getDescription() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
   public int getVMax() {
     // TODO Auto-generated method stub
     return 0;
