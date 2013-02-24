@@ -28,6 +28,13 @@ public abstract class MobileImpl implements Mobile {
   protected String  PicName = null;
   protected int     Addr    = 0;
   protected int     Speed   = 0;
+  protected int     Vprev   = 0;
+  public int     Steps   = 0;
+  public long    RunTime = 0;
+  public int     Vmax    = 0;
+  public int     Vmid    = 0;
+  public int     Vmin    = 0;
+  public String  Vmode   = "";
   protected Bitmap LocoBmp = null;
   protected boolean   ImageRequested = false;
   protected  LocoImage imageView      = null;
@@ -39,6 +46,52 @@ public abstract class MobileImpl implements Mobile {
   protected boolean   Show      = true;
   protected boolean   Lights    = false;
 
+  
+  @Override
+  public boolean isPlacing() {
+    return Placing;
+  }
+
+
+  @Override
+  public void setPlacing(boolean placing) {
+    Placing = placing;
+  }
+
+  @Override
+  public long getRunTime() {
+    return RunTime;
+  }
+
+
+  @Override
+  public int getSteps() {
+    return Steps;
+  }
+
+  public void setSpeed(int V, boolean force) {
+    if( force || V == Vmax || V == 0 || StrictMath.abs( Vprev - V) >= this.rocrailService.Prefs.VDelta || Steps < 50 ) {
+      Speed = V;
+      System.out.println("set Speed="+Speed);
+      setSpeed(false);
+    }
+  }
+
+  public void setSpeed(boolean force) {
+    if(force || Vprev != Speed) {
+      Vprev = Speed;
+      rocrailService.sendMessage("lc", 
+          String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
+              rocrailService.getDeviceName(), ID, Speed, (Dir?"true":"false"), (Lights?"true":"false") ) );
+    }
+  }
+  
+  public void flipDir() {
+    Dir = !Dir;
+    Speed = 0;
+    setSpeed(true);
+  }
+  
   @Override
   public String getDescription() {
     return Description;

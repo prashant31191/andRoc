@@ -281,5 +281,11 @@ public class ActConnect extends ActBase implements ModelListener, SystemListener
     
   }
 
+  @Override
+  protected void onStop() {
+    super.onPause();
+    if( RocrailServiceConnection != null)
+      unbindService(RocrailServiceConnection);
+  }
 }
 

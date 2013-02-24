@@ -36,6 +36,7 @@ import net.rocrail.android.widgets.Slider;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -311,6 +312,8 @@ public class ActThrottle extends ActBase
     }    
     
     m_Loco = m_RocrailService.m_Model.m_LocoMap.get(LocoID);
+    if( m_Loco == null )
+      m_Loco = m_RocrailService.m_Model.m_CarMap.get(LocoID);
     locoSelected();
 
     Slider mSeekBar = (Slider)findViewById(R.id.Speed);
@@ -778,7 +781,12 @@ public class ActThrottle extends ActBase
     return false;
   }
   
-
+  @Override
+  protected void onStop() {
+    super.onPause();
+    if( RocrailServiceConnection != null)
+      unbindService(RocrailServiceConnection);
+  }
 }
 
 

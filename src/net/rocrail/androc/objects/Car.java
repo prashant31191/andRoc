@@ -19,18 +19,9 @@
 */
 package net.rocrail.androc.objects;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
+import net.rocrail.androc.RocrailService;
 
 import org.xml.sax.Attributes;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import net.rocrail.androc.RocrailService;
-import net.rocrail.androc.interfaces.Mobile;
-import net.rocrail.androc.widgets.LocoImage;
 
 public class Car extends MobileImpl implements Runnable {
   
@@ -57,100 +48,45 @@ public class Car extends MobileImpl implements Runnable {
   
   @Override
   public boolean isAutoStart() {
-    // TODO Auto-generated method stub
     return false;
   }
 
   @Override
   public void flipGo() {
-    // TODO Auto-generated method stub
-    
   }
 
   @Override
   public void doRelease() {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void flipDir() {
-    // TODO Auto-generated method stub
-    
   }
 
   @Override
   public int getVMax() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  @Override
-  public void setSpeed(int V, boolean force) {
-    // TODO Auto-generated method stub
-    
+    return 100;
   }
 
   @Override
   public void Dispatch() {
-    // TODO Auto-generated method stub
-    
-  }
-
-
-  @Override
-  public long getRunTime() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-
-  @Override
-  public int getSteps() {
-    // TODO Auto-generated method stub
-    return 0;
   }
 
 
   @Override
   public boolean isHalfAuto() {
-    // TODO Auto-generated method stub
     return false;
   }
 
 
   @Override
   public void setAutoStart(boolean autostart) {
-    // TODO Auto-generated method stub
-    
   }
 
 
   @Override
   public void setHalfAuto(boolean halfauto) {
-    // TODO Auto-generated method stub
-    
-  }
-
-
-  @Override
-  public boolean isPlacing() {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-
-  @Override
-  public void setPlacing(boolean placing) {
-    // TODO Auto-generated method stub
-    
   }
 
 
   @Override
   public void swap() {
-    // TODO Auto-generated method stub
-    
   }
 
 

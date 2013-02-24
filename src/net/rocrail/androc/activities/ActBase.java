@@ -61,7 +61,7 @@ public class ActBase extends Activity implements ServiceListener {
   RocrailService.RocrailLocalBinder m_RocrailServiceBinder = null;
 
   
-  private ServiceConnection RocrailServiceConnection = new ServiceConnection() {
+  protected ServiceConnection RocrailServiceConnection = new ServiceConnection() {
     @Override
     public void onServiceConnected(ComponentName className, IBinder binder) {
       m_RocrailServiceBinder = (RocrailService.RocrailLocalBinder)binder;

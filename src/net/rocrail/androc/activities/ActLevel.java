@@ -426,6 +426,11 @@ public class ActLevel extends ActBase implements OnZoomListener, OnLongClickList
   }
 
 
-
+  @Override
+  protected void onStop() {
+    super.onPause();
+    if( RocrailServiceConnection != null)
+      unbindService(RocrailServiceConnection);
+  }
 }
 

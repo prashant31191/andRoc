@@ -20,35 +20,14 @@
 package net.rocrail.androc.objects;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import net.rocrail.androc.RocrailService;
-import net.rocrail.androc.interfaces.Mobile;
-import net.rocrail.androc.widgets.LocoImage;
 
 import org.xml.sax.Attributes;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 public class Loco extends MobileImpl implements Runnable {
   public String  Mode    = "";
   public String  Engine  = "";
   public String  Cargo   = "";
-  public int     Steps   = 0;
-  public long    RunTime = 0;
-  public int     Vmax    = 0;
-  public int     Vmid    = 0;
-  public int     Vmin    = 0;
-  public String  Vmode   = "";
-  public int     Vprev   = 0;
   
   public boolean   AutoStart = false;
   public boolean   HalfAuto  = false;
@@ -159,12 +138,6 @@ public class Loco extends MobileImpl implements Runnable {
     return Mode.equals("halfauto");
   }
   
-  public void flipDir() {
-    Dir = !Dir;
-    Speed = 0;
-    setSpeed(true);
-  }
-  
   public void flipGo() {
     if( rocrailService.AutoMode ) {
       AutoStart = !AutoStart;
@@ -175,23 +148,6 @@ public class Loco extends MobileImpl implements Runnable {
   public void doRelease() {
     rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" cmd=\"release\" id=\"%s\"/>",
         rocrailService.getDeviceName(), ID ) );
-  }
-  
-  public void setSpeed(int V, boolean force) {
-    if( force || V == Vmax || V == 0 || StrictMath.abs( Vprev - V) >= this.rocrailService.Prefs.VDelta || Steps < 50 ) {
-      Speed = V;
-      System.out.println("set Speed="+Speed);
-      setSpeed(false);
-    }
-  }
-
-  public void setSpeed(boolean force) {
-    if(force || Vprev != Speed) {
-      Vprev = Speed;
-      rocrailService.sendMessage("lc", 
-          String.format( "<lc throttleid=\"%s\" id=\"%s\" V=\"%d\" dir=\"%s\" fn=\"%s\"/>", 
-              rocrailService.getDeviceName(), ID, Speed, (Dir?"true":"false"), (Lights?"true":"false") ) );
-    }
   }
   
   public void CVWrite(int cv, int val) {
@@ -261,17 +217,6 @@ public class Loco extends MobileImpl implements Runnable {
   }
 
 
-  @Override
-  public long getRunTime() {
-    return RunTime;
-  }
-
-
-  @Override
-  public int getSteps() {
-    return Steps;
-  }
-
 
   @Override
   public boolean isHalfAuto() {
@@ -292,16 +237,6 @@ public class Loco extends MobileImpl implements Runnable {
   }
 
 
-  @Override
-  public boolean isPlacing() {
-    return Placing;
-  }
-
-
-  @Override
-  public void setPlacing(boolean placing) {
-    Placing = placing;
-  }
   
 }
 
