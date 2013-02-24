@@ -26,6 +26,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
@@ -44,7 +45,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class ActBlock extends ActBase implements OnItemSelectedListener {
   Block m_Block = null;
   String LocoID = null;
-  List<Loco> m_LocoList = new ArrayList<Loco>();
+  List<Mobile> m_LocoList = new ArrayList<Mobile>();
   int m_iLocoSelected = 0;
 
   @Override
@@ -76,9 +77,9 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
 
     if( lc != null ) {
       TextView ID = (TextView)findViewById(R.id.LocoBlockID);
-      ID.setText(lc.ID);
+      ID.setText(lc.getID());
       TextView Desc = (TextView)findViewById(R.id.LocoBlockDesc);
-      Desc.setText(lc.Description);
+      Desc.setText(lc.getDescription());
     }
     else {
       TextView ID = (TextView)findViewById(R.id.LocoBlockID);
@@ -87,8 +88,8 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
       Desc.setText("");
     }
     
-    if (lc != null && lc.getLocoBmp(image) != null) {
-      image.setImageBitmap(lc.getLocoBmp(null));
+    if (lc != null && lc.getBmp(image) != null) {
+      image.setImageBitmap(lc.getBmp(null));
     }
     else {
       image.setImageResource(R.drawable.noimg);
@@ -106,9 +107,9 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
   public void initView() {
     setContentView(R.layout.block);
     
-    Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
+    Iterator<Mobile> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
-      Loco loco = it.next();
+      Loco loco = (Loco) it.next();
       m_LocoList.add(loco);
     }
     
@@ -127,8 +128,8 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
       it = m_LocoList.iterator();
       int idx = 0;
       while( it.hasNext() ) {
-        Loco loco = it.next();
-        if( m_Block.LocoID.equals(loco.ID) ) {
+        Loco loco = (Loco)it.next();
+        if( m_Block.LocoID.equals(loco.getID()) ) {
           m_iLocoSelected = idx;
         }
         idx++;
@@ -258,10 +259,10 @@ public class ActBlock extends ActBase implements OnItemSelectedListener {
   protected void onActivityResult (int requestCode, int resultCode, Intent data) {
     if( requestCode == 1 && resultCode != -1 ) {
       m_iLocoSelected = resultCode;
-      Loco loco = m_LocoList.get(resultCode);
+      Loco loco = (Loco)m_LocoList.get(resultCode);
       if( loco != null ) {
         //LocoID = (id.equals(getText(R.string.FreeBlock).toString())?null:id);
-        LocoID = loco.ID;
+        LocoID = loco.getID();
         if( LocoID != null ) {
           m_RocrailService.sendMessage("lc", 
               String.format("<lc id=\"%s\" cmd=\"block\" blockid=\"%s\"/>", LocoID, m_Block.ID ) );

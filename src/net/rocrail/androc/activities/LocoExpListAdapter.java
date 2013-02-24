@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.rocrail.androc.R;
-import net.rocrail.androc.activities.LocoAdapter.ViewHolder;
+import net.rocrail.androc.interfaces.Mobile;
+import net.rocrail.androc.objects.Car;
 import net.rocrail.androc.objects.Loco;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,39 +19,48 @@ import android.widget.TextView;
 
 public class LocoExpListAdapter extends BaseExpandableListAdapter {
   Context m_Context = null;
-  List<Loco> m_LocoList     = null;
-  List<Loco> m_SteamList    = new ArrayList<Loco>();
-  List<Loco> m_DieselList   = new ArrayList<Loco>();
-  List<Loco> m_ElectricList = new ArrayList<Loco>();
-  List<Loco> m_TrainsetList = new ArrayList<Loco>();
-  List<Loco> m_SpecialList  = new ArrayList<Loco>();
-  List<Loco>[] m_Lists      = new ArrayList[5];
+  List<Mobile> m_MobileList     = null;
+  List<Mobile> m_SteamList    = new ArrayList<Mobile>();
+  List<Mobile> m_DieselList   = new ArrayList<Mobile>();
+  List<Mobile> m_ElectricList = new ArrayList<Mobile>();
+  List<Mobile> m_TrainsetList = new ArrayList<Mobile>();
+  List<Mobile> m_SpecialList  = new ArrayList<Mobile>();
+  List<Mobile> m_CarList      = new ArrayList<Mobile>();
+  List<Mobile>[] m_Lists      = new ArrayList[6];
   boolean sortbyaddr = false;
 
-  public LocoExpListAdapter(Context context, List<Loco> locoList) {
+  public LocoExpListAdapter(Context context, List<Mobile> locoList) {
     m_Context = context;
-    m_LocoList = locoList;
+    m_MobileList = locoList;
     m_Lists[0] = m_SteamList;
     m_Lists[1] = m_DieselList;
     m_Lists[2] = m_ElectricList;
     m_Lists[3] = m_TrainsetList;
     m_Lists[4] = m_SpecialList;
-    Iterator<Loco> it = m_LocoList.iterator();
+    m_Lists[5] = m_CarList;
+    Iterator<Mobile> it = m_MobileList.iterator();
     while( it.hasNext() ) {
-      Loco loco = it.next();
-      if( loco.Show ) {
-        if( loco.Cargo.equals("commuter") || loco.Commuter )
-          m_TrainsetList.add(loco);
-        else if( loco.Cargo.equals("post") || loco.Cargo.equals("cleaning") )
-          m_SpecialList.add(loco);
-        else if( loco.Engine.equals("steam"))
-          m_SteamList.add(loco);
-        else if( loco.Engine.equals("diesel"))
-          m_DieselList.add(loco);
-        else if( loco.Engine.equals("electric"))
-          m_ElectricList.add(loco);
-        else
-          m_SpecialList.add(loco);
+      Mobile mobile = it.next();
+      if( mobile instanceof Loco ) {
+        Loco loco = (Loco)mobile;
+        if( loco.isShow() ) {
+          if( loco.Cargo.equals("commuter") || loco.Commuter )
+            m_TrainsetList.add(loco);
+          else if( loco.Cargo.equals("post") || loco.Cargo.equals("cleaning") )
+            m_SpecialList.add(loco);
+          else if( loco.Engine.equals("steam"))
+            m_SteamList.add(loco);
+          else if( loco.Engine.equals("diesel"))
+            m_DieselList.add(loco);
+          else if( loco.Engine.equals("electric"))
+            m_ElectricList.add(loco);
+          else
+            m_SpecialList.add(loco);
+        }
+      }
+      else if(mobile instanceof Car) {
+        Car car = (Car)mobile;
+        m_CarList.add(car);
       }
       
     }
@@ -60,9 +69,9 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
   
   @Override
   public Object getChild(int group, int child) {
-    List<Loco> list = m_Lists[group];
+    List<Mobile> list = m_Lists[group];
     if( list.size() >= child )
-      return list.get(child).ID;
+      return list.get(child).getID();
     return null;
   }
 
@@ -84,6 +93,7 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
     case 2: return m_ElectricList.size();
     case 3: return m_TrainsetList.size();
     case 4: return m_SpecialList.size();
+    case 5: return m_CarList.size();
     }
     return 0;
   }
@@ -96,13 +106,14 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
     case 2: return m_Context.getText(R.string.Electric).toString();
     case 3: return m_Context.getText(R.string.Trainset).toString();
     case 4: return m_Context.getText(R.string.Special).toString();
+    case 5: return m_Context.getText(R.string.Car).toString();
     }
     return null;
   }
 
   @Override
   public int getGroupCount() {
-    return 5;
+    return m_Lists.length;
   }
 
   @Override
@@ -160,6 +171,7 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
     case 2: holder.text.setText("Electric"); break;
     case 3: holder.text.setText("Trainset"); break;
     case 4: holder.text.setText("Special"); break;
+    case 5: holder.text.setText("Car"); break;
     }
   
     return row;
@@ -168,11 +180,11 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
   
   public int getRealPosition(int group, int position) {
     
-    List<Loco> list = m_Lists[group];
-    Loco loco = list.get(position);
+    List<Mobile> list = m_Lists[group];
+    Mobile loco = list.get(position);
     
-    for( int i = 0; i < m_LocoList.size(); i++ ) {
-      if( loco == m_LocoList.get(i) ) {
+    for( int i = 0; i < m_MobileList.size(); i++ ) {
+      if( loco == m_MobileList.get(i) ) {
         return i;
       }
     }
@@ -201,20 +213,20 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
       holder = (ViewHolder) row.getTag();
     }
 
-    List<Loco> list = m_Lists[groupposition];
+    List<Mobile> list = m_Lists[groupposition];
     
     if( list != null && position < list.size() ) {
-      Loco loco = list.get(position);
+      Mobile loco = list.get(position);
       if( sortbyaddr ) {
-        holder.text.setText(""+loco.Addr);
-        holder.addr.setText(loco.ID);
+        holder.text.setText(""+loco.getAddr());
+        holder.addr.setText(loco.getID());
       }
       else {
-        holder.text.setText(loco.ID);
-        holder.addr.setText(""+loco.Addr);
+        holder.text.setText(loco.getID());
+        holder.addr.setText(""+loco.getAddr());
       }
   
-      Bitmap img = loco.getLocoBmp(loco.imageView);
+      Bitmap img = loco.getBmp(loco.getImageView());
       if( img != null )
         holder.icon.setImageBitmap(img);
       else

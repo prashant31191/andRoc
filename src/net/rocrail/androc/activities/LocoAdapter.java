@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.objects.Loco;
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -35,11 +36,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LocoAdapter extends ArrayAdapter<String> {
-  List<Loco> m_LocoList = null;
+  List<Mobile> m_LocoList = null;
   Activity m_Activity = null;
   boolean sortbyaddr = false;
   
-  public LocoAdapter(Activity activity, int textViewResourceId, List<Loco> locoList, boolean sortbyaddr) {
+  public LocoAdapter(Activity activity, int textViewResourceId, List<Mobile> locoList, boolean sortbyaddr) {
     super(activity, textViewResourceId);
     m_Activity = activity;
     m_LocoList = locoList;
@@ -57,16 +58,16 @@ public class LocoAdapter extends ArrayAdapter<String> {
   }
   
   public void add(Loco loco) {
-    super.add(loco.ID);
+    super.add(loco.getID());
     m_LocoList.add(loco);
   }
   
   @Override
   public int getPosition (String LocoID) {
     int idx = 0;
-    Iterator<Loco> it = m_LocoList.iterator();
+    Iterator<Mobile> it = m_LocoList.iterator();
     while( it.hasNext() ) {
-      Loco loco = it.next();
+      Mobile loco = it.next();
       if( LocoID.equals(loco.toString()))
         return idx;
       idx++;
@@ -106,19 +107,19 @@ public class LocoAdapter extends ArrayAdapter<String> {
 
     
     if( m_LocoList != null && position < m_LocoList.size() ) {
-      Loco loco = m_LocoList.get(position);
+      Mobile loco = m_LocoList.get(position);
       if( sortbyaddr ) {
-        holder.text.setText(""+loco.Addr);
-        holder.addr.setText(loco.ID);
+        holder.text.setText(""+loco.getAddr());
+        holder.addr.setText(loco.getID());
       }
       else {
-        holder.text.setText(loco.ID);
-        holder.addr.setText(""+loco.Addr);
+        holder.text.setText(loco.getID());
+        holder.addr.setText(""+loco.getAddr());
       }
       
-      holder.dir.setImageResource(loco.Placing ? R.drawable.fwd:R.drawable.rev);
+      holder.dir.setImageResource(loco.isPlacing() ? R.drawable.fwd:R.drawable.rev);
   
-      Bitmap img = loco.getLocoBmp(loco.imageView);
+      Bitmap img = loco.getBmp(loco.getImageView());
       if( img != null )
         holder.icon.setImageBitmap(img);
       else

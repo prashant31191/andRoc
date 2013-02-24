@@ -31,6 +31,7 @@ import javax.xml.parsers.SAXParser;
 import net.rocrail.androc.activities.ActLevel;
 import net.rocrail.androc.activities.ActSystem;
 import net.rocrail.androc.interfaces.MessageListener;
+import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.interfaces.PoMListener;
 import net.rocrail.androc.interfaces.SystemListener;
 import net.rocrail.androc.objects.Item;
@@ -56,7 +57,7 @@ public class RocrailService extends Service {
   public Model   m_Model       = null;
   public String  m_DeviceId    = "andRoc";
   
-  public Loco   SelectedLoco = null;
+  public Mobile SelectedLoco = null;
   public ActLevel  LevelView = null;
   
   public boolean Power     = false;

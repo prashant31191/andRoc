@@ -25,7 +25,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.rocrail.androc.interfaces.ModelListener;
+import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.objects.Block;
+import net.rocrail.androc.objects.Car;
 import net.rocrail.androc.objects.FiddleYard;
 import net.rocrail.androc.objects.Item;
 import net.rocrail.androc.objects.Loco;
@@ -48,7 +50,9 @@ public class Model {
   RocrailService  rocrailService  = null;
   private List<ModelListener>  m_Listeners = new ArrayList<ModelListener>();
   public List<Loco>  m_LocoList = new ArrayList<Loco>();
-  public HashMap<String,Loco> m_LocoMap = new HashMap<String,Loco>();
+  public List<Car>  m_CarList = new ArrayList<Car>();
+  public HashMap<String,Mobile> m_LocoMap = new HashMap<String,Mobile>();
+  public HashMap<String,Mobile> m_CarMap = new HashMap<String,Mobile>();
   public List<ZLevel> m_ZLevelList = new ArrayList<ZLevel>();
   public HashMap<String,Switch> m_SwitchMap = new HashMap<String,Switch>();
   public HashMap<String,Output> m_OutputMap = new HashMap<String,Output>();
@@ -76,7 +80,7 @@ public class Model {
   
   Turntable m_CurrentTT = null;
   StageBlock m_CurrentSB = null;
-  Loco m_CurrentLC = null;
+  Mobile m_CurrentMobile = null;
 
   
   public Model(RocrailService rocrailService) {
@@ -85,6 +89,7 @@ public class Model {
   
   public void setup(Attributes atts) {
     m_LocoList.clear();
+    m_CarList.clear();
     m_LocoMap.clear();
     m_ZLevelList.clear();
     m_SwitchMap.clear();
@@ -131,7 +136,7 @@ public class Model {
     while(it.hasNext()) {
       Loco lc = it.next();
       if( lc.Consist.contains(ID))
-        return lc.ID + "=" + lc.Consist;
+        return lc.getID() + "=" + lc.Consist;
     }
     return "";
   }
@@ -147,35 +152,68 @@ public class Model {
     Iterator<Loco> it = m_LocoList.iterator();
     while( it.hasNext()) {
       Loco loco = it.next();
-      if( ID.equals(loco.ID ) || ID.equals(loco.toString() ) )
+      if( ID.equals(loco.getID() ) || ID.equals(loco.toString() ) )
         return loco;
+    }
+    return null;
+  }
+  
+  public Car getCar(String ID) {
+    Iterator<Car> it = m_CarList.iterator();
+    while( it.hasNext()) {
+      Car car = it.next();
+      if( ID.equals(car.getID() ) || ID.equals(car.toString() ) )
+        return car;
     }
     return null;
   }
   
   public void updateItem(String objName, Attributes atts) {
     if( objName.equals("lc") ) {
-      Loco lc = m_LocoMap.get(Item.getAttrValue(atts, "id", "?"));
+      Mobile lc = m_LocoMap.get(Item.getAttrValue(atts, "id", "?"));
       if( lc != null ) {
         // A consist command could have the same throttle ID as this device...
         if( Item.getAttrValue(atts, "consistcmd", false) || !rocrailService.getDeviceName().equals(Item.getAttrValue(atts, "throttleid", "?"))) {
           lc.updateWithAttributes(atts);
-          informListeners(ModelListener.MODELLIST_LC, lc.ID);
+          informListeners(ModelListener.MODELLIST_LC, lc.getID());
         }
       }
       else {
         Loco loco = new Loco(rocrailService, atts);
-        m_CurrentLC = loco;
+        m_CurrentMobile = loco;
         m_LocoList.add(loco);
-        m_LocoMap.put(loco.ID, loco);
+        m_LocoMap.put(loco.getID(), loco);
+      }
+      return;
+    }
+    if( objName.equals("car") ) {
+      Mobile car = m_CarMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( car != null ) {
+        // A consist command could have the same throttle ID as this device...
+        if( Item.getAttrValue(atts, "consistcmd", false) || !rocrailService.getDeviceName().equals(Item.getAttrValue(atts, "throttleid", "?"))) {
+          car.updateWithAttributes(atts);
+          informListeners(ModelListener.MODELLIST_LC, car.getID());
+        }
+      }
+      else {
+        Car l_car = new Car(rocrailService, atts);
+        m_CurrentMobile = car;
+        m_CarList.add(l_car);
+        m_CarMap.put(l_car.getID(), l_car);
       }
       return;
     }
     if( objName.equals("fn") ) {
-      Loco lc = m_LocoMap.get(Item.getAttrValue(atts, "id", "?"));
+      Mobile lc = m_LocoMap.get(Item.getAttrValue(atts, "id", "?"));
       if( lc != null ) {
         lc.updateFunctions(atts);
-        informListeners(ModelListener.MODELLIST_LC, lc.ID);
+        informListeners(ModelListener.MODELLIST_LC, lc.getID());
+        return;
+      }
+      Mobile car = m_CarMap.get(Item.getAttrValue(atts, "id", "?"));
+      if( car != null ) {
+        car.updateFunctions(atts);
+        informListeners(ModelListener.MODELLIST_LC, car.getID());
       }
       return;
     }
@@ -298,13 +336,22 @@ public class Model {
 
     if( objName.equals("lc") ) {
       Loco loco = new Loco(rocrailService, atts);
-      m_CurrentLC = loco;
+      m_CurrentMobile = loco;
       m_LocoList.add(loco);
-      m_LocoMap.put(loco.ID, loco);
+      m_LocoMap.put(loco.getID(), loco);
       return;
     }
-    if( objName.equals("fundef") && m_CurrentLC != null ) {
-      m_CurrentLC.addFunction(atts);
+    if( objName.equals("car") ) {
+      Car car = new Car(rocrailService, atts);
+      m_CurrentMobile = car;
+      if( car.getAddr() > 0 ) {
+        m_CarList.add(car);
+        m_CarMap.put(car.getID(), car);
+      }
+      return;
+    }
+    if( objName.equals("fundef") && m_CurrentMobile != null ) {
+      m_CurrentMobile.addFunction(atts);
       return;
     }
     

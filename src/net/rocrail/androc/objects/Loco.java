@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.widgets.LocoImage;
 
 import org.xml.sax.Attributes;
@@ -37,24 +38,14 @@ import org.xml.sax.Attributes;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-public class Loco implements Runnable {
-  RocrailService  rocrailService = null;
-
-  public List<Function> Functions = new ArrayList<Function>();
-  public String  ID      = "?";
-  public String  Description = "";
-  public String  Roadname = "";
+public class Loco extends MobileImpl implements Runnable {
   public String  Mode    = "";
   public String  Consist = "";
-  public String  PicName = null;
   public String  Engine  = "";
   public String  Cargo   = "";
   private Bitmap LocoBmp = null;
-  private HashMap<String,Bitmap> FunBmp = new HashMap<String,Bitmap>();
-  public int     Addr    = 0;
   public int     Steps   = 0;
   public long    RunTime = 0;
-  public int     Speed   = 0;
   public int     Vmax    = 0;
   public int     Vmid    = 0;
   public int     Vmin    = 0;
@@ -64,16 +55,7 @@ public class Loco implements Runnable {
   public boolean   AutoStart = false;
   public boolean   HalfAuto  = false;
   public boolean   Commuter  = false;
-  public boolean   Lights    = false;
-  public boolean   Dir       = true;
-  public boolean   Placing   = true;
-  public boolean[] Function  = new boolean[32];
-  public boolean   Show      = true;
   
-  private boolean   ImageRequested = false;
-  public  LocoImage imageView      = null;
-  
-  public Attributes properties = null;
   
   int fx = 0;
   
@@ -121,12 +103,6 @@ public class Loco implements Runnable {
   }
   
 
-  public void updateFunctions(Attributes atts) {
-    for( int i = 1; i <= 24; i++ ) {
-      Function[i] = Item.getAttrValue(atts, "f"+i, Function[i]);
-    }
-  }
-  
   
   public void updateWithAttributes(Attributes atts) {
     Dir    = Item.getAttrValue(atts, "dir", Dir);
@@ -185,173 +161,10 @@ public class Loco implements Runnable {
     return Mode.equals("halfauto");
   }
   
-  public String toString() {
-    if( Description.length() > 0 ) {
-      return ID + ", " + Description;
-    }
-    return ID;
-  }
-
-  public Bitmap getLocoBmp(LocoImage image) {
-    if( LocoBmp == null ) {
-      requestLocoImg(image);
-    }
-    return LocoBmp;
-      
-  }
-  
-  public void requestLocoImg(LocoImage image) {
-    if( image != null )
-      imageView = image;
-    
-    
-    File dir = new File("/sdcard/androc/");
-    if( !dir.exists() )
-      dir.mkdirs();
-    File file = new File("/sdcard/androc/" + PicName );
-    if( file.exists()) {
-      try {
-        byte rawdata[] = new byte[(int)file.length()]; 
-        FileInputStream fis = new FileInputStream(file);
-        fis.read(rawdata);
-        fis.close();
-        Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
-        LocoBmp = bmp;
-        if( imageView != null ) {
-          imageView.post(new UpdateLocoImage(this));
-        }
-      }
-      catch(Exception e) {
-        e.printStackTrace();
-      }
-    }
-    
-    if(LocoBmp == null && !ImageRequested) {
-      ImageRequested = true;
-      if( PicName != null && PicName.length() > 0 ) {
-        // type 1 is for small images
-        rocrailService.sendMessage("datareq", 
-            String.format("<datareq id=\"%s\" type=\"1\" filename=\"%s\"/>", ID, PicName) );
-      }
-    }
-  }
-
-  
-  public Bitmap requestFunctionIcon(int nr) {
-    String IconName = "";
-    if( Functions != null ) {
-      Iterator<Function> it = Functions.iterator();
-      while(it.hasNext()) {
-        Function function = it.next();
-        if( function.Nr == nr ) {
-          if( function.Icon.length() > 0 ) {
-            IconName = function.Icon;
-            break;
-          }
-          return null;
-        }
-      }
-    }
-    
-    Bitmap bmp = null;
-    
-    File dir = new File("/sdcard/androc/");
-    if( !dir.exists() )
-      dir.mkdirs();
-    File file = new File("/sdcard/androc/" + IconName );
-    if( file.exists()) {
-      try {
-        byte rawdata[] = new byte[(int)file.length()]; 
-        FileInputStream fis = new FileInputStream(file);
-        fis.read(rawdata);
-        fis.close();
-        bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
-        FunBmp.put(""+nr, bmp);
-      }
-      catch(Exception e) {
-        e.printStackTrace();
-      }
-    }
-    
-    if(bmp == null && !FunBmp.containsKey(""+nr)) {
-      FunBmp.put(""+nr, null);
-
-      rocrailService.sendMessage("datareq", 
-          String.format("<datareq id=\"%s\" function=\"%d\" filename=\"%s\"/>", ID, nr, IconName) );
-    }
-    return bmp;
-  }
-
-  
-  static byte[] strToByte( String s ) {
-    int i = 0;
-    int len = s.length();
-    byte[] b = new byte[len/2 + 1];
-    for( i = 0; i < len; i+=2 ) {
-      int val = Integer.parseInt(s.substring(i, i+2), 16);
-      b[i/2] = (byte)(val & 0xFF);
-    }
-    return b;
-  }
-
-  public void setPicData(String filename, String data, int nr) {
-    if( data != null && data.length() > 0 ) {
-      // convert from HEXA to Bitmap
-      byte[] rawdata = strToByte(data);
-      
-      File dir = new File("/sdcard/androc/");
-      if( !dir.exists() )
-        dir.mkdirs();
-      
-      File file = null;
-      if( filename.equals(PicName) )
-        file = new File("/sdcard/androc/" + PicName );
-      else {
-        if( Functions != null ) {
-          Iterator<Function> it = Functions.iterator();
-          while(it.hasNext()) {
-            Function function = it.next();
-            if( function.Nr == nr && function.Icon.length() > 0 )
-              file = new File("/sdcard/androc/" + function.Icon );
-          }
-        }
-      }
-      
-      if( file != null ) {
-        try {
-          FileOutputStream fos = new FileOutputStream(file);
-          fos.write(rawdata);
-          fos.close();
-        }
-        catch(Exception e) {
-          e.printStackTrace();
-        }
-  
-        Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
-        if( nr == 0 ) {
-          LocoBmp = bmp;
-          if( imageView != null ) {
-            imageView.post(new UpdateLocoImage(this));
-          }
-        }
-        else {
-          FunBmp.put(""+nr, bmp);
-        }
-      }
-    }
-  }
-  
   public void flipDir() {
     Dir = !Dir;
     Speed = 0;
     setSpeed(true);
-  }
-  
-  public void flipLights() {
-    Lights = !Lights;
-    setSpeed(true);
-    rocrailService.sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>",
-        ID, 0, 1, 0, (Lights?"true":"false")) );
   }
   
   public void flipGo() {
@@ -364,12 +177,6 @@ public class Loco implements Runnable {
   public void doRelease() {
     rocrailService.sendMessage("lc", String.format( "<lc throttleid=\"%s\" cmd=\"release\" id=\"%s\"/>",
         rocrailService.getDeviceName(), ID ) );
-  }
-  
-  public void flipFunction(int fn) {
-    Function[fn] = !Function[fn];
-    rocrailService.sendMessage("lc", String.format( "<fn id=\"%s\" fnchanged=\"%d\" group=\"%d\" f%d=\"%s\"/>", 
-        ID, fn, (fn-1)/4+1, fn, (Function[fn]?"true":"false")) );
   }
   
   public void setSpeed(int V, boolean force) {
@@ -431,60 +238,83 @@ public class Loco implements Runnable {
         String.format("<lc id=\"%s\" cmd=\"dispatch\"/>", ID ) );
   }
   
-  public void addFunction(Attributes atts ) {
-    Function function = new Function();
-    function.Nr = Item.getAttrValue(atts, "fn", 0 );
-    function.Text = Item.getAttrValue(atts, "text", "F"+function.Nr );
-    function.Icon = Item.getAttrValue(atts, "icon", "" );
-    Functions.add(function);
-  }
-
-  public String getFunctionText(int nr) {
-    if( Functions != null ) {
-      Iterator<Function> it = Functions.iterator();
-      while(it.hasNext()) {
-        Function function = it.next();
-        if( function.Nr == nr && function.Text.length() > 0 )
-          return function.Text;
-      }
-    }
-    return "F"+nr;
-  }
-  
-  public Bitmap getFunctionIcon(int nr) {
-    return requestFunctionIcon(nr);
-  }
 
   @Override
   public void run() {
     try {
       Thread.sleep(100);
-      Loco.this.getLocoBmp(null);
+      Loco.this.getBmp(null);
     }
     catch(Exception e) {
       
     }
   }
-}
 
 
-class UpdateLocoImage implements Runnable {
-  Loco loco = null;
-  
-  public UpdateLocoImage( Loco loco ) {
-    this.loco = loco;
-  }
   @Override
-  public void run() {
-    if( loco.getLocoBmp(null) != null && loco.imageView != null ) {
-      try {
-        if( loco.ID.equals(loco.imageView.ID))
-          loco.imageView.setImageBitmap(loco.getLocoBmp(null));
-      }
-      catch( Exception e ) {
-        // invalid imageView 
-      }
-    }
+  public boolean isAutoStart() {
+    return AutoStart;
+  }
+
+
+  @Override
+  public String getConsist() {
+    return Consist;
+  }
+
+
+  @Override
+  public String getDescription() {
+    return Description;
+  }
+
+
+  @Override
+  public int getVMax() {
+    return Vmax;
+  }
+
+
+  @Override
+  public long getRunTime() {
+    return RunTime;
+  }
+
+
+  @Override
+  public int getSteps() {
+    return Steps;
+  }
+
+
+  @Override
+  public boolean isHalfAuto() {
+    return HalfAuto;
+  }
+
+
+  @Override
+  public void setAutoStart(boolean autostart) {
+    AutoStart = autostart;
+    
+  }
+
+
+  @Override
+  public void setHalfAuto(boolean halfauto) {
+    HalfAuto = halfauto;
+  }
+
+
+  @Override
+  public boolean isPlacing() {
+    return Placing;
+  }
+
+
+  @Override
+  public void setPlacing(boolean placing) {
+    Placing = placing;
   }
   
 }

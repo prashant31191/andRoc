@@ -27,6 +27,7 @@ import java.util.List;
 
 import net.rocrail.androc.R;
 import net.rocrail.androc.activities.LocoSort;
+import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.interfaces.ServiceListener;
 import net.rocrail.androc.objects.Loco;
 import android.app.ListActivity;
@@ -37,7 +38,7 @@ import android.widget.ListView;
 
 public class ActLocoList extends ListActivity implements ServiceListener {
   ActBase m_Base = null;
-  List<Loco> m_LocoList = new ArrayList<Loco>();
+  List<Mobile> m_LocoList = new ArrayList<Mobile>();
   LocoAdapter m_Adapter = null;
 
   @Override
@@ -49,7 +50,7 @@ public class ActLocoList extends ListActivity implements ServiceListener {
     m_Base.connectWithService();
   }
   
-  public Loco getLoco(int selected) {
+  public Mobile getLoco(int selected) {
     return m_LocoList.get(selected);
   }
   
@@ -68,17 +69,17 @@ public class ActLocoList extends ListActivity implements ServiceListener {
     }
 
     
-    Iterator<Loco> it = m_Base.m_RocrailService.m_Model.m_LocoMap.values().iterator();
+    Iterator<Mobile> it = m_Base.m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
-      Loco loco = it.next();
-      if( loco.Show ) {
+      Mobile loco = it.next();
+      if( loco.isShow() ) {
         if( Consist == null ) {
           if( Exclude == null )
             m_LocoList.add(loco);
-          else if( !Exclude.contains(loco.ID) )
+          else if( !Exclude.contains(loco.getID()) )
             m_LocoList.add(loco);
         }
-        else if( Consist.contains(loco.ID) )
+        else if( Consist.contains(loco.getID()) )
           m_LocoList.add(loco);
       }
     }
@@ -87,10 +88,10 @@ public class ActLocoList extends ListActivity implements ServiceListener {
     m_Adapter = new LocoAdapter(this, R.layout.locorow, m_LocoList, m_Base.m_RocrailService.Prefs.SortByAddr);
     setListAdapter(m_Adapter);
 
-    Iterator<Loco> itList = m_LocoList.iterator();
+    Iterator<Mobile> itList = m_LocoList.iterator();
     while( itList.hasNext() ) {
-      Loco loco = itList.next();
-      if( loco.Show )
+      Mobile loco = itList.next();
+      if( loco.isShow() )
         m_Adapter.add(loco.toString());
     }
 
@@ -101,7 +102,7 @@ public class ActLocoList extends ListActivity implements ServiceListener {
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // Set selected loco.
         //ActLocoList.this.setResult(position);
-        getIntent().putExtra("selectedID", m_LocoList.get(position).ID);
+        getIntent().putExtra("selectedID", m_LocoList.get(position).getID());
         ActLocoList.this.setResult(position, getIntent());
         finish();
       }

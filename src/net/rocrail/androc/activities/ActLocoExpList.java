@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.objects.Loco;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -15,7 +16,8 @@ import android.widget.ExpandableListView.OnChildClickListener;
 
 
 public class ActLocoExpList extends ActBase {
-  List<Loco> m_LocoList = new ArrayList<Loco>();
+  List<Mobile> m_LocoList = new ArrayList<Mobile>();
+  List<Mobile> m_CarList = new ArrayList<Mobile>();
   LocoExpListAdapter m_Adapter = null;
   ExpandableListView m_ListView = null;
 
@@ -40,14 +42,21 @@ public class ActLocoExpList extends ActBase {
     setContentView(R.layout.locoexplist);
     m_ListView = (ExpandableListView) findViewById(R.id.locoExpList);
 
-    Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
+    Iterator<Mobile> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
-      Loco loco = it.next();
-      if(loco.Show)
+      Mobile loco = it.next();
+      if(loco.isShow())
         m_LocoList.add(loco);
     }
     
     Collections.sort(m_LocoList, new LocoSort(m_RocrailService.Prefs.SortByAddr));
+
+    it = m_RocrailService.m_Model.m_CarMap.values().iterator();
+    while( it.hasNext() ) {
+      Mobile car = it.next();
+      if(car.isShow())
+        m_CarList.add(car);
+    }
 
     m_ListView.setOnChildClickListener(new OnChildClickListener() 
     {
@@ -64,8 +73,10 @@ public class ActLocoExpList extends ActBase {
       
     });
 
-    
-    m_Adapter = new LocoExpListAdapter(this, m_LocoList);
+    List<Mobile> list = new ArrayList<Mobile>();
+    list.addAll(m_LocoList);
+    list.addAll(m_CarList);
+    m_Adapter = new LocoExpListAdapter(this, list);
     m_ListView.setAdapter(m_Adapter);
 
     setResult(-1);

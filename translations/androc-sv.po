@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rocrail\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-07-24 20:34+0200\n"
+"POT-Creation-Date: 2013-02-15 07:13+0100\n"
 "PO-Revision-Date: 2011-10-23 15:42+0000\n"
 "Last-Translator: Rocrail <r.j.versluis@rocrail.net>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -275,220 +275,273 @@ msgid "Close Block"
 msgstr "Stäng block"
 
 #: res/values/strings.xml:87(string)
+msgid "Open enter"
+msgstr ""
+
+#: res/values/strings.xml:88(string)
+#, fuzzy
+msgid "Close enter"
+msgstr "Stäng"
+
+#: res/values/strings.xml:89(string)
+#, fuzzy
+msgid "Open exit"
+msgstr "Öppna"
+
+#: res/values/strings.xml:90(string)
+#, fuzzy
+msgid "Close exit"
+msgstr "Stäng"
+
+#: res/values/strings.xml:91(string)
+msgid "Compress"
+msgstr ""
+
+#: res/values/strings.xml:92(string)
 msgid "Select Block"
 msgstr "Välj block"
 
-#: res/values/strings.xml:88(string)
+#: res/values/strings.xml:93(string)
 msgid "Block list"
 msgstr "Block lista"
 
-#: res/values/strings.xml:89(string)
+#: res/values/strings.xml:94(string)
 msgid "Select Schedule"
 msgstr "Välj schema"
 
-#: res/values/strings.xml:90(string)
+#: res/values/strings.xml:95(string)
 msgid "Schedule list"
 msgstr ""
 
-#: res/values/strings.xml:91(string)
+#: res/values/strings.xml:96(string)
 msgid "Module view"
 msgstr "Modul översikt"
 
-#: res/values/strings.xml:92(string)
+#: res/values/strings.xml:97(string)
 msgid "Read"
 msgstr "Läs"
 
-#: res/values/strings.xml:93(string)
+#: res/values/strings.xml:98(string)
 msgid "Write"
 msgstr "Skriv"
 
-#: res/values/strings.xml:94(string)
+#: res/values/strings.xml:99(string)
 msgid "CV"
 msgstr "CV"
 
-#: res/values/strings.xml:95(string)
+#: res/values/strings.xml:100(string)
 msgid "Value"
 msgstr "Värde"
 
-#: res/values/strings.xml:96(string)
+#: res/values/strings.xml:101(string)
 msgid "DeviceID"
 msgstr "Apparat ID"
 
-#: res/values/strings.xml:97(string)
+#: res/values/strings.xml:102(string)
 msgid "BlockID"
 msgstr "Block ID"
 
-#: res/values/strings.xml:98(string)
+#: res/values/strings.xml:103(string)
+msgid "StageID"
+msgstr ""
+
+#: res/values/strings.xml:104(string)
 msgid "Description"
 msgstr "Beskrivning"
 
-#: res/values/strings.xml:99(string)
+#: res/values/strings.xml:105(string)
 msgid "Roadname"
 msgstr "Väg namn"
 
-#: res/values/strings.xml:100(string)
+#: res/values/strings.xml:106(string)
 msgid "Vmax"
 msgstr "Vmax"
 
-#: res/values/strings.xml:101(string)
+#: res/values/strings.xml:107(string)
 msgid "Vmid"
 msgstr "Vmid"
 
-#: res/values/strings.xml:102(string)
+#: res/values/strings.xml:108(string)
 msgid "Vmin"
 msgstr "Vmin"
 
-#: res/values/strings.xml:103(string)
+#: res/values/strings.xml:109(string)
 msgid "Loading plan..."
 msgstr "Laddar inställningar"
 
-#: res/values/strings.xml:104(string)
+#: res/values/strings.xml:110(string)
 msgid "License"
 msgstr "Licens"
 
-#: res/values/strings.xml:105(string)
+#: res/values/strings.xml:111(string)
 msgid "Version"
 msgstr "Version"
 
-#: res/values/strings.xml:106(string)
+#: res/values/strings.xml:112(string)
 msgid "Throttle ID"
 msgstr "Throttle ID"
 
-#: res/values/strings.xml:107(string)
+#: res/values/strings.xml:113(string)
 msgid "Creating module view..."
 msgstr "Skapa modul översikt"
 
-#: res/values/strings.xml:108(string)
+#: res/values/strings.xml:114(string)
 msgid "Loco properties"
 msgstr "Lokets egenskaper"
 
-#: res/values/strings.xml:109(string)
+#: res/values/strings.xml:115(string)
 msgid "Info"
 msgstr "Information"
 
-#: res/values/strings.xml:110(string)
+#: res/values/strings.xml:116(string)
 msgid "Actions"
 msgstr "Aktiviteter"
 
-#: res/values/strings.xml:111(string)
+#: res/values/strings.xml:117(string)
 msgid "Turntable"
 msgstr "Vändskiva"
 
-#: res/values/strings.xml:112(string)
+#: res/values/strings.xml:118(string)
 msgid "Fiddle Yard"
 msgstr "Fiddle Yard"
 
-#: res/values/strings.xml:113(string)
+#: res/values/strings.xml:119(string)
 msgid "Swap"
 msgstr "Byta"
 
-#: res/values/strings.xml:114(string)
+#: res/values/strings.xml:120(string)
 msgid "Select loco"
 msgstr "Välj lok"
 
-#: res/values/strings.xml:115(string)
+#: res/values/strings.xml:121(string)
 msgid "Dispatch"
 msgstr ""
 
-#: res/values/strings.xml:116(string)
+#: res/values/strings.xml:122(string)
 msgid "Accept BiDi Ident"
 msgstr ""
 
-#: res/values/strings.xml:117(string)
+#: res/values/strings.xml:123(string)
 msgid "Emergency stop"
 msgstr ""
 
-#: res/values/strings.xml:118(string)
+#: res/values/strings.xml:124(string)
 msgid "Small throttle"
 msgstr ""
 
-#: res/values/strings.xml:119(string)
+#: res/values/strings.xml:125(string)
 msgid "Ctrl code"
 msgstr ""
 
-#: res/values/strings.xml:120(string)
+#: res/values/strings.xml:126(string)
 msgid "Zoom"
 msgstr ""
 
-#: res/values/strings.xml:121(string)
+#: res/values/strings.xml:127(string)
 msgid "Unlock"
 msgstr ""
 
-#: res/values/strings.xml:122(string)
+#: res/values/strings.xml:128(string)
 msgid "Images on demand"
 msgstr ""
 
-#: res/values/strings.xml:123(string)
+#: res/values/strings.xml:129(string)
 msgid "Sort by address"
 msgstr ""
 
-#: res/values/strings.xml:124(string)
+#: res/values/strings.xml:130(string)
 msgid "Power off for EStop"
 msgstr ""
 
-#: res/values/strings.xml:125(string)
+#: res/values/strings.xml:131(string)
 msgid "Color"
 msgstr ""
 
-#: res/values/strings.xml:126(string)
+#: res/values/strings.xml:132(string)
 msgid "Select background color"
 msgstr ""
 
-#: res/values/strings.xml:127(string)
+#: res/values/strings.xml:133(string)
 msgid "Green"
 msgstr ""
 
-#: res/values/strings.xml:128(string)
+#: res/values/strings.xml:134(string)
 msgid "Grey"
 msgstr ""
 
-#: res/values/strings.xml:129(string)
+#: res/values/strings.xml:135(string)
 msgid "Blue"
 msgstr ""
 
-#: res/values/strings.xml:130(string)
+#: res/values/strings.xml:136(string)
 msgid "Sort by category"
 msgstr ""
 
-#: res/values/strings.xml:131(string)
+#: res/values/strings.xml:137(string)
 msgid "Steam"
 msgstr ""
 
-#: res/values/strings.xml:132(string)
+#: res/values/strings.xml:138(string)
 msgid "Diesel"
 msgstr ""
 
-#: res/values/strings.xml:133(string)
+#: res/values/strings.xml:139(string)
 msgid "Electric"
 msgstr ""
 
-#: res/values/strings.xml:134(string)
+#: res/values/strings.xml:140(string)
 msgid "Trainset"
 msgstr ""
 
-#: res/values/strings.xml:135(string)
+#: res/values/strings.xml:141(string)
 msgid "Special"
 msgstr ""
 
-#: res/values/strings.xml:136(string)
+#: res/values/strings.xml:142(string)
 msgid "Use all speed steps"
 msgstr ""
 
-#: res/values/strings.xml:137(string)
+#: res/values/strings.xml:143(string)
 msgid "Synchronise speed"
 msgstr ""
 
-#: res/values/strings.xml:138(string)
+#: res/values/strings.xml:144(string)
 msgid "View"
 msgstr ""
 
-#: res/values/strings.xml:139(string)
+#: res/values/strings.xml:145(string)
 #, fuzzy
 msgid "Add"
 msgstr "Adress"
 
-#: res/values/strings.xml:140(string)
+#: res/values/strings.xml:146(string)
 msgid "Delete"
+msgstr ""
+
+#: res/values/strings.xml:147(string)
+#, fuzzy
+msgid "Guest Loco"
+msgstr "Frigör Lok"
+
+#: res/values/strings.xml:148(string)
+#, fuzzy
+msgid "Short ID"
+msgstr "Throttle ID"
+
+#: res/values/strings.xml:149(string)
+msgid "Speedsteps"
+msgstr ""
+
+#: res/values/strings.xml:150(string)
+msgid "Protocol"
+msgstr ""
+
+#: res/values/strings.xml:151(string)
+msgid "Buttons for speed"
+msgstr ""
+
+#: res/values/strings.xml:152(string)
+msgid "Step increment"
 msgstr ""
 
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.

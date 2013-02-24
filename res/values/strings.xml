@@ -150,4 +150,5 @@
   <string name="Protocol">Protocol</string>
   <string name="ButtonView">Buttons for speed</string>
   <string name="VDelta">Step increment</string>
+  <string name="Car">Car</string>
 </resources>

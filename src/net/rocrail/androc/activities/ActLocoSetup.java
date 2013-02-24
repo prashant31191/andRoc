@@ -21,6 +21,7 @@
 package net.rocrail.androc.activities;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.interfaces.PoMListener;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LocoImage;
@@ -47,7 +48,7 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
   
   public void connectedWithService() {
     initView();
-    updateTitle(m_Loco!=null?m_Loco.ID:getText(R.string.LocoSetup).toString());
+    updateTitle(m_Loco!=null?m_Loco.getID():getText(R.string.LocoSetup).toString());
     m_RocrailService.addPoMListener(this);
   }
 
@@ -61,7 +62,11 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
       m_Loco = m_RocrailService.m_Model.getLoco(id);
     }
     else {
-      m_Loco = m_RocrailService.SelectedLoco;
+      Mobile mobile = m_RocrailService.SelectedLoco;
+      if( mobile instanceof Loco )
+        m_Loco = (Loco)mobile;
+      else
+        m_Loco = null;
     }
 
     if( m_Loco == null )
@@ -69,9 +74,9 @@ public class ActLocoSetup extends ActBase implements OnItemSelectedListener, OnS
 
     LocoImage image = (LocoImage)findViewById(R.id.locoImage);
     
-    if( m_Loco.getLocoBmp(null) != null ) {
+    if( m_Loco.getBmp(null) != null ) {
       if( image != null ) {
-        image.setImageBitmap(m_Loco.getLocoBmp(null));
+        image.setImageBitmap(m_Loco.getBmp(null));
       }
     }
     

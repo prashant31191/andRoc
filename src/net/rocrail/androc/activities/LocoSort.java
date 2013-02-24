@@ -22,24 +22,24 @@ package net.rocrail.androc.activities;
 
 import java.util.Comparator;
 
-import net.rocrail.androc.objects.Loco;
+import net.rocrail.androc.interfaces.Mobile;
 
-public class LocoSort implements Comparator<Loco>{
+public class LocoSort implements Comparator<Mobile>{
   boolean sortbyaddr = false;
   
   public LocoSort(boolean sortbyaddr) {
     this.sortbyaddr = sortbyaddr;
   }
   @Override
-  public int compare(Loco loco1, Loco loco2) {
+  public int compare(Mobile loco1, Mobile loco2) {
     if( sortbyaddr ) {
-      if( loco1.Addr == loco2.Addr )
+      if( loco1.getAddr() == loco2.getAddr() )
         return 0;
-      if( loco1.Addr > loco2.Addr )
+      if( loco1.getAddr() > loco2.getAddr() )
         return 1;
       return -1;
     }
     else
-      return loco1.ID.toLowerCase().compareTo(loco2.ID.toLowerCase());
+      return loco1.getID().toLowerCase().compareTo(loco2.getID().toLowerCase());
   }
  }

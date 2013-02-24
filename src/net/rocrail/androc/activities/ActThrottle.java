@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import net.rocrail.androc.R;
+import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.interfaces.ModelListener;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
@@ -56,9 +57,9 @@ public class ActThrottle extends ActBase
   int         m_iLocoCount     = 0;
   int         m_iLocoSelected  = 0;
   final static int FNGROUPSIZE = 6;
-  private Loco m_Loco = null;
+  private Mobile m_Loco = null;
   boolean quitShowed = false;
-  List<Loco> m_LocoList = new ArrayList<Loco>();
+  List<Mobile> m_MobileList = new ArrayList<Mobile>();
 
 
   @Override
@@ -98,14 +99,19 @@ public class ActThrottle extends ActBase
 
   
   void findLoco(int pos) {
-    if( pos >= 0 && pos < m_LocoList.size() ) 
-      m_Loco = m_LocoList.get(pos);
+    System.out.println("findLoco " + pos + " out of " + m_MobileList.size()  );
+    if( pos >= 0 && pos < m_MobileList.size() ) 
+      m_Loco = m_MobileList.get(pos);
     else {
       // ToDo: Look up last used...
     }
   
     if( m_Loco != null ) {
-      m_RocrailService.Prefs.saveLoco(m_Loco.ID, m_RocrailService.ThrottleNr);
+      System.out.println("findLoco: " + m_Loco.getID() );
+      m_RocrailService.Prefs.saveLoco(m_Loco.getID(), m_RocrailService.ThrottleNr);
+    }
+    else {
+      System.out.println("findLoco: loco not found " + pos );
     }
 
   }
@@ -234,16 +240,16 @@ public class ActThrottle extends ActBase
     LEDButton Lights = (LEDButton) findViewById(R.id.throttleLights);
 
     if( m_Loco != null ) {
-      f1.ON = m_Loco.Function[1+m_iFunctionGroup*FNGROUPSIZE];
-      f2.ON = m_Loco.Function[2+m_iFunctionGroup*FNGROUPSIZE];
-      f3.ON = m_Loco.Function[3+m_iFunctionGroup*FNGROUPSIZE];
-      f4.ON = m_Loco.Function[4+m_iFunctionGroup*FNGROUPSIZE];
-      f5.ON = m_Loco.Function[5+m_iFunctionGroup*FNGROUPSIZE];
-      f6.ON = m_Loco.Function[6+m_iFunctionGroup*FNGROUPSIZE];
+      f1.ON = m_Loco.isFunction(1+m_iFunctionGroup*FNGROUPSIZE);
+      f2.ON = m_Loco.isFunction(2+m_iFunctionGroup*FNGROUPSIZE);
+      f3.ON = m_Loco.isFunction(3+m_iFunctionGroup*FNGROUPSIZE);
+      f4.ON = m_Loco.isFunction(4+m_iFunctionGroup*FNGROUPSIZE);
+      f5.ON = m_Loco.isFunction(5+m_iFunctionGroup*FNGROUPSIZE);
+      f6.ON = m_Loco.isFunction(6+m_iFunctionGroup*FNGROUPSIZE);
       //Direction.ON = m_Loco.Dir;
       Go.setEnabled(m_RocrailService.AutoMode);
-      Go.ON = m_Loco.AutoStart;
-      Lights.ON = m_Loco.Lights;
+      Go.ON = m_Loco.isAutoStart();
+      Lights.ON = m_Loco.isLights();
       Release.ON = false;
       f1.invalidate();
       f2.invalidate();
@@ -276,21 +282,28 @@ public class ActThrottle extends ActBase
     
     getWindow().setLayout((m_RocrailService.Prefs.SmallThrottle ? 300:LayoutParams.WRAP_CONTENT), LayoutParams.FILL_PARENT);
 
-    Iterator<Loco> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
+    Iterator<Mobile> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
-      Loco loco = it.next();
-      if( loco.Show )
-        m_LocoList.add(loco);
+      Mobile loco = it.next();
+      if( loco.isShow() )
+        m_MobileList.add(loco);
     }
     
-    Collections.sort(m_LocoList, new LocoSort(m_RocrailService.Prefs.SortByAddr));
+    it = m_RocrailService.m_Model.m_CarMap.values().iterator();
+    while( it.hasNext() ) {
+      Mobile car = it.next();
+      if( car.isShow() )
+        m_MobileList.add(car);
+    }
+    
+    Collections.sort(m_MobileList, new LocoSort(m_RocrailService.Prefs.SortByAddr));
 
     if( LocoID != null ) {
-      it = m_LocoList.iterator();
+      it = m_MobileList.iterator();
       int idx = 0;
       while( it.hasNext() ) {
-        Loco loco = it.next();
-        if( LocoID.equals(loco.ID) ) {
+        Mobile loco = it.next();
+        if( LocoID.equals(loco.getID()) ) {
           m_iLocoSelected = idx;
         }
         idx++;
@@ -311,7 +324,7 @@ public class ActThrottle extends ActBase
           quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipLights();
-            ((LEDButton)v).ON = m_Loco.Lights;
+            ((LEDButton)v).ON = m_Loco.isLights();
             v.invalidate();
           }
         }
@@ -343,7 +356,7 @@ public class ActThrottle extends ActBase
           quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(1+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = m_Loco.Function[1+m_iFunctionGroup*FNGROUPSIZE];
+            ((LEDButton)v).ON = m_Loco.isFunction(1+m_iFunctionGroup*FNGROUPSIZE);
             v.invalidate();
           }
         }
@@ -357,7 +370,7 @@ public class ActThrottle extends ActBase
           quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(2+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = m_Loco.Function[2+m_iFunctionGroup*FNGROUPSIZE];
+            ((LEDButton)v).ON = m_Loco.isFunction(2+m_iFunctionGroup*FNGROUPSIZE);
             v.invalidate();
           }
         }
@@ -371,7 +384,7 @@ public class ActThrottle extends ActBase
           quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(3+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = m_Loco.Function[3+m_iFunctionGroup*FNGROUPSIZE];
+            ((LEDButton)v).ON = m_Loco.isFunction(3+m_iFunctionGroup*FNGROUPSIZE);
             v.invalidate();
           }
         }
@@ -385,7 +398,7 @@ public class ActThrottle extends ActBase
           quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(4+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = m_Loco.Function[4+m_iFunctionGroup*FNGROUPSIZE];
+            ((LEDButton)v).ON = m_Loco.isFunction(4+m_iFunctionGroup*FNGROUPSIZE);
             v.invalidate();
           }
         }
@@ -399,7 +412,7 @@ public class ActThrottle extends ActBase
           quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(5+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = m_Loco.Function[5+m_iFunctionGroup*FNGROUPSIZE];
+            ((LEDButton)v).ON = m_Loco.isFunction(5+m_iFunctionGroup*FNGROUPSIZE);
             v.invalidate();
           }
         }
@@ -413,7 +426,7 @@ public class ActThrottle extends ActBase
           quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipFunction(6+m_iFunctionGroup*FNGROUPSIZE);
-            ((LEDButton)v).ON = m_Loco.Function[6+m_iFunctionGroup*FNGROUPSIZE];
+            ((LEDButton)v).ON = m_Loco.isFunction(6+m_iFunctionGroup*FNGROUPSIZE);
             v.invalidate();
           }
         }
@@ -422,14 +435,14 @@ public class ActThrottle extends ActBase
     LEDButton Go = (LEDButton) findViewById(R.id.throttleGo);
     Go.noLED();
     if( m_Loco != null )
-      Go.ON = m_Loco.AutoStart;
+      Go.ON = m_Loco.isAutoStart();
     Go.setEnabled(m_RocrailService.AutoMode);
     Go.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           quitShowed = false;
           if( m_Loco != null ) {
             m_Loco.flipGo();
-            ((LEDButton)v).ON = m_Loco.AutoStart;
+            ((LEDButton)v).ON = m_Loco.isAutoStart();
             v.invalidate();
           }
         }
@@ -464,7 +477,7 @@ public class ActThrottle extends ActBase
             //((LEDButton)v).ON = m_Loco.Dir;
             v.invalidate();
             Slider mSeekBar = (Slider)findViewById(R.id.Speed);
-            mSeekBar.setV(m_Loco.Speed);
+            mSeekBar.setV(m_Loco.getSpeed());
             setDirSpeed((LEDButton)v);
           }
         }
@@ -490,7 +503,7 @@ public class ActThrottle extends ActBase
         quitShowed = false;
         if( m_Loco != null ) {
           Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
-          intent.putExtra("id", m_Loco.ID);
+          intent.putExtra("id", m_Loco.getID());
           startActivity(intent);
         }
         return true;
@@ -503,24 +516,24 @@ public class ActThrottle extends ActBase
   
   void setDirSpeed(LEDButton v) {
     //v.ON = m_Loco.Dir;
-    if( m_Loco.Dir )
-      v.setText(""+m_Loco.Speed+" >");
+    if( m_Loco.isDir() )
+      v.setText(""+m_Loco.getSpeed()+" >");
     else
-      v.setText("< "+m_Loco.Speed);
+      v.setText("< "+m_Loco.getSpeed());
   }
 
   void setConsist() {
     TextView Consist = (TextView)findViewById(R.id.LocoThrottleConsist);
     Consist.setBackgroundColor(Color.TRANSPARENT);
     Consist.setText("");
-    if( m_Loco.Consist.length() > 0 ) {
-      Consist.setText(m_Loco.Consist);
+    if( m_Loco.getConsist().length() > 0 ) {
+      Consist.setText(m_Loco.getConsist());
     }
     else {
-      String master = m_RocrailService.m_Model.findMaster(m_Loco.ID);
+      String master = m_RocrailService.m_Model.findMaster(m_Loco.getID());
       if( master.length() > 0 ) {
         Consist.setBackgroundColor(Color.rgb(180, 0, 0));
-        Consist.setText(m_RocrailService.m_Model.findMaster(m_Loco.ID));
+        Consist.setText(m_RocrailService.m_Model.findMaster(m_Loco.getID()));
         /*
         Consist.setOnClickListener(new View.OnClickListener() {
           public void onClick(View v) {
@@ -567,6 +580,7 @@ public class ActThrottle extends ActBase
   }
 
   public void locoSelected( int position) {
+    System.out.println("locoSelected " + position);
     quitShowed = false;
     if( position != -1 ) {
       m_iLocoSelected = position;
@@ -579,31 +593,31 @@ public class ActThrottle extends ActBase
     if( m_Loco != null ) {
       m_RocrailService.SelectedLoco = m_Loco;
       
-      m_RocrailService.Prefs.saveLoco(m_Loco.ID, m_RocrailService.ThrottleNr);
+      m_RocrailService.Prefs.saveLoco(m_Loco.getID(), m_RocrailService.ThrottleNr);
       
-      System.out.println("locoSelected: "+m_Loco.ID+"["+m_RocrailService.ThrottleNr+"]");
+      System.out.println("locoSelected: "+m_Loco.getID()+"["+m_RocrailService.ThrottleNr+"]");
 
       LEDButton f0 = (LEDButton) findViewById(R.id.throttleLights);
-      f0.ON = m_Loco.Lights;
+      f0.ON = m_Loco.isLights();
       updateFunctions();
       
       LocoImage image = (LocoImage)findViewById(R.id.locoImage);
-      image.ID = m_Loco.ID;
-      if( m_Loco.getLocoBmp(image) != null ) {
-        image.setImageBitmap(m_Loco.getLocoBmp(null));
+      image.ID = m_Loco.getID();
+      if( m_Loco.getBmp(image) != null ) {
+        image.setImageBitmap(m_Loco.getBmp(null));
       }
       else {
         image.setImageResource(R.drawable.noimg);
       }
       TextView ID = (TextView)findViewById(R.id.LocoThrottleID);
-      ID.setText(m_Loco.ID);
+      ID.setText(m_Loco.getID());
       TextView Desc = (TextView)findViewById(R.id.LocoThrottleDesc);
-      Desc.setText(m_Loco.Description);
+      Desc.setText(m_Loco.getDescription());
       setConsist();
       
       Slider mSeekBar = (Slider)findViewById(R.id.Speed);
-      mSeekBar.setRange(m_Loco.Vmax);
-      mSeekBar.setV(m_Loco.Speed);
+      mSeekBar.setRange(m_Loco.getVMax());
+      mSeekBar.setV(m_Loco.getSpeed());
       mSeekBar.setButtonView(m_RocrailService.Prefs.ButtonView);
       mSeekBar.setDelta(m_RocrailService.Prefs.UseAllSpeedSteps?1:m_RocrailService.Prefs.VDelta);
       LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
@@ -635,7 +649,7 @@ public class ActThrottle extends ActBase
 
   @Override
   public void modelUpdate(int MODELLIST, String ID) {
-    if( MODELLIST == ModelListener.MODELLIST_LC && m_Loco != null && m_Loco.ID == ID ) {
+    if( MODELLIST == ModelListener.MODELLIST_LC && m_Loco != null && m_Loco.getID() == ID ) {
       Slider bar = (Slider)findViewById(R.id.Speed);
       if( bar != null ) {
         bar.post(new Runnable() {
@@ -644,7 +658,7 @@ public class ActThrottle extends ActBase
             if( m_RocrailService.Prefs.SyncSpeed ) {
               Slider mSeekBar = (Slider)findViewById(R.id.Speed);
               if( !mSeekBar.isPressed() )
-                mSeekBar.setV(m_Loco.Speed);
+                mSeekBar.setV(m_Loco.getSpeed());
               LEDButton mDir = (LEDButton)findViewById(R.id.throttleDirection);
               setDirSpeed(mDir);
             }
@@ -742,10 +756,10 @@ public class ActThrottle extends ActBase
     }
     if( view.getId() == R.id.throttleDirection ) {
       if( m_Loco != null ) {
-        String masterConsist = m_RocrailService.m_Model.findMaster(m_Loco.ID);
+        String masterConsist = m_RocrailService.m_Model.findMaster(m_Loco.getID());
         if( masterConsist.length() == 0 ) {
           Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoConsist.class);
-          intent.putExtra("id", m_Loco.ID);
+          intent.putExtra("id", m_Loco.getID());
           startActivityForResult(intent, 2);
         }
         else {

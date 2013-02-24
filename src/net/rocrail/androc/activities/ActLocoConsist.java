@@ -34,19 +34,19 @@ public class ActLocoConsist extends ActBase {
       m_Loco = m_RocrailService.m_Model.getLoco(id);
     }
     else {
-      m_Loco = m_RocrailService.SelectedLoco;
+      m_Loco = (Loco)m_RocrailService.SelectedLoco;
     }
 
     if( m_Loco == null )
       return;
     
-    setTitle("Consist " + m_Loco.ID);
+    setTitle("Consist " + m_Loco.getID());
     
     LocoImage image = (LocoImage)findViewById(R.id.locoImage);
     
-    if( m_Loco.getLocoBmp(null) != null ) {
+    if( m_Loco.getBmp(null) != null ) {
       if( image != null ) {
-        image.setImageBitmap(m_Loco.getLocoBmp(null));
+        image.setImageBitmap(m_Loco.getBmp(null));
       }
     }
     
@@ -66,7 +66,7 @@ public class ActLocoConsist extends ActBase {
         public void onClick(View v) {
           if( m_Loco != null ) {
             Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoList.class);
-            intent.putExtra("exclude", m_Loco.ID + "," + m_Loco.Consist );
+            intent.putExtra("exclude", m_Loco.getID() + "," + m_Loco.Consist );
             startActivityForResult(intent, 1);
           }
         }
@@ -105,7 +105,7 @@ public class ActLocoConsist extends ActBase {
 
       if( l_Loco != null ) {
         Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLoco.class);
-        intent.putExtra("id", l_Loco.ID);
+        intent.putExtra("id", l_Loco.getID());
         startActivity(intent);
       }
         

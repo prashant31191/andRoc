@@ -22,6 +22,7 @@ package net.rocrail.androc.activities;
 
 import java.util.Iterator;
 
+import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.objects.Block;
 import net.rocrail.androc.objects.Loco;
 import net.rocrail.androc.widgets.LEDButton;
@@ -42,7 +43,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBarChangeListener {
-  Loco m_Loco = null;
+  Mobile m_Loco = null;
   String ScheduleID  = null;
   String BlockID     = null;
   String ThisBlockID = null;
@@ -57,17 +58,17 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
   
   public void connectedWithService() {
     initView();
-    updateTitle(m_Loco!=null?m_Loco.ID:getText(R.string.LocoProps).toString());
+    updateTitle(m_Loco!=null?m_Loco.getID():getText(R.string.LocoProps).toString());
   }
 
 
   void updateLoco() {
     LocoImage image = (LocoImage)findViewById(R.id.locoImage);
     
-    image.ID = m_Loco.ID;
+    image.ID = m_Loco.getID();
     
-    if (m_Loco.getLocoBmp(image) != null) {
-      image.setImageBitmap(m_Loco.getLocoBmp(null));
+    if (m_Loco.getBmp(image) != null) {
+      image.setImageBitmap(m_Loco.getBmp(null));
     }
     else {
       image.setImageResource(R.drawable.noimg);
@@ -94,24 +95,24 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
       return;
 
     if( BlockID == null || BlockID.length() == 0 ) {
-      Block block = m_RocrailService.m_Model.findBlock4Loco(m_Loco.ID);
+      Block block = m_RocrailService.m_Model.findBlock4Loco(m_Loco.getID());
       if( block != null )
         BlockID = block.ID;
     }
     
     TextView addr = (TextView)findViewById(R.id.locoAddress);
-    addr.setText(getText(R.string.Address) + ": " + m_Loco.Addr + "/" + m_Loco.Steps);
+    addr.setText(getText(R.string.Address) + ": " + m_Loco.getAddr() + "/" + m_Loco.getSteps());
     
     TextView runtime = (TextView)findViewById(R.id.locoRuntime);
-    int hours = (int)(m_Loco.RunTime/3600);
-    int mins  = (int)((m_Loco.RunTime - hours * 3600) / 60);
-    int secs  = (int)(m_Loco.RunTime%60);
+    int hours = (int)(m_Loco.getRunTime()/3600);
+    int mins  = (int)((m_Loco.getRunTime() - hours * 3600) / 60);
+    int secs  = (int)(m_Loco.getRunTime()%60);
     runtime.setText(getText(R.string.Runtime) + ": " + String.format("%d:%02d.%02d", hours, mins, secs ) ); 
     
     TextView desc = (TextView)findViewById(R.id.locoDesc);
-    desc.setText(getText(R.string.Description) + ": " + m_Loco.Description);
+    desc.setText(getText(R.string.Description) + ": " + m_Loco.getDescription());
     TextView road = (TextView)findViewById(R.id.locoRoadname);
-    road.setText(getText(R.string.Roadname) + ": " + m_Loco.Roadname);
+    road.setText(getText(R.string.Roadname) + ": " + m_Loco.getRoadname());
     
     updateLoco();
     LocoImage image = (LocoImage)findViewById(R.id.locoImage);
@@ -121,7 +122,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
         //finish();
         if( m_Loco != null ) {
           Intent intent = new Intent(m_Activity,net.rocrail.androc.activities.ActLocoSetup.class);
-          intent.putExtra("id", m_Loco.ID);
+          intent.putExtra("id", m_Loco.getID());
           startActivity(intent);
         }
       }
@@ -130,30 +131,30 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     final LEDButton autoStart = (LEDButton) findViewById(R.id.locoStart);
     autoStart.setEnabled(m_RocrailService.AutoMode);
     autoStart.setLongClickable(true);
-    autoStart.ON = m_Loco.AutoStart;
+    autoStart.ON = m_Loco.isAutoStart();
     autoStart.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_Loco.AutoStart = !m_Loco.AutoStart;
-          ((LEDButton)v).ON = m_Loco.AutoStart;
+          m_Loco.setAutoStart( !m_Loco.isAutoStart() );
+          ((LEDButton)v).ON = m_Loco.isAutoStart();
           
-          if( m_Loco.AutoStart && ScheduleID != null) {
+          if( m_Loco.isAutoStart() && ScheduleID != null) {
             m_RocrailService.sendMessage("lc", 
                 String.format("<lc id=\"%s\" cmd=\"useschedule\" scheduleid=\"%s\"/>", 
-                    m_Loco.ID, ScheduleID ) );
+                    m_Loco.getID(), ScheduleID ) );
           }
 
           m_RocrailService.sendMessage("lc", String.format("<lc id=\"%s\" cmd=\"%s\"/>", 
-              m_Loco.ID, m_Loco.AutoStart?(m_Loco.HalfAuto?"gomanual":"go"):"stop") );
+              m_Loco.getID(), m_Loco.isAutoStart()?(m_Loco.isHalfAuto()?"gomanual":"go"):"stop") );
 
         }
     });
     
     autoStart.setOnLongClickListener(new View.OnLongClickListener() {
       public boolean onLongClick(View v) {
-        if( m_Loco.AutoStart && BlockID != null && !BlockID.equals(ThisBlockID)) {
+        if( m_Loco.isAutoStart() && BlockID != null && !BlockID.equals(ThisBlockID)) {
           m_RocrailService.sendMessage("lc", 
               String.format("<lc id=\"%s\" cmd=\"gotoblock\" blockid=\"%s\"/>", 
-                  m_Loco.ID, BlockID ) );
+                  m_Loco.getID(), BlockID ) );
           finish();
         }
         return true;
@@ -163,11 +164,11 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
 
    
     final LEDButton halfAuto = (LEDButton) findViewById(R.id.locoHalfAuto);
-    halfAuto.ON = m_Loco.HalfAuto;
+    halfAuto.ON = m_Loco.isHalfAuto();
     halfAuto.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_Loco.HalfAuto = !m_Loco.HalfAuto;
-          ((LEDButton)v).ON = m_Loco.HalfAuto;
+          m_Loco.setHalfAuto( !m_Loco.isHalfAuto() );
+          ((LEDButton)v).ON = m_Loco.isHalfAuto();
         }
     });
 
@@ -177,19 +178,19 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
         public void onClick(View v) {
           if( BlockID != null ) {
             m_RocrailService.sendMessage("lc", 
-                String.format("<lc id=\"%s\" cmd=\"block\" blockid=\"%s\"/>", m_Loco.ID, BlockID ) );
+                String.format("<lc id=\"%s\" cmd=\"block\" blockid=\"%s\"/>", m_Loco.getID(), BlockID ) );
           }
         }
     });
 
    
     final LEDButton swapLoco = (LEDButton) findViewById(R.id.locoSwap);
-    swapLoco.ON = m_Loco.Placing;
+    swapLoco.ON = m_Loco.isPlacing();
     swapLoco.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_Loco.Placing = !m_Loco.Placing;
+          m_Loco.setPlacing( !m_Loco.isPlacing());
           m_Loco.swap();
-          ((LEDButton)v).ON = m_Loco.Placing;
+          ((LEDButton)v).ON = m_Loco.isPlacing();
         }
     });
 
@@ -253,10 +254,10 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     if( m_Loco != null ) {
       final LEDButton autoStart = (LEDButton) findViewById(R.id.locoStart);
       autoStart.setEnabled(m_RocrailService.AutoMode);
-      autoStart.ON = m_Loco.AutoStart;
+      autoStart.ON = m_Loco.isAutoStart();
       
       final LEDButton halfAuto = (LEDButton) findViewById(R.id.locoHalfAuto);
-      halfAuto.ON = m_Loco.HalfAuto;
+      halfAuto.ON = m_Loco.isHalfAuto();
     }
   }
 
