@@ -784,8 +784,8 @@ public class ActThrottle extends ActBase
   @Override
   protected void onStop() {
     super.onPause();
-    if( RocrailServiceConnection != null)
-      unbindService(RocrailServiceConnection);
+    //if( RocrailServiceConnection != null)
+      //unbindService(RocrailServiceConnection);
   }
 }
 

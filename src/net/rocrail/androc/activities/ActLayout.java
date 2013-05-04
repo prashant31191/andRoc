@@ -128,7 +128,7 @@ public class ActLayout extends ListActivity implements ServiceListener {
   @Override
   protected void onStop() {
     super.onPause();
-    if( m_Base.RocrailServiceConnection != null)
-      unbindService(m_Base.RocrailServiceConnection);
+    //if( m_Base.RocrailServiceConnection != null)
+      //unbindService(m_Base.RocrailServiceConnection);
   }
 }
