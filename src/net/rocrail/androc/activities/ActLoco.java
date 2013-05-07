@@ -20,6 +20,7 @@
 
 package net.rocrail.androc.activities;
 
+import java.util.Comparator;
 import java.util.Iterator;
 
 import net.rocrail.androc.interfaces.Mobile;
@@ -203,22 +204,26 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
 
-    int idx = 0;
-    int select = 0;
-    m_adapterForSpinner.add(getText(R.string.BlockList).toString());
-    idx++;
-    
     Iterator<Block> it = m_RocrailService.m_Model.m_BlockMap.values().iterator();
     while( it.hasNext() ) {
       Block block = it.next();
       m_adapterForSpinner.add(block.ID);
-      if( BlockID != null && BlockID.equals(block.ID)) {
-        select = idx;
-      }
-      idx++;
     }
     
-    s.setSelection(select);
+    m_adapterForSpinner.sort(new IDComparator());
+    m_adapterForSpinner.insert(getText(R.string.BlockList).toString(), 0);
+    s.setSelection(0);
+
+    if( BlockID != null ) {
+      int cnt = m_adapterForSpinner.getCount();
+      for( int i = 0; i < cnt; i++ ) {
+        if( m_adapterForSpinner.getItem(i).equals(BlockID) ) {
+          s.setSelection(i);
+          break;
+        }
+      }
+    }
+    
     s.setOnItemSelectedListener(this);
     // s.setSelection(m_RocrailService.m_iSelectedLoco);    
     
@@ -231,13 +236,15 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     m_adapterForSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     s.setAdapter(m_adapterForSpinner);
 
-    m_adapterForSpinner.add(getText(R.string.ScheduleList).toString());
 
     Iterator<String> itSc = m_RocrailService.m_Model.m_ScheduleList.iterator();
     while( itSc.hasNext() ) {
       String sc = itSc.next();
       m_adapterForSpinner.add(sc);
     }
+
+    m_adapterForSpinner.sort(new IDComparator());
+    m_adapterForSpinner.insert(getText(R.string.ScheduleList).toString(), 0);
     
     s.setOnItemSelectedListener(this);
     // s.setSelection(m_RocrailService.m_iSelectedLoco);    
@@ -303,6 +310,13 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     
   }
   
+  
+  class IDComparator implements Comparator<String> {
+    @Override
+    public int compare(String id1, String id2) {
+      return id1.toLowerCase().compareTo(id2.toLowerCase());
+    }
+  }
   
   
 
