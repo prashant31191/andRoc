@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Rocrail - Model Railroad Software
+
+ Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-->
+<resources>
+  <string name="Title">Títol</string>
+  <string name="Throttle">Regulador</string>
+  <string name="Locomotives">Locomotores</string>
+  <string name="Outputs">Sortides</string>
+  <string name="Routes">Rutes</string>
+  <string name="Switches">Canvis d\'agulles</string>
+  <string name="Signals">Senyals</string>
+  <string name="Blocks">Blocs</string>
+  <string name="Schedules">Horaris</string>
+  <string name="System">Sistema</string>
+  <string name="Power_ON">Encès</string>
+  <string name="Power_OFF">Apagat</string>
+  <string name="Init_Field">Init Field</string>
+  <string name="Auto_ON">Automàticament encès</string>
+  <string name="Auto_Start">Autoinici</string>
+  <string name="Release">RE</string>
+  <string name="none">Cap</string>
+  <string name="START">Encén</string>
+  <string name="STOP">Para</string>
+  <string name="HalfAuto">Half Auto</string>
+  <string name="SetInBlock">Aplica al bloc</string>
+  <string name="Normal">Normal</string>
+  <string name="Swapped">Swapped</string>
+  <string name="Placing">Col.locació</string>
+  <string name="Automatic">Automàtic</string>
+  <string name="Settings">Preferències</string>
+  <string name="Loco">Locomotora</string>
+  <string name="Close">Tanca</string>
+  <string name="Open">Obre</string>
+  <string name="Connect">Connecta</string>
+  <string name="Menu">Menú</string>
+  <string name="Layout">Disseny</string>
+  <string name="Level">Nivell</string>
+  <string name="Quit">Surt</string>
+  <string name="Direction">Sentit</string>
+  <string name="Host">Servidor</string>
+  <string name="Port">Port</string>
+  <string name="Start">ST</string>
+  <string name="FunctionGroup">FG</string>
+  <string name="Lights">Llums</string>
+  <string name="Recent">Recent</string>
+  <string name="Previous">Anterior</string>
+  <string name="Next">Següent</string>
+  <string name="Track">Via</string>
+  <string name="SetLoco">Selecciona locomotora</string>
+  <string name="ResetLoco">Reset Loco</string>
+  <string name="quit">Surt</string>
+  <string name="ReallyQuit">Sortir d\'AndRoc</string>
+  <string name="yes">Sí</string>
+  <string name="no">No</string>
+  <string name="start_all_locos">Iniciar totes les locomotres en mode automàtic?</string>
+  <string name="Preferences">Opcions</string>
+  <string name="Monitoring">Monitorització del sistema</string>
+  <string name="Address">Adreça</string>
+  <string name="Runtime">Temps d\'execució</string>
+  <string name="KeepScreenOn">Keep screen on</string>
+  <string name="ClearRecent">Neteja llista recent</string>
+  <string name="R2RHost">Adreça R2R</string>
+  <string name="R2RPort">Port R2R</string>
+  <string name="Accessory">Accessori</string>
+  <string name="BackAgainQuit">Press Back once more to exit.</string>
+  <string name="LocoSetup">Configuració de locomotora</string>
+  <string name="FreeBlock">Free Block</string>
+  <string name="OpenBlock">Open Block</string>
+  <string name="CloseBlock">Close Block</string>
+  <string name="OpenEnter">Open enter</string>
+  <string name="CloseEnter">Close enter</string>
+  <string name="OpenExit">Open exit</string>
+  <string name="CloseExit">Close exit</string>
+  <string name="Compress">Compress</string>
+  <string name="SelectBlock">Selecciona Bloc</string>
+  <string name="BlockList">Llista de Blocs</string>
+  <string name="SelectSchedule">Select Schedule</string>
+  <string name="ScheduleList">Schedule list</string>
+  <string name="Modview">Module view</string>
+  <string name="Read">llegir</string>
+  <string name="Write">Escriu</string>
+  <string name="CV">CV</string>
+  <string name="Value">Valor</string>
+  <string name="DeviceID">DeviceID</string>
+  <string name="BlockID">BlockID</string>
+  <string name="StageID">StageID</string>
+  <string name="Description">Descripció</string>
+  <string name="Roadname">Companyia</string>
+  <string name="Vmax">Vmax</string>
+  <string name="Vmid">Vmij</string>
+  <string name="Vmin">Vmin</string>
+  <string name="LoadingPlan">Loading plan...</string>
+  <string name="License">Llicència</string>
+  <string name="Version">Versió</string>
+  <string name="ThrottleID">Throttle ID</string>
+  <string name="CreatingModview">Creating module view...</string>
+  <string name="LocoProps">Loco properties</string>
+  <string name="Info">Informació</string>
+  <string name="Actions">Actions</string>
+  <string name="Turntable">Rotonda</string>
+  <string name="FiddleYard">Fiddle Yard</string>
+  <string name="Swap">Swap</string>
+  <string name="SelectLoco">Selecciona locomotora</string>
+  <string name="Dispatch">Dispatch</string>
+  <string name="AcceptIdent">Accept BiDi Ident</string>
+  <string name="EmergencyStop">Parada d\'emergència</string>
+  <string name="SmallThrottle">Small throttle</string>
+  <string name="ControlCode">Ctrl code</string>
+  <string name="Zoom">Acosta/allunya la vista</string>
+  <string name="Unlock">Desbloquejar</string>
+  <string name="ImagesOnDemand">Images on demand</string>
+  <string name="SortByAddr">Sort by address</string>
+  <string name="PowerOff4EBreak">Power off for EStop</string>
+  <string name="Color">Color</string>
+  <string name="SelectColor">Selecciona el color de fons</string>
+  <string name="Green">Verd</string>
+  <string name="Grey">Gris</string>
+  <string name="Blue">Blau</string>
+  <string name="LocoCatList">Sort by category</string>
+  <string name="Steam">Vapor</string>
+  <string name="Diesel">Dièsel</string>
+  <string name="Electric">Elèctric</string>
+  <string name="Trainset">Trainset</string>
+  <string name="Special">Especial</string>
+  <string name="UseAllSpeedSteps">Use all speed steps</string>
+  <string name="SyncSpeed">Synchronise speed</string>
+  <string name="View">View</string>
+  <string name="Add">Add</string>
+  <string name="Delete">Delete</string>
+  <string name="GuestLoco">Guest Loco</string>
+  <string name="ShortID">Short ID</string>
+  <string name="Speedsteps">Speedsteps</string>
+  <string name="Protocol">Protocol</string>
+  <string name="ButtonView">Buttons for speed</string>
+  <string name="VDelta">Step increment</string>
+  <string name="Car">Car</string>
+</resources>

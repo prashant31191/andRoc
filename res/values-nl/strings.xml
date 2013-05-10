@@ -64,7 +64,7 @@
   <string name="Next">Volgende</string>
   <string name="Track">Spoor</string>
   <string name="SetLoco">Plaats loc</string>
-  <string name="ResetLoco">Reset loc</string>
+  <string name="ResetLoco">Reset Loc</string>
   <string name="quit">Afsluiten</string>
   <string name="ReallyQuit">Afsluiten</string>
   <string name="yes">Ja</string>
@@ -84,6 +84,11 @@
   <string name="FreeBlock">Vrij Blok</string>
   <string name="OpenBlock">Open Blok</string>
   <string name="CloseBlock">Sluit Blok</string>
+  <string name="OpenEnter">Open ingang</string>
+  <string name="CloseEnter">Sluit ingang</string>
+  <string name="OpenExit">Open uitgang</string>
+  <string name="CloseExit">Sluit uitgang</string>
+  <string name="Compress">Comprimeren</string>
   <string name="SelectBlock">Kies Blok</string>
   <string name="BlockList">Blok lijst</string>
   <string name="SelectSchedule">Kies Dienstrooster</string>
@@ -95,6 +100,7 @@
   <string name="Value">Waarde</string>
   <string name="DeviceID">Apparaat ID</string>
   <string name="BlockID">Blok ID</string>
+  <string name="StageID">Opstelblok ID</string>
   <string name="Description">Omschrijving</string>
   <string name="Roadname">Maatschappij</string>
   <string name="Vmax">Vmax</string>
@@ -105,13 +111,13 @@
   <string name="Version">Versie</string>
   <string name="ThrottleID">Regelaar ID</string>
   <string name="CreatingModview">Module aanzicht samenstellen...</string>
-  <string name="LocoProps">Loc eigenschappen</string>
+  <string name="LocoProps">Lok eigenschappen</string>
   <string name="Info">Info</string>
   <string name="Actions">Acties</string>
   <string name="Turntable">Draaischijf</string>
   <string name="FiddleYard">Fiddle Yard</string>
   <string name="Swap">Omkeren</string>
-  <string name="SelectLoco">Kies loc</string>
+  <string name="SelectLoco">Kies Lok</string>
   <string name="Dispatch">Dispatch</string>
   <string name="AcceptIdent">Accepteer BiDi</string>
   <string name="EmergencyStop">Nood stop</string>
@@ -133,4 +139,16 @@
   <string name="Electric">Elektrisch</string>
   <string name="Trainset">Treinstel</string>
   <string name="Special">Speciaal</string>
+  <string name="UseAllSpeedSteps">Gebruik alle snelheid stappen</string>
+  <string name="SyncSpeed">Snelheid synchroniseren</string>
+  <string name="View">Weergeven</string>
+  <string name="Add">Toevoegen</string>
+  <string name="Delete">Verwijderen</string>
+  <string name="GuestLoco">Gast locomotief</string>
+  <string name="ShortID">Korte ID</string>
+  <string name="Speedsteps">Decoder stappen</string>
+  <string name="Protocol">Protocol</string>
+  <string name="ButtonView">Snelheid knoppen</string>
+  <string name="VDelta">Snelheid stap grote</string>
+  <string name="Car">Wagon</string>
 </resources>

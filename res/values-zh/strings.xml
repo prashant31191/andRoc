@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Rocrail - Model Railroad Software
+
+ Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-->
+<resources>
+  <string name="Title">标题</string>
+  <string name="Throttle">机车控制台</string>
+  <string name="Locomotives">机车</string>
+  <string name="Outputs">输出</string>
+  <string name="Routes">线路</string>
+  <string name="Switches">道岔</string>
+  <string name="Signals">信号</string>
+  <string name="Blocks">区间</string>
+  <string name="Schedules">线路规划</string>
+  <string name="System">系统</string>
+  <string name="Power_ON">开启</string>
+  <string name="Power_OFF">关闭</string>
+  <string name="Init_Field">初始线路</string>
+  <string name="Auto_ON">自动开启</string>
+  <string name="Auto_Start">自动启动</string>
+  <string name="Release">RE</string>
+  <string name="none">无</string>
+  <string name="START">开始</string>
+  <string name="STOP">停止</string>
+  <string name="HalfAuto">半自动</string>
+  <string name="SetInBlock">放置区间</string>
+  <string name="Normal">普通</string>
+  <string name="Swapped">交换</string>
+  <string name="Placing">配置</string>
+  <string name="Automatic">自动</string>
+  <string name="Settings">设定值</string>
+  <string name="Loco">机车</string>
+  <string name="Close">关闭(C)</string>
+  <string name="Open">打开(O)</string>
+  <string name="Connect">连接</string>
+  <string name="Menu">菜单</string>
+  <string name="Layout">沙盘布局(Layout)</string>
+  <string name="Level">级别</string>
+  <string name="Quit">退出 (Quit)</string>
+  <string name="Direction">行进方向</string>
+  <string name="Host">主机</string>
+  <string name="Port">端口</string>
+  <string name="Start">ST</string>
+  <string name="FunctionGroup">FG</string>
+  <string name="Lights">灯光</string>
+  <string name="Recent">最近使用过的</string>
+  <string name="Previous">上一个(P)</string>
+  <string name="Next">下一个(N)</string>
+  <string name="Track">轨道</string>
+  <string name="SetLoco">设置机车</string>
+  <string name="ResetLoco">复位机车设置</string>
+  <string name="quit">退出 (Quit)</string>
+  <string name="ReallyQuit">退出 anRoc?</string>
+  <string name="yes">是(Y)</string>
+  <string name="no">否(N)</string>
+  <string name="start_all_locos">机车由自动模式启动？</string>
+  <string name="Preferences">首选项</string>
+  <string name="Monitoring">监视系统</string>
+  <string name="Address">地址</string>
+  <string name="Runtime">运行时间</string>
+  <string name="KeepScreenOn">保持屏幕显示</string>
+  <string name="ClearRecent">清除最近记录</string>
+  <string name="R2RHost">R2R 地址</string>
+  <string name="R2RPort">R2R 端口</string>
+  <string name="Accessory">附件</string>
+  <string name="BackAgainQuit">再次按下BACK将退出程序</string>
+  <string name="LocoSetup">机车 设置</string>
+  <string name="FreeBlock">空闲区间</string>
+  <string name="OpenBlock">释放区间</string>
+  <string name="CloseBlock">关闭区间</string>
+  <string name="OpenEnter">开放进入</string>
+  <string name="CloseEnter">禁止驶入</string>
+  <string name="OpenExit">开放离开</string>
+  <string name="CloseExit">禁止驶出</string>
+  <string name="Compress">压缩</string>
+  <string name="SelectBlock">选择区间</string>
+  <string name="BlockList">区间列表</string>
+  <string name="SelectSchedule">选择线路</string>
+  <string name="ScheduleList">线路列表</string>
+  <string name="Modview">模型视图</string>
+  <string name="Read">读取</string>
+  <string name="Write">写入</string>
+  <string name="CV">CV值</string>
+  <string name="Value">定义值</string>
+  <string name="DeviceID">设备ID</string>
+  <string name="BlockID">区间ID</string>
+  <string name="StageID">平台ID</string>
+  <string name="Description">描述(A)</string>
+  <string name="Roadname">线路名称</string>
+  <string name="Vmax">V（最大值）</string>
+  <string name="Vmid">V（最小值）</string>
+  <string name="Vmin">V（中间值）</string>
+  <string name="LoadingPlan">读取规划线路中。。。</string>
+  <string name="License">许可(A)</string>
+  <string name="Version">版本号</string>
+  <string name="ThrottleID">机车控制ID</string>
+  <string name="CreatingModview">建立预览图片。。。</string>
+  <string name="LocoProps">机车属性</string>
+  <string name="Info">信息</string>
+  <string name="Actions">操作</string>
+  <string name="Turntable">调车转盘</string>
+  <string name="FiddleYard">停车场</string>
+  <string name="Swap">交换</string>
+  <string name="SelectLoco">选择机车</string>
+  <string name="Dispatch">出发</string>
+  <string name="AcceptIdent">接受双向始发</string>
+  <string name="EmergencyStop">紧急停车</string>
+  <string name="SmallThrottle">机车控制缩小</string>
+  <string name="ControlCode">控制码</string>
+  <string name="Zoom">缩放</string>
+  <string name="Unlock">取消锁定</string>
+  <string name="ImagesOnDemand">图像正在使用</string>
+  <string name="SortByAddr">按地址排序</string>
+  <string name="PowerOff4EBreak">紧急停车时关闭电源</string>
+  <string name="Color">颜色</string>
+  <string name="SelectColor">选择背景色</string>
+  <string name="Green">绿色</string>
+  <string name="Grey">灰色</string>
+  <string name="Blue">蓝色</string>
+  <string name="LocoCatList">分类排序</string>
+  <string name="Steam">蒸汽机车</string>
+  <string name="Diesel">柴油机车</string>
+  <string name="Electric">电力机车</string>
+  <string name="Trainset">机车组</string>
+  <string name="Special">特殊(_P)</string>
+  <string name="UseAllSpeedSteps">使用所有速度级</string>
+  <string name="SyncSpeed">重联速度</string>
+  <string name="View">查看</string>
+  <string name="Add">添加</string>
+  <string name="Delete">删除</string>
+  <string name="GuestLoco">访客用机车</string>
+  <string name="ShortID">短地址</string>
+  <string name="Speedsteps">速度级</string>
+  <string name="Protocol">协议</string>
+  <string name="ButtonView">速度键</string>
+  <string name="VDelta">步进量</string>
+  <string name="Car">车辆</string>
+</resources>

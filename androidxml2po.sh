@@ -22,8 +22,8 @@
 #
 
 #Set the languages here (long version is the android resource append string).
-short_lang=("nl" "de" "fr" "cs" "ta" "es" "it" "ta" "pt" "sv" "ta") #do not include template language ("en" usually).
-long_lang=("nl" "de" "fr" "cs" "ta" "es" "it" "ta" "pt_BR" "sv" "ta") #do not include template language ("en" usually).
+short_lang=("nl" "de" "fr" "cs" "ta" "es" "it" "ta" "pt" "sv" "ta" "ca" "ru" "zh_CN") #do not include template language ("en" usually).
+long_lang=("nl" "de" "fr" "cs" "ta" "es" "it" "ta" "pt_BR" "sv" "ta" "ca" "ru" "zh_CN") #do not include template language ("en" usually).
 #Change the dirs where the files are located.
 launchpad_po_files_dir="translations"
 launchpad_pot_file_dir="translations"
