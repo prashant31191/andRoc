@@ -147,6 +147,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
           m_RocrailService.sendMessage("lc", String.format("<lc id=\"%s\" cmd=\"%s\"/>", 
               m_Loco.getID(), m_Loco.isAutoStart()?(m_Loco.isHalfAuto()?"gomanual":"go"):"stop") );
 
+          finish();
         }
     });
     
@@ -170,6 +171,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
         public void onClick(View v) {
           m_Loco.setHalfAuto( !m_Loco.isHalfAuto() );
           ((LEDButton)v).ON = m_Loco.isHalfAuto();
+          finish();
         }
     });
 
@@ -180,6 +182,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
           if( BlockID != null ) {
             m_RocrailService.sendMessage("lc", 
                 String.format("<lc id=\"%s\" cmd=\"block\" blockid=\"%s\"/>", m_Loco.getID(), BlockID ) );
+            finish();
           }
         }
     });
@@ -192,6 +195,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
           m_Loco.setPlacing( !m_Loco.isPlacing());
           m_Loco.swap();
           ((LEDButton)v).ON = m_Loco.isPlacing();
+          finish();
         }
     });
 
