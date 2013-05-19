@@ -152,7 +152,7 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
     
     autoStart.setOnLongClickListener(new View.OnLongClickListener() {
       public boolean onLongClick(View v) {
-        if( m_Loco.isAutoStart() && BlockID != null && !BlockID.equals(ThisBlockID)) {
+        if( BlockID != null && !BlockID.equals(ThisBlockID)) {
           m_RocrailService.sendMessage("lc", 
               String.format("<lc id=\"%s\" cmd=\"gotoblock\" blockid=\"%s\"/>", 
                   m_Loco.getID(), BlockID ) );
