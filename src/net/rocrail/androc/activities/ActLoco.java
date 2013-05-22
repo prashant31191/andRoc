@@ -171,7 +171,6 @@ public class ActLoco extends ActBase implements OnItemSelectedListener, OnSeekBa
         public void onClick(View v) {
           m_Loco.setHalfAuto( !m_Loco.isHalfAuto() );
           ((LEDButton)v).ON = m_Loco.isHalfAuto();
-          finish();
         }
     });
 
