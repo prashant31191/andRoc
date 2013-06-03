@@ -55,6 +55,7 @@ public class Item implements View.OnClickListener, View.OnLongClickListener, Upd
   public String State = "";
   public String Text = "";
   public boolean textVertical = false;
+  public boolean imageRequested = false;
   public String ImageName = "";
   public LevelItem imageView = null;
   public int colorName = 0;
@@ -62,6 +63,7 @@ public class Item implements View.OnClickListener, View.OnLongClickListener, Upd
   public boolean RouteLocked = false;
   public String BlockID = "";
   public boolean Occupied = false;
+  public boolean HideText = false;
   
   boolean Reserved = false;
   boolean Entering = false;
@@ -209,6 +211,21 @@ public class Item implements View.OnClickListener, View.OnLongClickListener, Upd
     return false;
   }
   
+  
+  public void update4Text() {
+    try {
+      if( imageView != null ) {
+        imageView.post(new UpdateImage(this));
+      }
+      else {
+        System.out.println("item " + ID + " does not show");
+      }
+    }
+    catch( Exception e ) {
+      // Probably not a valid ImageView...
+    }
+  }
+  
 public int getOriNr(boolean ModPlan) {
     if( ModPlan ) {
       if(Mod_Ori.equals("north"))
@@ -277,6 +294,12 @@ class UpdateImage implements Runnable {
             // update text
             item.imageView.invalidate();
           }
+        }
+        else if( !item.imageRequested ) {
+          item.imageRequested = true;
+          System.out.println("requesting image " + item.getImageName(item.ModPlan)+".png");
+          item.m_RocrailService.sendMessage("datareq", 
+              String.format("<datareq id=\"%s\" filename=\"%s\"/>", item.ID, item.getImageName(item.ModPlan)+".png") );
         }
       }
     }

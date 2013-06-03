@@ -99,7 +99,7 @@ public class LevelItem extends ImageView implements OnGestureListener {
       }
     }
     
-    if( item.Text != null && item.Text.trim().length() > 0 ) {
+    if( item.Text != null && item.Text.trim().length() > 0 && !item.HideText) {
       // draw the text on top of the image
       if( item.textVertical ) {
         drawRotatedText(canvas);

@@ -140,6 +140,10 @@ public class Model {
     }
     return "";
   }
+  
+  public Text getText(String ID) {
+    return m_TextMap.get(ID);
+  }
  
   public Loco getLoco(String ID) {
     /* Rob:

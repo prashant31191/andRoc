@@ -21,6 +21,7 @@ package net.rocrail.androc;
 
 import net.rocrail.androc.interfaces.Mobile;
 import net.rocrail.androc.objects.Loco;
+import net.rocrail.androc.objects.Text;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
@@ -86,7 +87,15 @@ class XmlHandler extends DefaultHandler {
         loco.setPicData(filename, data, nr);
       }
       else {
-        System.out.println("mobile "+id+" not found...");
+        Text text = m_Model.getText(id);
+        if( text != null ) {
+          System.out.println("set text picture data: "+id);
+          String data = atts.getValue("data");
+          String filename = atts.getValue("filename");
+          text.setPicData(filename, data);
+        }
+        else 
+          System.out.println("datareq ID ["+id+"] not found...");
       }
       return;
     }

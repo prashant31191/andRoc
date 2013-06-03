@@ -20,13 +20,26 @@
 
 package net.rocrail.androc.objects;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Iterator;
+
 import net.rocrail.androc.RocrailService;
+import net.rocrail.androc.interfaces.Mobile;
+import net.rocrail.androc.widgets.LocoImage;
+
 import org.xml.sax.Attributes;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.view.View;
 
 public class Text extends Item implements View.OnClickListener {
   int m_cX = 0;
   int m_cY = 0;
+  protected Bitmap TextBmp = null;
 
   public Text(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
@@ -38,7 +51,12 @@ public class Text extends Item implements View.OnClickListener {
   
   public void updateTextColor() {
   }
- 
+  
+  public void Draw( Canvas canvas) {
+    if( !imageRequested )
+      update4Text();
+  }
+  
   public String getImageName(boolean ModPlan) {
     this.ModPlan = ModPlan;
     int orinr = getOriNr(ModPlan);
@@ -54,14 +72,85 @@ public class Text extends Item implements View.OnClickListener {
       cX = m_cX;
       cY = m_cY;
     }
+
+    if( Text.endsWith(".png") ) {
+      ImageName = Text.substring(0, Text.indexOf(".png"));
+      return ImageName;
+    }
     return null;
   }
 
   public void updateWithAttributes(Attributes atts ) {
     Text = Item.getAttrValue(atts, "text", Text); 
+    imageRequested = false;
     updateTextColor();
     super.updateWithAttributes(atts);
   }
 
+  
+  public void setPicData(String filename, String data) {
+    if( data != null && data.length() > 0 ) {
+      // convert from HEXA to Bitmap
+      byte[] rawdata = MobileImpl.strToByte(data);
+      System.out.println("text image: " + filename);
+      File dir = new File("/sdcard/androc/");
+      if( !dir.exists() )
+        dir.mkdirs();
+      
+      File file = null;
+      file = new File("/sdcard/androc/" + filename );
+      
+      if( file != null ) {
+        try {
+          FileOutputStream fos = new FileOutputStream(file);
+          fos.write(rawdata);
+          fos.close();
+        }
+        catch(Exception e) {
+          e.printStackTrace();
+        }
+  
+        Bitmap bmp = BitmapFactory.decodeByteArray(rawdata, 0, rawdata.length);
+        TextBmp = bmp;
+        HideText = true;
+        if( imageView != null ) {
+          System.out.println("setting text image...");
+          imageView.post(new UpdateTextImage(this));
+        }
+        else {
+          System.out.println("no text imageview...");
+        }
+      }
+    }
+    else {
+      System.out.println("no raw data for text "+ID);
+    }
+  }
+  
+  
+  public Bitmap getBmp() {
+    return TextBmp;
+  }
 
+}
+
+
+class UpdateTextImage implements Runnable {
+  Text text = null;
+  
+  public UpdateTextImage( Text text ) {
+    this.text = text;
+  }
+  @Override
+  public void run() {
+    if( text.getBmp() != null ) {
+      try {
+        text.imageView.setImageBitmap(text.getBmp());
+      }
+      catch( Exception e ) {
+        // invalid imageView 
+      }
+    }
+  }
+  
 }
