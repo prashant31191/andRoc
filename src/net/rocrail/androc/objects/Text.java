@@ -55,6 +55,16 @@ public class Text extends Item implements View.OnClickListener {
   public void Draw( Canvas canvas) {
     if( !imageRequested )
       update4Text();
+    else {
+      if( getBmp() != null ) {
+        try {
+          imageView.setImageBitmap(getBmp());
+        }
+        catch( Exception e ) {
+          // invalid imageView 
+        }
+      }
+    }
   }
   
   public String getImageName(boolean ModPlan) {
