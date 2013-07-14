@@ -45,18 +45,19 @@ public class StageBlock extends Block {
   public StageBlock(RocrailService rocrailService, Attributes atts) {
     super(rocrailService, atts);
     ExitState = Item.getAttrValue(atts, "exitstate", "open"); 
-    LocoID   = Item.getAttrValue(atts, "locid", ""); 
-    Reserved = Item.getAttrValue(atts, "reserved", false); 
-    Entering = Item.getAttrValue(atts, "entering", false); 
+    LocoID    = Item.getAttrValue(atts, "locid", ""); 
+    Reserved  = Item.getAttrValue(atts, "reserved", false); 
+    Entering  = Item.getAttrValue(atts, "entering", false); 
     Text = ID;
     Background = true;
   }
 
   public void updateWithAttributes(Attributes atts ) {
-    ExitState = Item.getAttrValue(atts, "exitstate", ExitState); 
-    LocoID    = Item.getAttrValue(atts, "locid", ""); 
-    Reserved  = Item.getAttrValue(atts, "reserved", false); 
-    Entering  = Item.getAttrValue(atts, "entering", false);
+    ExitState  = Item.getAttrValue(atts, "exitstate", ExitState); 
+    LocoID     = Item.getAttrValue(atts, "locid", ""); 
+    Reserved   = Item.getAttrValue(atts, "reserved", false); 
+    Entering   = Item.getAttrValue(atts, "entering", false);
+    State      = Item.getAttrValue(atts, "state", State); 
     Closed     = State.equals("closed");
     ExitClosed = ExitState.equals("closed");
     updateTextColor();
