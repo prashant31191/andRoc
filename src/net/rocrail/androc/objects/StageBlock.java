@@ -50,6 +50,9 @@ public class StageBlock extends Block {
     Entering  = Item.getAttrValue(atts, "entering", false); 
     Text = ID;
     Background = true;
+    State      = Item.getAttrValue(atts, "state", State); 
+    Closed     = State.equals("closed");
+    ExitClosed = ExitState.equals("closed");
   }
 
   public void updateWithAttributes(Attributes atts ) {
