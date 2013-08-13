@@ -99,6 +99,22 @@ public class Switch extends Item implements View.OnClickListener {
         cX = (orinr == 1 ? 4 : 2);
         cY = (orinr == 1 ? 2 : 4);
         break;
+      case 51:
+        cX = (orinr == 1 ? 4 : 2);
+        cY = (orinr == 1 ? 2 : 4);
+        break;
+      case 52:
+        cX = (orinr == 1 ? 4 : 1);
+        cY = (orinr == 1 ? 1 : 4);
+        break;
+      case 53:
+        cX = 2;
+        cY = 2;
+        break;
+      case 54:
+        cX = (orinr == 1 ? 3 : 2);
+        cY = (orinr == 1 ? 2 : 3);
+        break;
       }
 
       if (State.equals("turnout"))
