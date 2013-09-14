@@ -83,6 +83,13 @@ public class ActLocoList extends ListActivity implements ServiceListener {
           m_LocoList.add(loco);
       }
     }
+    it = m_Base.m_RocrailService.m_Model.m_CarMap.values().iterator();
+    while( it.hasNext() ) {
+      Mobile car = it.next();
+      if(car.isShow())
+        m_LocoList.add(car);
+    }
+
     
     Collections.sort(m_LocoList, new LocoSort(m_Base.m_RocrailService.Prefs.SortByAddr));
     m_Adapter = new LocoAdapter(this, R.layout.locorow, m_LocoList, m_Base.m_RocrailService.Prefs.SortByAddr);
