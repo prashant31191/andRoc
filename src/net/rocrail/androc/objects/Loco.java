@@ -89,6 +89,7 @@ public class Loco extends MobileImpl implements Runnable {
     Vmax   = Item.getAttrValue(atts, "V_max", Vmax);
     Vmid   = Item.getAttrValue(atts, "V_mid", Vmid);
     Vmin   = Item.getAttrValue(atts, "V_min", Vmin);
+    Show   = Item.getAttrValue(atts, "show", Show);
 
     RunTime = Item.getAttrValue(atts, "runtime", 0);
     Placing = Item.getAttrValue(atts, "placing", Placing);

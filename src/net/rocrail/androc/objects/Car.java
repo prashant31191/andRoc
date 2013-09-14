@@ -34,6 +34,7 @@ public class Car extends MobileImpl implements Runnable {
     Description = Item.getAttrValue(atts, "desc","");
     Roadname    = Item.getAttrValue(atts, "roadname", "");
     Addr        = Item.getAttrValue(atts, "addr", 0);
+    Show        = Item.getAttrValue(atts, "show", false);
     
     updateWithAttributes(atts);
 
@@ -43,7 +44,8 @@ public class Car extends MobileImpl implements Runnable {
   
   @Override
   public void updateWithAttributes(Attributes atts) {
-    Dir = Item.getAttrValue(atts, "dir", Dir);
+    Dir  = Item.getAttrValue(atts, "dir", Dir);
+    Show = Item.getAttrValue(atts, "show", Show);
   }
   
   @Override
