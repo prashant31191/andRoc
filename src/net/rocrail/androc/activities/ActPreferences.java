@@ -91,6 +91,10 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     et = (EditText)findViewById(R.id.prefVDelta);
     et.setText(""+m_RocrailService.Prefs.VDelta);
     
+    et = (EditText)findViewById(R.id.prefThrottleWidth);
+    et.setText(""+m_RocrailService.Prefs.ThrottleWidth);
+    et = (EditText)findViewById(R.id.prefThrottleHeight);
+    et.setText(""+m_RocrailService.Prefs.ThrottleHeight);
     
     Spinner color = (Spinner) findViewById(R.id.BackgroundColor);
     
@@ -145,6 +149,11 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     
     et = (EditText)findViewById(R.id.prefVDelta);
     m_RocrailService.Prefs.VDelta = Integer.parseInt(et.getText().toString());
+
+    et = (EditText)findViewById(R.id.prefThrottleWidth);
+    m_RocrailService.Prefs.ThrottleWidth = Integer.parseInt(et.getText().toString());
+    et = (EditText)findViewById(R.id.prefThrottleHeight);
+    m_RocrailService.Prefs.ThrottleHeight = Integer.parseInt(et.getText().toString());
     
     Spinner color = (Spinner) findViewById(R.id.BackgroundColor);
     if(m_RocrailService.Prefs.Color != color.getSelectedItemPosition()) {

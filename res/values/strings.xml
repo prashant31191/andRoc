@@ -151,4 +151,6 @@
   <string name="ButtonView">Buttons for speed</string>
   <string name="VDelta">Step increment</string>
   <string name="Car">Car</string>
+  <string name="ThrottleWidth">Throttle width</string>
+  <string name="ThrottleHeight">Throttle height</string>
 </resources>

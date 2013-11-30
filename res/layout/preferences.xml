@@ -57,6 +57,18 @@ android:layout_width="fill_parent" android:layout_height="wrap_content"></CheckB
 android:layout_width="0px" android:layout_height="wrap_content" android:layout_weight="50"></EditText>
 </LinearLayout>
 
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+<TextView android:text="@string/ThrottleWidth" android:layout_width="0px" android:layout_weight="50" android:layout_height="wrap_content"/>
+<EditText android:text="300" android:id="@+id/prefThrottleWidth" android:inputType="number"
+android:layout_width="0px" android:layout_height="wrap_content" android:layout_weight="50"></EditText>
+</LinearLayout>
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+<TextView android:text="@string/ThrottleHeight" android:layout_width="0px" android:layout_weight="50" android:layout_height="wrap_content"/>
+<EditText android:text="300" android:id="@+id/prefThrottleHeight" android:inputType="number"
+android:layout_width="0px" android:layout_height="wrap_content" android:layout_weight="50"></EditText>
+</LinearLayout>
+
+
  <LinearLayout android:orientation="horizontal" 
    android:layout_width="fill_parent" android:layout_height="wrap_content">
    <TextView android:text="@string/Color" 

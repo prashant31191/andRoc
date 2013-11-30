@@ -58,6 +58,8 @@ public class Preferences {
   public static final String PREFS_ZOOM = "zoom";
   public static final String PREFS_BUTTONVIEW = "buttonview";
   public static final String PREFS_VDELTA = "vdelta";
+  public static final String PREFS_THROTTLEWIDTH = "throttlewidth";
+  public static final String PREFS_THROTTLEHEIGHT = "throttleheight";
   
   public static final String ACCTYPE_MADA = "M";
   public static final String ACCTYPE_FADA = "F";
@@ -96,6 +98,8 @@ public class Preferences {
   public int     Size         = 32;
   public int     Color        = 0;
   public int     VDelta       = 5;
+  public int     ThrottleWidth  = 300;
+  public int     ThrottleHeight = 300;
   
   public List<RRConnection> conList = null; 
 
@@ -141,6 +145,8 @@ public class Preferences {
     Color         = settings.getInt(PREFS_COLOR, Color);
     ButtonView    = settings.getBoolean(PREFS_BUTTONVIEW, ButtonView);
     VDelta        = settings.getInt(PREFS_VDELTA, VDelta);
+    ThrottleWidth  = settings.getInt(PREFS_THROTTLEWIDTH, ThrottleWidth);
+    ThrottleHeight = settings.getInt(PREFS_THROTTLEHEIGHT, ThrottleHeight);
     
     conList = RRConnection.parse(Recent);
 
@@ -222,6 +228,8 @@ public class Preferences {
     editor.putInt(PREFS_COLOR, Color);
     editor.putBoolean(PREFS_BUTTONVIEW, ButtonView);
     editor.putInt(PREFS_VDELTA, VDelta);
+    editor.putInt(PREFS_THROTTLEWIDTH, ThrottleWidth);
+    editor.putInt(PREFS_THROTTLEHEIGHT, ThrottleHeight);
     editor.commit();
   }
   

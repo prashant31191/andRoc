@@ -281,7 +281,8 @@ public class ActThrottle extends ActBase
     LocoID = m_RocrailService.Prefs.getLocoID(m_RocrailService.ThrottleNr);
     setContentView(R.layout.throttle);
     
-    getWindow().setLayout((m_RocrailService.Prefs.SmallThrottle ? 300:LayoutParams.WRAP_CONTENT), LayoutParams.FILL_PARENT);
+    getWindow().setLayout((m_RocrailService.Prefs.SmallThrottle ? m_RocrailService.Prefs.ThrottleWidth:LayoutParams.WRAP_CONTENT), 
+        (m_RocrailService.Prefs.SmallThrottle ? m_RocrailService.Prefs.ThrottleHeight:LayoutParams.FILL_PARENT) );
 
     Iterator<Mobile> it = m_RocrailService.m_Model.m_LocoMap.values().iterator();
     while( it.hasNext() ) {
