@@ -99,7 +99,7 @@ public class Preferences {
   public int     Color        = 0;
   public int     VDelta       = 5;
   public int     ThrottleWidth  = 300;
-  public int     ThrottleHeight = 300;
+  public int     ThrottleHeight = 380;
   
   public List<RRConnection> conList = null; 
 
