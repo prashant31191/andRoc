@@ -76,7 +76,7 @@ public class Preferences {
   public boolean SmallThrottle  = true;
   public boolean ImagesOnDemand = false;
   public boolean SortByAddr   = false;
-  public boolean LocoCatList  = false;
+  public boolean LocoCatList  = true;
   public boolean Modview      = true;
   public boolean PowerOff4EBreak = false;
   public boolean UseAllSpeedSteps = false;
