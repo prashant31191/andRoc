@@ -35,7 +35,8 @@ public class Car extends MobileImpl implements Runnable {
     Roadname    = Item.getAttrValue(atts, "roadname", "");
     Addr        = Item.getAttrValue(atts, "addr", 0);
     Show        = Item.getAttrValue(atts, "show", false);
-    
+    Era         = Item.getAttrValue(atts, "era", 0);
+
     updateWithAttributes(atts);
 
     if( !this.rocrailService.Prefs.ImagesOnDemand )
@@ -46,6 +47,7 @@ public class Car extends MobileImpl implements Runnable {
   public void updateWithAttributes(Attributes atts) {
     Dir  = Item.getAttrValue(atts, "dir", Dir);
     Show = Item.getAttrValue(atts, "show", Show);
+    Era  = Item.getAttrValue(atts, "era", Era);
   }
   
   @Override

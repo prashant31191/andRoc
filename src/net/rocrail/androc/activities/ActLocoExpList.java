@@ -73,7 +73,7 @@ public class ActLocoExpList extends ActBase {
       
     });
 
-    m_Adapter = new LocoExpListAdapter(this, m_MobileList);
+    m_Adapter = new LocoExpListAdapter(this, m_MobileList, m_RocrailService.Prefs.Category);
     m_ListView.setAdapter(m_Adapter);
 
     setResult(-1);

@@ -114,6 +114,23 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     color.setSelection(m_RocrailService.Prefs.Color);
 
 
+    Spinner category = (Spinner) findViewById(R.id.prefCategory);
+    
+    color.setPrompt(getString(R.string.SelectColor));
+
+    ArrayAdapter<String> m_adapterForSpinner2 = new ArrayAdapter<String>(this,
+        android.R.layout.simple_spinner_item);
+    m_adapterForSpinner2
+        .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    category.setAdapter(m_adapterForSpinner2);
+
+    
+    m_adapterForSpinner2.add(getString(R.string.CatEngine));
+    m_adapterForSpinner2.add(getString(R.string.CatEra));
+    category.setOnItemSelectedListener(this);
+    category.setSelection(m_RocrailService.Prefs.Category);
+
+
   }
   
   void savePrefs() {
@@ -163,6 +180,9 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
         m_RocrailService.LevelView.setBackgroundColor();
       }
     }
+    
+    Spinner category = (Spinner) findViewById(R.id.prefCategory);
+    m_RocrailService.Prefs.Category = category.getSelectedItemPosition();
     
     m_RocrailService.Prefs.save();
   }

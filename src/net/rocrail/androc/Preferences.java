@@ -53,6 +53,7 @@ public class Preferences {
   public static final String PREFS_POWEROFF4EBREAK = "poweroff4ebreak";
   public static final String PREFS_COLOR = "color";
   public static final String PREFS_LOCOCATLIST = "lococatlist";
+  public static final String PREFS_CATEGORY = "category";
   public static final String PREFS_USEALLSPEEDSTEPS = "useallspeedsteps";
   public static final String PREFS_SYNCSPEED = "syncspeed";
   public static final String PREFS_ZOOM = "zoom";
@@ -77,6 +78,7 @@ public class Preferences {
   public boolean ImagesOnDemand = false;
   public boolean SortByAddr   = false;
   public boolean LocoCatList  = true;
+  public int     Category     = 0;
   public boolean Modview      = true;
   public boolean PowerOff4EBreak = false;
   public boolean UseAllSpeedSteps = false;
@@ -142,6 +144,7 @@ public class Preferences {
     ImagesOnDemand = settings.getBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
     SortByAddr    = settings.getBoolean(PREFS_SORTBYADDR, SortByAddr);
     LocoCatList   = settings.getBoolean(PREFS_LOCOCATLIST, LocoCatList);
+    Category      = settings.getInt(PREFS_CATEGORY, Category);
     Color         = settings.getInt(PREFS_COLOR, Color);
     ButtonView    = settings.getBoolean(PREFS_BUTTONVIEW, ButtonView);
     VDelta        = settings.getInt(PREFS_VDELTA, VDelta);
@@ -221,6 +224,7 @@ public class Preferences {
     editor.putBoolean(PREFS_IMAGESONDEMAND, ImagesOnDemand);
     editor.putBoolean(PREFS_SORTBYADDR, SortByAddr);
     editor.putBoolean(PREFS_LOCOCATLIST, LocoCatList);
+    editor.putInt(PREFS_CATEGORY, Category);
     editor.putBoolean(PREFS_POWEROFF4EBREAK, PowerOff4EBreak);
     editor.putBoolean(PREFS_USEALLSPEEDSTEPS, UseAllSpeedSteps);
     editor.putBoolean(PREFS_SYNCSPEED, SyncSpeed);

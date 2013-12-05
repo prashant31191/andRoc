@@ -28,10 +28,12 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
   List<Mobile> m_CarList      = new ArrayList<Mobile>();
   List<Mobile>[] m_Lists      = new ArrayList[6];
   boolean sortbyaddr = false;
+  int m_Category = 0;
 
-  public LocoExpListAdapter(Context context, List<Mobile> locoList) {
+  public LocoExpListAdapter(Context context, List<Mobile> locoList, int category) {
     m_Context = context;
     m_MobileList = locoList;
+    m_Category = category;
     m_Lists[0] = m_SteamList;
     m_Lists[1] = m_DieselList;
     m_Lists[2] = m_ElectricList;
@@ -44,23 +46,55 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
       if( mobile instanceof Loco ) {
         Loco loco = (Loco)mobile;
         if( loco.isShow() ) {
-          if( loco.Cargo.equals("commuter") || loco.Commuter )
-            m_TrainsetList.add(loco);
-          else if( loco.Cargo.equals("post") || loco.Cargo.equals("cleaning") )
-            m_SpecialList.add(loco);
-          else if( loco.Engine.equals("steam"))
-            m_SteamList.add(loco);
-          else if( loco.Engine.equals("diesel"))
-            m_DieselList.add(loco);
-          else if( loco.Engine.equals("electric"))
-            m_ElectricList.add(loco);
-          else
-            m_SpecialList.add(loco);
+          if( m_Category == 1 ) {
+            if( loco.Era == 0 )
+              m_SteamList.add(loco);
+            else if( loco.Era == 1 )
+              m_DieselList.add(loco);
+            else if( loco.Era == 2 )
+              m_ElectricList.add(loco);
+            else if( loco.Era == 3 )
+              m_TrainsetList.add(loco);
+            else if( loco.Era == 4 )
+              m_SpecialList.add(loco);
+            else if( loco.Era == 5 )
+              m_CarList.add(loco);
+          }
+          else {
+            if( loco.Cargo.equals("commuter") || loco.Commuter )
+              m_TrainsetList.add(loco);
+            else if( loco.Cargo.equals("post") || loco.Cargo.equals("cleaning") )
+              m_SpecialList.add(loco);
+            else if( loco.Engine.equals("steam"))
+              m_SteamList.add(loco);
+            else if( loco.Engine.equals("diesel"))
+              m_DieselList.add(loco);
+            else if( loco.Engine.equals("electric"))
+              m_ElectricList.add(loco);
+            else
+              m_SpecialList.add(loco);
+          }
         }
       }
       else if(mobile instanceof Car) {
         Car car = (Car)mobile;
-        m_CarList.add(car);
+        if( m_Category == 1 ) {
+          if( car.Era == 0 )
+            m_SteamList.add(car);
+          else if( car.Era == 1 )
+            m_DieselList.add(car);
+          else if( car.Era == 2 )
+            m_ElectricList.add(car);
+          else if( car.Era == 3 )
+            m_TrainsetList.add(car);
+          else if( car.Era == 4 )
+            m_SpecialList.add(car);
+          else if( car.Era == 5 )
+            m_CarList.add(car);
+        }
+        else {
+          m_CarList.add(car);
+        }
       }
       
     }
@@ -100,13 +134,25 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
 
   @Override
   public Object getGroup(int group) {
-    switch(group) {
-    case 0: return m_Context.getText(R.string.Steam).toString();
-    case 1: return m_Context.getText(R.string.Diesel).toString();
-    case 2: return m_Context.getText(R.string.Electric).toString();
-    case 3: return m_Context.getText(R.string.Trainset).toString();
-    case 4: return m_Context.getText(R.string.Special).toString();
-    case 5: return m_Context.getText(R.string.Car).toString();
+    if( m_Category == 1 ) {
+      switch(group) {
+      case 0: return "I";
+      case 1: return "II";
+      case 2: return "III";
+      case 3: return "IV";
+      case 4: return "V";
+      case 5: return "VI";
+      }
+    }
+    else {
+      switch(group) {
+      case 0: return m_Context.getText(R.string.Steam).toString();
+      case 1: return m_Context.getText(R.string.Diesel).toString();
+      case 2: return m_Context.getText(R.string.Electric).toString();
+      case 3: return m_Context.getText(R.string.Trainset).toString();
+      case 4: return m_Context.getText(R.string.Special).toString();
+      case 5: return m_Context.getText(R.string.Car).toString();
+      }
     }
     return null;
   }
@@ -165,15 +211,27 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
     }
 
     
-    switch(position) {
-    case 0: holder.text.setText("Steam"); break;
-    case 1: holder.text.setText("Diesel"); break;
-    case 2: holder.text.setText("Electric"); break;
-    case 3: holder.text.setText("Trainset"); break;
-    case 4: holder.text.setText("Special"); break;
-    case 5: holder.text.setText("Car"); break;
+    if( m_Category == 1 ) {
+      switch(position) {
+      case 0: holder.text.setText("I"); break;
+      case 1: holder.text.setText("II"); break;
+      case 2: holder.text.setText("III"); break;
+      case 3: holder.text.setText("IV"); break;
+      case 4: holder.text.setText("V"); break;
+      case 5: holder.text.setText("VI"); break;
+      }
     }
-  
+    else {
+      switch(position) {
+      case 0: holder.text.setText("Steam"); break;
+      case 1: holder.text.setText("Diesel"); break;
+      case 2: holder.text.setText("Electric"); break;
+      case 3: holder.text.setText("Trainset"); break;
+      case 4: holder.text.setText("Special"); break;
+      case 5: holder.text.setText("Car"); break;
+      }
+    }
+    
     return row;
   }
   

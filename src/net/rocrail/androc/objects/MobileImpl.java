@@ -45,6 +45,7 @@ public abstract class MobileImpl implements Mobile {
   protected boolean   Placing   = true;
   protected boolean   Show      = true;
   protected boolean   Lights    = false;
+  public    int       Era       = 0;
 
   
   @Override

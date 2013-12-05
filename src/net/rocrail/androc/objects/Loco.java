@@ -60,6 +60,7 @@ public class Loco extends MobileImpl implements Runnable {
     Cargo       = Item.getAttrValue(atts, "cargo", "");
     Commuter    = Item.getAttrValue(atts, "commuter", false);
     Show        = Item.getAttrValue(atts, "show", false);
+    Era         = Item.getAttrValue(atts, "era", 0);
     
     Vmax  = Item.getAttrValue(atts, "V_max", 100);
     Vmid  = Item.getAttrValue(atts, "V_mid", 50);
@@ -90,6 +91,7 @@ public class Loco extends MobileImpl implements Runnable {
     Vmid   = Item.getAttrValue(atts, "V_mid", Vmid);
     Vmin   = Item.getAttrValue(atts, "V_min", Vmin);
     Show   = Item.getAttrValue(atts, "show", Show);
+    Era    = Item.getAttrValue(atts, "era", Era);
 
     RunTime = Item.getAttrValue(atts, "runtime", 0);
     Placing = Item.getAttrValue(atts, "placing", Placing);
