@@ -1,6 +1,8 @@
 package net.rocrail.androc.activities;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -70,6 +72,15 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
         Mobile mobile = it.next();
         addCatName(mobile.getRoadname());
       }
+      
+      Collections.sort(m_CatNames, new Comparator<String>() {
+        @Override
+        public int compare(String s1, String s2)
+        {
+            return  s1.compareTo(s2);
+        }
+      });      
+      
       m_CatNames.add(m_Context.getText(R.string.none).toString());
     }
     return m_CatNames.size();
