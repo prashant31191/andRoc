@@ -23,7 +23,7 @@ public abstract class MobileImpl implements Mobile {
   protected List<Function> Functions = new ArrayList<Function>();
   protected String  ID      = "?";
   protected String  Description = "";
-  protected String  Roadname = "";
+  public String  Roadname = "";
   public String  Consist = "";
   protected String  PicName = null;
   protected int     Addr    = 0;

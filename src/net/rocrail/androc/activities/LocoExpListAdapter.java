@@ -18,28 +18,92 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LocoExpListAdapter extends BaseExpandableListAdapter {
+  
+  private static final int SteamList = 0;
+  private static final int DieselList = 1;
+  private static final int ElectricList = 2;
+  private static final int TrainsetList = 3;
+  private static final int SpecialList = 4;
+  private static final int CarList = 5;
+
+  
   Context m_Context = null;
-  List<Mobile> m_MobileList     = null;
-  List<Mobile> m_SteamList    = new ArrayList<Mobile>();
-  List<Mobile> m_DieselList   = new ArrayList<Mobile>();
-  List<Mobile> m_ElectricList = new ArrayList<Mobile>();
-  List<Mobile> m_TrainsetList = new ArrayList<Mobile>();
-  List<Mobile> m_SpecialList  = new ArrayList<Mobile>();
-  List<Mobile> m_CarList      = new ArrayList<Mobile>();
-  List<Mobile>[] m_Lists      = new ArrayList[6];
+  List<Mobile> m_MobileList = null;
+  List<Mobile>[] m_Lists    = null;
   boolean sortbyaddr = false;
   int m_Category = 0;
+  List<String> m_CatNames = new ArrayList<String>();
 
+  void addCatName(String catname) {
+    if( catname != null && catname.length() > 0 ) {
+      Iterator<String> it = m_CatNames.iterator();
+      while( it.hasNext() ) {
+        String l_catname = it.next();
+        if( l_catname.equalsIgnoreCase(catname))
+          return;
+      }
+      m_CatNames.add(catname);
+    }
+  }
+  
+  int initCategories() {
+    if( m_Category == 0 ) {
+      m_CatNames.add(m_Context.getText(R.string.Steam).toString());
+      m_CatNames.add(m_Context.getText(R.string.Diesel).toString());
+      m_CatNames.add(m_Context.getText(R.string.Electric).toString());
+      m_CatNames.add(m_Context.getText(R.string.Trainset).toString());
+      m_CatNames.add(m_Context.getText(R.string.Special).toString());
+      m_CatNames.add(m_Context.getText(R.string.Car).toString());
+    }
+    else if( m_Category == 1 ) {
+      m_CatNames.add("I");
+      m_CatNames.add("II");
+      m_CatNames.add("III");
+      m_CatNames.add("IV");
+      m_CatNames.add("V");
+      m_CatNames.add("VI");
+    }
+    else if( m_Category == 2 ) {
+      // Roadname
+      Iterator<Mobile> it = m_MobileList.iterator();
+      while( it.hasNext() ) {
+        Mobile mobile = it.next();
+        addCatName(mobile.getRoadname());
+      }
+      m_CatNames.add(m_Context.getText(R.string.none).toString());
+    }
+    return m_CatNames.size();
+  }
+  
+  void addMobile2Roadname(Mobile mobile) {
+    if( mobile.getRoadname() != null && mobile.getRoadname().length() > 0) {
+      for( int i = 0; i < m_CatNames.size(); i++ ) {
+        String l_catname = m_CatNames.get(i);
+        if( l_catname.equalsIgnoreCase(mobile.getRoadname())) {
+          m_Lists[i].add(mobile);
+          return;
+        }
+      }
+      if( m_CatNames.size() > 0 )
+        m_Lists[m_CatNames.size()-1].add(mobile);
+    }
+    else {
+      if( m_CatNames.size() > 0 )
+        m_Lists[m_CatNames.size()-1].add(mobile);
+    }
+  }
+  
   public LocoExpListAdapter(Context context, List<Mobile> locoList, int category) {
     m_Context = context;
     m_MobileList = locoList;
     m_Category = category;
-    m_Lists[0] = m_SteamList;
-    m_Lists[1] = m_DieselList;
-    m_Lists[2] = m_ElectricList;
-    m_Lists[3] = m_TrainsetList;
-    m_Lists[4] = m_SpecialList;
-    m_Lists[5] = m_CarList;
+    
+    int nrcats = initCategories();
+    m_Lists = new ArrayList[nrcats];
+    for( int i = 0; i < nrcats; i++) {
+      m_Lists[i] = new ArrayList<Mobile>();
+    }
+    
     Iterator<Mobile> it = m_MobileList.iterator();
     while( it.hasNext() ) {
       Mobile mobile = it.next();
@@ -47,53 +111,37 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
         Loco loco = (Loco)mobile;
         if( loco.isShow() ) {
           if( m_Category == 1 ) {
-            if( loco.Era == 0 )
-              m_SteamList.add(loco);
-            else if( loco.Era == 1 )
-              m_DieselList.add(loco);
-            else if( loco.Era == 2 )
-              m_ElectricList.add(loco);
-            else if( loco.Era == 3 )
-              m_TrainsetList.add(loco);
-            else if( loco.Era == 4 )
-              m_SpecialList.add(loco);
-            else if( loco.Era == 5 )
-              m_CarList.add(loco);
+            m_Lists[loco.Era].add(loco);
+          }
+          else if( m_Category == 2 ) {
+            addMobile2Roadname(loco);
           }
           else {
             if( loco.Cargo.equals("commuter") || loco.Commuter )
-              m_TrainsetList.add(loco);
+              m_Lists[TrainsetList].add(loco);
             else if( loco.Cargo.equals("post") || loco.Cargo.equals("cleaning") )
-              m_SpecialList.add(loco);
+              m_Lists[SpecialList].add(loco);
             else if( loco.Engine.equals("steam"))
-              m_SteamList.add(loco);
+              m_Lists[SteamList].add(loco);
             else if( loco.Engine.equals("diesel"))
-              m_DieselList.add(loco);
+              m_Lists[DieselList].add(loco);
             else if( loco.Engine.equals("electric"))
-              m_ElectricList.add(loco);
+              m_Lists[ElectricList].add(loco);
             else
-              m_SpecialList.add(loco);
+              m_Lists[SpecialList].add(loco);
           }
         }
       }
       else if(mobile instanceof Car) {
         Car car = (Car)mobile;
         if( m_Category == 1 ) {
-          if( car.Era == 0 )
-            m_SteamList.add(car);
-          else if( car.Era == 1 )
-            m_DieselList.add(car);
-          else if( car.Era == 2 )
-            m_ElectricList.add(car);
-          else if( car.Era == 3 )
-            m_TrainsetList.add(car);
-          else if( car.Era == 4 )
-            m_SpecialList.add(car);
-          else if( car.Era == 5 )
-            m_CarList.add(car);
+          m_Lists[car.Era].add(car);
+        }
+        else if( m_Category == 2 ) {
+          addMobile2Roadname(car);
         }
         else {
-          m_CarList.add(car);
+          m_Lists[CarList].add(car);
         }
       }
       
@@ -121,39 +169,15 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
 
   @Override
   public int getChildrenCount(int group) {
-    switch(group) {
-    case 0: return m_SteamList.size();
-    case 1: return m_DieselList.size();
-    case 2: return m_ElectricList.size();
-    case 3: return m_TrainsetList.size();
-    case 4: return m_SpecialList.size();
-    case 5: return m_CarList.size();
-    }
+    if( group < m_Lists.length )
+      return m_Lists[group].size();
     return 0;
   }
 
   @Override
   public Object getGroup(int group) {
-    if( m_Category == 1 ) {
-      switch(group) {
-      case 0: return "I";
-      case 1: return "II";
-      case 2: return "III";
-      case 3: return "IV";
-      case 4: return "V";
-      case 5: return "VI";
-      }
-    }
-    else {
-      switch(group) {
-      case 0: return m_Context.getText(R.string.Steam).toString();
-      case 1: return m_Context.getText(R.string.Diesel).toString();
-      case 2: return m_Context.getText(R.string.Electric).toString();
-      case 3: return m_Context.getText(R.string.Trainset).toString();
-      case 4: return m_Context.getText(R.string.Special).toString();
-      case 5: return m_Context.getText(R.string.Car).toString();
-      }
-    }
+    if( group < m_CatNames.size() )
+      return m_CatNames.get(group);
     return null;
   }
 
@@ -211,26 +235,8 @@ public class LocoExpListAdapter extends BaseExpandableListAdapter {
     }
 
     
-    if( m_Category == 1 ) {
-      switch(position) {
-      case 0: holder.text.setText("I"); break;
-      case 1: holder.text.setText("II"); break;
-      case 2: holder.text.setText("III"); break;
-      case 3: holder.text.setText("IV"); break;
-      case 4: holder.text.setText("V"); break;
-      case 5: holder.text.setText("VI"); break;
-      }
-    }
-    else {
-      switch(position) {
-      case 0: holder.text.setText("Steam"); break;
-      case 1: holder.text.setText("Diesel"); break;
-      case 2: holder.text.setText("Electric"); break;
-      case 3: holder.text.setText("Trainset"); break;
-      case 4: holder.text.setText("Special"); break;
-      case 5: holder.text.setText("Car"); break;
-      }
-    }
+    if( position < m_CatNames.size() )
+      holder.text.setText(m_CatNames.get(position));
     
     return row;
   }

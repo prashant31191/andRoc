@@ -127,6 +127,7 @@ public class ActPreferences extends ActBase implements OnItemSelectedListener {
     
     m_adapterForSpinner2.add(getString(R.string.CatEngine));
     m_adapterForSpinner2.add(getString(R.string.CatEra));
+    m_adapterForSpinner2.add(getString(R.string.CatRoadname));
     category.setOnItemSelectedListener(this);
     category.setSelection(m_RocrailService.Prefs.Category);
 
