@@ -690,9 +690,9 @@ public class ActThrottle extends ActBase
       Toast.makeText(getApplicationContext(), R.string.EmergencyStop,
           Toast.LENGTH_SHORT).show();
       if( m_RocrailService.Prefs.PowerOff4EBreak )
-        m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
+        m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"  informall=\"true\"/>");
       else
-        m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\"/>");
+        m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\" informall=\"true\"/>");
       return true;
     }
     if( view.getId() == R.id.throttleLights ) {
@@ -707,7 +707,7 @@ public class ActThrottle extends ActBase
       Toast.makeText(getApplicationContext(), R.string.Power_OFF,
           Toast.LENGTH_SHORT).show();
       m_RocrailService.Power = false;
-      m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
+      m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\" informall=\"true\"/>");
       return true;
     }
     if( view.getId() == R.id.throttleF1 ) {

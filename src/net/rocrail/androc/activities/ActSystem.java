@@ -93,7 +93,7 @@ public class ActSystem extends ActBase implements MessageListener {
           powerOFF.ON = !m_RocrailService.Power;
           powerOFF.invalidate();
           ((LEDButton)v).ON = m_RocrailService.Power;
-          m_RocrailService.sendMessage("sys", "<sys cmd=\"go\"/>");
+          m_RocrailService.sendMessage("sys", "<sys cmd=\"go\" informall=\"true\"/>");
         }
     });
 
@@ -106,14 +106,14 @@ public class ActSystem extends ActBase implements MessageListener {
           powerON.ON = m_RocrailService.Power;
           powerON.invalidate();
           ((LEDButton)v).ON = !m_RocrailService.Power;
-          m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
+          m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\" informall=\"true\"/>");
         }
     });
     
     final Button initField = (Button) findViewById(R.id.systemInitField);
     initField.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-          m_RocrailService.sendMessage("model", "<model cmd=\"initfield\"/>");
+          m_RocrailService.sendMessage("model", "<model cmd=\"initfield\" informall=\"true\"/>");
         }
     });
     
@@ -121,9 +121,9 @@ public class ActSystem extends ActBase implements MessageListener {
     eBreak.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           if( m_RocrailService.Prefs.PowerOff4EBreak )
-            m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\"/>");
+            m_RocrailService.sendMessage("sys", "<sys cmd=\"stop\" informall=\"true\"/>");
           else
-            m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\"/>");
+            m_RocrailService.sendMessage("sys", "<sys cmd=\"ebreak\" informall=\"true\"/>");
         }
     });
     
