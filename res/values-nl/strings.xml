@@ -21,7 +21,7 @@
 <resources>
   <string name="Title">Naam</string>
   <string name="Throttle">Handbediening</string>
-  <string name="Locomotives">Loc\'s</string>
+  <string name="Locomotives">Loc's</string>
   <string name="Outputs">Uitgangen</string>
   <string name="Routes">Rijwegen</string>
   <string name="Switches">Wissels</string>
@@ -151,4 +151,10 @@
   <string name="ButtonView">Snelheid knoppen</string>
   <string name="VDelta">Snelheid stap grote</string>
   <string name="Car">Wagon</string>
+  <string name="ThrottleWidth">Breedte handbediening</string>
+  <string name="ThrottleHeight">Hoogte handbediening</string>
+  <string name="Category">Categorie</string>
+  <string name="CatEngine">Aandrijving</string>
+  <string name="CatEra">tijdperk</string>
+  <string name="CatRoadname">Maatschappij</string>
 </resources>

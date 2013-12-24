@@ -48,7 +48,7 @@
   <string name="Loco">Lok</string>
   <string name="Close">Schließen</string>
   <string name="Open">Öffnen</string>
-  <string name="Connect">Verbinde...</string>
+  <string name="Connect">Verbinden</string>
   <string name="Menu">Menü</string>
   <string name="Layout">Layout</string>
   <string name="Level">Ebene</string>
@@ -84,6 +84,11 @@
   <string name="FreeBlock">Block freigeben</string>
   <string name="OpenBlock">Block entsperren</string>
   <string name="CloseBlock">Block sperren</string>
+  <string name="OpenEnter">Open enter</string>
+  <string name="CloseEnter">Close enter</string>
+  <string name="OpenExit">Open exit</string>
+  <string name="CloseExit">Close exit</string>
+  <string name="Compress">Komprimieren</string>
   <string name="SelectBlock">Block auswählen</string>
   <string name="BlockList">Blockliste</string>
   <string name="SelectSchedule">Fahrplan wählen</string>
@@ -95,6 +100,7 @@
   <string name="Value">Wert</string>
   <string name="DeviceID">Geräte-Kennung</string>
   <string name="BlockID">Block-Kennung</string>
+  <string name="StageID">StageID</string>
   <string name="Description">Bezeichnung</string>
   <string name="Roadname">Gesellschaft</string>
   <string name="Vmax">V-max</string>
@@ -133,4 +139,22 @@
   <string name="Electric">Elektrisch</string>
   <string name="Trainset">Pendelzug</string>
   <string name="Special">Spezial</string>
+  <string name="UseAllSpeedSteps">Alle Geschwindigkeitsstufen verwenden</string>
+  <string name="SyncSpeed">Geschwindigkeit synchronisieren</string>
+  <string name="View">Anzeigen</string>
+  <string name="Add">Hinzufügen</string>
+  <string name="Delete">Entfernen</string>
+  <string name="GuestLoco">Guest Loco</string>
+  <string name="ShortID">Short ID</string>
+  <string name="Speedsteps">Speedsteps</string>
+  <string name="Protocol">Protokoll</string>
+  <string name="ButtonView">Buttons for speed</string>
+  <string name="VDelta">Step increment</string>
+  <string name="Car">Car</string>
+  <string name="ThrottleWidth">Throttle width</string>
+  <string name="ThrottleHeight">Throttle height</string>
+  <string name="Category">Category</string>
+  <string name="CatEngine">Engine</string>
+  <string name="CatEra">Era</string>
+  <string name="CatRoadname">Gesellschaft</string>
 </resources>
