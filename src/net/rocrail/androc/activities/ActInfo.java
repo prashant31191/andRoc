@@ -1,7 +1,7 @@
 /*
  Rocrail - Model Railroad Software
 
- Copyright (C) 2002-2010 - Rob Versluis <r.j.versluis@rocrail.net>
+ Copyright (C) 2002-2014 - Rob Versluis <r.j.versluis@rocrail.net>
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -64,7 +64,7 @@ public class ActInfo extends ListActivity implements ServiceListener {
     } 
 
     m_Items = new String[5];
-    m_Items[0] = "TM and Copyright 2010-2013 Rob Versluis\nhttp://www.rocrail.net";
+    m_Items[0] = "TM and Copyright 2010-2014 Rob Versluis\nhttp://www.rocrail.net";
     m_Items[1] = getText(R.string.License) + ": GNU GENERAL PUBLIC LICENSE";
     m_Items[2] = "andRoc " + getText(R.string.Version) + ": "+versionName;
     m_Items[3] = getText(R.string.ThrottleID) + ": "+m_Base.m_RocrailService.getDeviceName();

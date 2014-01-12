@@ -2,7 +2,7 @@
 <!--
  Rocrail - Model Railroad Software
 
- Copyright (C) 2002-2013 - Rob Versluis <r.j.versluis@rocrail.net>
+ Copyright (C) 2002-2014 - Rob Versluis <r.j.versluis@rocrail.net>
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="net.rocrail.androc"
-      android:versionName="426" android:versionCode="426">
+      android:versionName="427" android:versionCode="427">
     <supports-screens android:anyDensity="false" android:largeScreens="true"
           android:normalScreens="true" android:smallScreens="true"/>
       

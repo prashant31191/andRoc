@@ -34,6 +34,8 @@ public class Switch extends Item implements View.OnClickListener {
   boolean Dir = false;
   boolean RectCrossing = true;
   int AccNr = 0;
+  int Addr1 = 0;
+  int Port1 = 0;
   String SWType = "";
   boolean Raster = false;
 
@@ -44,6 +46,8 @@ public class Switch extends Item implements View.OnClickListener {
     AccNr = Item.getAttrValue(atts, "accnr", 1 );
     SWType = Item.getAttrValue(atts, "swtype", "default" );
     Raster = SWType.equals("raster");
+    Addr1 = Item.getAttrValue(atts, "addr1", 0 );
+    Port1 = Item.getAttrValue(atts, "port1", 0 );
   }
 
   public void onClick(View v) {
@@ -170,7 +174,7 @@ public class Switch extends Item implements View.OnClickListener {
       cY = orinr % 2 == 0 ? 2 : 1;
     }
     else if (Type.equals("crossing")) {
-      if( RectCrossing ) {
+      if( RectCrossing &&  Addr1 == 0 && Port1 == 0) {
 		    ImageName = "cross";
       }
       else {
