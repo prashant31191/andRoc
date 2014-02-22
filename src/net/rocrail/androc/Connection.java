@@ -78,6 +78,11 @@ public class Connection extends Thread {
     
     while(saxparser != null && m_bRun) {
       try {
+        if( rocrailService.m_Socket == null || !rocrailService.m_Socket.isConnected() || rocrailService.m_Socket.isClosed() ) {
+          Thread.sleep(500);            
+          rocrailService.m_Socket = new Socket(rocrailService.Prefs.Host, rocrailService.Prefs.Port);
+        }
+        
         if( m_bRead && rocrailService.m_Socket != null && rocrailService.m_Socket.isConnected() && !rocrailService.m_Socket.isClosed() ) {
           InputStream is = rocrailService.m_Socket.getInputStream();
           
@@ -161,7 +166,16 @@ public class Connection extends Thread {
       } catch (SocketException soce) {
         // TODO: Inform the system
         soce.printStackTrace();
-        rocrailService.informListeners(SystemListener.EVENT_DISCONNECTED);
+        //rocrailService.informListeners(SystemListener.EVENT_DISCONNECTED);
+        try {
+          Socket s = rocrailService.m_Socket;
+          rocrailService.m_Socket = null;
+          s.close();
+        }
+        catch (IOException e) {
+          e.printStackTrace();
+        }
+
       } catch (SAXException saxe) {
         // TODO Auto-generated catch block
         saxe.printStackTrace();
