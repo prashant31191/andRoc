@@ -226,7 +226,8 @@ public class RocrailService extends Service {
       }
     }
     else if( m_Socket != null ) {
-      informListeners(SystemListener.EVENT_DISCONNECTED);
+      // Reconnect in the Connection Class.
+      //informListeners(SystemListener.EVENT_DISCONNECTED);
     }
   }
 
