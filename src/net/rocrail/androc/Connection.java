@@ -167,16 +167,9 @@ public class Connection extends Thread {
         // TODO: Inform the system
         soce.printStackTrace();
         //rocrailService.informListeners(SystemListener.EVENT_DISCONNECTED);
-        try {
-          Socket s = rocrailService.m_Socket;
-          rocrailService.m_Socket = null;
-          s.close();
-        }
-        catch (IOException e) {
-          e.printStackTrace();
-        }
-
-      } catch (SAXException saxe) {
+        rocrailService.m_Socket = null;
+      } 
+      catch (SAXException saxe) {
         // TODO Auto-generated catch block
         saxe.printStackTrace();
         read = 0;
